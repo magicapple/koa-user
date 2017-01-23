@@ -5,12 +5,25 @@
 
 "use strict";
 
-let env = process.env.NODE_ENV || 'development';
+const lodash = require("lodash");
+const defaultConfig = require('./default.js');
+const env = process.env.NODE_ENV || 'development';
+const currentConfig = require('./' + env);
 
-module.exports = {
-    // 扩展配置文件路径 配置文件名分别为：
-    //  * main.development.js 开发环境
-    //  * main.testing.js 测试环境
-    //  * main.production.js 生产环境
-    extend: './config/'
-}
+
+
+/**
+ * 扩展配置文件路径 配置文件名分别为
+ * development.js 开发环境
+ * testing.js 测试环境
+ * staging.js 线上 staging 环境
+ * production.js 线上 生产环境
+ *
+ */
+
+
+
+
+module.exports = lodash.merge({}, defaultConfig, currentConfig);
+
+

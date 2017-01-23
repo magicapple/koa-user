@@ -33,6 +33,15 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 ## 项目所用到的库
 
+1. 安装 [debug] 库用于显示调式信息  ``` npm i -S debug``` 
+2. 安装 [lodash] ``` npmS lodash``` 
+2. 安装 [koa-convert] 用来转换 koa v1版本的 middleware ``` npmS koa-convert ``` 
+2. 安装 [koa-logger] 用来显示日志 ``` npmS koa-logger``` 
+
+
+
+
+
 
 
 
@@ -44,3 +53,9 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 [koa]: http://koajs.com/
 [nodemon]: https://github.com/remy/nodemon
+
+
+[debug]: https://github.com/visionmedia/debug
+[lodash]: https://github.com/lodash/lodash
+[koa-convert]: https://github.com/koajs/convert
+[koa-logger]: https://github.com/koajs/logger

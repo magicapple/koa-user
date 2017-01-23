@@ -1,8 +1,11 @@
 {
-  "name": "usermodel",
+  "name": "koa2user",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "bin": {
+    "gen": "gen.js"
+  },
   "scripts": {
     "dev": "nodemon --debug --harmony-async-await server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +13,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "koa": "^2.0.0"
+    "debug": "^2.6.0",
+    "koa": "^2.0.0",
+    "koa-convert": "^1.2.0",
+    "koa-logger": "^1.3.1",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

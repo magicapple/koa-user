@@ -1,23 +1,19 @@
 
 // Koa application is now a class and requires the new operator.
+const convert = require('koa-convert')
+const logger = require('koa-logger')
 const Koa = require('koa');
+const debug = require('debug')('koa2-user:server');
 const app = new Koa();
 
-const port = 3000;
+const config = require('./config');
+console.log(config)
 
 
 
-class Demo {
-    async greeting() {
-        const h = await this.world();
-        return h;
-    }
-    world() {
-        return Promise.resolve('hello world');
-    }
-}
 
-const demo = new Demo();
+
+app.use(convert(logger()))
 
 // uses async arrow functions
 app.use(async (ctx, next) => {
@@ -29,16 +25,12 @@ app.use(async (ctx, next) => {
     }
 });
 
-// Set up a route
-app.use(async ctx => {
-    const retval = await demo.greeting();
-    ctx.body = retval;
-});
+
 
 
 // Start listening on specified port
-app.listen(port, () => {
-    console.log("listening on port", port);
+app.listen(config.port, () => {
+    debug("----- Koa 2.0 server listening on port", config.port);
 });
 
 // Start the app with "node --harmony-async-await" flag, and go to http://localhost:3000
