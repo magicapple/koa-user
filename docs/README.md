@@ -35,8 +35,9 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 1. 安装 [debug] 库用于显示调式信息  ``` npm i -S debug``` 
 2. 安装 [lodash] ``` npmS lodash``` 
-2. 安装 [koa-convert] 用来转换 koa v1版本的 middleware ``` npmS koa-convert ``` 
-2. 安装 [koa-logger] 用来显示日志 ``` npmS koa-logger``` 
+3. 安装 [koa-convert] 用来转换 koa v1版本的 middleware ``` npmS koa-convert ``` 
+4. 安装 [koa-logger] 用来显示日志 ``` npmS koa-logger``` 
+5. 安装 [koa-router] koa 路由库 ``` npm install koa-router --save``` 
 
 
 
@@ -59,3 +60,4 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [lodash]: https://github.com/lodash/lodash
 [koa-convert]: https://github.com/koajs/convert
 [koa-logger]: https://github.com/koajs/logger
+[koa-router]: https://github.com/alexmingoia/koa-router

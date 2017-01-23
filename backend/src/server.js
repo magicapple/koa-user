@@ -2,9 +2,13 @@
 // Koa application is now a class and requires the new operator.
 const convert = require('koa-convert')
 const logger = require('koa-logger')
+const router = require('koa-router')();
 const Koa = require('koa');
 const debug = require('debug')('koa2-user:server');
+
+
 const app = new Koa();
+const api = require('./routes/api/apiv1');
 
 const config = require('./config');
 console.log(config)
@@ -14,6 +18,12 @@ console.log(config)
 
 
 app.use(convert(logger()))
+// Start Router
+router.use('/api', api.routes(), api.allowedMethods());
+
+app.use(router.routes(), router.allowedMethods());
+
+
 
 // uses async arrow functions
 app.use(async (ctx, next) => {
