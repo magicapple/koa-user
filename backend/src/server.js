@@ -8,6 +8,7 @@ const debug = require('debug')('koa2-user:server');
 
 
 const app = new Koa();
+const response_formatter = require('./koa2-middleware/response-formater');
 const api = require('./routes/api/apiv1');
 
 const config = require('./config');
@@ -18,6 +19,8 @@ console.log(config)
 
 
 app.use(convert(logger()))
+app.use(response_formatter);
+
 // Start Router
 router.use('/api', api.routes(), api.allowedMethods());
 
