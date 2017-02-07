@@ -27,7 +27,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 ## 环境搭建需要库 
 
 1. 安装 [koa] 框架 ``` npm install --save koa@2 ```
-2. 使用 [nodemon] 在修改代码后自动重启服务器, node v7 版本启动需要使用 --harmony-async-await 参数. 具体请看 npm run dev 命令.
+2. 使用 [nodemon] ``` npm i -g nodemon ``` 在修改代码后自动重启服务器, node v7 版本启动需要使用 --harmony-async-await 参数. 具体请看 npm run dev 命令.
 3. nodemon.json 文件为 [nodemon] 的配置文件.
 
 
