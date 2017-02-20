@@ -11,14 +11,12 @@ const path = require('path');
 module.exports = {
 
     debug : false, // debug 为 true 时，用于本地调试
-    env : process.env.NODE_ENV || 'development',
 
     https    : false,
     domain   : 'pay-local.yimei180.com',
     port     : 3000, // 程序运行的端口
-    homepage : 'http://pay-local.yimei180.com:3000',
 
-    cookie_secret   : 'this_is_yimeis_secret_key_node_redis__cache_long_',
+    auth_cookie_secret   : 'very_long_koa2_express_tekken_nina_jin_kazama',
     auth_cookie_name : 'signed_cookie_username',
 
 
@@ -31,11 +29,6 @@ module.exports = {
     path_file_upload_tmp : path.join(__dirname, '../../../files/upload_tmp'),
     path_file_download : path.join(__dirname, '../../../files/download'),
 
-
-
-    cookie: {
-        secret: 'very_long_koa2_express_tekken_nina_jin_kazama'
-    },
 
     redis : {
         host : '127.0.0.1',

@@ -3,25 +3,32 @@
  */
 
 
-const response_formatter = async (ctx, next) => {
-    //先去执行路由
-    await next();
+const response_formatter = function(ctx){
 
     //如果有返回数据，将返回数据添加到data中
     if (ctx.body) {
-
         if (Array.isArray(ctx.body)){
             ctx.body = {
                 success : true,
                 error : null,
                 meta : {
+                    total : 0,
+                    count : ctx.body.length,
+                    numPerPage : 0,
+                    offset : 0,
+                    page : 0
+                },
+                data : ctx.body
+            }
+
+            if (ctx.meta && ctx.meta.total) {
+                ctx.body.meta = {
                     total : ctx.meta.total,
                     count : ctx.body.length,
                     numPerPage : ctx.meta.numPerPage,
                     offset : ctx.meta.offset,
                     page : ctx.meta.page
-                },
-                data : ctx.body
+                }
             }
         }else {
             ctx.body = {
@@ -32,15 +39,52 @@ const response_formatter = async (ctx, next) => {
             }
         }
 
-    } else {
-        ctx.body = {
-            success : false,
-            message: 'error',
-            errorCode: 200,
-            field: 'dd',
-        }
     }
 }
 
 
-module.exports = response_formatter;
+
+const url_filter = function (pattern, options){
+
+    return async (ctx, next) => {
+
+        const matchedUrl = new RegExp(pattern);
+
+
+
+        try {
+            // 先去执行路由
+            await next(); // wait until we execute the next function down the chain, then continue;
+
+
+            // 通过正则的url进行格式化处理
+            if(typeof pattern === 'undefined'){
+                response_formatter(ctx);
+            }else if(pattern && matchedUrl.test(ctx.originalUrl)){
+                response_formatter(ctx);
+            }else{
+
+            }
+
+        } catch (err) {
+            ctx.body = {
+                success : false,
+                error : {
+                    code: err.code,
+                    message: err.message,
+                    field: err.field
+                },
+                meta : null,
+                data : null
+            };
+            ctx.status = err.status || 500;
+        }
+
+
+    }
+}
+
+
+
+
+module.exports = url_filter;

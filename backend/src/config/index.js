@@ -24,6 +24,6 @@ const currentConfig = require('./' + env);
 
 
 
-module.exports = lodash.merge({}, defaultConfig, currentConfig);
+module.exports = lodash.merge({env : env}, defaultConfig, currentConfig);
 
 

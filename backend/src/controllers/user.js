@@ -3,18 +3,43 @@
  */
 
 
+const ValidationError = require('../errors/ValidationError');
 
-//获取用户
-exports.getUser = async (ctx, next) => {
+
+/**
+ * 获取当前登录用户信息
+ */
+exports.getSessionUserInfo = async (ctx, next) => {
+    throw new ValidationError('xXXXXX', 'xxxxxx');
+
     ctx.body = {
         username: '阿，希爸',
         age: 30
     }
 }
 
-//用户注册
-exports.registerUser = async (ctx, next) => {
+
+
+/**
+ * 注册新用户
+ */
+exports.registerNewUser = async (ctx, next) => {
     console.log('registerUser', ctx.request.body);
+
+    ctx.body = [
+        {
+            username : '阿，希爸',
+            age      : 30
+        }
+    ]
+
+    ctx.meta = {
+        total : 10,
+        numPerPage : 10,
+        offset : 10,
+        page : 1
+    }
+
 }
 
 

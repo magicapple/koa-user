@@ -11,15 +11,16 @@ const app = new Koa();
 const response_formatter = require('./koa2-middleware/response-formater');
 const api = require('./routes/api/apiv1');
 
+const util = require('util')
 const config = require('./config');
-console.log(config)
+console.log("Node Config: ", util.inspect(config, {showHidden: false, depth: null}))
 
 
 
 
 
 app.use(convert(logger()))
-app.use(response_formatter);
+app.use(response_formatter());
 
 // Start Router
 router.use('/api', api.routes(), api.allowedMethods());
@@ -28,15 +29,6 @@ app.use(router.routes(), router.allowedMethods());
 
 
 
-// uses async arrow functions
-app.use(async (ctx, next) => {
-    try {
-        await next(); // wait until we execute the next function down the chain, then continue;
-    } catch (err) {
-        ctx.body = { message: err.message };
-        ctx.status = err.status || 500;
-    }
-});
 
 
 
@@ -47,6 +39,4 @@ app.listen(config.port, () => {
 });
 
 // Start the app with "node --harmony-async-await" flag, and go to http://localhost:3000
-
-
 
