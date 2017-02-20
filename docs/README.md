@@ -29,9 +29,11 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 1. 安装 [koa] 框架 ``` npm install --save koa@2 ```
 2. 使用 [nodemon] ``` npm i -g nodemon ``` 在修改代码后自动重启服务器, node v7 版本启动需要使用 --harmony-async-await 参数. 具体请看 npm run dev 命令.
 3. nodemon.json 文件为 [nodemon] 的配置文件.
+4. 安装 [mocha] 框架 ``` npm install -g mocha ``` 作为单元测试工具. 运行命令 ```npm test ``` 进行测试. 使用 ``` npm test -- --grep 'length' ``` 测试指定测试.
 
 
-## 项目所用到的库
+
+## 项目运行所用到的库
 
 1. 安装 [debug] 库用于显示调式信息  ``` npm i -S debug``` 
 2. 安装 [lodash] ``` npmS lodash``` 
@@ -40,9 +42,8 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 5. 安装 [koa-router] koa 路由库 ``` npm install koa-router --save``` 
 
 
-
-
-
+## 项目测试所用到的库
+1. 安装 [chai] 库用于在测试时,支持BDD断言语法  ``` npm install --save-dev chai ``` 
 
 
 
@@ -54,6 +55,8 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 [koa]: http://koajs.com/
 [nodemon]: https://github.com/remy/nodemon
+[mocha]: https://mochajs.org/
+[chai]: http://chaijs.com/
 
 
 [debug]: https://github.com/visionmedia/debug

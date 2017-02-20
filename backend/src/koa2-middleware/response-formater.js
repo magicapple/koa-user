@@ -78,6 +78,10 @@ const url_filter = function (pattern, options){
                 data : null
             };
             ctx.status = err.status || 500;
+
+            //继续抛，让外层中间件处理日志
+            //throw err;
+
         }
 
 
