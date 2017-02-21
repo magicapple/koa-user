@@ -24,7 +24,6 @@ exports.getSessionUserInfo = async (ctx, next) => {
  * 注册新用户
  */
 exports.registerNewUser = async (ctx, next) => {
-    console.log('registerUser', ctx.request.body);
 
     ctx.body = [
         {

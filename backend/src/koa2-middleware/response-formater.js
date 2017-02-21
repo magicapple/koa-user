@@ -2,6 +2,8 @@
  * Created by JinWYP on 23/01/2017.
  */
 
+const log4js = require('./logger-log4js').log4js;
+const logger = log4js.getLogger('errorLogger')
 
 const response_formatter = function(ctx){
 
@@ -51,7 +53,6 @@ const url_filter = function (pattern, options){
         const matchedUrl = new RegExp(pattern);
 
 
-
         try {
             // 先去执行路由
             await next(); // wait until we execute the next function down the chain, then continue;
@@ -82,11 +83,14 @@ const url_filter = function (pattern, options){
             //继续抛，让外层中间件处理日志
             //throw err;
 
+            logger.error('== Server 4XX error : ', err, '== Server koa2 ctx : ', ctx)
+
         }
 
 
     }
 }
+
 
 
 

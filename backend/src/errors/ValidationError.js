@@ -13,7 +13,7 @@ class ValidationError extends Error{
     constructor(error_name, error_field){
         super();
 
-        const error = validationErrorCode(error_name);
+        const error = validationErrorCode[error_name];
 
         this.type = "UserLevelOperationalError";
         this.name = "ValidationError";
