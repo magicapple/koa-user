@@ -38,13 +38,13 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 1. 安装 [debug] 库用于显示调式信息  ``` npm i -S debug``` 
 2. 安装 [lodash] ``` npmS lodash``` 
 3. 安装 [koa-convert] 用来转换 koa v1版本的 middleware ``` npmS koa-convert ``` 
-4. 安装 [koa-logger] 用来显示日志 ``` npmS koa-logger``` 
+4. 安装 [koa-logger] 用来显示调试日志 ``` npmS koa-logger``` 
 5. 安装 [koa-router] koa 路由库 ``` npm install koa-router --save``` 
+6. 安装 [koa-log4] koa2 log4js-node 日志模块 ``` npm i --save koa-log4@2 ``` 
 
 
 ## 项目测试所用到的库
 1. 安装 [chai] 库用于在测试时,支持BDD断言语法  ``` npm install --save-dev chai ``` 
-
 
 
 
@@ -63,5 +63,6 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [lodash]: https://github.com/lodash/lodash
 [koa-convert]: https://github.com/koajs/convert
 [koa-logger]: https://github.com/koajs/logger
+[koa-log4]: https://github.com/dominhhai/koa-log4js
 [koa-router]: https://github.com/alexmingoia/koa-router
 
