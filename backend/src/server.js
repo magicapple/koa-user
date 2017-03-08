@@ -7,9 +7,9 @@ require('./global-variable');
 const convert = require('koa-convert');
 const logger = require('koa-logger');
 const router = require('koa-router')();
+const responseTime = require('koa-response-time');
 const Koa = require('koa');
 const debug = require('debug')('koa2-user:server');
-
 
 const app = new Koa();
 const log4js = require('./koa2-middleware/logger-log4js');
@@ -28,6 +28,7 @@ require('./koa2-middleware/error-handler');
 
 
 app.use(log4js.middleware)
+app.use(responseTime())
 app.use(convert(logger()))
 //app.use(require('./koa2-middleware/request-logger'));
 app.use(response_formatter());
@@ -37,6 +38,8 @@ router.use('/api', api.routes(), api.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());
 
+
+require('./interview.js')();
 
 
 
