@@ -39,7 +39,6 @@ router.use('/api', api.routes(), api.allowedMethods());
 app.use(router.routes(), router.allowedMethods());
 
 
-require('./interview.js')();
 
 
 
