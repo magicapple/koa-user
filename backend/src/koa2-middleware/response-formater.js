@@ -2,6 +2,7 @@
  * Created by JinWYP on 23/01/2017.
  */
 
+const debug  = require('debug')('koa2-user:error400');
 
 
 const response_formatter = function(ctx){
@@ -51,18 +52,33 @@ const url_filter = function (pattern, options){
 
         const matchedUrl = new RegExp(pattern);
 
+        options = options || {isInclude : true}
+
 
         try {
             // 先去执行路由
             await next(); // wait until we execute the next function down the chain, then continue;
 
-
             // 通过正则的url进行格式化处理
             if(typeof pattern === 'undefined'){
                 response_formatter(ctx);
-            }else if(pattern && matchedUrl.test(ctx.originalUrl)){
-                response_formatter(ctx);
-            }else{
+            }else {
+
+                if (options.isInclude){
+                    if(pattern && matchedUrl.test(ctx.originalUrl)){
+                        response_formatter(ctx);
+                    }else{
+
+                    }
+                }else{
+
+                    if(ctx.path.indexOf(pattern) === -1){
+
+                    }else{
+                        response_formatter(ctx);
+                    }
+                }
+
 
             }
 
@@ -82,10 +98,9 @@ const url_filter = function (pattern, options){
             //继续抛，让外层中间件处理日志
             //throw err;
 
-            GLogger.error('== Server 4XX error : ', err, '== Server koa2 ctx : ', ctx)
-
+            GLogger.error('== Server 4XX Bad request : ', err, '\n == Server koa2 ctx : ', ctx)
+            debug('== Server 4XX Bad request : ', err, '\n == Server koa2 ctx : ', ctx)
         }
-
 
     }
 }

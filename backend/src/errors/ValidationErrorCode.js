@@ -68,30 +68,28 @@ const validationName = {
 const getValidationErrorCode = function(propertyName){
     const propertyArray = propertyName.split('.')
 
+
     let result = {
         code : 400,
         message:'Field validation error.'
     };
 
-    if (!propertyName){
-        return result
-    }
+    if (propertyName){
 
-    if (validationName[propertyArray[0]]){
-        result = validationName[propertyArray[0]];
-    }else{
-        return result
-    }
+        if (validationName[propertyArray[0]]){
+            result = validationName[propertyArray[0]];
 
-    for(let i = 1, l = propertyArray.length; i < l; i++){
+            for(let i = 1, l = propertyArray.length; i < l; i++){
 
-        if (result[propertyArray[i]]){
-            result = result[propertyArray[i]];
-        }else{
-            result = {
-                code : 400,
-                message:'Field validation error.'
-            };
+                if (result[propertyArray[i]]){
+                    result = result[propertyArray[i]];
+                }else{
+                    result = {
+                        code : 400,
+                        message:'Field validation error.'
+                    };
+                }
+            }
         }
     }
 

@@ -5,6 +5,7 @@ require('./global-variable');
 
 
 const logger = require('koa-logger');
+const koaStaticServer = require('koa-static');
 const router = require('koa-router')();
 const XResponseTime = require('koa-response-time');
 const Koa = require('koa');
@@ -32,9 +33,16 @@ app.use(log4js.middleware)
 app.use(XResponseTime())
 app.use(logger())
 
-app.use(response_formatter());
+
 
 // Start Router
+app.use(koaStaticServer(__dirname + '/public', {
+    maxage : 1000 * 60 * 60 * 24 * 365,
+    hidden : false, // 默认不返回隐藏文件
+    gzip : false
+}));
+
+app.use(response_formatter('/public', {isInclude:true}));
 router.use('/api', api.routes(), api.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());

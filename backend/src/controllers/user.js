@@ -3,14 +3,13 @@
  */
 
 
-const ValidationError = require('../errors/ValidationError');
-
 
 /**
  * 获取当前登录用户信息
  */
 exports.getSessionUserInfo = async (ctx, next) => {
-    throw new ValidationError('xXXXXX', 'xxxxxx');
+
+    // throw new GValidationError('XXXName', 'xxxField');
 
     ctx.body = {
         username: '阿，希爸',

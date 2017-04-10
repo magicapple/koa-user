@@ -25,8 +25,8 @@ process.on('uncaughtException', function(error){
 // To render unhandled rejections created in BlueBird:
 // https://nodejs.org/api/process.html#process_event_unhandledrejection
 process.on('unhandledRejection', function(reason, p){
-    GLogger.error('== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), ". Reason: ", reason);
-    debug('== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), ". Reason: ", reason);
+    GLogger.error('== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
+    debug('== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
 });
 
 

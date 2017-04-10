@@ -12,5 +12,5 @@ global.GProjectPath = process.cwd()
 
 
 
-global.SystemError = require('./errors/SystemError');
-global.ValidationError = require('./errors/ValidationError');
+global.GSystemError = require('./errors/SystemError');
+global.GValidationError = require('./errors/ValidationError');
