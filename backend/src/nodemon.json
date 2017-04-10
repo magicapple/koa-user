@@ -11,7 +11,7 @@
   },
   "ext": "js json",
   "execMap": {
-    "js": "node --harmony-async-await --debug",
+    "js": "node --inspect",
     "rb": "ruby",
     "pde": "processing --sketch={{pwd}} --run"
   }

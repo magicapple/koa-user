@@ -61,7 +61,7 @@ module.exports = function(pathLog){
             },
             //响应日志
             {
-                "category"             : "resLogger",
+                "category"             : "responseLogger",
                 "type"                 : "dateFile",
                 "filename"             : responseLogPath,
                 "alwaysIncludePattern" : true,
@@ -72,7 +72,7 @@ module.exports = function(pathLog){
         "levels"      :                                   //设置logger名称对应的的日志等级
             {
                 "errorLogger" : "ERROR",
-                "resLogger"   : "ALL"
+                "responseLogger"   : "ALL"
             },
         "baseLogPath" : baseLogPath                  //logs根目录
     }

@@ -114,12 +114,10 @@ function createDirectory (path) {
 
 
 
-module.exports = function(){
-    return {
-        isDirExistsSync : isDirExistsSync,
-        isFileExistsSync : isFileExistsSync,
-        mkdirSync : mkdirSync,
-        mkdirpSync : mkdirpSync,
-        createDirectory : createDirectory
-    }
+module.exports = {
+    isDirExistsSync : isDirExistsSync,
+    isFileExistsSync : isFileExistsSync,
+    mkdirSync : mkdirSync,
+    mkdirpSync : mkdirpSync,
+    createDirectory : createDirectory
 }

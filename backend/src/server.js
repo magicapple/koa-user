@@ -4,19 +4,21 @@
 require('./global-variable');
 
 
-const convert = require('koa-convert');
 const logger = require('koa-logger');
 const router = require('koa-router')();
-const responseTime = require('koa-response-time');
+const XResponseTime = require('koa-response-time');
 const Koa = require('koa');
 const debug = require('debug')('koa2-user:server');
+
+const util = require('util')
+
 
 const app = new Koa();
 const log4js = require('./koa2-middleware/logger-log4js');
 const response_formatter = require('./koa2-middleware/response-formater');
 const api = require('./routes/api/apiv1');
 
-const util = require('util')
+
 
 debug("Node Config: ", util.inspect(GConfig, {showHidden: false, depth: null}))
 
@@ -26,18 +28,16 @@ debug("Node Config: ", util.inspect(GConfig, {showHidden: false, depth: null}))
 require('./koa2-middleware/error-handler');
 
 
-
 app.use(log4js.middleware)
-app.use(responseTime())
-app.use(convert(logger()))
-//app.use(require('./koa2-middleware/request-logger'));
+app.use(XResponseTime())
+app.use(logger())
+
 app.use(response_formatter());
 
 // Start Router
 router.use('/api', api.routes(), api.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());
-
 
 
 

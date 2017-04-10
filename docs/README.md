@@ -3,7 +3,7 @@
 
 ## 项目从零起步的配置
 
-1. 使用 [Node.js] V7.4 以上版本运行, Mac电脑建议通过 ``` nvm install node ```安装 [Node.js].  需要先安装nvm,运行脚本 ``` curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash``` . 或参考[3m安装法]
+1. 使用 [Node.js] V7.8 以上版本运行, Mac电脑建议通过 ``` nvm install node ```安装 [Node.js].  需要先安装nvm,运行脚本 ``` curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash``` . 或参考[3m安装法]
 2. 在 项目根目录配置 .npmrc 文件, 加速 npm 安装源.
 
 全局配置 .npmrc 文件方法如下:
@@ -26,7 +26,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 ## 环境搭建需要库 
 
-1. 安装 [koa] 框架 ``` npm install --save koa@2 ```
+1. 安装 [koa] 框架 ``` npm install --save koa ```
 2. 使用 [nodemon] ``` npm i -g nodemon ``` 在修改代码后自动重启服务器, node v7 版本启动需要使用 --harmony-async-await 参数. 具体请看 npm run dev 命令.
 3. nodemon.json 文件为 [nodemon] 的配置文件.
 4. 安装 [mocha] 框架 ``` npm install -g mocha ``` 作为单元测试工具. 运行命令 ```npm test ``` 进行测试. 使用 ``` npm test -- --grep 'length' ``` 测试指定测试.
