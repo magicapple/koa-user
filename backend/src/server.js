@@ -4,14 +4,14 @@
 require('./global-variable');
 
 
+const util = require('util')
 const logger = require('koa-logger');
+const XResponseTime = require('koa-response-time');
 const koaStaticServer = require('koa-static');
 const router = require('koa-router')();
-const XResponseTime = require('koa-response-time');
 const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
 const debug = require('debug')('koa2-user:server');
-
-const util = require('util')
 
 
 const app = new Koa();
@@ -32,7 +32,7 @@ require('./koa2-middleware/error-handler');
 app.use(log4js.middleware)
 app.use(XResponseTime())
 app.use(logger())
-
+app.use(bodyParser());
 
 
 // Start Router

@@ -41,7 +41,8 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 4. 安装 [koa-logger] 用来显示调试日志 ``` npmS koa-logger``` 
 5. 安装 [koa-router] koa 路由库 ``` npm install koa-router --save``` 
 6. 安装 [koa-log4] koa2 log4js-node 日志模块 ``` npm i --save koa-log4@2 ``` 
-6. 安装 [koa-static] koa2 koa-static 静态服务器模块 ``` npm install --save koa-static ``` 
+7. 安装 [koa-static] koa2 koa-static 静态服务器模块 ``` npm install --save koa-static ``` 
+8. 安装 [koa-bodyparser] koa2 koa-bodyparser 获取post表单内容模块 ``` npm install --save koa-bodyparser ``` 
 
 
 ## 项目测试所用到的库
@@ -67,6 +68,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [koa-log4]: https://github.com/dominhhai/koa-log4js
 [koa-router]: https://github.com/alexmingoia/koa-router
 [koa-static]: https://github.com/koajs/static
+[koa-bodyparser]: https://github.com/koajs/bodyparser
 
 
 
@@ -74,3 +76,5 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 https://github.com/yonyou-yyfax/hello-koa2
 https://github.com/guo-yu/koa-guide
+https://github.com/chentsulin/simple-koa2-example
+
