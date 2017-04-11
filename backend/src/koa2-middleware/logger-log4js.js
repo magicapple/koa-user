@@ -8,7 +8,8 @@
 
 const log4js = require('koa-log4')
 
-log4js.configure(GConfig.log4jsConfig, { reloadSecs: 300 })
+log4js.configure(GConfig.log4jsConfig);
+
 
 module.exports = {
     middleware : log4js.koaLogger(log4js.getLogger('responseLogger'), { level: 'auto' }),

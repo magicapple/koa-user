@@ -5,7 +5,7 @@
 
 
 global.GPromise = require('bluebird');
-global.GDirUtil = require('./koa2-utils/create-directory');
+global.GDirUtil = require('./common-libs/create-directory');
 global.GConfig = require('./config');
 global.GLogger = require('./koa2-middleware/logger-log4js').logger;
 global.GProjectPath = process.cwd()

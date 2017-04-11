@@ -21,12 +21,12 @@ const api = require('./routes/api/apiv1');
 
 
 
-debug("Node Config: ", util.inspect(GConfig, {showHidden: false, depth: null}))
+// debug("Node Config: ", util.inspect(GConfig, {showHidden: false, depth: null}))
 
 
 
 
-require('./koa2-middleware/error-handler');
+require('./koa2-libs/error-handler');
 
 
 app.use(log4js.middleware)
@@ -42,7 +42,7 @@ app.use(koaStaticServer(__dirname + '/public', {
     gzip : false
 }));
 
-app.use(response_formatter('/public', {isInclude:true}));
+app.use(response_formatter('/api', {isInclude:true}));
 router.use('/api', api.routes(), api.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());

@@ -43,6 +43,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 6. 安装 [koa-log4] koa2 log4js-node 日志模块 ``` npm i --save koa-log4@2 ``` 
 7. 安装 [koa-static] koa2 koa-static 静态服务器模块 ``` npm install --save koa-static ``` 
 8. 安装 [koa-bodyparser] koa2 koa-bodyparser 获取post表单内容模块 ``` npm install --save koa-bodyparser ``` 
+9. 安装 [[koa-response-time] koa2 在 response header 上, 增加 X-Response-Time 相应时间 ``` npm install --save koa-bodyparser ``` 
 
 
 ## 项目测试所用到的库
@@ -69,6 +70,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [koa-router]: https://github.com/alexmingoia/koa-router
 [koa-static]: https://github.com/koajs/static
 [koa-bodyparser]: https://github.com/koajs/bodyparser
+[koa-response-time]: https://github.com/koajs/response-time
 
 
 
