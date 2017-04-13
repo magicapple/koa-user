@@ -16,7 +16,8 @@
 
 
 /**
- * 自定义Api异常
+ * Custom Error For System Error
+ *
  */
 class SystemError extends Error{
 
@@ -24,10 +25,8 @@ class SystemError extends Error{
     constructor(code, message, error){
         super();
 
-
         this.type = "SystemLevelOperationalError";
         this.name = "SystemError";
-
         this.status = 500;
         
         this.code = code || 500;

@@ -39,11 +39,12 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 2. 安装 [lodash] ``` npmS lodash``` 
 3. 安装 [koa-convert] 用来转换 koa v1版本的 middleware ``` npmS koa-convert ``` 
 4. 安装 [koa-logger] 用来显示调试日志 ``` npmS koa-logger``` 
-5. 安装 [koa-router] koa 路由库 ``` npm install koa-router --save``` 
-6. 安装 [koa-log4] koa2 log4js-node 日志模块 ``` npm i --save koa-log4@2 ``` 
-7. 安装 [koa-static] koa2 koa-static 静态服务器模块 ``` npm install --save koa-static ``` 
-8. 安装 [koa-bodyparser] koa2 koa-bodyparser 获取post表单内容模块 ``` npm install --save koa-bodyparser ``` 
-9. 安装 [[koa-response-time] koa2 在 response header 上, 增加 X-Response-Time 相应时间 ``` npm install --save koa-bodyparser ``` 
+5. 安装 [koa-log4] koa2 的 log4js-node 日志模块 ``` npm i --save koa-log4@2 ``` 
+6. 安装 [koa-router] koa2 路由库 ``` npm install koa-router --save``` 
+7. 安装 [koa-static] koa2 的 koa-static 静态服务器模块 ``` npm install --save koa-static ``` 
+8. 安装 [koa-ejs]  koa2的 支持 ejs 的HTML模版引擎  ``` npmS koa-ejs ``` 
+9. 安装 [koa-bodyparser] koa2 的 koa-bodyparser 获取post表单内容模块 ``` npm install --save koa-bodyparser ``` 
+10. 安装 [koa-response-time] koa2 在 response header 上, 增加 X-Response-Time 相应时间 ``` npm install --save koa-bodyparser ``` 
 
 
 ## 项目测试所用到的库
@@ -56,19 +57,21 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [3m安装法]: https://cnodejs.org/topic/57f628098489e7ca69f4e839
 
 
-[koa]: http://koajs.com/
+
 [nodemon]: https://github.com/remy/nodemon
 [mocha]: https://mochajs.org/
 [chai]: http://chaijs.com/
 
-
-[debug]: https://github.com/visionmedia/debug
 [lodash]: https://github.com/lodash/lodash
+
+[koa]: http://koajs.com/
+[debug]: https://github.com/visionmedia/debug
 [koa-convert]: https://github.com/koajs/convert
 [koa-logger]: https://github.com/koajs/logger
 [koa-log4]: https://github.com/dominhhai/koa-log4js
 [koa-router]: https://github.com/alexmingoia/koa-router
 [koa-static]: https://github.com/koajs/static
+[koa-ejs]: https://github.com/koajs/ejs
 [koa-bodyparser]: https://github.com/koajs/bodyparser
 [koa-response-time]: https://github.com/koajs/response-time
 

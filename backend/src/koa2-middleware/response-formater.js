@@ -59,6 +59,8 @@ const url_filter = function (pattern, options){
             // 先去执行路由
             await next(); // wait until we execute the next function down the chain, then continue;
 
+            console.log('----------------------  RES Formatter  ------------------------------')
+
             // 通过正则的url进行格式化处理
             if(typeof pattern === 'undefined'){
                 response_formatter(ctx);
@@ -79,27 +81,22 @@ const url_filter = function (pattern, options){
                     }
                 }
 
-
             }
 
-        } catch (err) {
+        } catch (error) {
             ctx.body = {
                 success : false,
                 error : {
-                    code: err.code,
-                    message: err.message,
-                    field: err.field
+                    code: error.code,
+                    message: error.message,
+                    field: error.field
                 },
                 meta : null,
                 data : null
             };
-            ctx.status = err.status || 500;
 
             //继续抛，让外层中间件处理日志
-            //throw err;
-
-            GLogger.error('== Server 4XX Bad request : ', err, '\n == Server koa2 ctx : ', ctx)
-            debug('== Server 4XX Bad request : ', err, '\n == Server koa2 ctx : ', ctx)
+            throw error;
         }
 
     }

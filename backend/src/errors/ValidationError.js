@@ -5,7 +5,8 @@
 const validationErrorCode = require('./ValidationErrorCode');
 
 /**
- * 自定义Api异常
+ * Custom Error For Validation Error
+ *
  */
 class ValidationError extends Error{
 
@@ -13,15 +14,15 @@ class ValidationError extends Error{
     constructor(error_name, error_field){
         super();
 
-        const error = validationErrorCode(error_name);
+        const vError = validationErrorCode(error_name);
 
         this.type = "UserLevelOperationalError";
         this.name = "ValidationError";
         this.status = 400;
 
 
-        this.code = error.code || 400;
-        this.message = error.message || "Field Validation Error";
+        this.code = vError.code || 400;
+        this.message = vError.message || "Field Validation Error";
         this.field = error_field || "unknown_field";
     }
 }
