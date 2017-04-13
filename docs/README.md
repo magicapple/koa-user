@@ -45,6 +45,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 8. 安装 [koa-ejs]  koa2的 支持 ejs 的HTML模版引擎  ``` npmS koa-ejs ``` 
 9. 安装 [koa-bodyparser] koa2 的 koa-bodyparser 获取post表单内容模块 ``` npm install --save koa-bodyparser ``` 
 10. 安装 [koa-response-time] koa2 在 response header 上, 增加 X-Response-Time 相应时间 ``` npm install --save koa-bodyparser ``` 
+11. 安装 [kcors] koa2 跨域CORS 模块 ``` npm install --save kcors ``` 
 
 
 ## 项目测试所用到的库
@@ -74,6 +75,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [koa-ejs]: https://github.com/koajs/ejs
 [koa-bodyparser]: https://github.com/koajs/bodyparser
 [koa-response-time]: https://github.com/koajs/response-time
+[kcors]: https://github.com/koajs/cors
 
 
 
@@ -84,8 +86,9 @@ https://github.com/guo-yu/koa-guide
 https://github.com/chentsulin/simple-koa2-example
 https://github.com/ecmadao/Learn-Koa2
 
-### Koa2 入门教程
 
+
+### Koa2 教程
 https://ecmadao.gitbooks.io/learn-koa2
 
 
