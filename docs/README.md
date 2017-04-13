@@ -82,4 +82,10 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 https://github.com/yonyou-yyfax/hello-koa2
 https://github.com/guo-yu/koa-guide
 https://github.com/chentsulin/simple-koa2-example
+https://github.com/ecmadao/Learn-Koa2
+
+### Koa2 入门教程
+
+https://ecmadao.gitbooks.io/learn-koa2
+
 

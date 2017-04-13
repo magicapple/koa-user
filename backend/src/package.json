@@ -1,7 +1,7 @@
 {
-  "name": "koa2user",
+  "name": "koa2-user",
   "version": "1.0.0",
-  "description": "",
+  "description": "Best practice for koa2 on Node.js v7.8++",
   "main": "server.js",
   "bin": {
     "gen": "gen.js"

@@ -1,5 +1,6 @@
 /**
- * Created by JinWYP on 23/01/2017.
+ * Koa2 logger middleware
+ * Demo for how to write a Koa2 middleware
  */
 
 
