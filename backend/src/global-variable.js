@@ -5,6 +5,15 @@
 
 
 global.GPromise = require('bluebird');
+global.GMongoose = require('mongoose');
+global.GSchema = GMongoose.Schema;
+global.GObjectId = GSchema.Types.ObjectId;
+
+GMongoose.Promise = GPromise;
+
+
+
+
 global.GDirUtil = require('./common-libs/create-directory');
 global.GConfig = require('./config');
 global.GLogger = require('./koa2-middleware/logger-log4js').logger;

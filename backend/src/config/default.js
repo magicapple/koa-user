@@ -37,14 +37,21 @@ module.exports = {
     },
 
     mongodb: {
-        "username": "",
-        "password": "",
+        "scheme": "mongodb",
         "hosts": [
             {
                 "host": "localhost",
                 "port": 27017
             }
         ],
+        "username": "",
+        "password": "",
+
+        // "options": {
+        //     "authSource": "@dmin"
+        // },
         "database": "koa2user"
-    },
+
+
+    }
 };

@@ -2,8 +2,6 @@
  * Created by JinWYP on 23/01/2017.
  */
 
-const debug  = require('debug')('koa2-user:error400');
-
 
 const response_formatter = function(ctx){
 

@@ -2,6 +2,7 @@
 // Koa application is now a class and requires the new operator.
 
 require('./global-variable');
+require('./koa2-libs/mongoose-connect');
 
 
 const util            = require('util');

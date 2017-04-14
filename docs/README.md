@@ -48,6 +48,11 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 11. 安装 [kcors] koa2 跨域CORS 模块 ``` npm install --save kcors ``` 
 
 
+#### mongodb 相关库
+
+1. 安装 [mongoose] mongodb ORM
+
+
 ## 项目测试所用到的库
 1. 安装 [chai] 库用于在测试时,支持BDD断言语法  ``` npm install --save-dev chai ``` 
 
@@ -77,7 +82,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [koa-response-time]: https://github.com/koajs/response-time
 [kcors]: https://github.com/koajs/cors
 
-
+[mongoose]: http://mongoosejs.com/
 
 ### 参考项目
 
