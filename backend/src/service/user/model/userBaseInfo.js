@@ -14,7 +14,17 @@ const UserBaseInfoSchema = new GSchema({
 
     firstName: { type: String, trim: true},
     lastName: { type: String, trim: true },
-    fullName: { type: String, trim: true}
+    fullName: { type: String, trim: true},
+
+    nickname: {type: String},
+
+    avatar: {type: String},
+
+
+    idGithub: {type: String },
+    idWeChatUnique: {type: String},
+    idQQ: {type: String},
+    idWeibo: {type: String}
 
 
 }, {

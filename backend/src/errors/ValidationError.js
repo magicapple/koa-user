@@ -23,7 +23,7 @@ class ValidationError extends Error{
 
         this.code = vError.code || 400;
         this.message = vError.message || "Field Validation Error";
-        this.field = error_field || "unknown_field";
+        this.field = error_field || vError.field ;
     }
 }
 

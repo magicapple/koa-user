@@ -9,6 +9,10 @@ let MUser = require('./model/userBaseInfo');
 
 
 MUser.signUp = (user) => {
+
+
+
+
     return MUser.create(user);
 };
 

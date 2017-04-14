@@ -44,7 +44,7 @@ app.use(cors()); // 跨域资源共享 CORS
 
 
 // 静态文件夹
-app.use(koaStaticServer(path.join(__dirname, 'public'), {
+app.use(koaStaticServer(path.join(__dirname, 'static'), {
     maxage : 1000 * 60 * 60 * 24 * 365,
     hidden : false, // 默认不返回隐藏文件
     gzip : false

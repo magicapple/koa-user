@@ -47,6 +47,9 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 10. 安装 [koa-response-time] koa2 在 response header 上, 增加 X-Response-Time 相应时间 ``` npm install --save koa-bodyparser ``` 
 11. 安装 [kcors] koa2 跨域CORS 模块 ``` npm install --save kcors ``` 
 
+20. 安装 [validator] 验证数据校验库.
+
+
 
 #### mongodb 相关库
 
@@ -84,16 +87,31 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 [mongoose]: http://mongoosejs.com/
 
+[validator]: https://github.com/chriso/validator.js
+
 ### 参考项目
 
 https://github.com/yonyou-yyfax/hello-koa2
 https://github.com/guo-yu/koa-guide
 https://github.com/chentsulin/simple-koa2-example
 https://github.com/ecmadao/Learn-Koa2
+https://github.com/moajs/moa2
+https://github.com/xiongwilee/koa-grace
+https://github.com/yi-ge/koa2-API-scaffold
+https://github.com/yujintang/koa2-server
+https://github.com/lanvige/koa2-boilerplate
+https://github.com/perminder-klair/kickoff-koa2
+
 
 
 
 ### Koa2 教程
 https://ecmadao.gitbooks.io/learn-koa2
+https://github.com/guo-yu/koa-guide
+https://github.com/chenshenhai/koa2-note
+
+
+
+
 
 

@@ -2,27 +2,27 @@
 
 const validationName = {
     user : {
-        usernameWrong : {code:1001, message:'Field validation error, orderId length should be 6 - 100'},
-        passwordWrong : {code:1002, message:'Field validation error, orderId length should be 6 - 100'},
-        payPasswordWrong : {code:1003, message:'Field validation error, User payPassword length should be 6 - 20'},
-        emailWrong : {code:1006, message:'Field validation error, orderId length should be 6 - 100'},
-        mobileWrong : {code:1007, message:'Field validation error, orderId length should be 6 - 100'},
+        usernameWrong : {code:1001, message:"Field validation error,  username length must be 4-30", field:'username'},
+        passwordWrong : {code:1002, message:"Field validation error,  password length must be 6-30", field:'password'},
+        emailWrong : {code:1003, message:"Field validation error, Email format wrong", field:'email'},
+        mobileWrong : {code:1004, message:"Field validation error, mobile number format wrong", field:'mobile'},
 
-        usernameExist : {code:1011, message:'Field validation error, orderId length should be 6 - 100'},
-        passwordExist : {code:1012, message:'Field validation error, orderId length should be 6 - 100'},
-        emailExist : {code:1013, message:'Field validation error, orderId length should be 6 - 100'},
-        mobileExist : {code:1014, message:'Field validation error, orderId length should be 6 - 100'},
+        usernameExist : {code:1011, message:"Field validation error,  username already exist", field:'username'},
+        passwordExist : {code:1012, message:"Field validation error,password already exist", field:'password'},
+        emailExist : {code:1013, message:"Field validation error,  email already exist", field:'email'},
+        mobileExist : {code:1014, message:"Field validation error, mobile number already exist", field:'mobile'},
 
-        usernameNotFound : {code:1101, message:'Field validation error, orderId length should be 6 - 100'},
-        passwordNotMatch : {code:1102, message:'Field validation error, orderId length should be 6 - 100'}
+        userNotFound :  {code:1101, message:"User Unauthorized, user not found", field:'username'},
+        passwordNotMatch :  {code:1102, message:"User Unauthorized, password not match", field:'password'},
     },
 
     token : {
-        tokenNotFound : {code:2001, message:'Field validation error, orderId length should be 6 - 100'},
-        userNotFound : {code:2002, message:'Field validation error, orderId length should be 6 - 100'},
-        tokenDecodeWrong : {code:2005, message:'Field validation error, orderId length should be 6 - 100'},
-        tokenExpired : {code:2007, message:'Field validation error, orderId length should be 6 - 100'},
-        tokenLengthWrong : {code:2008, message:'Field validation error, orderId length should be 6 - 100'}
+        tokenNotFound : {code:2001, message:"User Unauthorized, token not found", field:'X-Access-Token'},
+        userNotFound : {code:2002, message:"User Unauthorized, user not found", field:'X-Access-Token'},
+        tokenLengthWrong : {code:2003, message:"Field validation error,  accessToken length must be 4-30", field:'accessToken'},
+        tokenDecodeWrong : {code:2005, message:"User Unauthorized, token wrong", field:'X-Access-Token'},
+        tokenExpired : {code:2006, message:"User Unauthorized, token expired", field:'X-Access-Token'}
+
     },
 
 
@@ -71,7 +71,8 @@ const getValidationErrorCode = function(propertyName){
 
     let result = {
         code : 400,
-        message:'Field validation error.'
+        message:'Field validation error.',
+        field : 'Unknown_field'
     };
 
     if (propertyName){
@@ -86,7 +87,8 @@ const getValidationErrorCode = function(propertyName){
                 }else{
                     result = {
                         code : 400,
-                        message:'Field validation error.'
+                        message:'Field validation error.',
+                        field : 'Unknown_field'
                     };
                 }
             }

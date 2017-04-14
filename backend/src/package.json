@@ -30,7 +30,8 @@
     "koa-static": "^3.0.0",
     "lodash": "^4.17.4",
     "mongodb-uri": "^0.9.7",
-    "mongoose": "^4.9.4"
+    "mongoose": "^4.9.4",
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
