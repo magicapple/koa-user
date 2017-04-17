@@ -39,15 +39,14 @@ exports.signUp = async (user) => {
         let emailIsExist = await MUserBaseInfo.findOne({email:user.email}).exec()
         GDataChecker.userEmailExist(emailIsExist);
 
-        return MUserBaseInfo.create(newUser);
-
     }else if (user.mobilePhone){
         let mobileIsExist = await MUserBaseInfo.findOne({email:user.email}).exec()
         GDataChecker.userMobilePhoneExist(mobileIsExist);
 
-        return MUserBaseInfo.create(newUser);
     }
 
+    let createdUser = await MUserBaseInfo.create(newUser);
+    return MUserBaseInfo.find1ById(createdUser._id)
 
 };
 

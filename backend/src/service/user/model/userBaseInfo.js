@@ -105,14 +105,17 @@ const UserBaseInfoSchema = new GSchema({
 
 
 const field = {
-    common : "-__v -password"
+    common : "-__v -updatedAt -password"
 };
 
 UserBaseInfoSchema.statics.findAll = function(query){
-    return User.find(query).select(field.common).exec();
+    return UserBaseInfo.find(query).select(field.common).exec();
 };
 UserBaseInfoSchema.statics.find1 = function(query){
-    return User.findOne(query).select(field.common).exec();
+    return UserBaseInfo.findOne(query).select(field.common).exec();
+};
+UserBaseInfoSchema.statics.find1ById = function(id){
+    return UserBaseInfo.findById(id).select(field.common).exec();
 };
 
 
