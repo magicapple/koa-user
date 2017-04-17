@@ -48,6 +48,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 11. 安装 [kcors] koa2 跨域CORS 模块 ``` npm install --save kcors ``` 
 
 20. 安装 [validator] 验证数据校验库.
+21. 安装 [bcrypt] 密码加密库
 
 
 
@@ -72,6 +73,8 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [chai]: http://chaijs.com/
 
 [lodash]: https://github.com/lodash/lodash
+[validator]: https://github.com/chriso/validator.js
+[bcrypt]: https://github.com/kelektiv/node.bcrypt.js
 
 [koa]: http://koajs.com/
 [debug]: https://github.com/visionmedia/debug
@@ -87,7 +90,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 [mongoose]: http://mongoosejs.com/
 
-[validator]: https://github.com/chriso/validator.js
+
 
 ### 参考项目
 

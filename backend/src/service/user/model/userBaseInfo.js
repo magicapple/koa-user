@@ -1,16 +1,27 @@
 
+const bcrypt = require('bcrypt');
+
+
+
+const saltRounds = 10;
+
 /**
  * Mongoose schema
  */
+
+const encryptPassword = function (password) {
+    let salt = bcrypt.genSaltSync(saltRounds);
+    return bcrypt.hashSync(password, salt);
+};
 
 
 const UserBaseInfoSchema = new GSchema({
 
     username: { type: String, unique: true, trim: true},
-    mobile: { type: String, unique: true},
+    mobilePhone: { type: String, unique: true},
     email: { type: String, unique: true, lowercase: true, trim: true },
 
-    password: { type: String, required: true, default: '123456'},
+    password: { type: String, required: true, default: '20170101', set : encryptPassword},
 
     firstName: { type: String, trim: true},
     lastName: { type: String, trim: true },
@@ -143,4 +154,5 @@ UserBaseInfoSchema.statics.find1 = function(query){
  * Register Model
  */
 
-module.exports = GMongoose.model("UserBaseInfo", UserBaseInfoSchema);
+const UserBaseInfo = GMongoose.model("UserBaseInfo", UserBaseInfoSchema);
+module.exports = UserBaseInfo;

@@ -2,8 +2,9 @@
   "verbose": true,
   "restartable": "rs",
   "ignore": [
-    ".git",
-    "node_modules/**/node_modules"
+    "public",
+    "views",
+    "logs"
   ],
   "env": {
     "NODE_ENV": "development",

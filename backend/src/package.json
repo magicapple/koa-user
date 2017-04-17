@@ -8,14 +8,15 @@
   },
   "scripts": {
     "env": "env",
-    "devonce": "node --inspect server.js",
+    "devdebug": "node --inspect server.js",
     "dev": "nodemon server.js",
-    "dev2": "nodemon --harmony-async-await server.js",
+    "devlegacy": "nodemon --harmony-async-await server.js",
     "test": "NODE_ENV=unittest mocha --recursive test/unit"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "debug": "^2.6.3",
     "kcors": "^1.3.2",

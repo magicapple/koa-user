@@ -30,23 +30,24 @@ let validation = {
         if (!validator.isLength(password, 6, 30)) return throw409('user.passwordWrong', field);
     },
     userEmail : function (email, field){
+        if (!email) return throw409('user.emailRequired', field);
         if (!validator.isEmail(email)) return throw409('user.emailWrong', field);
     },
     userMobile : function (mobile, field){
         if (!validator.isMobilePhone(mobile, 'zh-CN')) return throw409('user.mobileWrong', field);
     },
 
-    // usernameExist : function (user, next){
-    //     if (user) return throw409(code.user.usernameExist.code, code.user.usernameExist.message, code.user.usernameExist.field, next);
-    // },
-    // userEmailExist : function (user, next){
-    //     if (user) return throw409(code.user.emailExist.code, code.user.emailExist.message, code.user.emailExist.field, next);
-    // },
-    // userMobileExist : function (user, next){
-    //     if (user) return throw409(code.user.mobileExist.code, code.user.mobileExist.message, code.user.mobileExist.field, next);
-    // },
-    //
-    //
+    usernameExist : function (user, field){
+        if (user) return throw409('user.usernameExist', field);
+    },
+    userEmailExist : function (user, field){
+        if (user) return throw409('user.emailExist', field);
+    },
+    userMobilePhoneExist : function (user, field){
+        if (user) return throw409('user.mobileExist', field);
+    },
+
+
     // userNotFound : function (user, next){
     //     if (!user) return throw401(code.user.userNotFound.code,code.user.userNotFound.message, code.user.userNotFound.field, next);
     // },

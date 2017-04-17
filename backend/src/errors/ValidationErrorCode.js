@@ -5,14 +5,15 @@ const validationName = {
         usernameWrong : {code:1001, message:"Field validation error,  username length must be 4-30", field:'username'},
         passwordWrong : {code:1002, message:"Field validation error,  password length must be 6-30", field:'password'},
         emailWrong : {code:1003, message:"Field validation error, Email format wrong", field:'email'},
-        mobileWrong : {code:1004, message:"Field validation error, mobile number format wrong", field:'mobile'},
+        mobileWrong : {code:1004, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
+
+        emailRequired : {code:1009, message:"Field validation error, Email is required wrong", field:'email'},
 
         usernameExist : {code:1011, message:"Field validation error,  username already exist", field:'username'},
-        passwordExist : {code:1012, message:"Field validation error,password already exist", field:'password'},
         emailExist : {code:1013, message:"Field validation error,  email already exist", field:'email'},
-        mobileExist : {code:1014, message:"Field validation error, mobile number already exist", field:'mobile'},
+        mobileExist : {code:1014, message:"Field validation error, mobile phone number already exist", field:'mobilePhone'},
 
-        userNotFound :  {code:1101, message:"User Unauthorized, user not found", field:'username'},
+        userNotFound :  {code:1031, message:"User Unauthorized, user not found", field:'username'},
         passwordNotMatch :  {code:1102, message:"User Unauthorized, password not match", field:'password'},
     },
 
