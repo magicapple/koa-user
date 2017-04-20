@@ -3,8 +3,10 @@
  */
 
 
+const validator = require('validator');
 
 let MUserBaseInfo = require('./model/userBaseInfo');
+
 
 
 
@@ -42,7 +44,6 @@ exports.signUp = async (user) => {
     }else if (user.mobilePhone){
         let mobileIsExist = await MUserBaseInfo.findOne({email:user.email}).exec()
         GDataChecker.userMobilePhoneExist(mobileIsExist);
-
     }
 
     let createdUser = await MUserBaseInfo.create(newUser);
@@ -50,4 +51,35 @@ exports.signUp = async (user) => {
 
 };
 
+
+
+
+exports.login = async (user) =>{
+
+    GDataChecker.userPassword(user.password);
+
+    let queryUser = {};
+
+
+    if (validator.isMobilePhone(user.username, 'zh-CN')){
+        queryUser.mobilePhone = user.username;
+
+    }else if (validator.isEmail(user.username)){
+        queryUser.email = user.username;
+
+    }else{
+        GDataChecker.username(user.username);
+        queryUser.username = user.username;
+    }
+
+    let resultUser = await MUserBaseInfo.findOne(queryUser).exec()
+    GDataChecker.loginUserNotFound(resultUser);
+
+
+    let isPasswordMatch = await resultUser.comparePassword(user.password)
+    GDataChecker.loginUserUnauthorized(isPasswordMatch);
+
+    return resultUser;
+
+};
 

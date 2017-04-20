@@ -10,7 +10,8 @@ const shopController = require('../../controllers/shop');
 
 
 router.post('/users', userController.registerNewUser);
-
+router.post('/user/login', userController.login);
+router.post('/user/logout', userController.logout);
 
 router.get('/user/session', userController.getSessionUserInfo);
 

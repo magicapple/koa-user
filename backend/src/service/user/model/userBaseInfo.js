@@ -17,7 +17,7 @@ const encryptPassword = function (password) {
 
 const UserBaseInfoSchema = new GSchema({
 
-    username: { type: String, unique: true, trim: true},
+    username: { type: String, required: true, unique: true, trim: true},
     mobilePhone: { type: String, unique: true},
     email: { type: String, unique: true, lowercase: true, trim: true },
 
@@ -133,24 +133,29 @@ UserBaseInfoSchema.statics.find1ById = function(id){
 
 
 
-// UserBaseInfoSchema.methods.comparePassword = function (passw) {
-//
-//     return bcrypt.compareSync(passw, this.password);
-// };
-//
-//
-// UserBaseInfoSchema.methods.comparePasswordCB = function (passw, callback) {
-//     bcrypt.compare(passw, this.password, function (err, isMatch) {
-//         if (err) {
-//             return callback(err);
-//         }
-//         callback(null, isMatch);
-//     });
-// };
-//
-//
-// UserBaseInfoSchema.methods.encryptPassword = encryptPassword;
-//
+UserBaseInfoSchema.methods.comparePasswordSync = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
+
+UserBaseInfoSchema.methods.comparePassword = function (password) {
+    return bcrypt.compare(password, this.password);
+};
+
+
+UserBaseInfoSchema.methods.comparePasswordCB = function (password, callback) {
+
+    bcrypt.compare(password, this.password, function (err, isMatch) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, isMatch);
+    });
+};
+
+
+UserBaseInfoSchema.methods.encryptPassword = encryptPassword;
+
 
 
 /**

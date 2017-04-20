@@ -4,7 +4,7 @@
 
 
 const UserService = require('../service/user/userService')
-
+const MUserToken = require('../service/user/model/userToken');
 
 
 /**
@@ -17,6 +17,30 @@ exports.registerNewUser = async (ctx, next) => {
     let newUser = await UserService.signUp(userPostData);
 
     ctx.body = newUser;
+
+}
+
+
+exports.login = async (ctx, next) => {
+
+    const userPostData = ctx.request.body;
+
+    let resultUser = await UserService.login(userPostData);
+
+    let userToken = await MUserToken.generateToken(resultUser, ctx);
+
+    ctx.body = userToken;
+
+}
+
+
+exports.logout = async (ctx, next) => {
+
+    const userPostData = ctx.request.body;
+
+    let userToken = await UserService.logout(userPostData);
+
+    ctx.body = userToken;
 
 }
 

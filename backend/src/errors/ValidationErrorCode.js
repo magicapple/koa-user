@@ -13,8 +13,8 @@ const validationName = {
         emailExist : {code:1013, message:"Field validation error,  email already exist", field:'email'},
         mobileExist : {code:1014, message:"Field validation error, mobile phone number already exist", field:'mobilePhone'},
 
-        userNotFound :  {code:1031, message:"User Unauthorized, user not found", field:'username'},
-        passwordNotMatch :  {code:1102, message:"User Unauthorized, password not match", field:'password'},
+        userNotFound :  {code:1041, message:"User Unauthorized, user not found", field:'username'},
+        passwordNotMatch :  {code:1045, message:"User Unauthorized, password not match", field:'password'},
     },
 
     token : {

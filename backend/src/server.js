@@ -14,6 +14,7 @@ const koaStaticServer = require('koa-static');
 const ejs             = require('koa-ejs');
 const router          = require('koa-router')();
 const bodyParser      = require('koa-bodyparser');
+const userAgent       = require('koa-useragent');
 const cors            = require('kcors');
 const debug           = require('debug')('koa2-user:server');
 
@@ -24,6 +25,9 @@ const errorHandler           = require('./koa2-libs/error-handler');
 const responseFormatter      = require('./koa2-middleware/response-formater');
 const ejsHelper              = require('./koa2-middleware/ejs-helper');
 const PageNotFoundMiddleware = require('./koa2-middleware/error404-handler');
+const userDevice = require('./koa2-middleware/user-device');
+const userIP = require('./koa2-middleware/ip-address');
+
 const apiRoutes              = require('./routes/api/apiv1');
 const webRoutes              = require('./routes/website/index');
 
@@ -33,14 +37,16 @@ const webRoutes              = require('./routes/website/index');
 
 
 
-app.use(errorHandler(app)); // 全局错误处理
+app.use(errorHandler(app));     // 全局错误处理
 
-app.use(log4js.middleware)
-app.use(logger()) // 记录所用方式与时间
-app.use(XResponseTime()) // 设置Header
-app.use(bodyParser()); // body解析
-app.use(cors()); // 跨域资源共享 CORS
-
+app.use(log4js.middleware);
+app.use(logger());     // 记录所用方式与时间
+app.use(XResponseTime());     // 设置Header
+app.use(bodyParser());     // POST请求 body 解析
+app.use(cors());     // 跨域资源共享 CORS
+app.use(userAgent);     //请求Header 的 user agent 信息
+app.use(userDevice());     //根据 Header 的 user agent 信息 获得设备名称
+app.use(userIP());     // 获取ipv4和ipv6地址
 
 
 // 静态文件夹

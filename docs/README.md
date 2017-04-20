@@ -46,9 +46,15 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 9. 安装 [koa-bodyparser] koa2 的 koa-bodyparser 获取post表单内容模块 ``` npm install --save koa-bodyparser ``` 
 10. 安装 [koa-response-time] koa2 在 response header 上, 增加 X-Response-Time 相应时间 ``` npm install --save koa-bodyparser ``` 
 11. 安装 [kcors] koa2 跨域CORS 模块 ``` npm install --save kcors ``` 
+12. 安装 [koa-useragent]] koa2 查看 请求Header中的UserAgent 模块 ``` npm install --save koa-useragent ``` 
+
+
 
 20. 安装 [validator] 验证数据校验库.
 21. 安装 [bcrypt] 密码加密库
+22. 安装 [jsonwebtoken] 用于登录的 JSON Web Tokens
+23. 安装 [moment] 处理时间日期库
+24. 安装 [ipaddr.js] 处理 IPv6 和 IPv4 地址的库
 
 
 
@@ -72,9 +78,14 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [mocha]: https://mochajs.org/
 [chai]: http://chaijs.com/
 
+
 [lodash]: https://github.com/lodash/lodash
+[moment]: https://github.com/moment/moment/
 [validator]: https://github.com/chriso/validator.js
 [bcrypt]: https://github.com/kelektiv/node.bcrypt.js
+[jsonwebtoken]: https://github.com/auth0/node-jsonwebtoken
+[ipaddr.js]: https://github.com/whitequark/ipaddr.js/commits/master
+
 
 [koa]: http://koajs.com/
 [debug]: https://github.com/visionmedia/debug
@@ -86,6 +97,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [koa-ejs]: https://github.com/koajs/ejs
 [koa-bodyparser]: https://github.com/koajs/bodyparser
 [koa-response-time]: https://github.com/koajs/response-time
+[koa-useragent]: https://github.com/rvboris/koa-useragent
 [kcors]: https://github.com/koajs/cors
 
 [mongoose]: http://mongoosejs.com/

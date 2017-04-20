@@ -16,7 +16,7 @@ function throw409 (codeName, field){
 
 function throw401 (codeName, field){
     field = field || '';
-    throw (new GValidationError(codeName, field))
+    throw (new GUnauthenticatedAccessError(codeName, field))
 }
 
 
@@ -48,15 +48,15 @@ let validation = {
     },
 
 
-    // userNotFound : function (user, next){
-    //     if (!user) return throw401(code.user.userNotFound.code,code.user.userNotFound.message, code.user.userNotFound.field, next);
-    // },
-    //
-    // userUnauthorized : function (){
-    //     return throw401(code.user.passwordNotMatch.code, code.user.passwordNotMatch.message, code.user.passwordNotMatch.field);
-    // },
-    //
-    //
+    loginUserNotFound : function (user, field){
+        if (!user) return throw401('user.userNotFound', field);
+    },
+
+    loginUserUnauthorized : function (isPasswordMatch, field){
+        if (!isPasswordMatch) return throw401('user.passwordNotMatch', field);
+    },
+
+
     // businessMessageType : function (type, next){
     //     if (businessMessageTypeList.indexOf(type) === -1) return throw409(code.user.businessMessageTypeWrong.code, code.user.businessMessageTypeWrong.message, code.user.businessMessageTypeWrong.field);
     // },
