@@ -101,7 +101,7 @@ exports.registerUserWeChat = async (ctx, next) => {
 
         let newUser = await UserService.signUpWeChat(newUserWeChat);
 
-        let userToken = await MUserToken.generateToken(newUser, ctx, wxUserSession.wxUserSession);
+        let userToken = await MUserToken.generateToken(newUser, ctx, wxUserSession.session_key);
 
         ctx.body = userToken;
     }
