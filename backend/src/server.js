@@ -16,6 +16,7 @@ const router          = require('koa-router')();
 const bodyParser      = require('koa-bodyparser');
 const userAgent       = require('koa-useragent');
 const cors            = require('kcors');
+
 const debug           = require('debug')('koa2-user:server');
 
 
@@ -28,6 +29,7 @@ const PageNotFoundMiddleware = require('./koa2-middleware/error404-handler');
 const userDevice = require('./koa2-middleware/user-device');
 const userIP = require('./koa2-middleware/ip-address');
 
+
 const apiRoutes              = require('./routes/api/apiv1');
 const webRoutes              = require('./routes/website/index');
 
@@ -36,6 +38,7 @@ const webRoutes              = require('./routes/website/index');
 // debug("Node Config: ", util.inspect(GConfig, {showHidden: false, depth: null}))
 
 
+app.proxy = true;  // If your Koa or Express server is properly configured, the protocol property of the request will be set to match the protocol reported by the proxy in the X-Forwarded-Proto header.
 
 app.use(errorHandler(app));     // 全局错误处理
 
@@ -47,6 +50,7 @@ app.use(cors());     // 跨域资源共享 CORS
 app.use(userAgent);     //请求Header 的 user agent 信息
 app.use(userDevice());     //根据 Header 的 user agent 信息 获得设备名称
 app.use(userIP());     // 获取ipv4和ipv6地址
+
 
 
 // 静态文件夹
@@ -71,6 +75,8 @@ app.use(responseFormatter('/api', {isInclude:true}));
 
 
 // Start Router 路由
+
+
 router.use('/api', apiRoutes.routes(), apiRoutes.allowedMethods());
 router.use('/web', webRoutes.routes(), webRoutes.allowedMethods());
 

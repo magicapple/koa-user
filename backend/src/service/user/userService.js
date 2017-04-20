@@ -96,3 +96,13 @@ exports.logout = async (userToken) =>{
     return resultToken;
 
 };
+
+
+
+exports.userInfo = async (userToken) =>{
+
+    let resultUser = await MUserBaseInfo.find1({_id:userToken._id});
+
+    return resultUser;
+
+};

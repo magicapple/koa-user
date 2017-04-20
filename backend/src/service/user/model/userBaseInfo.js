@@ -17,7 +17,7 @@ const encryptPassword = function (password) {
 
 const UserBaseInfoSchema = new GSchema({
 
-    username: { type: String, required: true, unique: true, trim: true},
+    username: { type: String, unique: true, trim: true},  // 由于微信登录等第三方登录，所以注册时可以不填写
     mobilePhone: { type: String, unique: true},
     email: { type: String, unique: true, lowercase: true, trim: true },
 
@@ -33,6 +33,7 @@ const UserBaseInfoSchema = new GSchema({
 
 
     idGithub: {type: String },
+    idWeChatOpenId: {type: String},
     idWeChatUnique: {type: String},
     idQQ: {type: String},
     idWeibo: {type: String}

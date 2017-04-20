@@ -46,8 +46,8 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 9. 安装 [koa-bodyparser] koa2 的 koa-bodyparser 获取post表单内容模块 ``` npm install --save koa-bodyparser ``` 
 10. 安装 [koa-response-time] koa2 在 response header 上, 增加 X-Response-Time 相应时间 ``` npm install --save koa-bodyparser ``` 
 11. 安装 [kcors] koa2 跨域CORS 模块 ``` npm install --save kcors ``` 
-12. 安装 [koa-useragent]] koa2 查看 请求Header中的UserAgent 模块 ``` npm install --save koa-useragent ``` 
-
+12. 安装 [koa-useragent] koa2 查看 请求Header中的UserAgent 模块 ``` npm install --save koa-useragent ``` 
+13. 安装 [koa-jwt]  koa2 针对每个路由的需要验证jwt token 的中间件
 
 
 20. 安装 [validator] 验证数据校验库.
@@ -99,6 +99,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [koa-response-time]: https://github.com/koajs/response-time
 [koa-useragent]: https://github.com/rvboris/koa-useragent
 [kcors]: https://github.com/koajs/cors
+[koa-jwt]: https://github.com/koajs/jwt
 
 [mongoose]: http://mongoosejs.com/
 

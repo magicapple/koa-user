@@ -2,6 +2,7 @@
  * Created by JinWYP on 23/01/2017.
  */
 
+const auth = require('../../koa2-middleware/auth-jwt');
 
 const router = require('koa-router')();
 const userController = require('../../controllers/user');
@@ -9,11 +10,11 @@ const shopController = require('../../controllers/shop');
 
 
 
-router.post('/users', userController.registerNewUser);
+router.post('/user/signup', userController.registerNewUser);
 router.post('/user/login', userController.login);
 router.post('/user/logout', userController.logout);
 
-router.get('/user/session', userController.getSessionUserInfo);
+router.get('/users/session', auth(), userController.getSessionUserInfo);
 
 
 
@@ -22,3 +23,4 @@ router.post('/shops', shopController.postNewShop);
 
 
 module.exports = router;
+

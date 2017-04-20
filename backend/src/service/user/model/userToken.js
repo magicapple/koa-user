@@ -85,7 +85,7 @@ const UserTokenSchema = new GSchema({
 
 
 const field = {
-    common : "-__v -updatedAt -accessToken_iat -accessToken_exp -expireDate -userAgent -ipv4 -ipv6"
+    common : "-__v -updatedAt -user -accessToken_iat -accessToken_exp -expireDate -userAgent -deviceType -ipv4 -ipv6"
 };
 
 
