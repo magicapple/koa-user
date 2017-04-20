@@ -42,7 +42,7 @@ exports.signUp = async (user) => {
         GDataChecker.userEmailExist(emailIsExist);
 
     }else if (user.mobilePhone){
-        let mobileIsExist = await MUserBaseInfo.findOne({email:user.email}).exec()
+        let mobileIsExist = await MUserBaseInfo.findOne({mobilePhone:user.mobilePhone}).exec()
         GDataChecker.userMobilePhoneExist(mobileIsExist);
     }
 
