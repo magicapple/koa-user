@@ -3,6 +3,9 @@
  */
 
 
+
+const superAgent = require('superagent')
+
 const UserService = require('../service/user/userService')
 const MUserToken = require('../service/user/model/userToken');
 
@@ -69,35 +72,39 @@ exports.getSessionUserInfo = async (ctx, next) => {
  * 第三方登录 微信注册新用户
  */
 
-// exports.registerNewUserWX = async (ctx, next) => {
-//
-//     const jscode = ctx.request.body.code || '';
-//
-//     const appid = 'wx48eb5eda518e52a9';
-//     const secret = '939ef96f22327cf4ef4243c9e4268e92';
-//
-//     const url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${jscode}&grant_type=authorization_code`;
-//     console.log(url);
-//
-//     let wxUserResult = await superagent.get(url);
-//
-//     let wxUserSession = JSON.parse(wxUserResult.text)
-//
-//
-//     // registration
-//     userPostData = {
-//         username : 'wx-' + wxUserSession.openid.substr(0,27),
-//         idWeChatUnique :  wxUserSession.openid,
-//         password : 'wx12345678'
-//     }
-//
-//     let newUser = await UserService.signUp(userPostData);
-//
-//     let userToken = await MUserToken.generateToken(newUser, ctx);
-//
-//     console.log(userToken);
-//
-//     ctx.body = userToken;
-//
-//
-// }
+exports.registerUserWeChat = async (ctx, next) => {
+
+    const jscode = ctx.request.body.code || '';
+
+    const appid = 'wx48eb5eda518e52a9';
+    const secret = '939ef96f22327cf4ef4243c9e4268e92';
+
+    const url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${jscode}&grant_type=authorization_code`;
+    console.log('Request 微信 API 获取 openid url: ', url);
+
+    let wxUserResult = await superAgent.get(url);
+    let wxUserSession = JSON.parse(wxUserResult.text)
+
+    console.log('微信 openid : ', wxUserSession);
+
+    if (wxUserSession.errcode){
+        ctx.body = wxUserSession;
+    }else{
+
+        // 在我们系统注册新用户
+
+        const newUserWeChat = {
+            username : 'wx-' + wxUserSession.openid.substr(0,27),
+            idWeChatOpenID :  wxUserSession.openid,
+            password : 'wx12345678'
+        }
+
+        let newUser = await UserService.signUpWeChat(newUserWeChat);
+
+        let userToken = await MUserToken.generateToken(newUser, ctx, wxUserSession.wxUserSession);
+
+        ctx.body = userToken;
+    }
+
+
+}

@@ -33,8 +33,8 @@ const UserBaseInfoSchema = new GSchema({
 
 
     idGithub: {type: String },
-    idWeChatOpenId: {type: String},
-    idWeChatUnique: {type: String},
+    idWeChatOpenID: {type: String},
+    idWeChatUnionID: {type: String},
     idQQ: {type: String},
     idWeibo: {type: String}
 

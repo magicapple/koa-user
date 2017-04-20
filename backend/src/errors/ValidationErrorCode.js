@@ -6,19 +6,24 @@ const validationName = {
         passwordWrong : {code:1002, message:"Field validation error,  password length must be 6-30", field:'password'},
         emailWrong : {code:1003, message:"Field validation error, Email format wrong", field:'email'},
         mobileWrong : {code:1004, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
+        weChatOpenIDWrong : {code:1011, message:"Field validation error, wechat OpenID wrong", field:'idWeChatOpenID'},
+        weChatUnionIDWrong : {code:1012, message:"Field validation error, wechat UnionID wrong", field:'idWeChatUnionID'},
 
-        usernameRequired : {code:1006, message:"Field validation error,  username is required", field:'username'},
-        passwordRequired : {code:1008, message:"Field validation error,  password is required", field:'password'},
-        emailRequired : {code:1009, message:"Field validation error, Email is required", field:'email'},
-        mobileRequired : {code:1010, message:"Field validation error, mobile number is required", field:'mobilePhone'},
+        usernameRequired : {code:1021, message:"Field validation error,  username is required", field:'username'},
+        passwordRequired : {code:1022, message:"Field validation error,  password is required", field:'password'},
+        emailRequired : {code:1023, message:"Field validation error, Email is required", field:'email'},
+        mobileRequired : {code:1024, message:"Field validation error, mobile number is required", field:'mobilePhone'},
+        weChatOpenIDRequired : {code:1027, message:"Field validation error, wechat OpenID is required", field:'idWeChatOpenID'},
+        weChatUnionIDRequired : {code:1028, message:"Field validation error, wechat UnionID is required", field:'idWeChatUnionID'},
 
 
-        usernameExist : {code:1011, message:"Field validation error,  username already exist", field:'username'},
-        emailExist : {code:1013, message:"Field validation error,  email already exist", field:'email'},
-        mobileExist : {code:1014, message:"Field validation error, mobile phone number already exist", field:'mobilePhone'},
+        usernameExist : {code:1041, message:"Field validation error,  username already exist", field:'username'},
+        emailExist : {code:1042, message:"Field validation error,  email already exist", field:'email'},
+        mobileExist : {code:143, message:"Field validation error, mobile phone number already exist", field:'mobilePhone'},
+        weChatOpenIDExist : {code:1047, message:"Field validation error,  wechat OpenID already exist", field:'idWeChatOpenID'},
 
-        userNotFound :  {code:1041, message:"User Unauthorized, user not found", field:'username'},
-        passwordNotMatch :  {code:1045, message:"User Unauthorized, password not match", field:'password'},
+        userNotFound :  {code:1061, message:"User Unauthorized, user not found", field:'username'},
+        passwordNotMatch :  {code:1062, message:"User Unauthorized, password not match", field:'password'},
     },
 
     token : {

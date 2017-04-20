@@ -33,7 +33,10 @@ const UserTokenSchema = new GSchema({
     ipv4: { type: String },
     ipv6: { type: String },
     userAgent: { type: String},
-    deviceType: { type: String}
+    deviceType: { type: String},
+
+
+    weChatSessionKey: { type: String}
 
 
 }, {
@@ -85,12 +88,12 @@ const UserTokenSchema = new GSchema({
 
 
 const field = {
-    common : "-__v -updatedAt -user -accessToken_iat -accessToken_exp -expireDate -userAgent -deviceType -ipv4 -ipv6"
+    common : "-__v -updatedAt -user -accessToken_iat -accessToken_exp -expireDate -userAgent -deviceType -ipv4 -ipv6 -weChatSessionKey"
 };
 
 
 
-UserTokenSchema.statics.generateToken = function(user, koaContent){
+UserTokenSchema.statics.generateToken = function(user, koaContent, weChatSessionKey){
 
     const payload = {
         _id: user._id
@@ -118,6 +121,8 @@ UserTokenSchema.statics.generateToken = function(user, koaContent){
     if (koaContent.ipv4) newToken.ipv4 = koaContent.ipv4;
     if (koaContent.ipv6) newToken.ipv6 = koaContent.ipv6;
 
+
+    if (weChatSessionKey) newToken.weChatSessionKey = weChatSessionKey;
 
     // http://mongoosejs.com/docs/api.html#query_Query-findOneAndUpdate
     return UserToken.findOneAndUpdate({user:user._id, deviceType:newToken.deviceType}, newToken, {upsert:true, new:true}).select(field.common).exec();

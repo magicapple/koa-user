@@ -39,6 +39,14 @@ let validation = {
         if (!mobilePhone) return throw409('user.mobileRequired', field);
         if (!validator.isMobilePhone(mobilePhone, 'zh-CN')) return throw409('user.mobileWrong', field);
     },
+    userWeChatOpenID : function (openId, field){
+        if (!openId) return throw409('user.weChatOpenIDRequired', field);
+        if (!validator.isLength(openId, 6, 30))  return throw409('user.weChatOpenIDWrong', field);
+    },
+    userWeChatUnionID : function (unionId, field){
+        if (!unionId) return throw409('user.weChatUnionIDRequired', field);
+        if (!validator.isLength(unionId, 6, 30))  return throw409('user.weChatUnionIDWrong', field);
+    },
 
     usernameExist : function (user, field){
         if (user) return throw409('user.usernameExist', field);
@@ -49,6 +57,10 @@ let validation = {
     userMobilePhoneExist : function (user, field){
         if (user) return throw409('user.mobileExist', field);
     },
+    userWeChatOpenIDExist : function (user, field){
+        if (user) return throw409('user.weChatOpenIDExist', field);
+    },
+
 
 
     loginUserNotFound : function (user, field){

@@ -99,6 +99,32 @@ exports.logout = async (userToken) =>{
 
 
 
+
+exports.signUpWeChat = async (user) => {
+
+    GDataChecker.username(user.username);
+    GDataChecker.userPassword(user.password);
+    GDataChecker.userWeChatOpenID(user.idWeChatOpenID);
+
+    let newUser = {
+        username  : user.username,
+        password : user.password,
+        idWeChatOpenID : user.idWeChatOpenID
+    };
+
+
+    let weChatOpenIdIsExist = await MUserBaseInfo.findOne({idWeChatOpenID : user.idWeChatOpenID}).exec()
+    if (weChatOpenIdIsExist){
+        return MUserBaseInfo.find1ById(weChatOpenIdIsExist._id)
+    }else{
+        let createdUser = await MUserBaseInfo.create(newUser);
+        return MUserBaseInfo.find1ById(createdUser._id)
+    }
+
+};
+
+
+
 exports.userInfo = async (userToken) =>{
 
     let resultUser = await MUserBaseInfo.find1({_id:userToken._id});
