@@ -6,6 +6,8 @@
 const UserService = require('../service/user/userService')
 const MUserToken = require('../service/user/model/userToken');
 
+const tokenFieldName = GConfig.loginToken.tokenFieldName;
+
 
 /**
  * 注册新用户
@@ -36,11 +38,11 @@ exports.login = async (ctx, next) => {
 
 exports.logout = async (ctx, next) => {
 
-    const userPostData = ctx.request.body;
+    const userTokenPostData = ctx.request.body.accessToken || ctx.cookies.get(tokenFieldName);
 
-    let userToken = await UserService.logout(userPostData);
+    let userToken = await UserService.logout(userTokenPostData);
 
-    ctx.body = userToken;
+    ctx.body = userToken || { message : 'Logout success, Token not found'};
 
 }
 

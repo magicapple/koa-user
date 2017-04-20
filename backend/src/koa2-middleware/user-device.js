@@ -15,7 +15,7 @@ const userDeviceType = {
     bot : 'bot'
 }
 
-function getUserDevice(options) {
+function getUserDeviceMiddleware(options) {
 
     return async function (ctx, next) {
 
@@ -35,16 +35,16 @@ function getUserDevice(options) {
             ctx.userDevice = device;
         }else{
 
-            if (ctx.headers['user-agent']){
+            if (ctx.header['user-agent']){
 
 
             }else{
                 // No user agent.
                 // https://github.com/rguerreiro/express-device/blob/master/lib/device.js
 
-                if (ctx.headers['cloudfront-is-mobile-viewer'] === 'true') device = userDeviceType.phone;
-                if (ctx.headers['cloudfront-is-tablet-viewer'] === 'true') device = userDeviceType.tablet;
-                if (ctx.headers['cloudfront-is-desktop-viewer'] === 'true') device = userDeviceType.desktop;
+                if (ctx.header['cloudfront-is-mobile-viewer'] === 'true') device = userDeviceType.phone;
+                if (ctx.header['cloudfront-is-tablet-viewer'] === 'true') device = userDeviceType.tablet;
+                if (ctx.header['cloudfront-is-desktop-viewer'] === 'true') device = userDeviceType.desktop;
             }
 
         }
@@ -55,5 +55,5 @@ function getUserDevice(options) {
 
 
 
-module.exports = getUserDevice;
+module.exports = getUserDeviceMiddleware;
 

@@ -24,17 +24,20 @@ function throw401 (codeName, field){
 
 let validation = {
     username : function (username, field){
+        if (!username) return throw409('user.usernameRequired', field);
         if (!validator.isLength(username, 6, 30))  return throw409('user.usernameWrong', field);
     },
     userPassword : function (password, field){
+        if (!password) return throw409('user.passwordRequired', field);
         if (!validator.isLength(password, 6, 30)) return throw409('user.passwordWrong', field);
     },
     userEmail : function (email, field){
         if (!email) return throw409('user.emailRequired', field);
         if (!validator.isEmail(email)) return throw409('user.emailWrong', field);
     },
-    userMobile : function (mobile, field){
-        if (!validator.isMobilePhone(mobile, 'zh-CN')) return throw409('user.mobileWrong', field);
+    userMobile : function (mobilePhone, field){
+        if (!mobilePhone) return throw409('user.mobileRequired', field);
+        if (!validator.isMobilePhone(mobilePhone, 'zh-CN')) return throw409('user.mobileWrong', field);
     },
 
     usernameExist : function (user, field){
@@ -57,6 +60,26 @@ let validation = {
     },
 
 
+    token : function (token, field){
+        if (!token) return throw409('token.tokenRequired', field);
+        if (!validator.isLength(token, 100, 200)) return throw409('token.tokenLengthWrong', field);
+    }
+
+    // tokenNotFound : function (token, next){
+    //     if (!token) return throw401(code.token.tokenNotFound.code, code.token.tokenNotFound.message, code.token.tokenNotFound.field, next);
+    // },
+    // tokenUserNotFound : function (user, next){
+    //     if (!user) return throw401(code.token.userNotFound.code, code.token.userNotFound.message, code.token.userNotFound.field, next);
+    // },
+    // tokenDecodeWrong : function (token, next){
+    //     if (!token) return throw401(code.token.tokenDecodeWrong.code, code.token.tokenDecodeWrong.message, code.token.tokenDecodeWrong.field, next);
+    // },
+    // tokenExpired : function (tokenIsExpired, next){
+    //     if (tokenIsExpired) return throw401(code.token.tokenExpired.code, code.token.tokenExpired.message, code.token.tokenExpired.field, next);
+    // }
+
+
+
     // businessMessageType : function (type, next){
     //     if (businessMessageTypeList.indexOf(type) === -1) return throw409(code.user.businessMessageTypeWrong.code, code.user.businessMessageTypeWrong.message, code.user.businessMessageTypeWrong.field);
     // },
@@ -70,26 +93,8 @@ let validation = {
     // SMScodeExpired : function (isExpired, next){
     //     if (isExpired) return throw409(code.user.SMSCodeExpired.code, code.user.SMSCodeExpired.message, code.user.SMSCodeExpired.field);
     // },
-    //
-    //
-    //
-    //
-    // token : function (token, next){
-    //     if (!validator.isLength(token, 100, 200)) return throw409(code.token.tokenLengthWrong.code, code.token.tokenLengthWrong.message, code.token.tokenLengthWrong.field, next);
-    // },
-    //
-    // tokenNotFound : function (token, next){
-    //     if (!token) return throw401(code.token.tokenNotFound.code, code.token.tokenNotFound.message, code.token.tokenNotFound.field, next);
-    // },
-    // tokenUserNotFound : function (user, next){
-    //     if (!user) return throw401(code.token.userNotFound.code, code.token.userNotFound.message, code.token.userNotFound.field, next);
-    // },
-    // tokenDecodeWrong : function (token, next){
-    //     if (!token) return throw401(code.token.tokenDecodeWrong.code, code.token.tokenDecodeWrong.message, code.token.tokenDecodeWrong.field, next);
-    // },
-    // tokenExpired : function (tokenIsExpired, next){
-    //     if (tokenIsExpired) return throw401(code.token.tokenExpired.code, code.token.tokenExpired.message, code.token.tokenExpired.field, next);
-    // }
+
+
 
 };
 

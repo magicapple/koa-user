@@ -84,7 +84,9 @@ const UserTokenSchema = new GSchema({
  */
 
 
-
+const field = {
+    common : "-__v -updatedAt -accessToken_iat -accessToken_exp -expireDate -userAgent -ipv4 -ipv6"
+};
 
 
 
@@ -118,39 +120,39 @@ UserTokenSchema.statics.generateToken = function(user, koaContent){
 
 
     // http://mongoosejs.com/docs/api.html#query_Query-findOneAndUpdate
-    return UserToken.findOneAndUpdate({user:user._id, deviceType:newToken.deviceType}, newToken, {upsert:true, new:true}).exec();
+    return UserToken.findOneAndUpdate({user:user._id, deviceType:newToken.deviceType}, newToken, {upsert:true, new:true}).select(field.common).exec();
 };
 
 
 
 UserTokenSchema.statics.removeToken = function(token){
 
-    return UserToken.findOneAndRemove({accessToken:token}).exec();
+    return UserToken.findOneAndRemove({accessToken:token}).select(field.common).exec();
 
 };
 
 
-
-UserTokenSchema.statics.getUserFromToken = function(userid, token, callback){
-
-    UserToken.findOne({ user: userid, accessToken: token }, function (err, resultToken) {
-        if (err) return callback(err);
-
-        if (!resultToken) return checker.tokenNotFound(resultToken, callback);
-        if (resultToken.isExpired()) return checker.tokenExpired(resultToken.isExpired(), callback);
-
-
-        MUser.findOne({ _id: resultToken.user }, function (err, resultUser) {
-            if (err) return callback(err);
-
-            if (!resultUser) return checker.tokenUserNotFound(resultUser, callback);
-
-            return callback(null, resultUser);
-        });
-    });
-
-
-};
+//
+// UserTokenSchema.statics.getUserFromToken = function(userid, token, callback){
+//
+//     UserToken.findOne({ user: userid, accessToken: token }, function (err, resultToken) {
+//         if (err) return callback(err);
+//
+//         if (!resultToken) return checker.tokenNotFound(resultToken, callback);
+//         if (resultToken.isExpired()) return checker.tokenExpired(resultToken.isExpired(), callback);
+//
+//
+//         MUser.findOne({ _id: resultToken.user }, function (err, resultUser) {
+//             if (err) return callback(err);
+//
+//             if (!resultUser) return checker.tokenUserNotFound(resultUser, callback);
+//
+//             return callback(null, resultUser);
+//         });
+//     });
+//
+//
+// };
 
 
 

@@ -5,8 +5,8 @@
 
 const validator = require('validator');
 
-let MUserBaseInfo = require('./model/userBaseInfo');
-
+const MUserBaseInfo = require('./model/userBaseInfo');
+const MUserToken = require('./model/userToken');
 
 
 
@@ -83,3 +83,16 @@ exports.login = async (user) =>{
 
 };
 
+
+
+
+
+exports.logout = async (userToken) =>{
+
+    GDataChecker.token(userToken);
+
+    let resultToken = await MUserToken.removeToken(userToken);
+
+    return resultToken;
+
+};

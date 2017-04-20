@@ -2,12 +2,16 @@
 
 const validationName = {
     user : {
-        usernameWrong : {code:1001, message:"Field validation error,  username length must be 4-30", field:'username'},
+        usernameWrong : {code:1001, message:"Field validation error,  username length must be 6-30", field:'username'},
         passwordWrong : {code:1002, message:"Field validation error,  password length must be 6-30", field:'password'},
         emailWrong : {code:1003, message:"Field validation error, Email format wrong", field:'email'},
         mobileWrong : {code:1004, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
 
-        emailRequired : {code:1009, message:"Field validation error, Email is required wrong", field:'email'},
+        usernameRequired : {code:1006, message:"Field validation error,  username is required", field:'username'},
+        passwordRequired : {code:1008, message:"Field validation error,  password is required", field:'password'},
+        emailRequired : {code:1009, message:"Field validation error, Email is required", field:'email'},
+        mobileRequired : {code:1010, message:"Field validation error, mobile number is required", field:'mobilePhone'},
+
 
         usernameExist : {code:1011, message:"Field validation error,  username already exist", field:'username'},
         emailExist : {code:1013, message:"Field validation error,  email already exist", field:'email'},
@@ -18,11 +22,13 @@ const validationName = {
     },
 
     token : {
-        tokenNotFound : {code:2001, message:"User Unauthorized, token not found", field:'X-Access-Token'},
-        userNotFound : {code:2002, message:"User Unauthorized, user not found", field:'X-Access-Token'},
-        tokenLengthWrong : {code:2003, message:"Field validation error,  accessToken length must be 4-30", field:'accessToken'},
-        tokenDecodeWrong : {code:2005, message:"User Unauthorized, token wrong", field:'X-Access-Token'},
-        tokenExpired : {code:2006, message:"User Unauthorized, token expired", field:'X-Access-Token'}
+        tokenRequired : {code:2001, message:"Field validation error,  accessToken is required", field:'accessToken'},
+        tokenLengthWrong : {code:2002, message:"Field validation error,  accessToken length must be 100-200", field:'accessToken'},
+
+        tokenNotFound : {code:2003, message:"User Unauthorized, token not found", field:'X-Access-Token'},
+        userNotFound : {code:2005, message:"User Unauthorized, user not found", field:'X-Access-Token'},
+        tokenDecodeWrong : {code:2007, message:"User Unauthorized, token wrong", field:'X-Access-Token'},
+        tokenExpired : {code:2008, message:"User Unauthorized, token expired", field:'X-Access-Token'}
 
     },
 
