@@ -6,8 +6,8 @@ const validationName = {
         passwordWrong : {code:1002, message:"Field validation error,  password length must be 6-30", field:'password'},
         emailWrong : {code:1003, message:"Field validation error, Email format wrong", field:'email'},
         mobileWrong : {code:1004, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
-        weChatOpenIDWrong : {code:1011, message:"Field validation error, wechat OpenID wrong", field:'idWeChatOpenID'},
-        weChatUnionIDWrong : {code:1012, message:"Field validation error, wechat UnionID wrong", field:'idWeChatUnionID'},
+        weChatOpenIDWrong : {code:1011, message:"Field validation error, wechat OpenID length must be 28", field:'idWeChatOpenID'},
+        weChatUnionIDWrong : {code:1012, message:"Field validation error, wechat UnionID length must be 29", field:'idWeChatUnionID'},
 
         usernameRequired : {code:1021, message:"Field validation error,  username is required", field:'username'},
         passwordRequired : {code:1022, message:"Field validation error,  password is required", field:'password'},

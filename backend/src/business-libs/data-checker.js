@@ -41,11 +41,11 @@ let validation = {
     },
     userWeChatOpenID : function (openId, field){
         if (!openId) return throw409('user.weChatOpenIDRequired', field);
-        if (!validator.isLength(openId, 6, 30))  return throw409('user.weChatOpenIDWrong', field);
+        if (!validator.isLength(openId, 28, 30))  return throw409('user.weChatOpenIDWrong', field);
     },
     userWeChatUnionID : function (unionId, field){
         if (!unionId) return throw409('user.weChatUnionIDRequired', field);
-        if (!validator.isLength(unionId, 6, 30))  return throw409('user.weChatUnionIDWrong', field);
+        if (!validator.isLength(unionId, 29, 30))  return throw409('user.weChatUnionIDWrong', field);
     },
 
     usernameExist : function (user, field){
