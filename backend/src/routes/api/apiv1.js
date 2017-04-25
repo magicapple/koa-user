@@ -2,7 +2,7 @@
  * Created by JinWYP on 23/01/2017.
  */
 
-const auth = require('../../koa2-middleware/auth-jwt');
+const auth = require('../../koa2/koa2-middleware/auth-jwt');
 
 const router = require('koa-router')();
 const userController = require('../../controllers/user');

@@ -82,16 +82,37 @@ const url_filter = function (pattern, options){
             }
 
         } catch (error) {
+
+            let newErr = error;
+
+            if (typeof error.type === 'undefined'){
+                newErr = new GSystemError(500, error.message, error);
+                if (error && typeof error.stack !== 'undefined'){
+                    newErr.stack = error.stack;
+                }
+            }
+
+
             ctx.body = {
                 success : false,
                 error : {
                     code: error.code,
                     message: error.message,
-                    field: error.field
+                    field: error.field,
+
+                    type : error.type,
+                    name : error.name,
+                    codename : error.codename,
+                    stack : error.stack,
+                    status: error.status,
+
+                    url : ctx.request.url
+
                 },
                 meta : null,
                 data : null
             };
+
 
             //继续抛，让外层中间件处理日志
             throw error;

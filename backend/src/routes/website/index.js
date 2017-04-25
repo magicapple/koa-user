@@ -14,7 +14,7 @@ async function pageIndex(ctx, next) {
               {name : 'Jack'},
               {name : 'Tom'}
           ];
-    await ctx.render('websiteIndex', { users });
+    await ctx.render('websiteIndex', { title : 'Homepage !', users:users });
 }
 
 

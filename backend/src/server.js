@@ -2,7 +2,7 @@
 // Koa application is now a class and requires the new operator.
 
 require('./global-variable');
-require('./koa2-libs/mongoose-connect');
+require('./koa2/koa2-libs/mongoose-connect');
 
 
 const util            = require('util');
@@ -21,13 +21,13 @@ const debug           = require('debug')('koa2-user:server');
 
 
 const app                    = new Koa();
-const log4js                 = require('./koa2-middleware/logger-log4js');
-const errorHandler           = require('./koa2-libs/error-handler');
-const responseFormatter      = require('./koa2-middleware/response-formater');
-const ejsHelper              = require('./koa2-middleware/ejs-helper');
-const PageNotFoundMiddleware = require('./koa2-middleware/error404-handler');
-const userDevice = require('./koa2-middleware/user-device');
-const userIP = require('./koa2-middleware/ip-address');
+const log4js                 = require('./koa2/koa2-middleware/logger-log4js');
+const errorHandler           = require('./koa2/koa2-middleware/error-handler');
+const responseFormatter      = require('./koa2/koa2-middleware/response-formater');
+const ejsHelper              = require('./koa2/koa2-middleware/ejs-helper');
+const PageNotFoundMiddleware = require('./koa2/koa2-middleware/error404-handler');
+const userDevice = require('./koa2/koa2-middleware/user-device');
+const userIP = require('./koa2/koa2-middleware/ip-address');
 
 
 const apiRoutes              = require('./routes/api/apiv1');
@@ -38,9 +38,8 @@ const webRoutes              = require('./routes/website/index');
 // debug("Node Config: ", util.inspect(GConfig, {showHidden: false, depth: null}))
 
 
-app.proxy = true;  // If your Koa or Express server is properly configured, the protocol property of the request will be set to match the protocol reported by the proxy in the X-Forwarded-Proto header.
 
-app.use(errorHandler(app));     // 全局错误处理
+app.use(errorHandler(app, {env : GConfig.env}));     // 全局错误处理
 
 app.use(log4js.middleware);
 app.use(logger());     // 记录所用方式与时间

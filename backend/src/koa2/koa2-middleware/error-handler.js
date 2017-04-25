@@ -55,46 +55,58 @@ function serverLog (error, ctx){
 }
 
 
-module.exports = function(app){
 
+// To render exceptions thrown in non-promies code:
+process.on('uncaughtException', function(error){
 
-    // To render exceptions thrown in non-promies code:
-    process.on('uncaughtException', function(error){
+    let newError = null;
 
-        let newError = null;
+    if (error && typeof error.type === 'undefined'){
+        newError = new GSystemError(500, error.message, error);
+        newError.stack = error.stack;
+    }else{
+        newError = error;
+    }
 
-        if (error && typeof error.type === 'undefined'){
-            newError = new GSystemError(500, error.message, error);
-            newError.stack = error.stack;
-        }else{
-            newError = error;
-        }
+    GLogger.error('===== Server 5XX UncaughtException : ', error)
+    debug('===== Server 5XX UncaughtException : ', error)
 
-        GLogger.error('===== Server 5XX UncaughtException : ', error)
-        debug('===== Server 5XX UncaughtException : ', error)
-
-        process.exit(1);
-    });
+    process.exit(1);
+});
 
 
 
-    // To render unhandled rejections created in BlueBird:
-    // https://nodejs.org/api/process.html#process_event_unhandledrejection
-    process.on('unhandledRejection', function(reason, p){
-        GLogger.error('===== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
-        debug('===== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
-    });
+// To render unhandled rejections created in BlueBird:
+// https://nodejs.org/api/process.html#process_event_unhandledrejection
+process.on('unhandledRejection', function(reason, p){
+    GLogger.error('===== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
+    debug('===== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
+});
 
+
+
+
+
+
+function productionErrorHandler (app, options){
+
+    options = options || {}
+    options.env = options.env || 'development'
 
     app.on('error', (error, ctx) =>{
 
     })
 
+    app.proxy = true;  // If your Koa or Express server is properly configured, the protocol property of the request will be set to match the protocol reported by the proxy in the X-Forwarded-Proto header.
 
     return async (ctx, next) => {
         try {
 
             ctx.state.xhr = (ctx.request.get('X-Requested-With') === 'XMLHttpRequest');
+
+            // Security Header for content sniffing
+            ctx.set('X-Content-Type-Options', 'nosniff');
+
 
             // console.log("==== Header application/json : ", ctx.request.is('application/json'), ctx.request.is('application/x-www-form-urlencoded'))
             // console.log("==== Header Content-Type : ", ctx.request.get('Content-Type'), ctx.request.get('Content-Type') === 'application/json')
@@ -106,11 +118,17 @@ module.exports = function(app){
 
             ctx.status = error.status || 500;
 
+
             if (checkIsXHR(ctx.request)){
+
+                if (options.env === 'production'){
+
+                }
 
             }else {
 
                 if (ctx.status >= 500){
+                    ctx.state.title = '500 系统错误, 请稍后重试!'
                     await ctx.render('error/error', { error : error });
                 }
 
@@ -130,3 +148,6 @@ module.exports = function(app){
     };
 
 }
+
+
+module.exports = productionErrorHandler;
