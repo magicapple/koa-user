@@ -25,7 +25,6 @@ const log4js                 = require('./koa2/koa2-middleware/logger-log4js');
 const errorHandler           = require('./koa2/koa2-middleware/error-handler');
 const responseFormatter      = require('./koa2/koa2-middleware/response-formater');
 const ejsHelper              = require('./koa2/koa2-middleware/ejs-helper');
-const PageNotFoundMiddleware = require('./koa2/koa2-middleware/error404-handler');
 const userDevice = require('./koa2/koa2-middleware/user-device');
 const userIP = require('./koa2/koa2-middleware/ip-address');
 
@@ -40,6 +39,7 @@ const webRoutes              = require('./app-user/routes/website/index');
 
 
 app.use(errorHandler(app, {env : GConfig.env}));     // 全局错误处理
+
 
 app.use(log4js.middleware);
 app.use(logger());     // 记录所用方式与时间
@@ -80,7 +80,7 @@ router.use('/api', apiRoutes.routes(), apiRoutes.allowedMethods());
 router.use('/web', webRoutes.routes(), webRoutes.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());
-app.use(PageNotFoundMiddleware());
+
 
 
 
