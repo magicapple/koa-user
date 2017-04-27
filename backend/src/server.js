@@ -30,8 +30,8 @@ const userDevice = require('./koa2/koa2-middleware/user-device');
 const userIP = require('./koa2/koa2-middleware/ip-address');
 
 
-const apiRoutes              = require('./routes/api/apiv1');
-const webRoutes              = require('./routes/website/index');
+const apiRoutes              = require('./app-user/routes/api/apiv1');
+const webRoutes              = require('./app-user/routes/website/index');
 
 
 

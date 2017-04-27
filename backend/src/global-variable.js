@@ -26,4 +26,4 @@ global.GPageNotFoundError = require('./koa2/errors/PageNotFoundError');
 global.GValidationError = require('./koa2/errors/ValidationError');
 global.GUnauthenticatedAccessError = require('./koa2/errors/UnauthenticatedAccessError');
 
-global.GDataChecker = require('./business-libs/data-checker');
+global.GDataChecker = require('./app-user/business-libs/data-checker');
