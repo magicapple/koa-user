@@ -114,16 +114,16 @@ function productionErrorHandler (app, options){
 
             await next();
 
-
             // Handle 404 upstream.
 
-            ctx.status = 404;
-            throw(new GPageNotFoundError())
+            ctx.status = ctx.status || 404;
+            if (ctx.status === 404) {
+                throw(new GPageNotFoundError())
+            }
 
         } catch (error) {
 
             ctx.status = error.status || 500;
-
 
             if (checkIsXHR(ctx.request)){
 

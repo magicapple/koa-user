@@ -18,6 +18,8 @@ async function pageIndex(ctx, next) {
 }
 
 
+
+router.redirect('/', 'index');
 router.get('/index', pageIndex);
 
 

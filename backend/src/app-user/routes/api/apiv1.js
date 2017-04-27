@@ -10,9 +10,11 @@ const shopController = require('../../controllers/shop');
 
 
 
-router.post('/user/signup/wechat', userController.registerUserWeChat);
+
 
 router.post('/user/signup', userController.registerNewUser);
+router.post('/user/signup/wechat', userController.registerUserWeChat);
+
 router.post('/user/login', userController.login);
 router.post('/user/logout', userController.logout);
 

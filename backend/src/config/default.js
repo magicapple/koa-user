@@ -14,7 +14,7 @@ module.exports = {
 
     https    : false,
     domain   : 'pay-local.yimei180.com',
-    port     : 3000, // 程序运行的端口
+    port     : 8000, // 程序运行的端口
 
     auth_cookie_secret   : 'very_long_koa2_express_tekken_nina_jin_kazama',
     auth_cookie_name : 'signed_cookie_username',
