@@ -2,7 +2,7 @@
 
 const validationName = {
     user : {
-        usernameWrong : {code:1001, message:"Field validation error,  username length must be 6-30", field:'username'},
+        usernameWrong : {code:1001, message:"Field validation error,  username length must be 6-40", field:'username'},
         passwordWrong : {code:1002, message:"Field validation error,  password length must be 6-30", field:'password'},
         emailWrong : {code:1003, message:"Field validation error, Email format wrong", field:'email'},
         mobileWrong : {code:1004, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},

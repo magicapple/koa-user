@@ -39,19 +39,20 @@ function serverLog (error, ctx){
     if (ctx.status >= 500){
         GLogger.error('===== Server 5XX UncaughtException : ', error, '\n ----- Server Koa2 Context : ', ctx);
         debug('===== Server 5XX UncaughtException : ', error, '\n ----- Server Koa2 Context : ', ctx);
-    }
+    }else {
+        if (ctx.status >= 400){
+            if (ctx.status === 404) {
+                // GLogger.error('===== 404 Page Not Found : ', error, '\n ----- Server Koa2 Context : ', ctx)
+                debug400('===== Server 404 Page Not Found : ', error, '\n ----- Server Koa2 Context : ', ctx)
 
-    if (ctx.status >= 400){
-        if (ctx.status === 404) {
-            // GLogger.error('===== 404 Page Not Found : ', error, '\n ----- Server Koa2 Context : ', ctx)
-            debug400('===== Server 404 Page Not Found : ', error, '\n ----- Server Koa2 Context : ', ctx)
+            } else {
 
-        } else {
-
-            // GLogger.error('===== Server 4XX Bad Request : ', error, '\n ----- Server Koa2 Context : ', ctx)
-            debug400('===== Server 4XX Bad Request : ', error, '\n ----- Server Koa2 Context : ', ctx)
+                // GLogger.error('===== Server 4XX Bad Request : ', error, '\n ----- Server Koa2 Context : ', ctx)
+                debug400('===== Server 4XX Bad Request : ', error, '\n ----- Server Koa2 Context : ', ctx)
+            }
         }
     }
+
 }
 
 

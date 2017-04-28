@@ -3,8 +3,9 @@
  */
 
 
-
 const superAgent = require('superagent')
+
+const WXBizDataCrypt = require('../business-libs/wechat/WXBizDataCrypt');
 
 const headerToken = require('../../koa2/common-libs/header/auth-header')
 const UserService = require('../service/user/userService')
@@ -80,6 +81,10 @@ exports.getSessionUserInfo = async (ctx, next) => {
 
 exports.registerUserWeChat = async (ctx, next) => {
 
+    console.log('=============== 微信 ==============');
+
+    console.log('微信注册用户Post信息 : ', ctx.request.body);
+
     const jscode = ctx.request.body.code || '';
 
     const appid = 'wx48eb5eda518e52a9';
@@ -97,12 +102,52 @@ exports.registerUserWeChat = async (ctx, next) => {
         ctx.body = wxUserSession;
     }else{
 
-        // 在我们系统注册新用户
+        /**
+         * 签名校验 和 加密数据解密算法
+         *  http://www.ionic.wang/weixin/api/signature.html
+         */
+
+        const encryptedData = ctx.request.body.encryptedData
+        const iv = ctx.request.body.iv
+
+        const sessionKey = wxUserSession.session_key;
+
+        let pc = new WXBizDataCrypt(appid, sessionKey)
+
+        const dataDecoded = pc.decryptData(encryptedData , iv)
+
+        console.log('微信用户信息 解密后 data: ', dataDecoded)
+
+        // 解密后的数据为
+        //
+        // data = {
+        //   "nickName": "Band",
+        //   "gender": 1,
+        //   "language": "zh_CN",
+        //   "city": "Guangzhou",
+        //   "province": "Guangdong",
+        //   "country": "CN",
+        //   "avatarUrl": "http://wx.qlogo.cn/mmopen/vi_32/aSKcBBPpibyKNicHNTMM0qJVh8Kjgiak2AHWr8MHM4WgMEm7GFhsf8OYrySdbvAMvTsw3mo8ibKicsnfN5pRjl1p8HQ/0",
+        //   "unionId": "ocMvos6NjeKLIBqg5Mr9QjxrP1FA",
+        //   "watermark": {
+        //     "timestamp": 1477314187,
+        //     "appid": "wx4f4bc4dec97d474b"
+        //   }
+        // }
+
+
+
+        // 在我们系统注册新用户 如果有昵称则使用昵称作为username注册用户，否则使用openid作为username
+
+        let username = dataDecoded.nickName || 'wx-' + wxUserSession.openid;
+
+        if (username.length <6) username = 'wx-' + wxUserSession.openid
 
         const newUserWeChat = {
-            username : 'wx-' + wxUserSession.openid.substr(0,27),
+            username : username,
             idWeChatOpenID :  wxUserSession.openid,
-            password : 'wx12345678'
+            password : 'wx12345678',
+            nickname : dataDecoded.nickName || ''
         }
 
         let newUser = await UserService.signUpWeChat(newUserWeChat);
@@ -111,6 +156,7 @@ exports.registerUserWeChat = async (ctx, next) => {
 
         ctx.body = userToken;
     }
+
 
 
 }

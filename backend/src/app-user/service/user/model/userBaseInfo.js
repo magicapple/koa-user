@@ -18,8 +18,8 @@ const encryptPassword = function (password) {
 const UserBaseInfoSchema = new GSchema({
 
     username: { type: String, unique: true, trim: true},  // 由于微信登录等第三方登录，所以注册时可以不填写
-    mobilePhone: { type: String, unique: true},
-    email: { type: String, unique: true, lowercase: true, trim: true },
+    mobilePhone: { type: String, unique: true, sparse: true},
+    email: { type: String, unique: true, lowercase: true, trim: true, sparse: true },
 
     password: { type: String, required: true, default: '20170101', set : encryptPassword},
 

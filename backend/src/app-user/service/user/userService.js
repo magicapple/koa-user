@@ -112,6 +112,7 @@ exports.signUpWeChat = async (user) => {
         idWeChatOpenID : user.idWeChatOpenID
     };
 
+    if (user.nickname) newUser.nickname = user.nickname
 
     let weChatOpenIdIsExist = await MUserBaseInfo.findOne({idWeChatOpenID : user.idWeChatOpenID}).exec()
     if (weChatOpenIdIsExist){
