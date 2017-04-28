@@ -50,11 +50,14 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 13. 安装 [koa-jwt]  koa2 针对每个路由的需要验证jwt token 的中间件
 
 
-20. 安装 [validator] 验证数据校验库.
+20. 安装 [validator] 验证数据校验库
 21. 安装 [bcrypt] 密码加密库
 22. 安装 [jsonwebtoken] 用于登录的 JSON Web Tokens
 23. 安装 [moment] 处理时间日期库
 24. 安装 [ipaddr.js] 处理 IPv6 和 IPv4 地址的库
+
+30. 安装 [superagent] node.js HTTP client. Node.js发起 Http请求的库
+
 
 
 
@@ -85,6 +88,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [bcrypt]: https://github.com/kelektiv/node.bcrypt.js
 [jsonwebtoken]: https://github.com/auth0/node-jsonwebtoken
 [ipaddr.js]: https://github.com/whitequark/ipaddr.js/commits/master
+[superagent]: https://github.com/visionmedia/superagent
 
 
 [koa]: http://koajs.com/

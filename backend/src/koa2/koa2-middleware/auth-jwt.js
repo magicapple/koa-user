@@ -5,7 +5,7 @@
 
 const koaJwt             = require('koa-jwt');
 
-const userService        = require('../../app-user/service/user/userService');
+const UserService        = require('../../app-user/service/user/userService');
 
 
 function authMiddleware(options) {
@@ -14,10 +14,10 @@ function authMiddleware(options) {
         debug : true,
         secret : GConfig.loginToken.jwtTokenSecret,
         cookie : GConfig.loginToken.tokenFieldName,
-        key : 'userToken',
+        key : 'userToken',  // add token info to ctx.state.userToken
         isRevoked : async (ctx, decodeToken, token) => {
 
-            ctx.state.userInfo = await userService.userInfo(decodeToken);
+            ctx.state.userInfo = await UserService.userInfo(decodeToken);
             return false;
         }
     })
