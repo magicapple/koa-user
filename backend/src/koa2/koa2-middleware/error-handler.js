@@ -128,7 +128,7 @@ function productionErrorHandler (app, options){
             if (checkIsXHR(ctx.request)){
 
                 if (options.env === 'production'){
-
+                    error.stack = ''
                 }
 
             }else {

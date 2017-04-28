@@ -27,6 +27,9 @@ exports.registerNewUser = async (ctx, next) => {
 }
 
 
+/**
+ * 登陆
+ */
 exports.login = async (ctx, next) => {
 
     const userPostData = ctx.request.body;
@@ -40,6 +43,9 @@ exports.login = async (ctx, next) => {
 }
 
 
+/**
+ * 退出登陆
+ */
 exports.logout = async (ctx, next) => {
 
     const userTokenPostData = ctx.request.body.accessToken || ctx.cookies.get(tokenFieldName);
@@ -57,6 +63,7 @@ exports.logout = async (ctx, next) => {
 exports.getSessionUserInfo = async (ctx, next) => {
 
     console.log("Decode token:", ctx.state.user)
+    console.log("Decode UserInfo:", ctx.state.userInfo)
 
     let user = await UserService.userInfo(ctx.state.user);
     ctx.body = user

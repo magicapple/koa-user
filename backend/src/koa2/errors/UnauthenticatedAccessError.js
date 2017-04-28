@@ -22,7 +22,7 @@ const validationErrorCode = require('./ValidationErrorCode');
 class UnauthenticatedAccessError extends Error{
 
     //构造方法
-    constructor(code, message, error){
+    constructor(error_name, error_field){
         super();
 
         this.type = "UserLevelOperationalError";

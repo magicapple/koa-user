@@ -75,7 +75,7 @@ let validation = {
     token : function (token, field){
         if (!token) return throw409('token.tokenRequired', field);
         if (!validator.isLength(token, 100, 200)) return throw409('token.tokenLengthWrong', field);
-    }
+    },
 
     // tokenNotFound : function (token, next){
     //     if (!token) return throw401(code.token.tokenNotFound.code, code.token.tokenNotFound.message, code.token.tokenNotFound.field, next);
@@ -83,12 +83,14 @@ let validation = {
     // tokenUserNotFound : function (user, next){
     //     if (!user) return throw401(code.token.userNotFound.code, code.token.userNotFound.message, code.token.userNotFound.field, next);
     // },
-    // tokenDecodeWrong : function (token, next){
-    //     if (!token) return throw401(code.token.tokenDecodeWrong.code, code.token.tokenDecodeWrong.message, code.token.tokenDecodeWrong.field, next);
-    // },
-    // tokenExpired : function (tokenIsExpired, next){
-    //     if (tokenIsExpired) return throw401(code.token.tokenExpired.code, code.token.tokenExpired.message, code.token.tokenExpired.field, next);
-    // }
+
+    tokenDecodeWrong : function (token, field){
+        if (token) return throw401('token.tokenDecodeWrong', field);
+    },
+
+    tokenExpired : function (tokenIsExpired, next){
+        if (tokenIsExpired) return throw401('token.tokenDecodeWrong', field);
+    }
 
 
 

@@ -82,11 +82,39 @@ const url_filter = function (pattern, options){
             }
 
         } catch (error) {
+            // console.log('name:', error.name)
+            // console.log('type:',error.type)
+            // console.log('code:',error.code)
+            // console.log('message:',error.message)
+            // console.log('field:',error.field)
 
             let newErr = error;
 
             if (typeof error.type === 'undefined'){
-                newErr = new GSystemError(500, error.message, error);
+
+                if (error.name === 'UnauthorizedError'){
+                    newErr = new GUnauthenticatedAccessError('token.tokenDecodeWrong', 'authorization');
+
+                    /**
+                     * Base on Module koa-jwt Error
+                     * https://github.com/koajs/jwt
+                     */
+                    if (error.message && error.message !== 'Authentication Error'){
+                        newErr.message = error.message;
+                    }
+
+                    /**
+                     * Base on Module jsonwebtoken Error
+                     * https://github.com/auth0/node-jsonwebtoken
+                     */
+                    if (error.message === 'jwt expired') {
+                        newErr = new GUnauthenticatedAccessError('token.tokenExpired', 'authorization');
+                    }
+
+                }else {
+                    newErr = new GSystemError(500, error.message, error);
+                }
+
                 if (error && typeof error.stack !== 'undefined'){
                     newErr.stack = error.stack;
                 }
@@ -96,15 +124,15 @@ const url_filter = function (pattern, options){
             ctx.body = {
                 success : false,
                 error : {
-                    code: error.code,
-                    message: error.message,
-                    field: error.field,
+                    code: newErr.code,
+                    message: newErr.message,
+                    field: newErr.field,
 
-                    type : error.type,
-                    name : error.name,
-                    codename : error.codename,
-                    stack : error.stack,
-                    status: error.status,
+                    type : newErr.type,
+                    name : newErr.name,
+                    codename : newErr.codename,
+                    stack : newErr.stack,
+                    status: newErr.status,
 
                     url : ctx.request.url
 
@@ -115,7 +143,7 @@ const url_filter = function (pattern, options){
 
 
             //继续抛，让外层中间件处理日志
-            throw error;
+            throw newErr;
         }
 
     }
