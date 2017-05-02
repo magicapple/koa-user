@@ -39,6 +39,11 @@ let validation = {
         if (!mobilePhone) return throw409('user.mobileRequired', field);
         if (!validator.isMobilePhone(mobilePhone, 'zh-CN')) return throw409('user.mobileWrong', field);
     },
+
+    userWeChatJsCode : function (js_code, field){
+        if (!js_code) return throw409('user.weChatJsCodeRequired', field);
+        if (!validator.isLength(js_code, 32, 50))  return throw409('user.weChatJsCodeWrong', field);
+    },
     userWeChatOpenID : function (openId, field){
         if (!openId) return throw409('user.weChatOpenIDRequired', field);
         if (!validator.isLength(openId, 28, 30))  return throw409('user.weChatOpenIDWrong', field);
@@ -47,6 +52,23 @@ let validation = {
         if (!unionId) return throw409('user.weChatUnionIDRequired', field);
         if (!validator.isLength(unionId, 29, 30))  return throw409('user.weChatUnionIDWrong', field);
     },
+    userWeChatEncryptedData : function (encryptedData, field){
+        if (!encryptedData) return throw409('user.weChatEncryptedDataRequired', field);
+        if (!validator.isLength(encryptedData, 100, 1000))  return throw409('user.weChatEncryptedDataWrong', field);
+    },
+    userWeChatUserInfoIV : function (iv, field){
+        if (!iv) return throw409('user.weChatUserInfoIVRequired', field);
+        if (!validator.isLength(iv, 24, 24))  return throw409('user.weChatUserInfoIVWrong', field);
+    },
+    userWeChatUserSessionKey : function (session_key, field){
+        if (!session_key) return throw409('user.weChatUserSessionKeyRequired', field);
+        if (!validator.isLength(session_key, 24, 24))  return throw409('user.weChatUserSessionKeyWrong', field);
+    },
+    userWeChatUserInfoSignature : function (signature, field){
+        if (!signature) return throw409('user.weChatUserInfoSignatureRequired', field);
+        if (!validator.isLength(signature, 40, 40))  return throw409('user.weChatUserInfoSignatureWrong', field);
+    },
+
 
     usernameExist : function (user, field){
         if (user) return throw409('user.usernameExist', field);

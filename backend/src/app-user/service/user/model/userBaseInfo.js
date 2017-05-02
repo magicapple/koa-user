@@ -28,6 +28,7 @@ const UserBaseInfoSchema = new GSchema({
     fullName: { type: String, trim: true},
 
     nickname: {type: String},
+    gender: {type: Number, min: 0, max: 10},
 
     avatar: {type: String},
 

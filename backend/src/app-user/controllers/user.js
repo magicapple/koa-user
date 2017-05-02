@@ -3,9 +3,10 @@
  */
 
 
-const superAgent = require('superagent')
 
 const WXBizDataCrypt = require('../business-libs/wechat/WXBizDataCrypt');
+const weChatMiniApp = require('../business-libs/wechat/weChatMiniApp');
+
 
 const headerToken = require('../../koa2/common-libs/header/auth-header')
 const UserService = require('../service/user/userService')
@@ -81,24 +82,35 @@ exports.getSessionUserInfo = async (ctx, next) => {
 
 exports.registerUserWeChat = async (ctx, next) => {
 
-    console.log('=============== 微信 ==============');
+    console.log('----- 微信注册用户Post信息 : ', ctx.request.body);
 
-    console.log('微信注册用户Post信息 : ', ctx.request.body);
+    const jsCode = ctx.request.body.code || "";
+    const signature = ctx.request.body.signature || "";
+    const encryptedData = ctx.request.body.encryptedData || "";
+    const iv = ctx.request.body.iv || ""; //对称解密算法初始向量
 
-    const jscode = ctx.request.body.code || '';
+    GDataChecker.userWeChatJsCode(jsCode);
+    GDataChecker.userWeChatUserInfoSignature(signature);
 
-    const appid = 'wx48eb5eda518e52a9';
-    const secret = '939ef96f22327cf4ef4243c9e4268e92';
+    GDataChecker.userWeChatEncryptedData(encryptedData);
+    GDataChecker.userWeChatUserInfoIV(iv);
 
-    const url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${jscode}&grant_type=authorization_code`;
-    console.log('Request 微信 API 获取 openid url: ', url);
 
-    let wxUserResult = await superAgent.get(url);
+    const appId = GConfig.weChatMiniApp.appId;
+    const secret = GConfig.weChatMiniApp.secret;
+
+    let miniApp = new weChatMiniApp(appId, secret );
+
+    let wxUserResult = await miniApp.getSessionKeyAndOpenId(jsCode);
     let wxUserSession = JSON.parse(wxUserResult.text)
 
-    console.log('微信 openid : ', wxUserSession);
+    // 文档 https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html#wxloginobject
+    console.log('----- 微信 openid : ', wxUserSession);
 
+    GDataChecker.userWeChatUserSessionKey(wxUserSession.session_key);
     if (wxUserSession.errcode){
+
+        // 如果微信返回错误码, 直接把微信返回的信息返回给前端
         ctx.body = wxUserSession;
     }else{
 
@@ -107,56 +119,51 @@ exports.registerUserWeChat = async (ctx, next) => {
          *  http://www.ionic.wang/weixin/api/signature.html
          */
 
-        const encryptedData = ctx.request.body.encryptedData
-        const iv = ctx.request.body.iv
+        const isValid = miniApp.verifyUserInfoSignature(ctx.request.body.rawData, wxUserSession.session_key, signature)
+        const dataDecoded = miniApp.decryptUserInfo(wxUserSession.session_key, encryptedData, iv)
 
-        const sessionKey = wxUserSession.session_key;
-
-        let pc = new WXBizDataCrypt(appid, sessionKey)
-
-        const dataDecoded = pc.decryptData(encryptedData , iv)
-
-        console.log('微信用户信息 解密后 data: ', dataDecoded)
-
-        // 解密后的数据为
-        //
-        // data = {
-        //   "nickName": "Band",
-        //   "gender": 1,
-        //   "language": "zh_CN",
-        //   "city": "Guangzhou",
-        //   "province": "Guangdong",
-        //   "country": "CN",
-        //   "avatarUrl": "http://wx.qlogo.cn/mmopen/vi_32/aSKcBBPpibyKNicHNTMM0qJVh8Kjgiak2AHWr8MHM4WgMEm7GFhsf8OYrySdbvAMvTsw3mo8ibKicsnfN5pRjl1p8HQ/0",
-        //   "unionId": "ocMvos6NjeKLIBqg5Mr9QjxrP1FA",
-        //   "watermark": {
-        //     "timestamp": 1477314187,
-        //     "appid": "wx4f4bc4dec97d474b"
-        //   }
-        // }
-
+        // 解密后的数据范例为
+        const simpleData = {
+          "nickName": "Band",
+          "gender": 1,
+          "language": "zh_CN",
+          "city": "Guangzhou",
+          "province": "Guangdong",
+          "country": "CN",
+          "avatarUrl": "http://wx.qlogo.cn/mmopen/vi_32/aSKcBBPpibyKNicHNTMM0qJVh8Kjgiak2AHWr8MHM4WgMEm7GFhsf8OYrySdbvAMvTsw3mo8ibKicsnfN5pRjl1p8HQ/0",
+          "unionId": "ocMvos6NjeKLIBqg5Mr9QjxrP1FA",
+          "watermark": {
+            "timestamp": 1477314187,
+            "appid": "wx4f4bc4dec97d474b"
+          }
+        }
 
 
         // 在我们系统注册新用户 如果有昵称则使用昵称作为username注册用户，否则使用openid作为username
-
         let username = dataDecoded.nickName || 'wx-' + wxUserSession.openid;
-
         if (username.length <6) username = 'wx-' + wxUserSession.openid
 
         const newUserWeChat = {
             username : username,
             idWeChatOpenID :  wxUserSession.openid,
             password : 'wx12345678',
-            nickname : dataDecoded.nickName || ''
+            nickname : dataDecoded.nickName || '',
+
+            openid : wxUserSession.openid,
+            gender : dataDecoded.gender,
+
+            avatarUrl : dataDecoded.avatarUrl,
+            language : dataDecoded.language,
+
+            country : dataDecoded.country,
+            province : dataDecoded.province,
+            city : dataDecoded.city,
         }
 
         let newUser = await UserService.signUpWeChat(newUserWeChat);
-
         let userToken = await MUserToken.generateToken(newUser, ctx, wxUserSession.session_key);
 
         ctx.body = userToken;
     }
-
-
 
 }

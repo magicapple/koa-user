@@ -6,6 +6,7 @@
 const validator = require('validator');
 
 const MUserBaseInfo = require('./model/userBaseInfo');
+const MUserInfoWechat = require('./model/userInfoWechat');
 const MUserToken = require('./model/userToken');
 
 
@@ -119,6 +120,7 @@ exports.signUpWeChat = async (user) => {
         return MUserBaseInfo.find1ById(weChatOpenIdIsExist._id)
     }else{
         let createdUser = await MUserBaseInfo.create(newUser);
+        let createdWeChatUser = await MUserInfoWechat.create(newUser);
         return MUserBaseInfo.find1ById(createdUser._id)
     }
 

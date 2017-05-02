@@ -6,18 +6,18 @@
  * config
  */
 
-const path = require('path');
+const path = require("path");
 
 module.exports = {
 
     debug : false, // debug 为 true 时，用于本地调试
 
     https    : false,
-    domain   : 'pay-local.yimei180.com',
+    domain   : "pay-local.yimei180.com",
     port     : 3000, // 程序运行的端口
 
-    auth_cookie_secret   : 'very_long_koa2_express_tekken_nina_jin_kazama',
-    auth_cookie_name : 'signed_cookie_username',
+    auth_cookie_secret   : "very_long_koa2_express_tekken_nina_jin_kazama",
+    auth_cookie_name : "signed_cookie_username",
 
     loginToken : {
         "jwtTokenSecret" : "koa2-user-secret-x1",
@@ -26,17 +26,17 @@ module.exports = {
     },
 
     // 应用目录配置
-    path_logs : path.join(__dirname, '../../../logs/'),
+    path_logs : path.join(__dirname, "../../../logs/"),
 
 
     // 文件目录配置
-    path_file_upload : path.join(__dirname, '../../../files/upload'),
-    path_file_upload_tmp : path.join(__dirname, '../../../files/upload_tmp'),
-    path_file_download : path.join(__dirname, '../../../files/download'),
+    path_file_upload : path.join(__dirname, "../../../files/upload"),
+    path_file_upload_tmp : path.join(__dirname, "../../../files/upload_tmp"),
+    path_file_download : path.join(__dirname, "../../../files/download"),
 
 
     redis : {
-        host : '127.0.0.1',
+        host : "127.0.0.1",
         port : 6379,
         db   : 0
     },
@@ -58,5 +58,11 @@ module.exports = {
         "database": "koa2user"
 
 
+    },
+
+
+    weChatMiniApp : {
+        appId : "wx48eb5eda518e52a9",
+        secret : "939ef96f22327cf4ef4243c9e4268e92"
     }
 };
