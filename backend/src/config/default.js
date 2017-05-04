@@ -62,7 +62,7 @@ module.exports = {
 
 
     weChatMiniApp : {
-        appId : "wx48eb5eda518e52a9",
-        secret : "939ef96f22327cf4ef4243c9e4268e92"
+        appId : "wx63852d7027018b3b",
+        secret : "a4d1f671cbae2544b3e43e6c519bb7f6"
     }
 };

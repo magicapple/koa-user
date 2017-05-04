@@ -15,6 +15,15 @@
 3. 当通过手机注册,用户先输入手机号,获取验证码,然后进入注册页面.输入用户名和密码后,注册成功.
 
 
+#### 用户微信联合登陆
+1. 验证几个字段长度是否合格 jsCode, signature, encrytedData, iv  
+2. 通过code 向微信请求 获取openid和seesion_key   
+3. 校验session_key 长度 并且 如果上面返回的errcode字段不为空 则继续 
+4. 通过sha1 算法把rawData 和 session_key 生成签名2 与 签名signature 字段 比对
+5. 通过 session_key 和 iv字段解密 encryptedData 
+6. 用nickname 作为用户名注册，如果nickname长度不够则用 “wx-”前缀 加 openid 作为用户名注册
+7. 注册成功后，生成新token返回给前端，如果用户的openid已存在则不注册新用户 直接生成token返回给前端
+
 
 
 #### 用户登录
