@@ -30,3 +30,9 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-5
+
+
+
+git:
+  lfs_skip_smudge: true
+
