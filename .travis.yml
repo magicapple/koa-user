@@ -36,3 +36,10 @@ addons:
 git:
   lfs_skip_smudge: true
 
+
+
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+
