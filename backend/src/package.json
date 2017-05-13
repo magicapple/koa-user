@@ -11,7 +11,8 @@
     "devdebug": "node --inspect server.js",
     "dev": "nodemon server.js",
     "devlegacy": "nodemon --harmony-async-await server.js",
-    "test": "NODE_ENV=unittest mocha --recursive test/unit"
+    "test": "NODE_ENV=unittest mocha --recursive test/unit",
+    "cover": "istanbul cover _mocha"
   },
   "author": "",
   "license": "MIT",
