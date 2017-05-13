@@ -12,7 +12,7 @@
     "dev": "nodemon server.js",
     "devlegacy": "nodemon --harmony-async-await server.js",
     "test": "NODE_ENV=unittest mocha --recursive test/unit",
-    "cover": "istanbul cover _mocha"
+    "cover": "nyc npm test"
   },
   "author": "",
   "license": "MIT",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "nyc": "^10.3.2"
   }
 }

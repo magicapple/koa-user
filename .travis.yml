@@ -3,13 +3,17 @@ node_js:
   - "node"
   - "7"
 
-
-before_script:
-  - npm install -g gulp
+before_install:
   - cd backend/src
 
 install:
   - npm install
+
+
+before_script:
+  - npm install -g gulp
+
+
 
 script:
   - npm test
