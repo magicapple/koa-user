@@ -6,7 +6,10 @@ node_js:
 
 before_script:
   - npm install -g gulp
+  - cd backend/src
 
+install:
+  - npm install
 
 script:
   - npm test
