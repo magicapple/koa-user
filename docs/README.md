@@ -48,6 +48,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 11. 安装 [kcors] koa2 跨域CORS 模块 ``` npm install --save kcors ``` 
 12. 安装 [koa-useragent] koa2 查看 请求Header中的UserAgent 模块 ``` npm install --save koa-useragent ``` 
 13. 安装 [koa-jwt]  koa2 针对每个路由的需要验证jwt token 的中间件
+14. 安装 [koa-multer]  koa2 上传文件组件
 
 
 20. 安装 [validator] 验证数据校验库
@@ -104,6 +105,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [koa-useragent]: https://github.com/rvboris/koa-useragent
 [kcors]: https://github.com/koajs/cors
 [koa-jwt]: https://github.com/koajs/jwt
+[koa-multer]: https://github.com/koa-modules/multer
 
 [mongoose]: http://mongoosejs.com/
 

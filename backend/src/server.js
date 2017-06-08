@@ -14,6 +14,7 @@ const koaStaticServer = require('koa-static');
 const ejs             = require('koa-ejs');
 const router          = require('koa-router')();
 const bodyParser      = require('koa-bodyparser');
+
 const userAgent       = require('koa-useragent');
 const cors            = require('kcors');
 
@@ -74,9 +75,10 @@ app.use(responseFormatter('/api', {isInclude:true}));
 
 
 
+
 // Start Router 路由
 
-router.use('/api', apiRoutes.routes(), apiRoutes.allowedMethods());
+router.use('/apx', apiRoutes.routes(), apiRoutes.allowedMethods());
 router.use('/web', webRoutes.routes(), webRoutes.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());
