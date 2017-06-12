@@ -14,8 +14,15 @@ const userController = require('../../controllers/user');
 const shopController = require('../../controllers/shop');
 
 
+const files = async (ctx, next) => {
 
-router.post('/upload', upload.single('avatar'));
+    console.log('ctx.req.file: ', ctx.req.file)
+
+    ctx.body = {file: ctx.req.file};
+}
+
+
+router.post('/upload', upload.single('file'), files);
 
 
 router.post('/user/signup', userController.registerNewUser);
