@@ -17,10 +17,18 @@ async function pageIndex(ctx, next) {
     await ctx.render('websiteIndex', { title : 'Homepage !', users:users });
 }
 
+async function pageAdminHome(ctx, next) {
+
+    await ctx.render('admin/adminHome', { layout: false, title : 'Admin Homepage !' });
+}
+
+
 
 
 router.redirect('/', 'index');
+
 router.get('/index', pageIndex);
 
+router.get('/admin', pageAdminHome);
 
 module.exports = router;
