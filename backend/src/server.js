@@ -62,7 +62,7 @@ app.use(koaStaticServer(path.join(__dirname, 'static'), {
 // 设置渲染引擎
 ejs(app, {
     root: path.join(__dirname, 'views'),
-    layout: 'indexLayout',
+    layout: false,
     viewExt: 'ejs',
     cache: false,
     debug: true
@@ -85,7 +85,7 @@ app.use(router.routes(), router.allowedMethods());
 
 // Start listening on specified port
 app.listen(GConfig.port, () => {
-    debug("----- Server Koa 2.0 listening on port ", GConfig.port);
+    debug("----- Server Koa 2.0 listening on port", GConfig.port);
 });
 
 // Start the app with "node --harmony-async-await" flag, and go to http://localhost:3000

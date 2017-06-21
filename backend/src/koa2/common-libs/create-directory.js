@@ -15,6 +15,7 @@ const PATH_SEPARATOR = path.normalize("/");
 
 /**
  * 判断目录是否存在
+ *
  */
 function isDirExistsSync (dirPath) {
     try {
@@ -31,6 +32,7 @@ function isDirExistsSync (dirPath) {
 
 /**
  * 判断文件是否存在
+ *
  */
 function isFileExistsSync(filePath) {
     try {
@@ -47,6 +49,7 @@ function isFileExistsSync(filePath) {
 
 /**
  * 创建目录,如果该目录包括子目录,则无法创建
+ *
  */
 function mkdirSync(path) {
     try {
@@ -58,7 +61,25 @@ function mkdirSync(path) {
 
 
 /**
+ * 创建目录
+ *
+ * https://github.com/moajs/moa2/blob/v2/init.js
+ */
+function createDirectory (path) {
+    var isExist = fs.existsSync(path)
+
+    if (isExist !== true) {
+        debug('Path is not exist, create folder:' + path)
+        fs.mkdirSync(path)
+    } else {
+        debug('Path is exist, no operation!')
+    }
+}
+
+
+/**
  * 创建目录,如果该目录包括子目录,则自动创建所有子目录
+ *
  */
 function mkdirpSync(pathStr) {
     var pathArray = path.normalize(pathStr).split(PATH_SEPARATOR);
@@ -96,21 +117,6 @@ function mkdirpSync(pathStr) {
 
 
 
-/**
- * 创建目录
- *
- * https://github.com/moajs/moa2/blob/v2/init.js
- */
-function createDirectory (path) {
-    var isExist = fs.existsSync(path)
-
-    if (isExist !== true) {
-        debug('Path is not exist, create folder:' + path)
-        fs.mkdirSync(path)
-    } else {
-        debug('Path is exist, no operation!')
-    }
-}
 
 
 

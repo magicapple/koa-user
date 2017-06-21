@@ -29,6 +29,7 @@ router.redirect('/', 'index');
 
 router.get('/index', pageIndex);
 
+
 router.get('/admin', pageAdminHome);
 
 module.exports = router;

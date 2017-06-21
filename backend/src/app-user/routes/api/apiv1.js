@@ -5,7 +5,6 @@
 const multer          = require('koa-multer');
 const upload = multer({ dest: GConfig.path_file_upload });
 
-console.log(GConfig.path_file_upload)
 
 const auth = require('../../../koa2/koa2-middleware/auth-jwt');
 

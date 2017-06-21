@@ -8,7 +8,7 @@ const WXBizDataCrypt = require('../business-libs/wechat/WXBizDataCrypt');
 const weChatMiniApp = require('../business-libs/wechat/weChatMiniApp');
 
 
-const headerToken = require('../../koa2/common-libs/header/auth-header')
+const headerToken = require('../../koa2/common-libs/authorization-header/auth-header')
 const UserService = require('../service/user/userService')
 const MUserToken = require('../service/user/model/userToken')
 
