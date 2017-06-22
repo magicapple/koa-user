@@ -2,24 +2,54 @@
 <head>
     <%- include ./includehead/head %>
 
+
+    <style>
+
+        html,body {
+            margin:0;
+            padding:0;
+            height: 100%;
+        }
+
+        .grid {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -o-flex;
+            display: -ms-flex;
+            display: flex;
+            flex-direction: row
+
+        }
+        .col {
+            padding: 30px;
+        }
+        .fluid {
+            flex: 1;
+            border: 1px solid blue;
+        }
+        .fixed {
+            width: 400px;
+            border: 1px solid red;
+        }
+
+
+    </style>
 </head>
 <body>
-<h1>Hello, world!</h1>
 
 
-<div>
 
-    <p>request ip is: <%= ip %></p>
-    <p>Time now is: <%= timeNow %></p>
-
-    <ul>
-        <% users.forEach(function (user) {%>
-        <li><%= user.name %></li>
-        <% })%>
-    </ul>
-
+<div class="grid">
+    <div class="col fluid">
+        fluid
+    </div>
+    <div class="col fixed">
+        fixed
+    </div>
+    <div class="col fluid">
+        fluid
+    </div>
 </div>
-
 
 
 </body>
