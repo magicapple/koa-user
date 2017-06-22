@@ -25,7 +25,7 @@ async function pageAdminHome(ctx, next) {
 
 
 
-router.redirect('/', 'index');
+router.redirect('/', '/web/index');
 
 router.get('/index', pageWebIndex);
 

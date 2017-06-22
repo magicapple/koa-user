@@ -35,23 +35,30 @@ function checkIsXHR (req){
 
 
 
-function serverLog (error, ctx){
+function serverLog (error, ctx, isAppOnError){
+    let errorText = ''
+
+    if (isAppOnError) {
+        errorText = '===== KOA2 App On Error '
+    }
+
     if (ctx.status >= 500){
-        GLogger.error('===== Server 5XX UncaughtException : ', error, '\n ----- Server Koa2 Context : ', ctx);
-        debug('===== Server 5XX UncaughtException : ', error, '\n ----- Server Koa2 Context : ', ctx);
-    }else {
-        if (ctx.status >= 400){
-            if (ctx.status === 404) {
-                // GLogger.error('===== 404 Page Not Found : ', error, '\n ----- Server Koa2 Context : ', ctx)
-                debug400('===== Server 404 Page Not Found : ', error, '\n ----- Server Koa2 Context : ', ctx)
+        GLogger.error(errorText + '===== Server 5XX UncaughtException : \n', error, '\n ----- Server Koa2 Context : \n', ctx);
+        debug(errorText + '===== Server 5XX UncaughtException : \n', error, '\n ----- Server Koa2 Context \n: ', ctx);
 
-            } else {
+    }else if (ctx.status >= 400){
 
-                // GLogger.error('===== Server 4XX Bad Request : ', error, '\n ----- Server Koa2 Context : ', ctx)
-                debug400('===== Server 4XX Bad Request : ', error, '\n ----- Server Koa2 Context : ', ctx)
-            }
+        if (ctx.status === 404) {
+            // GLogger.error(errorText + '===== 404 Page Not Found : ', error, '\n ----- Server Koa2 Context : ', ctx)
+            debug400(errorText + '===== Server 404 Page Not Found : \n', error, '\n ----- Server Koa2 Context : \n', ctx)
+
+        } else {
+
+            // GLogger.error(errorText + '===== Server 4XX Bad Request : ', error, '\n ----- Server Koa2 Context : ', ctx)
+            debug400(errorText + '===== Server 4XX Bad Request : \n', error, '\n ----- Server Koa2 Context : \n', ctx)
         }
     }
+
 
 }
 
@@ -69,8 +76,8 @@ process.on('uncaughtException', function(error){
         newError = error;
     }
 
-    GLogger.error('===== Server 5XX UncaughtException : ', error)
-    debug('===== Server 5XX UncaughtException : ', error)
+    GLogger.error('===== Process Server 5XX UncaughtException : ', error)
+    debug('===== Process Server 5XX UncaughtException : ', error)
 
     process.exit(1);
 });
@@ -80,8 +87,8 @@ process.on('uncaughtException', function(error){
 // To render unhandled rejections created in BlueBird:
 // https://nodejs.org/api/process.html#process_event_unhandledrejection
 process.on('unhandledRejection', function(reason, p){
-    GLogger.error('===== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
-    debug('===== Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
+    GLogger.error('===== Process Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
+    debug('===== Process Server 5XX UnhandledRejection at Promise: ', JSON.stringify(p), "\n Reason: ", reason);
 });
 
 
@@ -95,7 +102,7 @@ function productionErrorHandler (app, options){
     options.env = options.env || 'development'
 
     app.on('error', (error, ctx) =>{
-
+        serverLog(error, ctx, true)
     })
 
     app.proxy = true;  // If your Koa or Express server is properly configured, the protocol property of the request will be set to match the protocol reported by the proxy in the X-Forwarded-Proto header.
@@ -136,10 +143,10 @@ function productionErrorHandler (app, options){
 
                 if (ctx.status >= 500){
                     ctx.state.title = '500 系统错误, 请稍后重试!'
-                    await ctx.render('error/error', { error : error });
-                }
+                    await ctx.render('error/500', { error : error });
 
-                if (ctx.status >= 400){
+                }else if (ctx.status >= 400){
+
                     if (ctx.status === 404) {
                         await ctx.render('error/404', { error : error });
                     } else {
