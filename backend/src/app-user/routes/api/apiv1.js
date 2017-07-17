@@ -17,7 +17,7 @@ const files = async (ctx, next) => {
 
     console.log('ctx.req.file: ', ctx.req.file)
 
-    ctx.body = {file: ctx.req.file};
+    ctx.body = ctx.req.file;
 }
 
 

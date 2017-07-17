@@ -3,14 +3,16 @@
 public
 static
 
-# css sprite
 
+
+# css sprite
 _auto_sprite.scss
 .sass-cache
 *auto-sprite*
 
 
-
+# upload files
+/files
 
 
 
