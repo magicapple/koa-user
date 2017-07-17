@@ -16,9 +16,9 @@ const rev          = require('gulp-rev');
 const sourcePath = {
     'htmlTemplate'  : '../../backend/src/views/src/**/*',
     'images'        : 'css/images/**/*',
-    'imagesSprites' : 'css/images/sprite/icon/**/*',
-    'scss'          : 'css/sass/**/*.scss',
-    'css'           : 'css/stylesheets'
+    'imagesSprites' : 'css/images/sprite/auto-sprite/**/*',
+    'scss'          : 'css/scss/**/*.scss',
+    'css'           : 'css/stylesheets/'
 };
 
 const distPath = {
@@ -26,10 +26,10 @@ const distPath = {
     'images'                           : '../dist/css/images/',
 
     'imagesSprites'                    : 'css/images/sprite/auto-sprite.png',
-    'imagesSpritesCssOutput'           : 'css/scss/helpers/_auto_sprite.scss',
+    'imagesSpritesScssOutput'           : 'css/scss/helpers/_auto_sprite.scss',
     'imagesSpritesOutputReferringPath' : '/static/css/images/sprite/auto-sprite.png',
-    'css'                              : '../dist/static/css/stylesheets/',
-    'manifest'                         : '../dist/static/rev/'
+    'css'                              : '../dist/css/stylesheets/',
+    'manifest'                         : '../dist/rev-manifest/'
 };
 
 
@@ -51,10 +51,10 @@ gulp.task('images', function() {
 
 
 gulp.task('sprite', function () {
-    var spriteData = gulp.src(sourcePath.imagesSprites).pipe(spritesmith({
+    const spriteData = gulp.src(sourcePath.imagesSprites).pipe(spritesmith({
         imgName:  distPath.imagesSprites ,
         imgPath: distPath.imagesSpritesOutputReferringPath,
-        cssName:  distPath.imagesSpritesCssOutput ,
+        cssName:  distPath.imagesSpritesScssOutput ,
         cssFormat:  'scss',
         algorithm : 'alt-diagonal',
         padding: 20
@@ -64,11 +64,11 @@ gulp.task('sprite', function () {
 
 
 // Compile css and automatically prefix stylesheets
-gulp.task('sass', [ 'images' ], function() {
-    gulp.src(sourcePath.scss)
+gulp.task('sass', [ 'sprite' ], function() {
+    return gulp.src(sourcePath.scss)
         .pipe(sass({
             precision       : 10,
-            outputStyle     : 'compressed',
+            outputStyle     : 'compact',
             errLogToConsole : true
         }).on('error', sass.logError))
         // .pipe(autoprefixer({
@@ -78,32 +78,31 @@ gulp.task('sass', [ 'images' ], function() {
         //     //        transform: rotate(45deg);
         //     remove:true //是否去掉不必要的前缀 默认：true
         // }))
-        //.pipe(cleanCss({compatibility: 'ie8'}))
-        .pipe(gulp.dest(distPath.css))
+        // .pipe(optimizerCss({debug: true, compatibility: 'ie8'}))
+        .pipe(gulp.dest(sourcePath.css))
 });
 
 
 
 gulp.task('sass-production', [ 'sprite'], function(done) {
 
-    runSequence('images', function() {
-        gulp.src(sourcePath.scss)
-            .pipe(sass({
-                precision       : 10,
-                outputStyle     : 'compressed',
-                errLogToConsole : true
-            }).on('error', sass.logError))
-            // .pipe(autoprefixer({
-            //     browsers: ['> 5%', 'Last 2 versions'],
-            //     cascade: false
-            // }))
-            //.pipe(cleanCss({compatibility: 'ie8'}))
-            .pipe(rev())
-            .pipe(gulp.dest(distPath.css))
-            .pipe(rev.manifest('rev-manifest-css.json'))
-            .pipe(gulp.dest(distPath.manifest) );
-        done();
-    });
+    return gulp.src(sourcePath.scss)
+        .pipe(sass({
+            precision       : 10,
+            outputStyle     : 'compact',
+            errLogToConsole : true
+        }).on('error', sass.logError))
+        // .pipe(autoprefixer({
+        //     browsers: ['> 5%', 'Last 2 versions'],
+        //     cascade: false
+        // }))
+        .pipe(optimizerCss({debug: true, compatibility: 'ie8'}), function(details) {
+            console.log('File name :' + details.name + ', original size: ' + details.stats.originalSize + ', minified size:' + details.stats.minifiedSize);
+        })
+        .pipe(rev())
+        .pipe(gulp.dest(distPath.css))
+        .pipe(rev.manifest('rev-manifest-css.json'))
+        .pipe(gulp.dest(distPath.manifest) );
 
 });
 
