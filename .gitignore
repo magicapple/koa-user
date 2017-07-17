@@ -1,8 +1,9 @@
 
 # static file for dist css html js
-public
-static
-
+/backend/src/public
+/backend/src/static
+/backend/src/views/dist
+/frontend-admin/dist
 
 
 # css sprite
@@ -91,7 +92,6 @@ fabric.properties
 
 # Ignore Mac OS desktop services store
 *.DS_Store
-.DS_Store
 
 
 # Ignore Windows desktop setting file

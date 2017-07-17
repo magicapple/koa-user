@@ -10,10 +10,10 @@ const del = require( 'del');
 
 const distPath = {
     'distAll'  : '../dist',
-    'htmlTemplate'  : '../dist',
+    'htmlTemplate'  : '../../backend/src/views/dist/',
 
-    'stylesheets' : './css/stylesheets/**/*',
-    'autoSprite' : './css/images/sprite/auto-sprite.*',
+    'stylesheets' : 'css/stylesheets/**/*',
+    'autoSprite' : 'css/images/sprite/auto-sprite.*',
 
     'tsCompileToJs' : './.awcache/**/*',
     'tsCompileJsBuild' : './jsoutput-temp-prodution/**/*',
@@ -23,6 +23,7 @@ const distPath = {
 
 gulp.task('clean', function() {
     del.sync([
+        distPath.htmlTemplate,
         distPath.distAll,
         distPath.stylesheets,
         distPath.autoSprite,
