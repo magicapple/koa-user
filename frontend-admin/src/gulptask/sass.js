@@ -4,12 +4,12 @@
 
 
 
-const gulp         = require('gulp');
-const sass         = require('gulp-sass');
-const spritesmith  = require('gulp.spritesmith');
-const autoprefixer = require('gulp-autoprefixer');
-const optimizerCss = require('gulp-clean-css');
-const rev          = require('gulp-rev');
+const gulp           = require('gulp');
+const sass           = require('gulp-sass');
+const spriteSmith    = require('gulp.spritesmith');
+const autoPrefixer   = require('gulp-autoprefixer');
+const cleanMinifyCSS = require('gulp-clean-css');
+const rev            = require('gulp-rev');
 
 
 
@@ -49,9 +49,9 @@ gulp.task('images', function() {
 });
 
 
-
+// CSS auto sprite
 gulp.task('sprite', function () {
-    const spriteData = gulp.src(sourcePath.imagesSprites).pipe(spritesmith({
+    const spriteData = gulp.src(sourcePath.imagesSprites).pipe(spriteSmith({
         imgName:  distPath.imagesSprites ,
         imgPath: distPath.imagesSpritesOutputReferringPath,
         cssName:  distPath.imagesSpritesScssOutput ,
@@ -71,7 +71,7 @@ gulp.task('sass', [ 'sprite' ], function() {
             outputStyle     : 'compact',
             errLogToConsole : true
         }).on('error', sass.logError))
-        // .pipe(autoprefixer({
+        // .pipe(autoPrefixer({
         //     browsers: ['> 5%', 'Last 2 versions'],
         //     cascade: true, //是否美化属性值 默认：true 像这样：
         //     //-webkit-transform: rotate(45deg);
@@ -92,17 +92,15 @@ gulp.task('sass-production', [ 'sprite'], function(done) {
             outputStyle     : 'compact',
             errLogToConsole : true
         }).on('error', sass.logError))
-        // .pipe(autoprefixer({
+        // .pipe(autoPrefixer({
         //     browsers: ['> 5%', 'Last 2 versions'],
         //     cascade: false
         // }))
-        .pipe(optimizerCss({debug: true, compatibility: 'ie8'}), function(details) {
-            console.log('File name :' + details.name + ', original size: ' + details.stats.originalSize + ', minified size:' + details.stats.minifiedSize);
-        })
+        .pipe(cleanMinifyCSS({debug: true, compatibility: 'ie8'}))
         .pipe(rev())
         .pipe(gulp.dest(distPath.css))
         .pipe(rev.manifest('rev-manifest-css.json'))
-        .pipe(gulp.dest(distPath.manifest) );
+        .pipe(gulp.dest(distPath.manifest))
 
 });
 
