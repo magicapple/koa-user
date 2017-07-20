@@ -43,7 +43,7 @@ gulp.task('htmlTemplate', function() {
 
 
 // Optimize images
-gulp.task('images', function() {
+gulp.task('images', ['sprite'],  function() {
     gulp.src(sourcePath.images)
         .pipe(gulp.dest(distPath.images))
 });
@@ -84,7 +84,7 @@ gulp.task('sass', [ 'sprite' ], function() {
 
 
 
-gulp.task('sass-production', [ 'sprite'], function(done) {
+gulp.task('sass-production', [ 'htmlTemplate', 'images'], function(done) {
 
     return gulp.src(sourcePath.scss)
         .pipe(sass({

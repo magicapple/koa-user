@@ -1,9 +1,10 @@
 
 # static file for dist css html js
-/backend/src/public
-/backend/src/static
-/backend/src/views/dist
-/frontend-admin/dist
+
+backend/src/public
+backend/src/static
+backend/src/views/dist
+frontend-admin/dist
 
 
 # css sprite
