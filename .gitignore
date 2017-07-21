@@ -4,7 +4,7 @@
 backend/src/public
 backend/src/static
 backend/src/views/dist
-frontend-admin/dist
+frontend/dist
 
 
 # css sprite
