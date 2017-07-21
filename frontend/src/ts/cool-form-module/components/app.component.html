@@ -1,0 +1,94 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div class="container">
+
+    <div class="row no-gutters">
+        <!--<div class="col">col-1</div>-->
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let bid of bids | async">{{bid.name}} : {{bid.bid}}</li>
+            </ul>
+
+            <!--<ul class="list-group">-->
+                <!--<li class="list-group-item" *ngFor="let bid of bidList | async">{{bid.name}} : {{bid.bid}}</li>-->
+            <!--</ul>-->
+        </div>
+    </div>
+
+
+
+    <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+
+        <app-text-input formControlName="name" [fc]="heroForm.get('name')" [type]="'text'" [label]="'Name:'" [error]="formErrors.name"></app-text-input>
+        <app-text-input formControlName="bid" [fc]="heroForm.get('bid')" [type]="'number'" [label]="'Bid:'" [error]="formErrors.bid"></app-text-input>
+
+
+
+        <!--<app-switch formControlName="switcher" [label]="'My Switch'"></app-switch>-->
+
+
+        {{heroForm.get('name').errors | json}} ------ {{heroForm.get('name').value | json}} <br>
+        {{heroForm.get('bid').errors | json}} ------ {{heroForm.get('bid').value | json}}
+
+
+
+        <!--<div class="form-group row">
+            <label class="col-sm-2 col-form-label">Example select</label>
+            <div class="col-sm-10">
+                <select class="custom-select">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Example select</label>
+            <div class="col-sm-10">
+                <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Check this custom checkbox</span>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label class="custom-file">
+                <input type="file" id="file" class="custom-file-input">
+                <span class="custom-file-control"></span>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputFile">File input</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+            <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+        </div>-->
+
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+                <button type="submit" class="btn btn-primary" [disabled]="!heroForm.valid" >Submit</button>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
+
