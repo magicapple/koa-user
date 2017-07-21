@@ -14,13 +14,13 @@ const sourcePath = {
     "manifest"                         : '../dist/rev-manifest/*.json'
 };
 const distPath = {
-    'html'                             : '../../backend/src/views/dist/**/*',
+    'html'                             : '../../backend/src/views/dist/',
     'jsoutput'                         : '../dist/jsoutput/'
 };
 
 
 
-gulp.task('replaceTpl', ['sass-production'],  function () {
+gulp.task('replace', ['sass-production'],  function () {
     // 替换CSS中的图片
     //gulp.src(['rev/**/*.json', 'dist/styles/**/*.css'])
     //    .pipe( plugins.revCollector() )
