@@ -17,8 +17,7 @@ const sourcePath = {
     'htmlTemplate'  : '../../backend/src/views/src/**/*',
     'images'        : 'css/images/**/*',
     'imagesSprites' : 'css/images/sprite/auto-sprite/**/*',
-    'scss'          : 'css/scss/**/*.scss',
-    'css'           : 'css/stylesheets/'
+    'scss'          : 'css/scss/**/*.scss'
 };
 
 const distPath = {
@@ -26,7 +25,7 @@ const distPath = {
     'images'                           : '../dist/css/images/',
 
     'imagesSprites'                    : 'css/images/sprite/auto-sprite.png',
-    'imagesSpritesScssOutput'           : 'css/scss/helpers/_auto_sprite.scss',
+    'imagesSpritesScssOutput'          : 'css/scss/helpers/_auto_sprite.scss',
     'imagesSpritesOutputReferringPath' : '/static/css/images/sprite/auto-sprite.png',
     'css'                              : '../dist/css/stylesheets/',
     'manifest'                         : '../dist/rev-manifest/'
@@ -64,7 +63,7 @@ gulp.task('sprite', function () {
 
 
 // Compile css and automatically prefix stylesheets
-gulp.task('sass', [ 'sprite' ], function() {
+gulp.task('sass', [ 'images' ], function() {
     return gulp.src(sourcePath.scss)
         .pipe(sass({
             precision       : 10,
@@ -79,7 +78,7 @@ gulp.task('sass', [ 'sprite' ], function() {
         //     remove:true //是否去掉不必要的前缀 默认：true
         // }))
         // .pipe(optimizerCss({debug: true, compatibility: 'ie8'}))
-        .pipe(gulp.dest(sourcePath.css))
+        .pipe(gulp.dest(distPath.css))
 });
 
 

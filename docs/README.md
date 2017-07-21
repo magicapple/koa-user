@@ -42,13 +42,14 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 5. 安装 [koa-log4] koa2 的 log4js-node 日志模块 ``` npm i --save koa-log4@2 ``` 
 6. 安装 [koa-router] koa2 路由库 ``` npm install koa-router --save``` 
 7. 安装 [koa-static] koa2 的 koa-static 静态服务器模块 ``` npm install --save koa-static ``` 
-8. 安装 [koa-ejs]  koa2的 支持 ejs 的HTML模版引擎  ``` npmS koa-ejs ``` 
-9. 安装 [koa-bodyparser] koa2 的 koa-bodyparser 获取post表单内容模块 ``` npm install --save koa-bodyparser ``` 
-10. 安装 [koa-response-time] koa2 在 response header 上, 增加 X-Response-Time 相应时间 ``` npm install --save koa-bodyparser ``` 
-11. 安装 [kcors] koa2 跨域CORS 模块 ``` npm install --save kcors ``` 
-12. 安装 [koa-useragent] koa2 查看 请求Header中的UserAgent 模块 ``` npm install --save koa-useragent ``` 
-13. 安装 [koa-jwt]  koa2 针对每个路由的需要验证jwt token 的中间件
-14. 安装 [koa-multer]  koa2 上传文件组件
+8. 安装 [koa-mount] koa2 的 koa-mount 可以指定路径挂载middleware，结合koa-static 可以指定静态资源的路径 ``` npm install --save koa-mount ``` 
+9. 安装 [koa-ejs]  koa2的 支持 ejs 的HTML模版引擎  ``` npmS koa-ejs ``` 
+10. 安装 [koa-bodyparser] koa2 的 koa-bodyparser 获取post表单内容模块 ``` npm install --save koa-bodyparser ``` 
+11. 安装 [koa-response-time] koa2 在 response header 上, 增加 X-Response-Time 相应时间 ``` npm install --save koa-bodyparser ``` 
+12. 安装 [kcors] koa2 跨域CORS 模块 ``` npm install --save kcors ``` 
+13. 安装 [koa-useragent] koa2 查看 请求Header中的UserAgent 模块 ``` npm install --save koa-useragent ``` 
+14. 安装 [koa-jwt]  koa2 针对每个路由的需要验证jwt token 的中间件
+15. 安装 [koa-multer]  koa2 上传文件组件
 
 
 20. 安装 [validator] 验证数据校验库
@@ -99,6 +100,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [koa-log4]: https://github.com/dominhhai/koa-log4js
 [koa-router]: https://github.com/alexmingoia/koa-router
 [koa-static]: https://github.com/koajs/static
+[koa-mount]: https://github.com/koajs/mount
 [koa-ejs]: https://github.com/koajs/ejs
 [koa-bodyparser]: https://github.com/koajs/bodyparser
 [koa-response-time]: https://github.com/koajs/response-time
@@ -106,6 +108,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [kcors]: https://github.com/koajs/cors
 [koa-jwt]: https://github.com/koajs/jwt
 [koa-multer]: https://github.com/koa-modules/multer
+
 
 [mongoose]: http://mongoosejs.com/
 

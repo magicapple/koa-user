@@ -14,12 +14,12 @@ async function pageWebIndex(ctx, next) {
               {name : 'Jack'},
               {name : 'Tom'}
           ];
-    await ctx.render('web/index', { title : 'Homepage !', users:users });
+    await ctx.render('web/index', { page : {title : 'Homepage !'}, users:users });
 }
 
 async function pageAdminHome(ctx, next) {
 
-    await ctx.render('admin/adminIndex', { layout: false, title : 'Admin Homepage !' });
+    await ctx.render('admin/adminIndex', { page: { title : 'Admin Homepage !' }});
 }
 
 

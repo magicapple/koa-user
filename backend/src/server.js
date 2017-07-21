@@ -11,6 +11,7 @@ const Koa             = require('koa');
 const logger          = require('koa-logger');
 const XResponseTime   = require('koa-response-time');
 const koaStaticServer = require('koa-static');
+const mount           = require('koa-mount');
 const ejs             = require('koa-ejs');
 const router          = require('koa-router')();
 const bodyParser      = require('koa-bodyparser');
@@ -51,17 +52,16 @@ app.use(userDevice());     //根据 Header 的 user agent 信息 获得设备名
 app.use(userIP());     // 获取ipv4和ipv6地址
 
 
-
 // 静态文件夹
-app.use(koaStaticServer(path.join(__dirname, 'static'), {
+app.use(mount('/static', koaStaticServer(path.join(__dirname, '../../frontend-admin/dist'), {
     maxage : 1000 * 60 * 60 * 24 * 365,
     hidden : false, // 默认不返回隐藏文件
     gzip : false
-}));
+})))
 
 // 设置渲染引擎
 ejs(app, {
-    root: path.join(__dirname, 'views'),
+    root: path.join(__dirname, 'views', 'src'),
     layout: false,
     viewExt: 'ejs',
     cache: false,

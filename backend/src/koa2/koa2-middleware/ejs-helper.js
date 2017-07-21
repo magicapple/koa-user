@@ -23,7 +23,7 @@ function ejsHelper (options) {
             url : ctx.request.url
         }
 
-        ctx.state.staticPath = '/';
+        ctx.state.staticPath = '/static';
 
         return next();
     }

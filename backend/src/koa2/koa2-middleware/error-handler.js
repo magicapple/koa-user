@@ -130,8 +130,10 @@ function productionErrorHandler (app, options){
             }
 
         } catch (error) {
-
             ctx.status = error.status || 500;
+
+            serverLog(error, ctx)
+
 
             if (checkIsXHR(ctx.request)){
 
@@ -142,11 +144,10 @@ function productionErrorHandler (app, options){
             }else {
 
                 if (ctx.status >= 500){
-                    ctx.state.title = '500 系统错误, 请稍后重试!'
+                    ctx.state.page.title = '500 系统错误, 请稍后重试!'
                     await ctx.render('error/500', { error : error });
 
                 }else if (ctx.status >= 400){
-
                     if (ctx.status === 404) {
                         await ctx.render('error/404', { error : error });
                     } else {
@@ -154,8 +155,6 @@ function productionErrorHandler (app, options){
                     }
                 }
             }
-
-            serverLog(error, ctx)
 
             // ctx.app.emit('error', error, ctx);
         }
