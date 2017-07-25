@@ -53,7 +53,7 @@ app.use(userIP());     // 获取ipv4和ipv6地址
 
 
 // 静态文件夹
-app.use(mount('/static', koaStaticServer(path.join(__dirname, '../../frontend-admin/dist'), {
+app.use(mount('/static', koaStaticServer(path.join(__dirname, '../../frontend/dist'), {
     maxage : 1000 * 60 * 60 * 24 * 365,
     hidden : false, // 默认不返回隐藏文件
     gzip : false
