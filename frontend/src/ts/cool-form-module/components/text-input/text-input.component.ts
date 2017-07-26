@@ -30,21 +30,25 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
     onTouched: any = () => { return undefined }
 
     constructor() {
-        console.log('constructor')
+        // console.log('constructor')
     }
 
     ngOnInit() {
-        console.log('ngOnInit')
+        // console.log('ngOnInit')
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-        console.log('ngOnChanges')
+        // console.log('ngOnChanges')
 
         for (const propertyName in changes) {
 
             if (changes.hasOwnProperty(propertyName)) {
-                const currentChange = changes[propertyName]
-                console.log('currentChange: ', currentChange)
+                const currentChangeObject = changes[propertyName]
+
+                if (currentChangeObject.currentValue && currentChangeObject.isFirstChange) {
+                    console.log('currentChangeObject: ', currentChangeObject)
+                }
+
             }
 
         }

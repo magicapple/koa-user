@@ -127,19 +127,50 @@ module.exports = {
 
     plugins       : [
 
-        // Workaround for angular/angular#11580
+        /**
+         * Plugin: ContextReplacementPlugin
+         * Description: Provides context to Angular's use of System.import
+         *
+         * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+         * See: https://github.com/angular/angular/issues/11580
+         */
+
         new webpack.ContextReplacementPlugin(
             // The (\\|\/) piece accounts for path separators in *nix and Windows
             /angular(\\|\/)core(\\|\/)@angular/,
             helpers.root('./'), // location of your src
-            {} // a map of your routes
+            {
+                /**
+                 * Your Angular Async Route paths relative to this root directory
+                 */
+
+            } // a map of your routes
         ),
 
 
         new CommonsChunkPlugin({
-            "minChunks" : 2,
-            "async"     : "common"
+            minChunks : 2,
+            async     : "common"
         }),
+
+
+        /**
+         * This enables tree shaking of the vendor modules
+         */
+        new CommonsChunkPlugin({
+            name      : "vendor",
+            chunks    : [
+                "login", "home"
+            ],
+            minChunks: module => /node_modules/.test(module.resource),
+        }),
+
+        new CommonsChunkPlugin({
+            name: ['manifest'],
+            minChunks: Infinity,
+        }),
+
+
 
         /**
          * Plugin: ForkCheckerPlugin
