@@ -1,9 +1,8 @@
-import { BrowserModule} from '@angular/platform-browser'
 import { NgModule} from '@angular/core'
+import { CommonModule } from '@angular/common'
 import { HttpModule} from '@angular/http'
-import { ReactiveFormsModule, FormsModule} from '@angular/forms'
+import { ReactiveFormsModule} from '@angular/forms'
 
-import {AppComponent} from './components/app.component'
 
 import { SwitchComponent } from './components/switch/switch.component';
 import { TextInputComponent } from './components/text-input/text-input.component'
@@ -13,18 +12,23 @@ import {ForbiddenValidatorDirective} from './components/custom-validatior';
 
 @NgModule({
     declarations : [
-        AppComponent,
         SwitchComponent,
         TextInputComponent,
         ForbiddenValidatorDirective
     ],
     imports      : [
-        BrowserModule,
+        CommonModule,
         HttpModule,
         ReactiveFormsModule
     ],
     providers    : [],
-    bootstrap    : [AppComponent]
+    exports:      [
+        CommonModule,
+        ReactiveFormsModule,
+
+        TextInputComponent,
+        SwitchComponent
+    ],
+    bootstrap    : []
 })
-export class CoolFormModule {
-}
+export class CoolFormModule {}

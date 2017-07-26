@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
     submitted: boolean = true
 
     bids : any = [
-        { name : 'one', bid : 10 },
+        { name : 'one222', bid : 10 },
         { name : 'two', bid : 20 }
     ]
 

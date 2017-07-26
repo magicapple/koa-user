@@ -3,10 +3,12 @@
  */
 
 
-const path = require('path');
-const webpack = require('webpack');
-const {CheckerPlugin} = require('awesome-typescript-loader')
-// const {AotPlugin}     = require('@ngtools/webpack');
+const path                 = require('path');
+const webpack              = require('webpack');
+const {CommonsChunkPlugin} = require('webpack').optimize;
+const {CheckerPlugin}      = require('awesome-typescript-loader')
+// const {AotPlugin}          = require('@ngtools/webpack');
+
 
 const helpers = require('./helpers');
 const AOT = process.env.BUILD_AOT;
@@ -17,7 +19,8 @@ console.log('-------- AOT:', AOT)
 module.exports = {
     entry: {
         "polyfills": ["./ts/polyfills.ts"],
-        "webIndex": [ AOT ? './ts/page/webIndex.ts' : './ts/page/webIndex.ts' ]
+        "login": [ AOT ? './ts/page/login.ts' : './ts/page/login.ts' ],
+        "home": [ AOT ? './ts/page/home.ts' : './ts/page/home.ts' ]
     },
 
     /**
@@ -133,6 +136,10 @@ module.exports = {
         ),
 
 
+        new CommonsChunkPlugin({
+            "minChunks" : 2,
+            "async"     : "common"
+        }),
 
         /**
          * Plugin: ForkCheckerPlugin
