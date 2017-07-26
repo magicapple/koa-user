@@ -1,0 +1,69 @@
+<%- include ./includehead/doctype %>
+<head>
+    <%- include ./includehead/head %>
+
+
+    <style>
+
+        html,body {
+            margin:0;
+            padding:0;
+            height: 100%;
+        }
+
+        .grid {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -o-flex;
+            display: -ms-flex;
+            display: flex;
+            flex-direction: row
+
+        }
+        .col {
+            padding: 30px;
+        }
+        .fluid {
+            flex: 1;
+            border: 1px solid blue;
+        }
+        .fixed {
+            width: 400px;
+            border: 1px solid red;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+
+<div class="grid">
+    <div class="col fluid">
+        fluid
+    </div>
+    <div class="col fixed">
+        fixed
+    </div>
+    <div class="col fluid">
+        fluid
+    </div>
+</div>
+
+<div>
+    <label for="files" class="btn">Select Image</label>
+    <input id="files" style="visibility:hidden;" type="file">
+</div>
+
+
+
+<app-root></app-root>
+
+<!--<script type="text/javascript" src="/static/js/manifest.bundle.js"></script>-->
+<script type="text/javascript" src="/static/js/polyfills.bundle.js"></script>
+<!--<script type="text/javascript" src="/static/js/vendor.bundle.js"></script>-->
+<script type="text/javascript" async src="/static/js/home.bundle.js"></script>
+
+</body>
+</html>
