@@ -4,11 +4,11 @@ import { HttpModule} from '@angular/http'
 import { ReactiveFormsModule} from '@angular/forms'
 
 
-import { SwitchComponent } from './components/switch/switch.component';
+import { SwitchComponent } from './components/switch/switch.component'
 import { TextInputComponent } from './components/text-input/text-input.component'
 
 
-import {ForbiddenValidatorDirective} from './components/custom-validatior';
+import {ForbiddenValidatorDirective} from './components/custom-validatior'
 
 @NgModule({
     declarations : [

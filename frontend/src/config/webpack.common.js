@@ -11,10 +11,13 @@ const {CheckerPlugin}      = require('awesome-typescript-loader')
 
 
 const helpers = require('./helpers');
-const AOT = process.env.BUILD_AOT;
+const AOT = process.env.BUILD_AOT || false;
 
+const vendorLibraryFromChunks = [
+    "login", "home"
+]
 
-console.log('-------- AOT:', AOT)
+console.log('---------- Angular Build Using AOT:', AOT, ' ----------')
 
 module.exports = {
     entry: {
@@ -159,9 +162,7 @@ module.exports = {
          */
         new CommonsChunkPlugin({
             name      : "vendor",
-            chunks    : [
-                "login", "home"
-            ],
+            chunks    : vendorLibraryFromChunks,
             minChunks: module => /node_modules/.test(module.resource),
         }),
 

@@ -9,48 +9,51 @@ const commonConfig = require('./webpack.common.js');
 const helpers = require('./helpers');
 
 
-module.exports = webpackMerge(commonConfig, {
-    /**
-     * Developer tool to enhance debugging
-     *
-     * See: http://webpack.github.io/docs/configuration.html#devtool
-     * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-     */
-    devtool: 'cheap-module-source-map',
+module.exports = function (env) {
+    console.log('Webpack env:', env)
+
+    return webpackMerge(commonConfig, {
+        /**
+         * Developer tool to enhance debugging
+         *
+         * See: http://webpack.github.io/docs/configuration.html#devtool
+         * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
+         */
+        devtool : 'cheap-module-source-map',
 
 
-    plugins: [
-    ],
+        plugins : [],
 
-    devServer: {
-        inline: true,
-        port: 4200,
-        historyApiFallback: true,
-        stats: 'minimal',
-        contentBase: helpers.root('ts/page'),
+        devServer : {
+            inline             : true,
+            port               : 4200,
+            historyApiFallback : true,
+            stats              : 'minimal',
+            contentBase        : helpers.root('ts/page'),
 
-        watchOptions: {
-            // if you're using Docker you may need this
-            // aggregateTimeout: 300,
-            // poll: 1000,
-            ignored: /node_modules/
-        },
-
-        publicPath: "/static/js/",
-
-        proxy : {
-            "/api": {
-                "target": "http://localhost:3000",
-                "secure": false
+            watchOptions : {
+                // if you're using Docker you may need this
+                // aggregateTimeout: 300,
+                // poll: 1000,
+                ignored : /node_modules/
             },
-            "/web": {
-                "target": "http://localhost:3000",
-                "secure": false
-            },
-            "/static": {
-                "target": "http://localhost:3000",
-                "secure": false
+
+            publicPath : "/static/js/",
+
+            proxy : {
+                "/api"    : {
+                    "target" : "http://localhost:3000",
+                    "secure" : false
+                },
+                "/web"    : {
+                    "target" : "http://localhost:3000",
+                    "secure" : false
+                },
+                "/static" : {
+                    "target" : "http://localhost:3000",
+                    "secure" : false
+                }
             }
         }
-    }
-});
+    })
+}
