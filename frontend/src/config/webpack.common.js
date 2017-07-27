@@ -6,6 +6,7 @@
 const path                 = require('path');
 const webpack              = require('webpack');
 const {CommonsChunkPlugin} = require('webpack').optimize;
+const AssetsPlugin         = require('assets-webpack-plugin')
 const {CheckerPlugin}      = require('awesome-typescript-loader')
 // const {AotPlugin}          = require('@ngtools/webpack');
 
@@ -16,6 +17,11 @@ const AOT = process.env.BUILD_AOT || false;
 const vendorLibraryFromChunks = [
     "login", "home"
 ]
+
+const distPath = {
+    assetsPluginPath: '../dist/rev-manifest',
+    assetsPluginFilename : 'rev-manifest-js.json'
+}
 
 console.log('---------- Angular Build Using AOT:', AOT, ' ----------')
 
@@ -129,6 +135,21 @@ module.exports = {
     },
 
     plugins       : [
+
+        new AssetsPlugin({
+            path: helpers.root(distPath.assetsPluginPath),
+            filename: distPath.assetsPluginFilename,
+            prettyPrint: true,
+            processOutput : function (assets) {
+                let output = {}
+                for (const prop in assets) {
+                    if (Object.prototype.hasOwnProperty.call(assets, prop)) {
+                        output[prop + '.bundle.js'] = assets[prop].js
+                    }
+                }
+                return JSON.stringify(output, null, 2)
+            }
+        }),
 
         /**
          * Plugin: ContextReplacementPlugin
