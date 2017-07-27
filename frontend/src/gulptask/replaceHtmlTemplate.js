@@ -28,7 +28,9 @@ gulp.task('replace', ['sass-production'],  function () {
 
     // 替换Html模版文件
     gulp.src([sourcePath.manifest, sourcePath.html])
-        .pipe( revCollector() )
+        .pipe( revCollector({
+            revSuffix : '[\.-][0-9a-z]{8,20}-?'
+        }) )
         .pipe( gulp.dest(distPath.html) );
 
 });
