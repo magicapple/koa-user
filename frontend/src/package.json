@@ -10,7 +10,7 @@
     "gulp:build": "NODE_ENV=production gulp",
     "build:dev": "gulp clean && webpack --env=dev --config config/webpack.dev.js --progress --profile && gulp sass",
     "build:prod": "gulp clean &&webpack --env=prod --config config/webpack.prod.js  --progress --profile --bail && gulp build",
-    "build:aot": "gulp clean &&webpack --env=aot --config config/webpack.prod.js  --progress --profile --bail && gulp build"
+    "build:aot": "gulp clean &&webpack --env=aot --config config/webpack.aot.js  --progress --profile --bail "
   },
   "author": "",
   "license": "ISC",
@@ -48,6 +48,7 @@
     "gulp-sass": "^3.1.0",
     "gulp.spritesmith": "^6.5.1",
     "json-loader": "^0.5.7",
+    "ngc-webpack": "^3.0.0",
     "optimize-js-plugin": "0.0.4",
     "raw-loader": "^0.5.1",
     "require-dir": "^0.3.2",

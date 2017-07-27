@@ -10,9 +10,8 @@ const helpers = require('./helpers');
 
 
 module.exports = function (env) {
-    console.log('Webpack env:', env)
 
-    return webpackMerge(commonConfig, {
+    return webpackMerge(commonConfig(env), {
         /**
          * Developer tool to enhance debugging
          *
@@ -22,7 +21,6 @@ module.exports = function (env) {
         devtool : 'cheap-module-source-map',
 
 
-        plugins : [],
 
         devServer : {
             inline             : true,

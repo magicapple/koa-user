@@ -4,6 +4,8 @@
 backend/src/public
 backend/src/static
 backend/src/views/dist
+
+frontend/src/aotCompiled
 frontend/dist
 
 
