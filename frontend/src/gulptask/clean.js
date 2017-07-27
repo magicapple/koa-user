@@ -15,9 +15,9 @@ const distPath = {
     'stylesheets' : 'css/stylesheets/**/*',
     'autoSprite' : 'css/images/sprite/auto-sprite.*',
 
-    'tsCompileToJs' : './.awcache/**/*',
+    'tsAotCompileToJs' : 'aotCompiled',
     'tsCompileJsBuild' : './jsoutput-temp-prodution/**/*',
-    'tsSourceWithHtmlTpl' : './tssource-temp-prodution/**/*'
+    'tsSourceWithHtmlTpl' : './ts/**/*.js.map'
 
 };
 
@@ -27,7 +27,7 @@ gulp.task('clean', function() {
         distPath.distAll,
         distPath.stylesheets,
         distPath.autoSprite,
-        distPath.tsCompileToJs
+        distPath.tsAotCompileToJs
 
     ], {force:true});
 });
