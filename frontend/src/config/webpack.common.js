@@ -239,7 +239,6 @@ module.exports = function (env) {
 
 
 
-
             new ngcWebpack.NgcWebpackPlugin({
                 /**
                  * If false the plugin is a ghost, it will not perform any action.
@@ -252,6 +251,23 @@ module.exports = function (env) {
                 tsConfig: helpers.root('tsconfig.aot.json')
             })
 
-        ]
+
+        ],
+
+
+        /**
+         * Include polyfills or mocks for various node stuff
+         * Description: Node configuration
+         *
+         * See: https://webpack.github.io/docs/configuration.html#node
+         */
+        node: {
+            global: true,
+            crypto: 'empty',
+            process: true,
+            module: false,
+            clearImmediate: false,
+            setImmediate: false
+        }
     }
 }
