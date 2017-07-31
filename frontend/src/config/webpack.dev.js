@@ -4,6 +4,7 @@
 
 
 const webpackMerge = require('webpack-merge');
+const webpack = require('webpack');
 
 const commonConfig = require('./webpack.common.js');
 const helpers = require('./helpers');
@@ -21,8 +22,13 @@ module.exports = function (env) {
         devtool : 'cheap-module-source-map',
 
 
+        plugins: [
+            new webpack.HotModuleReplacementPlugin()
+        ],
+
 
         devServer : {
+            hot: true,
             inline             : true,
             port               : 4200,
             historyApiFallback : true,

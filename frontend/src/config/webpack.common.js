@@ -107,10 +107,23 @@ module.exports = function (env) {
 
                 {
                     test: /\.ts$/,
-                    loaders: [{
-                        loader: 'awesome-typescript-loader',
-                        options: { configFileName: helpers.root( 'tsconfig.json') }
-                    } , 'angular2-template-loader' ],
+                    use: [
+                        {
+                            loader: 'awesome-typescript-loader',
+                            options: {
+                                configFileName: helpers.root( 'tsconfig.json')
+                            }
+                        },
+                        {
+                            loader: 'ngc-webpack',
+                            options: {
+                                disable: !AOT,                   // SET TO TRUE ON NON AOT PROD BUILDS
+                            }
+                        },
+                        {
+                            loader: 'angular2-template-loader'
+                        }
+                    ],
                     exclude: [/\.(spec|e2e)\.ts$/]
                 },
 

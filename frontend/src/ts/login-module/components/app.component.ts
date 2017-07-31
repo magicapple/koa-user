@@ -22,7 +22,7 @@ export class AppComponent implements OnInit{
 
     bids : any = [
         { name : 'one222', bid : 10 },
-        { name : 'two', bid : 20 }
+        { name : 'two33', bid : 20 }
     ]
 
 

@@ -17,18 +17,23 @@
             display: -o-flex;
             display: -ms-flex;
             display: flex;
-            flex-direction: row
-
+            flex-direction: row;
         }
+        .wrap    {
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
         .col {
             padding: 30px;
+            height: 100px;
         }
         .fluid {
             flex: 1;
             border: 1px solid blue;
         }
         .fixed {
-            width: 400px;
+            width: 800px;
             border: 1px solid red;
         }
 
@@ -39,9 +44,15 @@
 
 
 
-<div class="grid">
+<div class="grid wrap">
     <div class="col fluid">
         fluid
+    </div>
+    <div class="col fixed">
+        fixed
+    </div>
+    <div class="col fixed">
+        fixed
     </div>
     <div class="col fixed">
         fixed
