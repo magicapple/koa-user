@@ -24,6 +24,7 @@ const distPath = {
 
 
 module.exports = function (env) {
+    env = env || 'dev'
 
     console.log('---------- Webpack env:', env)
 
@@ -60,7 +61,7 @@ module.exports = function (env) {
              *
              * See: http://webpack.github.io/docs/configuration.html#output-filename
              */
-            filename: isDev ?  "[name].bundle.js" : "[name].[chunkhash].bundle.js"  ,
+            filename: isDev ? "[name].bundle.js" : "[name].[chunkhash].bundle.js",
 
             /**
              * The filename of the SourceMaps for the JavaScript files.
@@ -68,14 +69,14 @@ module.exports = function (env) {
              *
              * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
              */
-            sourceMapFilename: '[file].map',
+            sourceMapFilename: "[file].map",
 
             /** The filename of non-entry chunks as relative path
              * inside the output.path directory.
              *
              * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
              */
-            chunkFilename: isDev ?  "[id].chunk.js" : '[name].[chunkhash].chunk.js'
+            chunkFilename: isDev ?  "[id].chunk.js" : "[name].[chunkhash].chunk.js"
         },
 
         resolve : {
@@ -108,7 +109,7 @@ module.exports = function (env) {
                     test: /\.ts$/,
                     loaders: [{
                         loader: 'awesome-typescript-loader',
-                        options: { configFileName: helpers.root( 'tsconfig.aot.json') }
+                        options: { configFileName: helpers.root( 'tsconfig.json') }
                     } , 'angular2-template-loader' ],
                     exclude: [/\.(spec|e2e)\.ts$/]
                 },
@@ -249,7 +250,7 @@ module.exports = function (env) {
                  */
                 disabled: !AOT,
                 tsConfig: helpers.root('tsconfig.aot.json')
-            }),
+            })
 
         ]
     }

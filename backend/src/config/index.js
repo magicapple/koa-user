@@ -13,13 +13,13 @@ const currentConfig = require('./' + env);
 let config = lodash.merge({env : env}, defaultConfig, currentConfig)
 
 
-const log4jsConfig = require('./log4js-config')(config.path_logs);
+const log4jsConfig = require('./log4js-config')(config.pathLogs);
 
 config.log4jsConfig = log4jsConfig
 
 
 // 创建log的根目录'logs'
-GDirUtil.mkdirSync(config.path_logs)
+GDirUtil.mkdirSync(config.pathLogs)
 
 //根据不同的logType创建不同的文件目录
 for(var i = 0, len = log4jsConfig.appenders.length; i < len; i++){

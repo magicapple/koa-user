@@ -10,29 +10,29 @@ const path = require("path");
 
 module.exports = {
 
-    debug : false, // debug 为 true 时，用于本地调试
-
     https    : false,
     domain   : "pay-local.yimei180.com",
-    port     : 3000, // 程序运行的端口
+    port     : 3000, // 程序运行的端口,
+
+    pathViewTemplate : path.join(__dirname, '../views/src'),
 
     auth_cookie_secret   : "very_long_koa2_express_tekken_nina_jin_kazama",
     auth_cookie_name : "signed_cookie_username",
 
     loginToken : {
-        "jwtTokenSecret" : "koa2-user-secret-x1",
-        "jwtTokenExpireDay" : 30,
-        "tokenFieldName" : "X-Access-Token"
+        jwtTokenSecret : "koa2-user-secret-x1",
+        jwtTokenExpireDay : 30,
+        tokenFieldName : "X-Access-Token"
     },
 
     // 应用目录配置
-    path_logs : path.join(__dirname, "../../../logs/"),
+    pathLogs : path.join(__dirname, "../../../logs/"),
 
 
     // 文件目录配置
-    path_file_upload : path.join(__dirname, "../../../files/upload"),
-    path_file_upload_tmp : path.join(__dirname, "../../../files/upload_tmp"),
-    path_file_download : path.join(__dirname, "../../../files/download"),
+    pathFileUpload : path.join(__dirname, "../../../files/upload"),
+    pathFileUploadTemp : path.join(__dirname, "../../../files/upload_tmp"),
+    pathFileDownload : path.join(__dirname, "../../../files/download"),
 
 
     redis : {
@@ -56,7 +56,6 @@ module.exports = {
         //     "authSource": "@dmin"
         // },
         "database": "koa2user"
-
 
     },
 

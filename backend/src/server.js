@@ -61,7 +61,7 @@ app.use(mount('/static', koaStaticServer(path.join(__dirname, '../../frontend/di
 
 // 设置渲染引擎
 ejs(app, {
-    root: path.join(__dirname, 'views', 'src'),
+    root: GConfig.pathViewTemplate,
     layout: false,
     viewExt: 'ejs',
     cache: false,
