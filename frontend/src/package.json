@@ -9,9 +9,9 @@
     "gulp:dev": "NODE_ENV=development gulp",
     "gulp:build": "NODE_ENV=production gulp",
     "build:dev": "gulp clean && webpack --env=dev --config config/webpack.dev.js --progress --profile && gulp sass",
-    "build:prod": "gulp clean &&webpack --env=prod --config config/webpack.prod.js  --progress --profile --bail && gulp build",
-    "build:aot": "gulp clean &&webpack --env=aot --config config/webpack.aot.js  --progress --profile --bail && gulp build",
-    "build:aotngc": "gulp clean &&webpack --env=aot --config config/webpack.aot-ngc.js  --progress --profile --bail && gulp build"
+    "build:prod": "gulp clean && webpack --env=prod --config config/webpack.prod.js  --progress --profile --bail && gulp build",
+    "build:aot": "gulp clean && webpack --env=aot --config config/webpack.aot.js  --progress --profile --bail && gulp build",
+    "build:aotngc": "gulp clean && webpack --env=aot --config config/webpack.aot-ngc.js  --progress --profile --bail && gulp build"
   },
   "author": "JinWYP",
   "license": "MIT",

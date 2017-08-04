@@ -23,16 +23,15 @@ module.exports = function (env) {
 
 
         plugins: [
-            new webpack.HotModuleReplacementPlugin()
+            // new webpack.HotModuleReplacementPlugin()
         ],
 
 
         devServer : {
-            hot: true,
+            hot: false,
             inline             : true,
             port               : 4200,
             historyApiFallback : true,
-            stats              : 'minimal',
             contentBase        : helpers.root('ts/page'),
 
             watchOptions : {

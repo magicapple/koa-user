@@ -9,8 +9,8 @@ const upload = multer({ dest: GConfig.pathFileUpload });
 const auth = require('../../../koa2/koa2-middleware/auth-jwt');
 
 const router = require('koa-router')();
-const userController = require('../../controllers/user');
-const shopController = require('../../controllers/shop');
+const userController = require('../../controllers/api/user');
+const shopController = require('../../controllers/api/shop');
 
 
 const files = async (ctx, next) => {

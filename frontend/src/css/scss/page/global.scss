@@ -5,10 +5,28 @@
 //@import "../base/_ie";
 
 
-
 //@import "../helpers/_auto_sprite";
 
 
 @import "../layout/_header";
 
+
+
+body {
+    font: 14px "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    background-color: $color_bg_body;
+}
+
+
+.form-validation {
+    padding: 5px 0px 0px 0px;
+    font-size: 16px;
+    color: $color_form_error;
+}
+
+
+
+.mainbox {
+    min-width: 1300px;
+}
 

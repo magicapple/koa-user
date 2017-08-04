@@ -4,13 +4,13 @@
 
 
 
-const WXBizDataCrypt = require('../business-libs/wechat/WXBizDataCrypt');
-const weChatMiniApp = require('../business-libs/wechat/weChatMiniApp');
+const WXBizDataCrypt = require('../../business-libs/wechat/WXBizDataCrypt');
+const weChatMiniApp = require('../../business-libs/wechat/weChatMiniApp');
 
 
-const headerToken = require('../../koa2/common-libs/authorization-header/auth-header')
-const UserService = require('../service/user/userService')
-const MUserToken = require('../service/user/model/userToken')
+const headerToken = require('../../../koa2/common-libs/authorization-header/auth-header')
+const UserService = require('../../service/user/userService')
+const MUserToken = require('../../service/user/model/userToken')
 
 const tokenFieldName = GConfig.loginToken.tokenFieldName;
 const TOKEN_EXPIRATION_SEC = 60 * 60 * 24 * GConfig.loginToken.jwtTokenExpireDay;

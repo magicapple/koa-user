@@ -7,37 +7,25 @@
 
 const router = require('koa-router')();
 
+const pageIndex = require('../../controllers/page/index')
+const pageLogin = require('../../controllers/page/login')
 
-async function pageWebHome(ctx, next) {
-    const users = [
-              {name : 'Dead Horse'},
-              {name : 'Jack'},
-              {name : 'Tom'}
-          ];
-    await ctx.render('web/home', { page : {title : 'Homepage !'}, users:users });
-}
-
-async function pageWebLogin(ctx, next) {
-    await ctx.render('web/login', { page : {title : 'Login !'} });
-}
+const pageAdminHome = require('../../controllers/page/adminHome')
 
 
-async function pageAdminHome(ctx, next) {
+router.redirect('/', '/web/index');
 
-    await ctx.render('admin/adminIndex', { page: { title : 'Admin Homepage !' }});
-}
+router.get('/index', pageIndex.pageIndex);
+router.get('/signin', pageLogin.pageLogin);
+router.get('/signup', pageLogin.pageLogin);
 
 
 
 
-router.redirect('/', '/web/home');
-
-router.get('/login', pageWebLogin);
-router.get('/home', pageWebHome);
 
 
 
-router.get('/admin', pageAdminHome);
+router.get('/admin', pageAdminHome.pageHome);
 
 module.exports = router;
 

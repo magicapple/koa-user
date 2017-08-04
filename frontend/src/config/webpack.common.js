@@ -37,8 +37,8 @@ module.exports = function (env) {
     return {
         entry: {
             "polyfills": ["./ts/polyfills.ts"],
-            "login": [ AOT ? './ts/page/login.aot.ts' : './ts/page/login.ts' ],
-            "home": [ AOT ? './ts/page/home.aot.ts' : './ts/page/home.ts' ]
+            "login": AOT ? './ts/page/login.aot.ts' : './ts/page/login.ts',
+            "home": AOT ? './ts/page/home.aot.ts' : './ts/page/home.ts'
         },
 
         /**
@@ -148,7 +148,7 @@ module.exports = function (env) {
                 {
                     test   : /\.json$/,
                     loader : "json-loader"
-                },
+                }
 
 
             ]

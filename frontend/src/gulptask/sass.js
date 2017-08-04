@@ -15,6 +15,7 @@ const rev            = require('gulp-rev');
 
 const sourcePath = {
     'htmlTemplate'  : '../../backend/src/views/src/**/*',
+    'jsLibs'        : 'js/**/*',
     'images'        : 'css/images/**/*',
     'imagesSprites' : 'css/images/sprite/auto-sprite/**/*',
     'scss'          : 'css/scss/**/*.scss'
@@ -22,8 +23,8 @@ const sourcePath = {
 
 const distPath = {
     'htmlTemplate'                     : '../../backend/src/views/dist/',
+    'jsLibs'                           : '../dist/js/',
     'images'                           : '../dist/css/images/',
-
     'imagesSprites'                    : 'css/images/sprite/auto-sprite.png',
     'imagesSpritesScssOutput'          : 'css/scss/helpers/_auto_sprite.scss',
     'imagesSpritesOutputReferringPath' : '/static/css/images/sprite/auto-sprite.png',
@@ -45,6 +46,8 @@ gulp.task('htmlTemplate', function() {
 gulp.task('images', ['sprite'],  function() {
     gulp.src(sourcePath.images)
         .pipe(gulp.dest(distPath.images))
+    gulp.src(sourcePath.jsLibs)
+        .pipe(gulp.dest(distPath.jsLibs))
 });
 
 

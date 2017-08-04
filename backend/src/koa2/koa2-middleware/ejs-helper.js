@@ -25,6 +25,14 @@ function ejsHelper (options) {
 
         ctx.state.staticPath = '/static';
 
+        ctx.state.user = null
+
+        ctx.state.ngShow = function (flag){
+            if (!flag){
+                return ' style="display:none;" '
+            }
+        };
+
         return next();
     }
 }

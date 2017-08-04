@@ -2,9 +2,9 @@ $assetPath : "/static";
 
 
 // default color
-$white:#ffffff;
-$green:#18aa6b;
-$web-blue:#00b7ec;
+$color-white:#ffffff;
+$color-green:#18aa6b;
+$color-web-blue:#00b7ec;
 
 
 
@@ -31,3 +31,10 @@ $web-blue:#00b7ec;
     from { -webkit-transform: rotate(0deg);}
     to { -webkit-transform: rotate(360deg);}
 }
+
+
+
+
+$color_bg_body : #F6F8F8;
+$color_form_error : #a94442;
+
