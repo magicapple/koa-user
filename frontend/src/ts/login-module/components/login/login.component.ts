@@ -1,26 +1,19 @@
 import {Component, OnInit} from '@angular/core'
 import { Http} from '@angular/http'
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms'
+import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
-import { Observable} from 'rxjs/Observable'
-
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/switchMap'
-import 'rxjs/add/observable/of'
-
-
+import { isMobilePhone } from '../../../cool-form-module/components/validators/mobilePhone'
 
 
 @Component({
     selector    : 'app-login',
     templateUrl : './login.component.html'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
-
-    hero: any = {
-        name : '',
-        bid : ''
+    user: any = {
+        username : '',
+        mobilePhone : ''
     }
 
     registerForm: FormGroup
@@ -41,9 +34,8 @@ export class LoginComponent implements OnInit{
 
     createRegisterForm(): void {
         this.registerForm = this.fb.group({
-            'username': [this.hero.name, [ Validators.required, Validators.minLength(6), Validators.maxLength(20)] ],
-            'mobilePhone': [this.hero.bid, Validators.required ],
-            'switcher': [true, Validators.required ]
+            'username': [this.user.username, [ Validators.required, Validators.minLength(6), Validators.maxLength(20)] ],
+            'mobilePhone': [this.user.mobilePhone, Validators.required, isMobilePhone ]
         })
 
         this.registerForm.valueChanges
@@ -137,16 +129,8 @@ export class LoginComponent implements OnInit{
 
 
     onSubmit() {
-        this.hero = this.registerForm.value
-        console.log('onSubmit', this.hero)
-
-        // this.bidList.push(this.heroForm.value)
-    }
-
-    addHero() {
-        this.hero = {
-            name : ''
-        }
+        this.user = this.registerForm.value
+        console.log('onSubmit', this.user)
 
     }
 

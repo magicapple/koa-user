@@ -17,7 +17,8 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
 
     @Input('fc') currentFormControl: FormControl = new FormControl()
     @Input() type: string = 'text'
-    @Input() label: string = '标签文字：'
+    @Input() label: string = '标签文字:'
+    @Input() hint: string = ''
     @Input() error: string = ''
 
     @Input('labelclass') labelClass: string = 'col-2'
@@ -46,11 +47,10 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
                 const currentChangeObject = changes[propertyName]
 
                 if (currentChangeObject.currentValue && currentChangeObject.isFirstChange) {
-                    console.log('currentChangeObject: ', currentChangeObject)
+                    // console.log('currentChangeObject firstChange: ', currentChangeObject)
                 }
 
             }
-
         }
     }
 

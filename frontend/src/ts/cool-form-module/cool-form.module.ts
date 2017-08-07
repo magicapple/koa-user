@@ -8,7 +8,7 @@ import { SwitchComponent } from './components/switch/switch.component'
 import { TextInputComponent } from './components/text-input/text-input.component'
 
 
-import {ForbiddenValidatorDirective} from './components/custom-validatior'
+import {ForbiddenValidatorDirective} from './components/validators/custom-validator'
 
 @NgModule({
     declarations : [

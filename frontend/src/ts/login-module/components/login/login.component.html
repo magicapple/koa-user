@@ -6,7 +6,7 @@
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
             <app-text-input formControlName="username" [fc]="registerForm.get('username')" [type]="'text'" [label]="'用户名:'" [error]="formErrors.username"></app-text-input>
-            <app-text-input formControlName="mobilePhone" [fc]="registerForm.get('mobilePhone')" [type]="'number'" [label]="'手机号:'" [error]="formErrors.mobilePhone"></app-text-input>
+            <app-text-input formControlName="mobilePhone" [fc]="registerForm.get('mobilePhone')" [type]="'text'" [label]="'手机号:'" [error]="formErrors.mobilePhone"></app-text-input>
 
 
 
