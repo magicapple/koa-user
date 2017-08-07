@@ -8,12 +8,12 @@ import { NgModule} from '@angular/core'
 import { HttpModule} from '@angular/http'
 import { ReactiveFormsModule} from '@angular/forms'
 
-import { AppComponent } from './components/app.component'
+import { LoginComponent } from './components/login/login.component'
 import { CoolFormModule } from '../cool-form-module/cool-form.module'
 
 @NgModule({
     declarations : [
-        AppComponent
+        LoginComponent
     ],
     imports      : [
         CoolFormModule,
@@ -22,7 +22,7 @@ import { CoolFormModule } from '../cool-form-module/cool-form.module'
         ReactiveFormsModule
     ],
     providers    : [],
-    bootstrap    : [AppComponent]
+    bootstrap    : [LoginComponent]
 })
 export class LoginModule {}
 

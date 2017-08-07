@@ -38,6 +38,7 @@ module.exports = function (env) {
         entry: {
             "polyfills": ["./ts/polyfills.ts"],
             "login": AOT ? './ts/page/login.aot.ts' : './ts/page/login.ts',
+            "register": AOT ? './ts/page/register.aot.ts' : './ts/page/register.ts',
             "home": AOT ? './ts/page/home.aot.ts' : './ts/page/home.ts'
         },
 

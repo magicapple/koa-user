@@ -9,5 +9,5 @@ if (environment.production) {
 }
 
 platformBrowserDynamic(
-    [ {provide: 'moduleType', useValue: 'login' } ]
+    [ {provide: 'moduleType', useValue: 'register' } ]
 ).bootstrapModule(LoginModule)

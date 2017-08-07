@@ -4,7 +4,7 @@
 
 
 
-exports.pageIndex = async function pageIndex(ctx, next) {
+exports.index = async function pageIndex(ctx, next) {
     const users = [
         {name : 'Dead Horse'},
         {name : 'Jack'},

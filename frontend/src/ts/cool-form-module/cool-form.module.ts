@@ -25,6 +25,7 @@ import {ForbiddenValidatorDirective} from './components/custom-validatior'
     exports:      [
         CommonModule,
         ReactiveFormsModule,
+        HttpModule,
 
         TextInputComponent,
         SwitchComponent

@@ -20,8 +20,8 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
     @Input() label: string = '标签文字：'
     @Input() error: string = ''
 
-    @Input('labelclass') labelClass: string = 'col-sm-2'
-    @Input('inputclass') inputClass: string = 'col-sm-10'
+    @Input('labelclass') labelClass: string = 'col-2'
+    @Input('inputclass') inputClass: string = 'col-6'
 
 
     interValue: string | number = ''

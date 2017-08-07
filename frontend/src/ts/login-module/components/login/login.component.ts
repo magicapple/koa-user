@@ -12,18 +12,10 @@ import 'rxjs/add/observable/of'
 
 
 @Component({
-    selector    : 'app-root',
-    templateUrl : './app.component.html'
+    selector    : 'app-login',
+    templateUrl : './login.component.html'
 })
-export class AppComponent implements OnInit{
-
-    active: boolean = true
-    submitted: boolean = true
-
-    bids : any = [
-        { name : 'one222', bid : 10 },
-        { name : 'two33', bid : 20 }
-    ]
+export class LoginComponent implements OnInit{
 
 
     hero: any = {
@@ -31,11 +23,11 @@ export class AppComponent implements OnInit{
         bid : ''
     }
 
-    heroForm: FormGroup
+    registerForm: FormGroup
+    loginForm: FormGroup
 
     constructor(
         private fb: FormBuilder,
-        // private db: AngularFireDatabase,
         private http: Http
     ) {
 
@@ -43,21 +35,18 @@ export class AppComponent implements OnInit{
 
     ngOnInit(): void {
 
-        // this.bidList = this.db.list('/users')
-
-
-        this.buildForm()
+        this.createRegisterForm()
     }
 
 
-    buildForm(): void {
-        this.heroForm = this.fb.group({
-            'name': [this.hero.name, [ Validators.required, Validators.minLength(4), Validators.maxLength(8)] ],
-            'bid': [this.hero.bid, Validators.required ],
+    createRegisterForm(): void {
+        this.registerForm = this.fb.group({
+            'username': [this.hero.name, [ Validators.required, Validators.minLength(6), Validators.maxLength(20)] ],
+            'mobilePhone': [this.hero.bid, Validators.required ],
             'switcher': [true, Validators.required ]
         })
 
-        this.heroForm.valueChanges
+        this.registerForm.valueChanges
             .subscribe(data => this.onValueChanged(data))
 
 
@@ -118,9 +107,9 @@ export class AppComponent implements OnInit{
     onValueChanged(data?: any) {
         // console.log('data: ', data)
 
-        if (!this.heroForm) { return }
+        if (!this.registerForm) { return }
 
-        const form = this.heroForm
+        const form = this.registerForm
 
         for (const field in this.formErrors) {
             // clear previous error message (if any)
@@ -148,8 +137,7 @@ export class AppComponent implements OnInit{
 
 
     onSubmit() {
-        this.submitted = true
-        this.hero = this.heroForm.value
+        this.hero = this.registerForm.value
         console.log('onSubmit', this.hero)
 
         // this.bidList.push(this.heroForm.value)
@@ -160,10 +148,6 @@ export class AppComponent implements OnInit{
             name : ''
         }
 
-        this.buildForm()
-
-        this.active = false
-        setTimeout(() => this.active = true, 0)
     }
 
 

@@ -4,6 +4,6 @@ import {LoginModuleNgFactory} from '../../aotCompiled/ts/login-module/login.modu
 
 
 platformBrowser(
-    [ {provide: 'moduleType', useValue: 'login' } ]
+    [ {provide: 'moduleType', useValue: 'register' } ]
 ).bootstrapModuleFactory(LoginModuleNgFactory)
 
