@@ -23,7 +23,7 @@ export function isMobilePhone(): ValidatorFn {
             return null
         }
 
-        console.log('手机号格式不正确!')
+        // console.log('手机号格式不正确!')
         return {'mobilePhone': true}
     }
 }

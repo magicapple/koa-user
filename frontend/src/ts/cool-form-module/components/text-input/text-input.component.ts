@@ -60,7 +60,7 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
     }
 
     set value(val: any) {
-        console.log('setter: ', val)
+        console.log('Setter: ', val)
         this.interValue = val
         this.onChange(val)
         this.onTouched()
@@ -68,17 +68,17 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
 
 
     registerOnChange(fn: any): void {
-        console.log('registerOnChange: ', fn)
+        console.log('RegisterOnChange: ', fn)
         this.onChange = fn
     }
 
     registerOnTouched(fn: any): void {
-        console.log('registerOnTouched: ', fn)
+        console.log('RegisterOnTouched: ', fn)
         this.onTouched = fn
     }
 
     writeValue(value: any): void {
-        console.log('writeValue: ', value)
+        console.log('WriteValue: ', value)
         if (value) {
             this.value = value
         }

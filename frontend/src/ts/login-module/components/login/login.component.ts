@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core'
 import { Http} from '@angular/http'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
-import { isMobilePhone } from '../../../cool-form-module/components/validators/mobilePhone'
+import { formErrorHandler, isMobilePhone } from '../../../cool-form-module/components/validators/validator'
 
 
 @Component({
@@ -13,7 +13,9 @@ export class LoginComponent implements OnInit {
 
     user: any = {
         username : '',
-        mobilePhone : ''
+        mobilePhone : '',
+        password: '',
+        password2 : ''
     }
 
     registerForm: FormGroup
@@ -32,17 +34,30 @@ export class LoginComponent implements OnInit {
     }
 
 
+    formValidationMessages: any = {
+        'username'  : {
+            'required'      : 'Name is required.',
+            'minlength'     : 'Name must be at least 4 characters long.',
+            'maxlength'     : 'Name cannot be more than 24 characters long.',
+            'forbiddenName' : 'Someone named "Bob" cannot be a hero.'
+        },
+        'mobilePhone' : {
+            'required' : 'bid is required.',
+            'toolow' : 'bid is too low.'
+        }
+    }
+
+
     createRegisterForm(): void {
         this.registerForm = this.fb.group({
-            'username': [this.user.username, [ Validators.required, Validators.minLength(6), Validators.maxLength(20)] ],
-            'mobilePhone': [this.user.mobilePhone, Validators.required, isMobilePhone ]
+            'username'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)] ],
+            'mobilePhone' : ['', [Validators.required, isMobilePhone]],
+            'password'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)] ],
+            'password2'   : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)] ]
         })
 
-        this.registerForm.valueChanges
-            .subscribe(data => this.onValueChanged(data))
+        this.registerForm.valueChanges.subscribe(data => formErrorHandler(data, this.registerForm, this.formValidationMessages))
 
-
-        // this.onValueChanged() // (re)set validation messages now
     }
 
     /*mininumBid2(control : AbstractControl) : Observable<ValidationErrors | null> {
@@ -76,56 +91,6 @@ export class LoginComponent implements OnInit {
     }*/
 
 
-    formErrors: any = {
-        'name'  : '',
-        'bid' : ''
-    }
-
-
-    validationMessages: any = {
-        'name'  : {
-            'required'      : 'Name is required.',
-            'minlength'     : 'Name must be at least 4 characters long.',
-            'maxlength'     : 'Name cannot be more than 24 characters long.',
-            'forbiddenName' : 'Someone named "Bob" cannot be a hero.'
-        },
-        'bid' : {
-            'required' : 'bid is required.',
-            'toolow' : 'bid is too low.'
-
-        }
-    }
-
-    onValueChanged(data?: any) {
-        // console.log('data: ', data)
-
-        if (!this.registerForm) { return }
-
-        const form = this.registerForm
-
-        for (const field in this.formErrors) {
-            // clear previous error message (if any)
-
-            if (this.formErrors.hasOwnProperty(field)) {
-                this.formErrors[field] = ''
-
-                const control = form.get(field)
-
-                if (control && control.dirty && !control.valid) {
-                    console.log('control.errors: ', control)
-
-                    const messages = this.validationMessages[field]
-                    for (const key in control.errors) {
-
-                        if (control.errors.hasOwnProperty(key)) {
-                            this.formErrors[field] += messages[key] + ' | '
-                        }
-
-                    }
-                }
-            }
-        }
-    }
 
 
     onSubmit() {
