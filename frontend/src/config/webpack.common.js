@@ -14,7 +14,7 @@ const helpers = require('./helpers')
 
 
 const vendorLibraryFromChunks = [
-    "login", "home"
+    "register", "login", "home"
 ]
 
 const distPath = {

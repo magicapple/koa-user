@@ -1,4 +1,4 @@
-<div class="form-group row " [class.has-success]="currentFormControl.valid&&currentFormControl.dirty" [class.has-danger]="currentFormControl.invalid&&currentFormControl.dirty" >
+<div class="form-group row " [class.has-success]="currentFormControl.valid&&currentFormControl.dirty" [class.has-danger]="(currentFormControl.invalid&&currentFormControl.dirty) || error" >
     <label class="{{labelClass}} col-form-label">{{label}}</label>
     <div class="{{inputClass}}">
         <input *ngIf="type==='text'" type="text" class="form-control" [value]="value" (change)="inputOnChange($event.target.value)" (keyup)="inputOnChange($event.target.value)">
@@ -8,9 +8,9 @@
         <input *ngIf="type==='url'" type="url" class="form-control" [value]="value" (change)="inputOnChange($event.target.value)" (keyup)="inputOnChange($event.target.value)">
         <input *ngIf="type==='tel'" type="tel" class="form-control" [value]="value" (change)="inputOnChange($event.target.value)" (keyup)="inputOnChange($event.target.value)">
 
-
-        <div class="form-control-feedback" *ngIf=" currentFormControl.invalid&& (currentFormControl.dirty || currentFormControl.touched)">
+        <div class="form-control-feedback" *ngIf="(currentFormControl.invalid && (currentFormControl.dirty || currentFormControl.touched)) || error">
             <span *ngIf="error"> {{error}} </span>
+
             <span *ngIf="!error">
                 <span *ngIf="currentFormControl.hasError('required')"> 该项是必填项！</span>
                 <span *ngIf="currentFormControl.hasError('email')"> 邮箱格式不正确！</span>

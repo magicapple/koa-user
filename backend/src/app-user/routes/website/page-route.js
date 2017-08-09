@@ -16,10 +16,9 @@ const pageAdminHome = require('../../controllers/page/adminHome')
 router.redirect('/', '/web/index');
 
 router.get('/signup', pageLogin.register);
-
+router.get('/login', pageLogin.login);
 
 router.get('/index', pageIndex.index);
-router.get('/signin', pageLogin.login);
 
 
 

@@ -18,7 +18,6 @@ export const mobilePattern2 = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|
 export function isMobilePhone(): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} => {
         const mobilePhone = control.value
-
         if (mobilePattern.test(mobilePhone)) {
             return null
         }

@@ -15,12 +15,11 @@ export function formErrorHandler (formData: Object, fb: FormGroup, validationErr
 
     const errorMessageContainer: Object = {}
 
-
     function getValidationErrorMessage (formGroupSource: any, errorMessageInput: any, errorMessageOutput: any,  needDirty : boolean = false) {
 
-        for (const field in formGroupSource) {
+        for (const field in formGroupSource.controls) {
 
-            if (formGroupSource.hasOwnProperty(field)) {
+            if (formGroupSource.controls.hasOwnProperty(field)) {
 
                 const control = formGroupSource.get(field)
 

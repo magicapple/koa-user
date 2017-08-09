@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core'
-import { Http} from '@angular/http'
+import {Component, Inject, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
 import { formErrorHandler, isMobilePhone } from '../../../cool-form-module/components/validators/validator'
@@ -11,19 +10,14 @@ import { formErrorHandler, isMobilePhone } from '../../../cool-form-module/compo
 })
 export class LoginComponent implements OnInit {
 
-    user: any = {
-        username : '',
-        mobilePhone : '',
-        password: '',
-        password2 : ''
-    }
+    user: any = {}
 
     registerForm: FormGroup
     loginForm: FormGroup
 
     constructor(
-        private fb: FormBuilder,
-        private http: Http
+        @Inject('moduleType') public pageType: string,
+        private fb: FormBuilder
     ) {
 
     }
@@ -33,32 +27,54 @@ export class LoginComponent implements OnInit {
         this.createRegisterForm()
     }
 
-
-    formValidationMessages: any = {
+    registerFormError : any = {}
+    registerFormValidationMessages: any = {
         'username'  : {
-            'required'      : 'Name is required.',
-            'minlength'     : 'Name must be at least 4 characters long.',
-            'maxlength'     : 'Name cannot be more than 24 characters long.',
-            'forbiddenName' : 'Someone named "Bob" cannot be a hero.'
+            'required'      : '请填写用户名!',
+            'minlength'     : '用户名长度4-20个字符!',
+            'maxlength'     : '用户名长度4-20个字符!'
         },
         'mobilePhone' : {
-            'required' : 'bid is required.',
-            'toolow' : 'bid is too low.'
+            'required' : '请填写手机号!',
+            'mobilePhone' : '手机号格式不正确!'
+        },
+        'password'  : {
+            'required'      : '请填写密码!',
+            'minlength'     : '密码长度6-20个字符!',
+            'maxlength'     : '密码长度6-20个字符!'
+        },
+        'password2'  : {
+            'required'      : '请填写确认密码!',
+            'minlength'     : '确认密码长度6-20个字符!',
+            'maxlength'     : '确认密码长度6-20个字符!'
         }
-    }
 
+    }
 
     createRegisterForm(): void {
         this.registerForm = this.fb.group({
-            'username'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)] ],
-            'mobilePhone' : ['', [Validators.required, isMobilePhone]],
+            'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)] ],
+            'mobilePhone' : ['', [Validators.required, isMobilePhone() ]],
             'password'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)] ],
             'password2'   : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)] ]
         })
 
-        this.registerForm.valueChanges.subscribe(data => formErrorHandler(data, this.registerForm, this.formValidationMessages))
+        this.registerForm.valueChanges.subscribe(data => { this.registerFormError = formErrorHandler(data, this.registerForm, this.registerFormValidationMessages) } )
+    }
+
+
+    registerFormSubmit() {
+
+        console.log('registerFormOnSubmit', this.registerForm.value)
+
+
+        if (this.registerForm.invalid) {
+            this.registerFormError = formErrorHandler(this.registerForm.value, this.registerForm, this.registerFormValidationMessages, true)
+            return
+        }
 
     }
+
 
     /*mininumBid2(control : AbstractControl) : Observable<ValidationErrors | null> {
         return this.bidList.map( bids => bids[bids.length - 1 ])
@@ -90,14 +106,6 @@ export class LoginComponent implements OnInit {
             })
     }*/
 
-
-
-
-    onSubmit() {
-        this.user = this.registerForm.value
-        console.log('onSubmit', this.user)
-
-    }
 
 
 }

@@ -4,7 +4,6 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/for
 @Component({
     selector    : 'app-text-input',
     templateUrl : './text-input.component.html',
-    styleUrls   : ['./text-input.component.css'],
     providers   : [
         {
             provide     : NG_VALUE_ACCESSOR,
@@ -48,6 +47,8 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
 
                 if (currentChangeObject.currentValue && currentChangeObject.isFirstChange) {
                     // console.log('currentChangeObject firstChange: ', currentChangeObject)
+                }else {
+                    // console.log('currentChangeObject secondChange: ', currentChangeObject)
                 }
 
             }
@@ -60,7 +61,7 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
     }
 
     set value(val: any) {
-        console.log('Setter: ', val)
+        // console.log('Setter: ', val)
         this.interValue = val
         this.onChange(val)
         this.onTouched()
@@ -68,17 +69,17 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
 
 
     registerOnChange(fn: any): void {
-        console.log('RegisterOnChange: ', fn)
+        // console.log('RegisterOnChange: ', fn)
         this.onChange = fn
     }
 
     registerOnTouched(fn: any): void {
-        console.log('RegisterOnTouched: ', fn)
+        // console.log('RegisterOnTouched: ', fn)
         this.onTouched = fn
     }
 
     writeValue(value: any): void {
-        console.log('WriteValue: ', value)
+        // console.log('WriteValue: ', value)
         if (value) {
             this.value = value
         }
