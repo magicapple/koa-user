@@ -2,40 +2,44 @@
 
 const validationName = {
     user : {
-        usernameWrong : {code:1001, message:"Field validation error,  username length must be 6-40", field:'username'},
-        passwordWrong : {code:1002, message:"Field validation error,  password length must be 6-30", field:'password'},
-        emailWrong : {code:1003, message:"Field validation error, Email format wrong", field:'email'},
-        mobileWrong : {code:1004, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
 
-        weChatJsCodeWrong : {code:1011, message:"Field validation error, wechat js_code length must be 32", field:'code'},
-        weChatEncryptedDataWrong : {code:1012, message:"Field validation error, wechat user encrypted info length must be 100+", field:'encryptedData'},
-        weChatUserInfoIVWrong : {code:1012, message:"Field validation error, wechat user encrypted info iv length must be 24-24", field:'iv'},
-        weChatUserSessionKeyWrong : {code:1013, message:"Field validation error, wechat user session key length must be 24-24", field:'session_key'},
-        weChatUserInfoSignatureWrong : {code:1014, message:"Field validation error, wechat user info signature length must be 40-40", field:'signature'},
-        weChatOpenIDWrong : {code:1015, message:"Field validation error, wechat OpenID length must be 28", field:'idWeChatOpenID'},
-        weChatUnionIDWrong : {code:1016, message:"Field validation error, wechat UnionID length must be 29", field:'idWeChatUnionID'},
+        usernameRequired : {code:1001, message:"Field validation error,  username is required", field:'username'},
+        passwordRequired : {code:1002, message:"Field validation error,  password is required", field:'password'},
+        emailRequired : {code:1003, message:"Field validation error, Email is required", field:'email'},
+        mobileRequired : {code:1004, message:"Field validation error, mobile number is required", field:'mobilePhone'},
 
-        usernameRequired : {code:1021, message:"Field validation error,  username is required", field:'username'},
-        passwordRequired : {code:1022, message:"Field validation error,  password is required", field:'password'},
-        emailRequired : {code:1023, message:"Field validation error, Email is required", field:'email'},
-        mobileRequired : {code:1024, message:"Field validation error, mobile number is required", field:'mobilePhone'},
+        usernameWrong : {code:1005, message:"Field validation error,  username length must be 4-30, start with letter character", field:'username'},
+        passwordWrong : {code:1006, message:"Field validation error,  password length must be 6-30", field:'password'},
+        emailWrong : {code:1007, message:"Field validation error, Email format wrong", field:'email'},
+        mobileWrong : {code:1008, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
 
-        weChatJsCodeRequired : {code:1031, message:"Field validation error, wechat js_code is required", field:'code'},
-        weChatEncryptedDataRequired : {code:1032, message:"Field validation error, wechat user encrypted info is required", field:'encryptedData'},
-        weChatUserInfoIVRequired : {code:1033, message:"Field validation error, wechat encrypted info iv is required", field:'iv'},
-        weChatUserSessionKeyRequired : {code:1034, message:"Field validation error, wechat user session key is required", field:'session_key'},
-        weChatUserInfoSignatureRequired : {code:1035, message:"Field validation error, wechat user info signature is required", field:'signature'},
-        weChatOpenIDRequired : {code:1036, message:"Field validation error, wechat OpenID is required", field:'idWeChatOpenID'},
-        weChatUnionIDRequired : {code:1037, message:"Field validation error, wechat UnionID is required", field:'idWeChatUnionID'},
+        usernameExist : {code:1031, message:"Field validation error,  username already exist", field:'username'},
+        emailExist : {code:1032, message:"Field validation error,  email already exist", field:'email'},
+        mobileExist : {code:1033, message:"Field validation error, mobile phone number already exist", field:'mobilePhone'},
+        weChatOpenIDExist : {code:1034, message:"Field validation error,  wechat OpenID already exist", field:'idWeChatOpenID'},
+
+        userNotFound :  {code:1041, message:"User Unauthorized, user not found", field:'username'},
+        passwordNotMatch :  {code:1042, message:"User Unauthorized, password not match", field:'password'},
 
 
-        usernameExist : {code:1041, message:"Field validation error,  username already exist", field:'username'},
-        emailExist : {code:1042, message:"Field validation error,  email already exist", field:'email'},
-        mobileExist : {code:143, message:"Field validation error, mobile phone number already exist", field:'mobilePhone'},
-        weChatOpenIDExist : {code:1047, message:"Field validation error,  wechat OpenID already exist", field:'idWeChatOpenID'},
+        weChatJsCodeRequired : {code:1071, message:"Field validation error, wechat js_code is required", field:'code'},
+        weChatEncryptedDataRequired : {code:1072, message:"Field validation error, wechat user encrypted info is required", field:'encryptedData'},
+        weChatUserInfoIVRequired : {code:1073, message:"Field validation error, wechat encrypted info iv is required", field:'iv'},
+        weChatUserSessionKeyRequired : {code:1074, message:"Field validation error, wechat user session key is required", field:'session_key'},
+        weChatUserInfoSignatureRequired : {code:1075, message:"Field validation error, wechat user info signature is required", field:'signature'},
+        weChatOpenIDRequired : {code:1076, message:"Field validation error, wechat OpenID is required", field:'idWeChatOpenID'},
+        weChatUnionIDRequired : {code:1077, message:"Field validation error, wechat UnionID is required", field:'idWeChatUnionID'},
 
-        userNotFound :  {code:1061, message:"User Unauthorized, user not found", field:'username'},
-        passwordNotMatch :  {code:1062, message:"User Unauthorized, password not match", field:'password'},
+
+        weChatJsCodeWrong : {code:1081, message:"Field validation error, wechat js_code length must be 32", field:'code'},
+        weChatEncryptedDataWrong : {code:1082, message:"Field validation error, wechat user encrypted info length must be 100+", field:'encryptedData'},
+        weChatUserInfoIVWrong : {code:1082, message:"Field validation error, wechat user encrypted info iv length must be 24-24", field:'iv'},
+        weChatUserSessionKeyWrong : {code:1083, message:"Field validation error, wechat user session key length must be 24-24", field:'session_key'},
+        weChatUserInfoSignatureWrong : {code:1084, message:"Field validation error, wechat user info signature length must be 40-40", field:'signature'},
+        weChatOpenIDWrong : {code:1085, message:"Field validation error, wechat OpenID length must be 28", field:'idWeChatOpenID'},
+        weChatUnionIDWrong : {code:1086, message:"Field validation error, wechat UnionID length must be 29", field:'idWeChatUnionID'},
+
+
     },
 
     token : {

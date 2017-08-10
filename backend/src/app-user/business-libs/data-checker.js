@@ -25,7 +25,8 @@ function throw401 (codeName, field){
 let validation = {
     username : function (username, field){
         if (!username) return throw409('user.usernameRequired', field);
-        if (!validator.isLength(username, 6, 40))  return throw409('user.usernameWrong', field);
+        if (!validator.isLength(username, 4, 30))  return throw409('user.usernameWrong', field);
+        if (!validator.matches(username, /^[a-zA-Z][a-zA-Z0-9_]*$/))  return throw409('user.usernameWrong', field);
     },
     userPassword : function (password, field){
         if (!password) return throw409('user.passwordRequired', field);

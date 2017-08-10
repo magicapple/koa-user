@@ -41,6 +41,7 @@ export function formErrorHandler (formData: Object, fb: FormGroup, validationErr
                             for (const key in control.errors) {
 
                                 if (control.errors.hasOwnProperty(key)) {
+                                    // console.log('control: ', field, key, control.errors)
 
                                     if (typeof errorMessageInput[field] === 'undefined') {
                                         errorMessageInput[field] = {}

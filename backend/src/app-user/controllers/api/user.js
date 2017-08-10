@@ -29,6 +29,26 @@ exports.registerNewUser = async (ctx, next) => {
 
 }
 
+/**
+ * 注册检查用户名是否重复
+ */
+exports.registerUsernameCheck = async (ctx, next) => {
+
+    const userPostData = ctx.request.body;
+
+    let newUser = await UserService.checkUsernameExist(ctx.request.body.username);
+
+    if (newUser) {
+        ctx.body = { usernameIsExist : true };
+    } else {
+        ctx.body = { usernameIsExist : false };
+    }
+
+}
+
+
+
+
 
 /**
  * 登陆

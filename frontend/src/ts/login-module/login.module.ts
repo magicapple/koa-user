@@ -5,10 +5,14 @@
 
 import { BrowserModule} from '@angular/platform-browser'
 import { NgModule} from '@angular/core'
-import { ReactiveFormsModule} from '@angular/forms'
 
 import { LoginComponent } from './components/login/login.component'
 import { CoolFormModule } from '../cool-form-module/cool-form.module'
+
+
+import { UserLoginService } from '../services/userLogin.service'
+
+
 
 @NgModule({
     declarations : [
@@ -16,10 +20,11 @@ import { CoolFormModule } from '../cool-form-module/cool-form.module'
     ],
     imports      : [
         CoolFormModule,
-        BrowserModule,
-        ReactiveFormsModule
+        BrowserModule
     ],
-    providers    : [],
+    providers    : [
+        UserLoginService
+    ],
     bootstrap    : [LoginComponent]
 })
 export class LoginModule {}

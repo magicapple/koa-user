@@ -2,9 +2,13 @@
  * Created by jin on 8/8/17.
  */
 
-
-import { isMobilePhone } from './mobilePhone'
 import { formErrorHandler } from './formValueChangeHandler'
 
+import { isMobilePhone } from './mobilePhone'
+import { passwordMatch, isMatched } from './passwordMatch'
 
-export { formErrorHandler, isMobilePhone }
+
+import { usernameCheckExist } from './usernameCheck'
+
+
+export { formErrorHandler, isMobilePhone, passwordMatch, isMatched , usernameCheckExist}

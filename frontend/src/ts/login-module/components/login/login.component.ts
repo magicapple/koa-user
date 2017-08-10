@@ -1,7 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
-import { formErrorHandler, isMobilePhone } from '../../../cool-form-module/components/validators/validator'
+import {subscribeErrorHandler} from '../../../services/httpErrorHandler'
+import { formErrorHandler, isMobilePhone, isMatched, usernameCheckExist } from '../../../cool-form-module/components/validators/validator'
+import {UserLoginService} from '../../../services/userLogin.service'
+
+
+import {apiPath} from '../../../services/apiPath'
 
 
 @Component({
@@ -17,7 +22,8 @@ export class LoginComponent implements OnInit {
 
     constructor(
         @Inject('moduleType') public pageType: string,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        public userService: UserLoginService
     ) {
 
     }
@@ -31,8 +37,10 @@ export class LoginComponent implements OnInit {
     registerFormValidationMessages: any = {
         'username'  : {
             'required'      : '请填写用户名!',
-            'minlength'     : '用户名长度4-20个字符!',
-            'maxlength'     : '用户名长度4-20个字符!'
+            'minlength'     : '用户名长度4-30个字符!',
+            'maxlength'     : '用户名长度4-30个字符!',
+            'pattern'       : '用户名必须字母开头!',
+            'usernameExist' : '用户名已经存在!'
         },
         'mobilePhone' : {
             'required' : '请填写手机号!',
@@ -40,26 +48,31 @@ export class LoginComponent implements OnInit {
         },
         'password'  : {
             'required'      : '请填写密码!',
-            'minlength'     : '密码长度6-20个字符!',
-            'maxlength'     : '密码长度6-20个字符!'
+            'minlength'     : '密码长度6-30个字符!',
+            'maxlength'     : '密码长度6-30个字符!'
         },
         'password2'  : {
             'required'      : '请填写确认密码!',
-            'minlength'     : '确认密码长度6-20个字符!',
-            'maxlength'     : '确认密码长度6-20个字符!'
-        }
+            'minlength'     : '确认密码长度6-30个字符!',
+            'maxlength'     : '确认密码长度6-30个字符!',
+            'mismatched'    : '确认密码输入不一致!'
 
+        }
+    }
+
+    registerFormInputChange(formInputData : any) {
+        this.registerFormError = formErrorHandler(formInputData, this.registerForm, this.registerFormValidationMessages, true)
     }
 
     createRegisterForm(): void {
         this.registerForm = this.fb.group({
-            'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)] ],
+            'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)], [usernameCheckExist(apiPath.signUpCheckUsername)] ],
             'mobilePhone' : ['', [Validators.required, isMobilePhone() ]],
-            'password'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)] ],
-            'password2'   : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)] ]
-        })
+            'password'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
+            'password2'   : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), isMatched('password')] ]
+        } )
 
-        this.registerForm.valueChanges.subscribe(data => { this.registerFormError = formErrorHandler(data, this.registerForm, this.registerFormValidationMessages) } )
+        this.registerForm.valueChanges.subscribe(data => { this.registerFormInputChange(data) } )
     }
 
 
@@ -69,43 +82,16 @@ export class LoginComponent implements OnInit {
 
 
         if (this.registerForm.invalid) {
-            this.registerFormError = formErrorHandler(this.registerForm.value, this.registerForm, this.registerFormValidationMessages, true)
+            this.registerFormInputChange(this.registerForm.value)
             return
         }
 
+        this.userService.checkUsername(this.registerForm.value.username).subscribe(
+            data => { console.log(data)},
+            subscribeErrorHandler
+        )
+
     }
-
-
-    /*mininumBid2(control : AbstractControl) : Observable<ValidationErrors | null> {
-        return this.bidList.map( bids => bids[bids.length - 1 ])
-            .map(bid => {
-                // console.log('value: ', control.value, bid.bid)
-                if (control.value > bid.bid) {
-                    console.log('value yes: ', control.value, bid.bid)
-                    return null
-                }else {
-                    console.log('value no: ', control.value, bid.bid)
-                    return { toolow : {expected : bid.bid}}
-                }
-            })
-    }
-*/
-/*    mininumBid(control : AbstractControl) : Observable<ValidationErrors | null> {
-        return this.http.get('/assets/data.json')
-            .map( response => response.json())
-            .map( bids => bids[bids.length - 1 ])
-            .map(bid => {
-                // console.log('value: ', control.value, bid.bid)
-                if (control.value > bid.bid) {
-                    console.log('value yes: ', control.value, bid.bid)
-                    return null
-                }else {
-                    console.log('value no: ', control.value, bid.bid)
-                    return { toolow : {expected : bid.bid, actual: control.value}}
-                }
-            })
-    }*/
-
 
 
 }

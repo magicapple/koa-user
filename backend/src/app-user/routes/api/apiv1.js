@@ -25,7 +25,11 @@ router.post('/upload', upload.single('file'), files);
 
 
 router.post('/user/signup', userController.registerNewUser);
+router.post('/user/signup/username', userController.registerUsernameCheck);
 router.post('/user/signup/wechat', userController.registerUserWeChat);
+
+
+
 
 router.post('/user/login', userController.login);
 router.post('/user/logout', userController.logout);

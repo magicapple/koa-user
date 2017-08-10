@@ -19,7 +19,7 @@ exports.signUp = async (user) => {
     let newUser = {
         username  : user.username,
         password : user.password
-    };
+    }
 
     if (user.email){
         GDataChecker.userEmail(user.email);
@@ -31,7 +31,7 @@ exports.signUp = async (user) => {
 
     }else {
         // At least email is required for signUp
-        GDataChecker.userEmail(user.email);
+        GDataChecker.userEmail(user.email)
     }
 
 
@@ -52,6 +52,11 @@ exports.signUp = async (user) => {
 
 };
 
+exports.checkUsernameExist = async (username) => {
+    GDataChecker.username(username);
+
+    return await MUserBaseInfo.findOne({username : username}).exec()
+}
 
 
 
