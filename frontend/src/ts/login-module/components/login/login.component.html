@@ -2,7 +2,7 @@
 <div class="row justify-content-center mt-4">
     <div class="col-8 col-lg-6" *ngIf="pageType === 'register' ">
 
-        <H1> 注册 </H1>
+        <H1> 注册 {{registerForm.get('username').hasError('usernameExist')}}</H1>
         <form [formGroup]="registerForm" (ngSubmit)="registerFormSubmit()">
 
             <app-text-input formControlName="username" [fc]="registerForm.get('username')" [type]="'text'" [label]="'用户名:'" [error]="registerFormError.username || (registerForm.get('username').hasError('usernameExist') ? registerFormValidationMessages.username.usernameExist : '') "></app-text-input>

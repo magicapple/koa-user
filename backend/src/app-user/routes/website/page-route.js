@@ -5,7 +5,7 @@
 
 
 
-const router = require('koa-router')();
+const router = require('koa-router')()
 
 const pageIndex = require('../../controllers/page/index')
 const pageLogin = require('../../controllers/page/login')
@@ -13,21 +13,22 @@ const pageLogin = require('../../controllers/page/login')
 const pageAdminHome = require('../../controllers/page/adminHome')
 
 
-router.redirect('/', '/web/index');
+router.redirect('/', '/web/index')
 
-router.get('/signup', pageLogin.register);
-router.get('/login', pageLogin.login);
+router.get('/signup', pageLogin.register)
+router.get('/login', pageLogin.login)
 
-router.get('/index', pageIndex.index);
-
-
-
+router.get('/index', pageIndex.index)
+router.get('/userhome', pageIndex.userHome)
 
 
 
 
 
-router.get('/admin', pageAdminHome.pageHome);
 
-module.exports = router;
+
+
+router.get('/admin', pageAdminHome.pageHome)
+
+module.exports = router
 

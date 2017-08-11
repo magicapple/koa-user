@@ -65,8 +65,7 @@ export function usernameCheckExist (url: string, postDataKey: string = 'username
 
         return Observable.timer(1000).switchMap(() => {
             return http.post(url, postData).map( data => {
-
-                if (!data.success) {
+                if (data.data.usernameIsExist) {
                     return {usernameExist : true}
                 }
                 return null
