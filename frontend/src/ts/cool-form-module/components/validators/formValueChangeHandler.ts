@@ -38,6 +38,7 @@ export function formErrorHandler (formData: Object, fb: FormGroup, validationErr
                         // console.log('control: ', field, control.errors)
 
                         if (needDirty || control.dirty) {
+
                             for (const key in control.errors) {
 
                                 if (control.errors.hasOwnProperty(key)) {

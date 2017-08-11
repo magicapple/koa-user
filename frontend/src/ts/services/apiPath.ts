@@ -4,7 +4,9 @@
 
 const prefix = '/api'
 const apiPath = {
-    signUpCheckUsername : prefix + '/user/signup/username'
+    signUpCheckUsername : prefix + '/user/signup/username',
+    signUpCheckMobilePhone : prefix + '/user/signup/phone',
+    sign : prefix + '/user/signup'
 }
 
 

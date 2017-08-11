@@ -8,7 +8,7 @@ import { isMobilePhone } from './mobilePhone'
 import { passwordMatch, isMatched } from './passwordMatch'
 
 
-import { usernameCheckExist } from './usernameCheck'
+import { checkFieldIsExist } from './usernameCheck'
 
 
-export { formErrorHandler, isMobilePhone, passwordMatch, isMatched , usernameCheckExist}
+export { formErrorHandler, isMobilePhone, passwordMatch, isMatched , checkFieldIsExist}

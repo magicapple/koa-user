@@ -23,4 +23,10 @@ export class UserLoginService {
 
         return this.http.post(apiPath.signUpCheckUsername, {username : username})
     }
+
+    registerNewUser(user : any): Observable<any> {
+
+        return this.http.post(apiPath.sign, user)
+    }
+
 }

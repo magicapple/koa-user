@@ -57,7 +57,11 @@ exports.checkUsernameExist = async (username) => {
 
     return await MUserBaseInfo.findOne({username : username}).exec()
 }
+exports.checkMobilePhoneExist = async (mobilePhone) => {
+    GDataChecker.userMobile(mobilePhone);
 
+    return await await MUserBaseInfo.findOne({mobilePhone:mobilePhone}).exec()
+}
 
 
 exports.login = async (user) =>{

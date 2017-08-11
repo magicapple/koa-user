@@ -34,8 +34,6 @@ exports.registerNewUser = async (ctx, next) => {
  */
 exports.registerUsernameCheck = async (ctx, next) => {
 
-    const userPostData = ctx.request.body;
-
     let newUser = await UserService.checkUsernameExist(ctx.request.body.username);
 
     if (newUser) {
@@ -46,6 +44,20 @@ exports.registerUsernameCheck = async (ctx, next) => {
 
 }
 
+/**
+ * 注册检查手机号是否重复
+ */
+exports.registerMobilePhoneCheck = async (ctx, next) => {
+
+    let newUser = await UserService.checkMobilePhoneExist(ctx.request.body.mobilePhone);
+
+    if (newUser) {
+        ctx.body = { mobilePhoneIsExist : true };
+    } else {
+        ctx.body = { mobilePhoneIsExist : false };
+    }
+
+}
 
 
 

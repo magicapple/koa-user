@@ -52,7 +52,7 @@ function convertTsickleDecoratorIntoMetadata(decoratorInvocations: any[]): any[]
 
 
 
-export function usernameCheckExist (url: string, postDataKey: string = 'username'): AsyncValidatorFn {
+export function checkFieldIsExist (url: string, postDataKey: string = 'username'): AsyncValidatorFn {
 
     return (control : AbstractControl) : Observable<ValidationErrors| null> => {
 
@@ -62,11 +62,10 @@ export function usernameCheckExist (url: string, postDataKey: string = 'username
         const postData : any = {}
         postData[postDataKey] = control.value
 
-
         return Observable.timer(1000).switchMap(() => {
             return http.post(url, postData).map( data => {
-                if (data.data.usernameIsExist) {
-                    return {usernameExist : true}
+                if (data.data[postDataKey + 'IsExist']) {
+                    return {isExist : true}
                 }
                 return null
             })
