@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
 import {subscribeErrorHandler} from '../../../services/httpErrorHandler'
-import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../cool-form-module/components/validators/validator'
+import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../cool-form-module/validators/validator'
 import {UserLoginService} from '../../../services/userLogin.service'
 
 
@@ -74,7 +74,10 @@ export class LoginComponent implements OnInit {
             'password2'   : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), isMatched('password')] ]
         } )
 
-        this.registerForm.valueChanges.subscribe(data => { this.ignoreDirty = false; this.registerFormInputChange(data) } )
+        this.registerForm.valueChanges.subscribe(data => {
+            this.ignoreDirty = false;
+            this.registerFormInputChange(data)
+        })
     }
 
 
@@ -82,15 +85,16 @@ export class LoginComponent implements OnInit {
 
         console.log('registerFormOnSubmit', this.registerForm.value)
 
-
         if (this.registerForm.invalid) {
             this.registerFormInputChange(this.registerForm.value, true)
             this.ignoreDirty = true
-            return
+            // return
         }
 
         this.userService.registerNewUser(this.registerForm.value).subscribe(
-            data => { console.log('注册成功: ', data)},
+            data => {
+                console.log('注册成功: ', data)
+            },
             subscribeErrorHandler
         )
 

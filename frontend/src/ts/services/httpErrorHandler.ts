@@ -20,16 +20,16 @@ const subscribeErrorHandler = (error: HttpErrorResponse) => {
             window.location.href = '/web/login'
         } else {
             if (error && error.status === 400) {
-                console.log('Http 400 请求发生错误!! ', error)
+                console.log('Http 400 请求发生错误!! ', error.error)
 
             }else if (error && error.status === 404) {
-                console.log('Http 404 请求发生错误!! ', error)
+                console.log('Http 404 请求发生错误!! ', error.error)
 
             }else if (error && error.status === 500) {
-                console.log('Http 500 请求发生错误!! ', error)
+                console.log('Http 500 请求发生错误!! ', error.error)
 
             }else {
-                console.log('Http 请求发生错误!! ', error)
+                console.log('Http 请求发生错误!! ', error.error)
             }
 
         }
