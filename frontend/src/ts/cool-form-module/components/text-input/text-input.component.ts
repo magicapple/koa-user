@@ -26,6 +26,7 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
 
 
     interValue: string | number = ''
+    labelId : string | number = ''
 
     onChange: any  = () => { return undefined }
     onTouched: any = () => { return undefined }
@@ -36,6 +37,7 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
 
     ngOnInit() {
         // console.log('ngOnInit')
+        this.labelId = 'id_' + this.getRandomInt()
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
@@ -89,6 +91,16 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
 
     inputOnChange(inputValue: any) {
         this.value = inputValue
+    }
+
+
+    getRandomInt(min: number = 1000, max: number = 9999) {
+
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+
+        min = Math.ceil(min)
+        max = Math.floor(max)
+        return Math.floor(Math.random() * (max - min)) + min  //The maximum is exclusive and the minimum is inclusive
     }
 
 }
