@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
-import {subscribeErrorHandler} from '../../../services/httpErrorHandler'
+import { ErrorService } from '../../../cool-form-module/services/httpError.service'
 import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../cool-form-module/validators/validator'
 import {UserLoginService} from '../../../services/userLogin.service'
+
 
 
 import {apiPath} from '../../../services/apiPath'
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     constructor(
         @Inject('moduleType') public pageType: string,
         private fb: FormBuilder,
-        public userService: UserLoginService
+        public userService: UserLoginService,
+        private errorService: ErrorService
     ) {
 
     }
@@ -95,7 +97,7 @@ export class LoginComponent implements OnInit {
             data => {
                 console.log('注册成功: ', data)
             },
-            subscribeErrorHandler
+            error => {this.errorService.handler(error) }
         )
 
     }
