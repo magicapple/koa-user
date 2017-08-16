@@ -16,6 +16,7 @@ const pageAdminHome = require('../../controllers/page/adminHome')
 router.redirect('/', '/web/index')
 
 router.get('/signup', pageLogin.register)
+router.get('/signup/captcha', pageLogin.getCaptchaImage)
 router.get('/login', pageLogin.login)
 
 router.get('/index', pageIndex.index)
