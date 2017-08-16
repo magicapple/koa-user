@@ -30,7 +30,6 @@ export class BSModalComponent implements OnInit {
 
 
         this.modalService.getModal().subscribe( data => {
-            console.log('Modal data: ', data)
 
             if (data && data.title || data && data.message) {
                 this.title = data.title || '抱歉，出错了！'

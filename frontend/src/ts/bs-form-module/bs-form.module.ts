@@ -15,7 +15,7 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import {ForbiddenValidatorDirective} from './validators/custom-validator'
 
 
-import {ErrorService} from './services/httpError.service'
+import {HttpService} from './services/http.service'
 
 @NgModule({
     declarations : [
@@ -31,7 +31,7 @@ import {ErrorService} from './services/httpError.service'
         BSCommonModule
     ],
     providers    : [
-        ErrorService
+        HttpService
     ],
     exports:      [
         CommonModule,

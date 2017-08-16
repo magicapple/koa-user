@@ -102,7 +102,6 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
     // Add the new notification to the notification array
     add(item: any): void {
-        console.log('item: ', item)
         item.createdOn = new Date()
 
         const toBlock: boolean = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false
@@ -115,7 +114,6 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         }
 
         if (!toBlock) {
-            console.log('lastOnBottom: ', this.lastOnBottom, this.maxStack)
             // Check if the notification should be added at the start or the end of the array
             if (this.lastOnBottom) {
                 if (this.notifications.length >= this.maxStack) {

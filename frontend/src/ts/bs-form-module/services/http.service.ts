@@ -53,7 +53,7 @@ const removeEmptyProperty = ( source : any) => {
 
 
 @Injectable()
-class ErrorService {
+class HttpService {
 
     constructor(
         private modalService: ModalService,
@@ -62,7 +62,7 @@ class ErrorService {
         // console.log(modalService)
     }
 
-    handler (error: HttpErrorResponse) {
+    errorHandler (error: HttpErrorResponse) {
 
         if (error.error instanceof Error) {
             // A client-side or network error occurred. Handle it accordingly.
@@ -98,19 +98,31 @@ class ErrorService {
 
                 this.notificationService.error( '请求出现错误!',  error.error.error.message,
                     {
-                        showProgressBar: true,
+                        showProgressBar: false,
                         pauseOnHover: true,
                         clickToClose: true,
-                        timeOut: 8000
+                        timeOut: 0
                     }
                 )
             }
         }
     }
+
+    successHandler (data: any) {
+        this.notificationService.success( '保存成功!', '提示: 点击后提示消失',
+            {
+                showProgressBar: false,
+                pauseOnHover: true,
+                clickToClose: true,
+                timeOut: 0
+            }
+        )
+    }
+
 }
 
 
 
-export {ErrorService, removeEmptyProperty}
+export {HttpService, removeEmptyProperty}
 
 

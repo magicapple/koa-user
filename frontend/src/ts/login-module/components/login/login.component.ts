@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
-import { ErrorService } from '../../../bs-form-module/services/httpError.service'
+import { HttpService } from '../../../bs-form-module/services/http.service'
 
 
 import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../bs-form-module/validators/validator'
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         @Inject('moduleType') public pageType: string,
         private fb: FormBuilder,
         public userService: UserLoginService,
-        private errorService: ErrorService,
+        private httpService: HttpService,
     ) {
 
     }
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
         } )
 
         this.registerForm.valueChanges.subscribe(data => {
-            this.ignoreDirty = false;
+            this.ignoreDirty = false
             this.registerFormInputChange(data)
         })
     }
@@ -99,8 +99,9 @@ export class LoginComponent implements OnInit {
         this.userService.registerNewUser(this.registerForm.value).subscribe(
             data => {
                 console.log('注册成功: ', data)
+                this.httpService.successHandler(data)
             },
-            error => {this.errorService.handler(error) }
+            error => {this.httpService.errorHandler(error) }
         )
 
     }
