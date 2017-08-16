@@ -4,7 +4,9 @@ import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule} from '@angular/forms'
 
 
-import { BsModalComponent } from './components/bs-modal/bs-modal.component'
+import { BSCommonModule } from '../bs-common-module/bs-common.module'
+
+
 
 import { SwitchComponent } from './components/switch/switch.component'
 import { TextInputComponent } from './components/text-input/text-input.component'
@@ -13,12 +15,10 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import {ForbiddenValidatorDirective} from './validators/custom-validator'
 
 
-import {ModalService} from './services/modal.service'
 import {ErrorService} from './services/httpError.service'
 
 @NgModule({
     declarations : [
-        BsModalComponent,
         SwitchComponent,
         TextInputComponent,
         ForbiddenValidatorDirective
@@ -26,22 +26,21 @@ import {ErrorService} from './services/httpError.service'
     imports      : [
         CommonModule,
         HttpClientModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+
+        BSCommonModule
     ],
     providers    : [
-        ErrorService,
-        ModalService
+        ErrorService
     ],
     exports:      [
         CommonModule,
         ReactiveFormsModule,
         HttpClientModule,
 
-        BsModalComponent,
-
         TextInputComponent,
         SwitchComponent
     ],
     bootstrap    : []
 })
-export class CoolFormModule {}
+export class BSFormModule {}

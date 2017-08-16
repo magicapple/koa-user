@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
-import { ErrorService } from '../../../cool-form-module/services/httpError.service'
-import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../cool-form-module/validators/validator'
+import { ErrorService } from '../../../bs-form-module/services/httpError.service'
+import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../bs-form-module/validators/validator'
 import {UserLoginService} from '../../../services/userLogin.service'
 
 

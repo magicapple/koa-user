@@ -5,7 +5,7 @@
 import { Injectable } from '@angular/core'
 import {HttpErrorResponse} from '@angular/common/http'
 
-import {ModalService} from './modal.service'
+import {ModalService} from '../../bs-common-module/services/modal.service'
 
 
 
