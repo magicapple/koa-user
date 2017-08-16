@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
 import { ErrorService } from '../../../bs-form-module/services/httpError.service'
+
+
 import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../bs-form-module/validators/validator'
 import {UserLoginService} from '../../../services/userLogin.service'
 
@@ -22,17 +24,17 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup
     ignoreDirty: boolean = false
 
+
     constructor(
         @Inject('moduleType') public pageType: string,
         private fb: FormBuilder,
         public userService: UserLoginService,
-        private errorService: ErrorService
+        private errorService: ErrorService,
     ) {
 
     }
 
     ngOnInit(): void {
-
         this.createRegisterForm()
     }
 
@@ -86,6 +88,7 @@ export class LoginComponent implements OnInit {
     registerFormSubmit() {
 
         console.log('registerFormOnSubmit', this.registerForm.value)
+
 
         if (this.registerForm.invalid) {
             this.registerFormInputChange(this.registerForm.value, true)

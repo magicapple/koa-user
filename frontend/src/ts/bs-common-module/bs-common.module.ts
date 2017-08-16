@@ -5,27 +5,42 @@
 
 import { NgModule} from '@angular/core'
 import { CommonModule } from '@angular/common'
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { BSModalComponent } from '../bs-common-module/components/bs-modal/bs-modal.component'
+import { SimpleNotificationsComponent } from '../bs-common-module/components/simple-notifications/simple-notifications.component'
+import { SimpleNotificationComponent } from '../bs-common-module/components/simple-notification/simple-notification.component'
+
+
+import {MaxPipe} from './pipes/max/max.pipe'
 
 
 import {ModalService} from './services/modal.service'
+import {NotificationService} from './services/notification.service'
 
 @NgModule({
     declarations : [
-        BSModalComponent
+        MaxPipe,
+
+
+        BSModalComponent,
+        SimpleNotificationComponent,
+        SimpleNotificationsComponent
     ],
     imports      : [
         CommonModule,
+        BrowserAnimationsModule
     ],
     providers    : [
-        ModalService
+        ModalService,
+        NotificationService
     ],
     exports:      [
         CommonModule,
+        BrowserAnimationsModule,
 
-        BSModalComponent
+        BSModalComponent,
+        SimpleNotificationsComponent
 
     ],
     bootstrap    : []
