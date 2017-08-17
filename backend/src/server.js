@@ -28,6 +28,7 @@ const responseFormatter      = require('./koa2/koa2-middleware/response-formater
 const ejsHelper              = require('./koa2/koa2-middleware/ejs-helper');
 const userDevice = require('./koa2/koa2-middleware/user-device');
 const userIP = require('./koa2/koa2-middleware/ip-address');
+const visitor = require('./koa2/koa2-middleware/visit-logger');
 
 
 const apiRoutes              = require('./app-user/routes/api/apiv1');
@@ -39,17 +40,21 @@ const webRoutes              = require('./app-user/routes/website/page-route');
 
 
 
+app.keys = [GConfig.cookieSecret];
+
+
 app.use(errorHandler(app, {env : GConfig.env}));     // 全局错误处理
 
 
-app.use(log4js.middleware);
-app.use(logger());     // 记录所用方式与时间
-app.use(XResponseTime());     // 设置Header
-app.use(bodyParser());     // POST请求 body 解析
-app.use(cors());     // 跨域资源共享 CORS
-app.use(userAgent);     //请求Header 的 user agent 信息
-app.use(userDevice());     //根据 Header 的 user agent 信息 获得设备名称
-app.use(userIP());     // 获取ipv4和ipv6地址
+app.use(log4js.middleware)
+app.use(logger())     // 记录所用方式与时间
+app.use(XResponseTime())     // 设置Header
+app.use(bodyParser())     // POST请求 body 解析
+app.use(cors())     // 跨域资源共享 CORS
+app.use(userAgent)     //请求Header 的 user agent 信息
+app.use(userDevice())   //根据 Header 的 user agent 信息 获得设备名称
+app.use(userIP())      // 获取ipv4和ipv6地址
+app.use(visitor())     // 获取visitor UUID
 
 
 // 静态文件夹
@@ -66,11 +71,12 @@ ejs(app, {
     viewExt: 'ejs',
     cache: false,
     debug: true
-});
+})
 
 app.use(ejsHelper());
 
 app.use(responseFormatter('/api', {isInclude:true}));
+
 
 
 

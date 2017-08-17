@@ -43,6 +43,7 @@
     "moment": "^2.18.1",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.10.7",
+    "nanoid": "^0.2.0",
     "superagent": "^3.5.2",
     "validator": "^7.0.0"
   },

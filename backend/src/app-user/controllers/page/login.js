@@ -11,8 +11,6 @@ exports.login = async function pageLogin(ctx, next) {
 
 
 exports.register = async function pageLogin(ctx, next) {
-    console.log('ctx session : ', ctx)
-
     await ctx.render('web/register', { page : {title : '注册页面 !'} });
 }
 

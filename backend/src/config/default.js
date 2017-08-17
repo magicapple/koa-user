@@ -16,13 +16,13 @@ module.exports = {
 
     pathViewTemplate : path.join(__dirname, '../views/src'),
 
-    auth_cookie_secret   : "very_long_koa2_express_tekken_nina_jin_kazama",
-    auth_cookie_name : "signed_cookie_username",
+    cookieSecret   : "very_long_koa2_express_tekken_nina_jin_kazama",
+    cookieName : "koa2:session",
 
-    loginToken : {
-        jwtTokenSecret : "koa2-user-secret-x1",
-        jwtTokenExpireDay : 30,
-        tokenFieldName : "X-Access-Token"
+    authToken : {
+        secret : "koa2-user-secret-x1",
+        expireDay : 30,
+        fieldName : "X-Access-Token"
     },
 
     // 应用目录配置

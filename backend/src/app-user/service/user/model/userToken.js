@@ -9,8 +9,8 @@ const jwt = require("jsonwebtoken");
 
 const userConstant = require("../userConstant");
 
-const TOKEN_EXPIRATION_DAY = GConfig.loginToken.jwtTokenExpireDay;
-const TOKEN_EXPIRATION_SEC = 60 * 60 * 24 * GConfig.loginToken.jwtTokenExpireDay;
+const TOKEN_EXPIRATION_DAY = GConfig.authToken.expireDay;
+const TOKEN_EXPIRATION_SEC = 60 * 60 * 24 * GConfig.authToken.expireDay;
 
 
 
@@ -99,7 +99,7 @@ UserTokenSchema.statics.generateToken = function(user, koaContent, weChatSession
         _id: user._id
     };
 
-    const token  = jwt.sign(payload, GConfig.loginToken.jwtTokenSecret, {
+    const token  = jwt.sign(payload, GConfig.authToken.secret, {
         expiresIn: TOKEN_EXPIRATION_SEC
     });
 

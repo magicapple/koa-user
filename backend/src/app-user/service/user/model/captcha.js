@@ -33,7 +33,7 @@ const CaptchaSchema = new GSchema({
  */
 
 
-// UserBaseInfoSchema.index({username: 1});
+// CaptchaSchema.index({username: 1});
 
 
 
@@ -42,7 +42,7 @@ const CaptchaSchema = new GSchema({
  * Mongoose plugin
  */
 
-// UserSchema.plugin(mongooseTimestamps);
+// CaptchaSchema.plugin(mongooseTimestamps);
 
 
 
@@ -56,7 +56,7 @@ const CaptchaSchema = new GSchema({
 
 
 //
-// UserSchema.pre('save', function (next) {
+// CaptchaSchema.pre('save', function (next) {
 //     var user = this;
 //     if (this.isModified('password') || this.isNew) {
 //         bcrypt.genSalt(10, function (err, salt) {

@@ -12,8 +12,8 @@ function authMiddleware(options) {
 
     return koaJwt({
         debug : true,
-        secret : GConfig.loginToken.jwtTokenSecret,
-        cookie : GConfig.loginToken.tokenFieldName,
+        secret : GConfig.authToken.secret,
+        cookie : GConfig.authToken.fieldName,
         key : 'userToken',  // add token info to ctx.state.userToken
         isRevoked : async (ctx, decodeToken, token) => {
 

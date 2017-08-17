@@ -12,8 +12,8 @@ const headerToken = require('../../../koa2/common-libs/authorization-header/auth
 const UserService = require('../../service/user/userService')
 const MUserToken = require('../../service/user/model/userToken')
 
-const tokenFieldName = GConfig.loginToken.tokenFieldName;
-const TOKEN_EXPIRATION_SEC = 60 * 60 * 24 * GConfig.loginToken.jwtTokenExpireDay;
+const tokenFieldName = GConfig.authToken.fieldName;
+const TOKEN_EXPIRATION_SEC = 60 * 60 * 24 * GConfig.authToken.expireDay;
 
 
 
@@ -85,10 +85,10 @@ exports.logout = async (ctx, next) => {
 
     const userTokenPostData = ctx.request.body.accessToken || ctx.cookies.get(tokenFieldName) || headerToken(ctx);
 
-    ctx.cookies.set(tokenFieldName, userToken.accessToken, { maxAge: TOKEN_EXPIRATION_SEC, httpOnly: true })
+    let userToken = await UserService.logout(userTokenPostData)
+    ctx.cookies.set(tokenFieldName, null, { maxAge: TOKEN_EXPIRATION_SEC, httpOnly: true })
 
-    let userToken = await UserService.logout(userTokenPostData);
-    ctx.body = userToken || { message : 'Logout success, Token not found'};
+    ctx.body = userToken || { message : 'Logout success, but token not found'};
 
 }
 
