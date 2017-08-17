@@ -50,6 +50,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 13. 安装 [koa-useragent] koa2 查看 请求Header中的UserAgent 模块 ``` npm install --save koa-useragent ``` 
 14. 安装 [koa-jwt]  koa2 针对每个路由的需要验证jwt token 的中间件
 15. 安装 [koa-multer]  koa2 上传文件组件
+16. 安装 [koa-session]  koa2 session中间件 Simple session middleware for Koa 
 
 
 20. 安装 [validator] 验证数据校验库
@@ -57,6 +58,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 22. 安装 [jsonwebtoken] 用于登录的 JSON Web Tokens
 23. 安装 [moment] 处理时间日期库
 24. 安装 [ipaddr.js] 处理 IPv6 和 IPv4 地址的库
+25. 安装 [captchapng] 处理图形验证码
 
 30. 安装 [superagent] node.js HTTP client. Node.js发起 Http请求的库
 
@@ -82,6 +84,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [nodemon]: https://github.com/remy/nodemon
 [mocha]: https://mochajs.org/
 [chai]: http://chaijs.com/
+[superagent]: https://github.com/visionmedia/superagent
 
 
 [lodash]: https://github.com/lodash/lodash
@@ -90,7 +93,9 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [bcrypt]: https://github.com/kelektiv/node.bcrypt.js
 [jsonwebtoken]: https://github.com/auth0/node-jsonwebtoken
 [ipaddr.js]: https://github.com/whitequark/ipaddr.js/commits/master
-[superagent]: https://github.com/visionmedia/superagent
+[captchapng2]: https://github.com/Lellansin/captchapng
+
+
 
 
 [koa]: http://koajs.com/
@@ -108,6 +113,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [kcors]: https://github.com/koajs/cors
 [koa-jwt]: https://github.com/koajs/jwt
 [koa-multer]: https://github.com/koa-modules/multer
+[koa-session]: https://github.com/koajs/session
 
 
 [mongoose]: http://mongoosejs.com/

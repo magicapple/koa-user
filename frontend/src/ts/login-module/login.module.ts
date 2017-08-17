@@ -6,9 +6,11 @@
 import { BrowserModule} from '@angular/platform-browser'
 import { NgModule} from '@angular/core'
 
-import { LoginComponent } from './components/login/login.component'
-import { CoolFormModule } from '../cool-form-module/cool-form.module'
 
+import { BSFormModule } from '../bs-form-module/bs-form.module'
+import { BSCommonModule } from '../bs-common-module/bs-common.module'
+
+import { LoginComponent } from './components/login/login.component'
 
 import { UserLoginService } from '../services/userLogin.service'
 
@@ -19,8 +21,11 @@ import { UserLoginService } from '../services/userLogin.service'
         LoginComponent
     ],
     imports      : [
-        CoolFormModule,
-        BrowserModule
+        BrowserModule,
+
+        BSFormModule,
+        BSCommonModule
+
     ],
     providers    : [
         UserLoginService

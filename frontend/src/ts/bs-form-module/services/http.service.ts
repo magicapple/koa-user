@@ -5,7 +5,8 @@
 import { Injectable } from '@angular/core'
 import {HttpErrorResponse} from '@angular/common/http'
 
-import {ModalService} from './modal.service'
+import {ModalService} from '../../bs-common-module/services/modal.service'
+import {NotificationService} from '../../bs-common-module/services/notification.service'
 
 
 
@@ -52,15 +53,16 @@ const removeEmptyProperty = ( source : any) => {
 
 
 @Injectable()
-class ErrorService {
+class HttpService {
 
     constructor(
-        private modalService: ModalService
+        private modalService: ModalService,
+        private notificationService: NotificationService
     ) {
         // console.log(modalService)
     }
 
-    handler (error: HttpErrorResponse) {
+    errorHandler (error: HttpErrorResponse) {
 
         if (error.error instanceof Error) {
             // A client-side or network error occurred. Handle it accordingly.
@@ -86,17 +88,41 @@ class ErrorService {
                     console.log('Http 请求发生错误!! ', error.error)
                 }
 
+/*
                 this.modalService.showModal({
                     title : '请求出现错误!',
                     message : error.error.error.message
                 })
+*/
+
+
+                this.notificationService.error( '请求出现错误!',  error.error.error.message,
+                    {
+                        showProgressBar: false,
+                        pauseOnHover: true,
+                        clickToClose: true,
+                        timeOut: 0
+                    }
+                )
             }
         }
     }
+
+    successHandler (data: any) {
+        this.notificationService.success( '保存成功!', '提示: 点击后提示消失',
+            {
+                showProgressBar: false,
+                pauseOnHover: true,
+                clickToClose: true,
+                timeOut: 0
+            }
+        )
+    }
+
 }
 
 
 
-export {ErrorService, removeEmptyProperty}
+export {HttpService, removeEmptyProperty}
 
 

@@ -1,8 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
-import { ErrorService } from '../../../cool-form-module/services/httpError.service'
-import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../cool-form-module/validators/validator'
+import { HttpService } from '../../../bs-form-module/services/http.service'
+
+
+import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../bs-form-module/validators/validator'
 import {UserLoginService} from '../../../services/userLogin.service'
 
 
@@ -22,17 +24,17 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup
     ignoreDirty: boolean = false
 
+
     constructor(
         @Inject('moduleType') public pageType: string,
         private fb: FormBuilder,
         public userService: UserLoginService,
-        private errorService: ErrorService
+        private httpService: HttpService,
     ) {
 
     }
 
     ngOnInit(): void {
-
         this.createRegisterForm()
     }
 
@@ -77,7 +79,7 @@ export class LoginComponent implements OnInit {
         } )
 
         this.registerForm.valueChanges.subscribe(data => {
-            this.ignoreDirty = false;
+            this.ignoreDirty = false
             this.registerFormInputChange(data)
         })
     }
@@ -86,6 +88,7 @@ export class LoginComponent implements OnInit {
     registerFormSubmit() {
 
         console.log('registerFormOnSubmit', this.registerForm.value)
+
 
         if (this.registerForm.invalid) {
             this.registerFormInputChange(this.registerForm.value, true)
@@ -96,8 +99,9 @@ export class LoginComponent implements OnInit {
         this.userService.registerNewUser(this.registerForm.value).subscribe(
             data => {
                 console.log('注册成功: ', data)
+                this.httpService.successHandler(data)
             },
-            error => {this.errorService.handler(error) }
+            error => {this.httpService.errorHandler(error) }
         )
 
     }
