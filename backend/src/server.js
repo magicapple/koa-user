@@ -70,7 +70,7 @@ ejs(app, {
     layout: false,
     viewExt: 'ejs',
     cache: false,
-    debug: true
+    debug: false
 })
 
 app.use(ejsHelper());
