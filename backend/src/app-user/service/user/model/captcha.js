@@ -23,7 +23,7 @@ const CaptchaSchema = new GSchema({
     toObject: { virtuals: false },
     toJSON: { virtuals: false },
     timestamps: true
-});
+})
 
 
 
@@ -33,7 +33,7 @@ const CaptchaSchema = new GSchema({
  */
 
 
-// CaptchaSchema.index({username: 1});
+// CaptchaSchema.index({username: 1})
 
 
 
@@ -42,7 +42,7 @@ const CaptchaSchema = new GSchema({
  * Mongoose plugin
  */
 
-// CaptchaSchema.plugin(mongooseTimestamps);
+// CaptchaSchema.plugin(mongooseTimestamps)
 
 
 
@@ -57,24 +57,24 @@ const CaptchaSchema = new GSchema({
 
 //
 // CaptchaSchema.pre('save', function (next) {
-//     var user = this;
+//     var user = this
 //     if (this.isModified('password') || this.isNew) {
 //         bcrypt.genSalt(10, function (err, salt) {
 //             if (err) {
-//                 return next(err);
+//                 return next(err)
 //             }
 //             bcrypt.hash(user.password, salt, function (err, hash) {
 //                 if (err) {
-//                     return next(err);
+//                     return next(err)
 //                 }
-//                 user.password = hash;
-//                 next();
-//             });
-//         });
+//                 user.password = hash
+//                 next()
+//             })
+//         })
 //     } else {
-//         return next();
+//         return next()
 //     }
-// });
+// })
 
 
 
@@ -89,17 +89,17 @@ const CaptchaSchema = new GSchema({
 
 const field = {
     common : "-__v -updatedAt"
-};
+}
 
 CaptchaSchema.statics.findAll = function(query){
-    return Captcha.find(query).select(field.common).exec();
-};
+    return Captcha.find(query).select(field.common).exec()
+}
 CaptchaSchema.statics.find1 = function(query){
-    return Captcha.findOne(query).select(field.common).exec();
-};
+    return Captcha.findOne(query).select(field.common).exec()
+}
 CaptchaSchema.statics.find1ById = function(id){
-    return Captcha.findById(id).select(field.common).exec();
-};
+    return Captcha.findById(id).select(field.common).exec()
+}
 
 
 
@@ -115,9 +115,9 @@ CaptchaSchema.statics.find1ById = function(id){
 
 
 CaptchaSchema.methods.isExpired = function () {
-    const date = moment(this.expireDate);
-    return moment().isAfter(date);
-};
+    const date = moment(this.expireDate)
+    return moment().isAfter(date)
+}
 
 
 
@@ -125,5 +125,5 @@ CaptchaSchema.methods.isExpired = function () {
  * Register Model
  */
 
-const Captcha = GMongoose.model("Captcha", CaptchaSchema);
-module.exports = Captcha;
+const Captcha = GMongoose.model("Captcha", CaptchaSchema)
+module.exports = Captcha

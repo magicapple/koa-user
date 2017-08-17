@@ -19,6 +19,10 @@ exports.getCaptchaImage = async function (ctx, next) {
     let rand = parseInt(Math.random() * 9000 + 1000);
     let png = new captchapng(80, 30, rand); // width,height, numeric captcha
 
+    const captcha = {
+
+    }
+
     ctx.type = 'image/png';
     ctx.body = png.getBuffer();
 

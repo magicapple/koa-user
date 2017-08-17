@@ -38,7 +38,7 @@ function visitLoggerMiddleware (options) {
     return async function (ctx, next) {
 
         const visitorId = ctx.cookies.get(options.key , {signed : options.signed})
-        console.log(ctx.userAgent)
+
         if (!visitorId) {
             const uuid = nanoid()
 

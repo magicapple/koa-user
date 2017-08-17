@@ -59,6 +59,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 23. 安装 [moment] 处理时间日期库
 24. 安装 [ipaddr.js] 处理 IPv6 和 IPv4 地址的库
 25. 安装 [captchapng] 处理图形验证码
+26. 安装 [nanoid] 生成UUID
 
 30. 安装 [superagent] node.js HTTP client. Node.js发起 Http请求的库
 
@@ -94,6 +95,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [jsonwebtoken]: https://github.com/auth0/node-jsonwebtoken
 [ipaddr.js]: https://github.com/whitequark/ipaddr.js/commits/master
 [captchapng2]: https://github.com/Lellansin/captchapng
+[nanoid]: https://github.com/ai/nanoid
 
 
 
