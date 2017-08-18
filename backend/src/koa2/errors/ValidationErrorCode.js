@@ -7,11 +7,15 @@ const validationName = {
         passwordRequired : {code:1002, message:"Field validation error,  password is required", field:'password'},
         emailRequired : {code:1003, message:"Field validation error, Email is required", field:'email'},
         mobileRequired : {code:1004, message:"Field validation error, mobile number is required", field:'mobilePhone'},
+        captchaRequired :  {code:1009, message:"Field validation error, captcha is required", field:'captcha'},
+
 
         usernameWrong : {code:1005, message:"Field validation error,  username length must be 4-30, start with letter character", field:'username'},
         passwordWrong : {code:1006, message:"Field validation error,  password length must be 6-30", field:'password'},
         emailWrong : {code:1007, message:"Field validation error, Email format wrong", field:'email'},
         mobileWrong : {code:1008, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
+        captchaWrong :  {code:1009, message:"Field validation error, captcha length must be 4-4", field:'captcha'},
+
 
         usernameExist : {code:1031, message:"Field validation error,  username already exist", field:'username'},
         emailExist : {code:1032, message:"Field validation error,  email already exist", field:'email'},
@@ -20,6 +24,10 @@ const validationName = {
 
         userNotFound :  {code:1041, message:"User Unauthorized, user not found", field:'username'},
         passwordNotMatch :  {code:1042, message:"User Unauthorized, password not match", field:'password'},
+
+
+        captchaWrong :  {code:1051, message:"Field validation error, captcha length must be 4-4", field:'captcha'},
+
 
 
         weChatJsCodeRequired : {code:1071, message:"Field validation error, wechat js_code is required", field:'code'},

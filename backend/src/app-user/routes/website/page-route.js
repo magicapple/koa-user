@@ -12,11 +12,16 @@ const pageLogin = require('../../controllers/page/login')
 
 const pageAdminHome = require('../../controllers/page/adminHome')
 
+const userConstant = require("../../service/user/userConstant");
+const captcha = require("../../../koa2/koa2-middleware/captcha");
+
+
 
 router.redirect('/', '/web/index')
 
+router.get('/signup/captcha', captcha.getCaptchaImage(userConstant.captchaType.signup))
+
 router.get('/signup', pageLogin.register)
-router.get('/signup/captcha', pageLogin.getCaptchaImage)
 router.get('/login', pageLogin.login)
 
 router.get('/index', pageIndex.index)

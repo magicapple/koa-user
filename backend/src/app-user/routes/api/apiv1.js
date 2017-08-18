@@ -12,6 +12,10 @@ const router = require('koa-router')();
 const userController = require('../../controllers/api/user');
 const shopController = require('../../controllers/api/shop');
 
+const userConstant = require("../../service/user/userConstant");
+const captcha = require("../../../koa2/koa2-middleware/captcha");
+
+
 
 const files = async (ctx, next) => {
 
@@ -27,6 +31,10 @@ router.post('/upload', upload.single('file'), files);
 router.post('/user/signup', userController.registerNewUser);
 router.post('/user/signup/username', userController.registerUsernameCheck);
 router.post('/user/signup/phone', userController.registerMobilePhoneCheck);
+router.post('/user/signup/captcha', captcha.verifyCaptcha(userConstant.captchaType.signup));
+
+
+
 router.post('/user/signup/wechat', userController.registerUserWeChat);
 
 

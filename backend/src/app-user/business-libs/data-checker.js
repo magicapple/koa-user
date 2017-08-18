@@ -41,6 +41,13 @@ let validation = {
         if (!validator.isMobilePhone(mobilePhone, 'zh-CN')) return throw409('user.mobileWrong', field);
     },
 
+    userCaptcha : function (captcha, field){
+        if (!captcha) return throw409('user.captchaRequired', field);
+        if (!validator.isLength(captcha, 4, 4)) return throw409('user.captchaWrong', field);
+    },
+
+
+
     userWeChatJsCode : function (js_code, field){
         if (!js_code) return throw409('user.weChatJsCodeRequired', field);
         if (!validator.isLength(js_code, 32, 50))  return throw409('user.weChatJsCodeWrong', field);

@@ -62,7 +62,9 @@ function visitLoggerMiddleware (options) {
 
 
         if (!visitorId) {
-            visitor.visitorId = nanoid()
+
+            const uuid = nanoid()
+            visitor.visitorId = uuid
 
             ctx.cookies.set(options.key, uuid, options)
 
