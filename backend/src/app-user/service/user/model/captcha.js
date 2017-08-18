@@ -15,8 +15,9 @@ const CaptchaSchema = new GSchema({
     type: { type: String},
 
     isUsed: { type: Boolean, default: false },
+    isVerified: { type: Boolean, default: false },
     code: { type: String, trim: true },
-    expireDate: { type: Date, required: true, default:Date.now }
+    expireDate: { type: Date, required: true, default: moment().add(20, 'minutes') }
 
 
 }, {

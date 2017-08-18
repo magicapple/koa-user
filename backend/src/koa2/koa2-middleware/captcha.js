@@ -2,6 +2,7 @@
  * Created by jin on 8/18/17.
  */
 
+const moment = require('moment')
 const captchapng = require('captchapng2');
 
 const mathUtil = require('../../koa2/common-libs/math')
@@ -19,7 +20,10 @@ exports.getCaptchaImage = function (captchaType) {
         const captcha = {
             visitorId : ctx.visitor.visitorId,
             type: captchaType,
-            code: rand
+            code: rand,
+            isUsed : false,
+            isVerified : false,
+            expireDate : moment().add(20, 'minutes')
         }
 
         const captchaData = await MCaptcha.findOneAndUpdate({visitorId: captcha.visitorId, type : captcha.type }, captcha, { upsert : true} )
@@ -34,14 +38,22 @@ exports.getCaptchaImage = function (captchaType) {
 exports.verifyCaptcha = function (captchaType) {
     return async function (ctx, next) {
 
+        console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
+
         GDataChecker.userCaptcha(ctx.request.body.captcha)
 
-        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType } )
+        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, isUsed: false } )
 
-        if (captchaData) {
-            ctx.body = { captchaVerified : true };
+
+        if (captchaData && !captchaData.isExpired) {
+            captchaData.isUsed = true
+            captchaData.isVerified = true
+
+            const captchaUpdated = await captchaData.save()
+
+            ctx.body = { captchaVerified : true }
         } else {
-            ctx.body = { captchaVerified : false };
+            ctx.body = { captchaVerified : false }
         }
 
     }
