@@ -64,10 +64,20 @@ export function checkFieldIsExist (url: string, postDataKey: string = 'username'
 
         return Observable.timer(1000).switchMap(() => {
             return http.post(url, postData).map( data => {
-                if (data.data[postDataKey + 'IsExist']) {
-                    return {isExist : true}
+
+                if (postDataKey === 'captcha') {
+                    if (data.data[postDataKey + 'Wrong']) {
+                        return {wrong : true}
+                    }
+                    return null
+                }else {
+                    if (data.data[postDataKey + 'IsExist']) {
+                        return {isExist : true}
+                    }
+                    return null
                 }
-                return null
+
+
             })
         })
 

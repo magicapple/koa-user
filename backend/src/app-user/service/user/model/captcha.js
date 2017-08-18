@@ -14,10 +14,12 @@ const CaptchaSchema = new GSchema({
     visitorId: { type: String, trim: true},
     type: { type: String},
 
+    code: { type: String, trim: true },
+
     isUsed: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },
-    code: { type: String, trim: true },
-    expireDate: { type: Date, required: true, default: moment().add(20, 'minutes') }
+
+    expireDate: { type: Date, required: true, default: moment().add(10, 'minutes') }
 
 
 }, {

@@ -12,17 +12,20 @@
 
 
             <div class="form-group row" >
-                <label class="col-2 col-form-label" >验证码</label>
+                <label class="col-2 col-form-label" for="captcha">验证码</label>
                 <div class="col-6">
-                    <input type="text" class="form-control" >
+                    <input type="text" class="form-control" id="captcha" formControlName="captcha" [class.is-valid]="registerForm.get('captcha').valid&&registerForm.get('captcha').dirty" [class.is-invalid]="(registerForm.get('captcha').invalid || registerFormError.captcha) && registerForm.get('captcha').dirty">
 
-                    <div class="invalid-feedback">
-
+                    <div class="invalid-feedback" *ngIf="registerForm.get('captcha').hasError('wrong') || registerFormError.captcha">
+                        {{registerFormError.captcha}}
+                        {{ registerForm.get('captcha').hasError('wrong') ? registerFormValidationMessages.captcha.wrong : '' }}
                     </div>
 
                 </div>
-                
-                <div class="col-4"><img src="/web/signup/captcha" alt=""></div>
+
+                <div class="col-4">
+                    <img [src]="imageSrcCaptcha" alt="" class="CaptchaImage" (click)="changeCaptchaImage($event)" >
+                </div>
             </div>
 
 

@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup
     ignoreDirty: boolean = false
 
-
+    imageSrcCaptcha : string = apiPath.getSignUpCaptcha
     constructor(
         @Inject('moduleType') public pageType: string,
         private fb: FormBuilder,
@@ -62,7 +62,12 @@ export class LoginComponent implements OnInit {
             'minlength'     : '确认密码长度6-30个字符!',
             'maxlength'     : '确认密码长度6-30个字符!',
             'mismatched'    : '确认密码输入不一致!'
-
+        },
+        'captcha'  : {
+            'required'      : '请填写验证码!',
+            'minlength'     : '验证码长度4-4个字符!',
+            'maxlength'     : '验证码长度4-4个字符!',
+            'wrong      '   : '验证码错误!'
         }
     }
 
@@ -75,7 +80,8 @@ export class LoginComponent implements OnInit {
             'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)], [checkFieldIsExist(apiPath.signUpCheckUsername)] ],
             'mobilePhone' : ['', [Validators.required, isMobilePhone() ], [checkFieldIsExist(apiPath.signUpCheckMobilePhone, 'mobilePhone')]],
             'password'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
-            'password2'   : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), isMatched('password')] ]
+            'password2'   : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), isMatched('password')] ],
+            'captcha'   : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)], [checkFieldIsExist(apiPath.signUpCheckCaptcha, 'captcha')] ]
         } )
 
         this.registerForm.valueChanges.subscribe(data => {
@@ -103,6 +109,15 @@ export class LoginComponent implements OnInit {
             },
             error => {this.httpService.errorHandler(error) }
         )
+
+    }
+
+
+
+    // 点击图片更换验证码
+    changeCaptchaImage() {
+
+        this.imageSrcCaptcha = apiPath.getSignUpCaptcha + '?' + new Date().getTime().toString()
 
     }
 

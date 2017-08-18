@@ -23,7 +23,7 @@ exports.getCaptchaImage = function (captchaType) {
             code: rand,
             isUsed : false,
             isVerified : false,
-            expireDate : moment().add(20, 'minutes')
+            expireDate : moment().add(10, 'minutes')
         }
 
         const captchaData = await MCaptcha.findOneAndUpdate({visitorId: captcha.visitorId, type : captcha.type }, captcha, { upsert : true} )
@@ -42,18 +42,19 @@ exports.verifyCaptcha = function (captchaType) {
 
         GDataChecker.userCaptcha(ctx.request.body.captcha)
 
-        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, isUsed: false } )
+        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, isUsed: false, code: ctx.request.body.captcha } )
 
+        ctx.body = { captchaWrong : true }
 
-        if (captchaData && !captchaData.isExpired) {
-            captchaData.isUsed = true
-            captchaData.isVerified = true
+        if (captchaData) {
 
-            const captchaUpdated = await captchaData.save()
+            if (!captchaData.isExpired()) {
+                captchaData.isUsed = true
+                captchaData.isVerified = true
 
-            ctx.body = { captchaVerified : true }
-        } else {
-            ctx.body = { captchaVerified : false }
+                const captchaUpdated = await captchaData.save()
+                ctx.body = { captchaWrong : false }
+            }
         }
 
     }
