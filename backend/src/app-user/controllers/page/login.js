@@ -2,7 +2,11 @@
  * Created by jin on 8/2/17.
  */
 const captchapng = require('captchapng2');
+const nanoid = require('nanoid')
 
+const mathUtil = require('../../../koa2/common-libs/math')
+const userConstant = require("../../service/user/userConstant");
+const MCaptcha = require('../../service/user/model/captcha')
 
 exports.login = async function pageLogin(ctx, next) {
 
@@ -15,17 +19,26 @@ exports.register = async function pageLogin(ctx, next) {
 }
 
 
+
+
+
 exports.getCaptchaImage = async function (ctx, next) {
-    let rand = parseInt(Math.random() * 9000 + 1000);
+
+    let rand = mathUtil.getRandomInt(1000, 9999)
     let png = new captchapng(80, 30, rand); // width,height, numeric captcha
 
     const captcha = {
+        visitorId : ctx.visitor.visitorId,
+        type: userConstant.captchaType.signup,
 
+        code: rand
     }
 
-    ctx.type = 'image/png';
-    ctx.body = png.getBuffer();
+    const captchaData = await MCaptcha.findOneAndUpdate({visitorId: captcha.visitorId, type : captcha.type }, captcha, { upsert : true} )
 
-    ctx.session.captcha = rand;  //这里可能需要加载session模块，输出验证码，在别的模块调用参与登陆逻辑验证
 
+    ctx.type = 'image/png'
+    ctx.body = png.getBuffer()
+
+    console.log('captchaData', captchaData)
 }

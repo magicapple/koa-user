@@ -39,35 +39,42 @@ function visitLoggerMiddleware (options) {
 
         const visitorId = ctx.cookies.get(options.key , {signed : options.signed})
 
+
+        const visitor = {
+            visitorId: '',
+            ipv4: ctx.ipv4 || '',
+            ipv6: ctx.ipv6 || '',
+            deviceType: ctx.userDevice || '',
+            userAgent : ctx.header['user-agent']
+        }
+
+        if (ctx.userAgent) {
+            visitor.browser = ctx.userAgent.browser
+            visitor.browserVersion = ctx.userAgent.version
+
+            visitor.OS = ctx.userAgent.platform
+            visitor.OSVersion = ctx.userAgent.os
+
+            visitor.isMobile = ctx.userAgent.isMobile
+            visitor.isDesktop = ctx.userAgent.isDesktop
+
+        }
+
+
         if (!visitorId) {
-            const uuid = nanoid()
+            visitor.visitorId = nanoid()
 
             ctx.cookies.set(options.key, uuid, options)
-
-            const visitor = {
-                visitorId: uuid,
-                ipv4: ctx.ipv4 || '',
-                ipv6: ctx.ipv6 || '',
-                deviceType: ctx.userDevice || '',
-                userAgent : ctx.header['user-agent']
-            }
-
-            if (ctx.userAgent) {
-                visitor.browser = ctx.userAgent.browser
-                visitor.browserVersion = ctx.userAgent.version
-
-                visitor.OS = ctx.userAgent.platform
-                visitor.OSVersion = ctx.userAgent.os
-
-                visitor.isMobile = ctx.userAgent.isMobile
-                visitor.isDesktop = ctx.userAgent.isDesktop
-
-            }
 
             ctx.visitor = await MVisitor.create(visitor)
 
         }else {
             ctx.visitor = await MVisitor.find1({visitorId: visitorId})
+
+            if (!ctx.visitor) {
+                visitor.visitorId = visitorId
+                ctx.visitor = await MVisitor.create(visitor)
+            }
         }
 
         return next()

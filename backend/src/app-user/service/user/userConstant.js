@@ -5,6 +5,10 @@
 
 
 module.exports = {
+    captchaType : {
+        signup : 'signup'
+    },
+
     userMessageType : {
         signup : 'signup',
         signin : 'signin',

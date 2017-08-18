@@ -12,11 +12,11 @@ const moment = require('moment')
 const CaptchaSchema = new GSchema({
 
     visitorId: { type: String, trim: true},
-    captchaId: { type: String, trim: true},
     type: { type: String},
 
+    isUsed: { type: Boolean, default: false },
     code: { type: String, trim: true },
-    expireDate: { type: Date, required: true }
+    expireDate: { type: Date, required: true, default:Date.now }
 
 
 }, {
