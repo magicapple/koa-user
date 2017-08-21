@@ -15,7 +15,7 @@ exports.getCaptchaImage = function (captchaType) {
     return async function (ctx, next) {
 
         let rand = mathUtil.getRandomInt(1000, 9999)
-        let png = new captchapng(80, 30, rand); // width,height, numeric captcha
+        let png = new captchapng(80, 36, rand); // width,height, numeric captcha
 
         const captcha = {
             visitorId : ctx.visitor.visitorId,
@@ -42,21 +42,18 @@ exports.verifyCaptcha = function (captchaType) {
 
         GDataChecker.userCaptcha(ctx.request.body.captcha)
 
-        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, isUsed: false, code: ctx.request.body.captcha } )
+        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, code: ctx.request.body.captcha } )
 
         ctx.body = { captchaWrong : true }
 
         if (captchaData) {
 
             if (!captchaData.isExpired()) {
-                captchaData.isUsed = true
                 captchaData.isVerified = true
-
                 const captchaUpdated = await captchaData.save()
                 ctx.body = { captchaWrong : false }
             }
         }
-
     }
 }
 
@@ -64,50 +61,22 @@ exports.verifyCaptcha = function (captchaType) {
 
 exports.verifyMiddleware = function(captchaType) {
 
-
-
     return async function (ctx, next) {
 
-        const visitorId = ctx.cookies.get(options.key , {signed : options.signed})
+        console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
 
+        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType,  isUsed: false, isVerified: true} )
 
-        const visitor = {
-            visitorId: '',
-            ipv4: ctx.ipv4 || '',
-            ipv6: ctx.ipv6 || '',
-            deviceType: ctx.userDevice || '',
-            userAgent : ctx.header['user-agent']
-        }
+        console.log('captchaData: ', captchaData)
 
-        if (ctx.userAgent) {
-            visitor.browser = ctx.userAgent.browser
-            visitor.browserVersion = ctx.userAgent.version
-
-            visitor.OS = ctx.userAgent.platform
-            visitor.OSVersion = ctx.userAgent.os
-
-            visitor.isMobile = ctx.userAgent.isMobile
-            visitor.isDesktop = ctx.userAgent.isDesktop
-
-        }
-
-
-        if (!visitorId) {
-            visitor.visitorId = nanoid()
-
-            ctx.cookies.set(options.key, uuid, options)
-
-            ctx.visitor = await MVisitor.create(visitor)
+        if (captchaData) {
+            captchaData.isUsed = true
+            const captchaUpdated = await captchaData.save()
+            return next()
 
         }else {
-            ctx.visitor = await MVisitor.find1({visitorId: visitorId})
-
-            if (!ctx.visitor) {
-                visitor.visitorId = visitorId
-                ctx.visitor = await MVisitor.create(visitor)
-            }
+            GDataChecker.userCaptchaUsed(captchaData)
         }
 
-        return next()
     }
 }

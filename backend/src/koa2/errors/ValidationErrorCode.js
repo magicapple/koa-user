@@ -14,7 +14,7 @@ const validationName = {
         passwordWrong : {code:1006, message:"Field validation error,  password length must be 6-30", field:'password'},
         emailWrong : {code:1007, message:"Field validation error, Email format wrong", field:'email'},
         mobileWrong : {code:1008, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
-        captchaWrong :  {code:1009, message:"Field validation error, captcha length must be 4-4", field:'captcha'},
+        captchaWrong :  {code:1009, message:"Field validation error, captcha length must be 4-4 or captcha expired", field:'captcha'},
 
 
         usernameExist : {code:1031, message:"Field validation error,  username already exist", field:'username'},
@@ -26,7 +26,7 @@ const validationName = {
         passwordNotMatch :  {code:1042, message:"User Unauthorized, password not match", field:'password'},
 
 
-        captchaWrong :  {code:1051, message:"Field validation error, captcha length must be 4-4", field:'captcha'},
+        captchaUsed :  {code:1051, message:"Field validation error, captcha already used", field:'captcha'},
 
 
 

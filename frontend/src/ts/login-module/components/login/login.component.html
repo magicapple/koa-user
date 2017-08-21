@@ -10,7 +10,11 @@
             <app-text-input formControlName="password" [fc]="registerForm.get('password')" [type]="'text'" [label]="'密码:'" [dirty]="ignoreDirty" [error]="registerFormError.password"></app-text-input>
             <app-text-input formControlName="password2" [fc]="registerForm.get('password2')" [type]="'text'" [label]="'确认密码:'" [dirty]="ignoreDirty" [error]="registerFormError.password2"></app-text-input>
 
+            <app-text-input formControlName="captcha" [fc]="registerForm.get('captcha')" [type]="'text'" [label]="'验证码:'" [dirty]="ignoreDirty" [error]="registerFormError.captcha || (registerForm.get('captcha').hasError('wrong') ? registerFormValidationMessages.captcha.wrong : '')">
+                <img [src]="imageSrcCaptcha"  class="img-fluid" (click)="changeCaptchaImage($event)" >
+            </app-text-input>
 
+<!--
             <div class="form-group row" >
                 <label class="col-2 col-form-label" for="captcha">验证码</label>
                 <div class="col-6">
@@ -20,13 +24,13 @@
                         {{registerFormError.captcha}}
                         {{ registerForm.get('captcha').hasError('wrong') ? registerFormValidationMessages.captcha.wrong : '' }}
                     </div>
-
                 </div>
 
                 <div class="col-4">
-                    <img [src]="imageSrcCaptcha" alt="" class="CaptchaImage" (click)="changeCaptchaImage($event)" >
+                    <img [src]="imageSrcCaptcha"  class="CaptchaImage" (click)="changeCaptchaImage($event)" >
                 </div>
             </div>
+-->
 
 
 

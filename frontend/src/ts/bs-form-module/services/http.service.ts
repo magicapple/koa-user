@@ -101,7 +101,7 @@ class HttpService {
                         showProgressBar: false,
                         pauseOnHover: true,
                         clickToClose: true,
-                        timeOut: 0
+                        timeOut: 10000
                     }
                 )
             }

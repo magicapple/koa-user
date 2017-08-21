@@ -46,6 +46,11 @@ let validation = {
         if (!validator.isLength(captcha, 4, 4)) return throw409('user.captchaWrong', field);
     },
 
+    userCaptchaUsed : function (captcha, field){
+        if (!captcha) return throw409('user.captchaUsed', field);
+        if (!validator.isLength(captcha, 4, 4)) return throw409('user.captchaUsed', field);
+    },
+
 
 
     userWeChatJsCode : function (js_code, field){
