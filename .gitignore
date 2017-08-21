@@ -8,6 +8,7 @@ backend/src/views/dist
 frontend/src/aotCompiled
 frontend/dist
 
+local.js
 
 # css sprite
 auto-sprite.png

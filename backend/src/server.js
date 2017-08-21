@@ -36,7 +36,7 @@ const webRoutes              = require('./app-user/routes/website/page-route');
 
 
 
-// debug("Node Config: ", util.inspect(GConfig, {showHidden: false, depth: null}))
+debug("Node Config: ", util.inspect(GConfig, {showHidden: false, depth: null}))
 
 
 

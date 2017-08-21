@@ -6,7 +6,7 @@
  * config
  */
 
-const path = require("path");
+const path = require("path")
 
 module.exports = {
 
@@ -63,5 +63,12 @@ module.exports = {
     weChatMiniApp : {
         appId : "wx63852d7027018b3b",
         secret : "a4d1f671cbae2544b3e43e6c519bb7f6"
+    },
+
+    smsNexmo : {
+        API_KEY : '',
+        API_SECRET : ''
     }
-};
+}
+
+
