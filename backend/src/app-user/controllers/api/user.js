@@ -12,6 +12,8 @@ const headerToken = require('../../../koa2/common-libs/authorization-header/auth
 const UserService = require('../../service/user/userService')
 const MUserToken = require('../../service/user/model/userToken')
 
+const SMS = require('../../../koa2/koa2-libs/sms/nexmosms')
+
 const tokenFieldName = GConfig.authToken.fieldName;
 const TOKEN_EXPIRATION_SEC = 60 * 60 * 24 * GConfig.authToken.expireDay;
 
@@ -59,6 +61,21 @@ exports.registerMobilePhoneCheck = async (ctx, next) => {
 
 }
 
+
+/**
+ * 发送注册短信
+ */
+exports.registerMobileSMS = async (ctx, next) => {
+
+    // let newUser = await UserService.checkMobilePhoneExist(ctx.request.body.mobilePhone);
+
+    const result = await  SMS.sendSms('', '', '')
+
+    console.log('result: ', result)
+
+    ctx.body = result
+
+}
 
 
 

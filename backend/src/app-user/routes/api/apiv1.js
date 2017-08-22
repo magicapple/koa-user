@@ -31,6 +31,7 @@ router.post('/upload', upload.single('file'), files);
 router.post('/user/signup', captcha.verifyMiddleware(userConstant.captchaType.signup), userController.registerNewUser);
 router.post('/user/signup/username', userController.registerUsernameCheck);
 router.post('/user/signup/phone', userController.registerMobilePhoneCheck);
+router.post('/user/signup/sms', userController.registerMobileSMS);
 router.post('/user/signup/captcha', captcha.verifyCaptcha(userConstant.captchaType.signup));
 
 
