@@ -28,6 +28,11 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
 
     interValue: string | number = ''
     labelId : string | number = ''
+    showTip : boolean = false
+    showPasswordValidation1 : boolean = false
+    showPasswordValidation2 : boolean = false
+    showPasswordValidation3 : boolean = false
+    showPasswordValidation4 : boolean = false
 
     onChange: any  = () => { return undefined }
     onTouched: any = () => { return undefined }
@@ -91,7 +96,18 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
 
 
     inputOnChange(inputValue: any) {
+        this.showTip = true
         this.value = inputValue
+
+        if (inputValue && inputValue.length >= 6) { this.showPasswordValidation1 = true} else {this.showPasswordValidation1 = false}
+        if (/[A-Z]/.test(inputValue)) { this.showPasswordValidation2 = true} else {this.showPasswordValidation2 = false}
+        if (/[a-z]/.test(inputValue)) { this.showPasswordValidation3 = true} else {this.showPasswordValidation3 = false}
+        if (/[0-9]/.test(inputValue)) { this.showPasswordValidation4 = true} else {this.showPasswordValidation4 = false}
+
+    }
+
+    inputOnBlue(inputValue: any) {
+        this.showTip = false
     }
 
 

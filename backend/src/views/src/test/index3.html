@@ -49,30 +49,25 @@
         <div class="content">
             <div class="list-block">
                 <ul>
-                    <!-- Switch (Checkbox) -->
                     <li>
                         <div class="item-content">
-                            <div class="item-media"><i class="icon icon-form-toggle"></i></div>
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
                             <div class="item-inner">
-                                <div class="item-title label">类型</div>
+                                <div class="item-title label">图片</div>
                                 <div class="item-input">
-                                    <select id="htype">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                    </select>
+                                    <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt="">
                                 </div>
                             </div>
                         </div>
                     </li>
-
                     <!-- Text inputs -->
                     <li>
                         <div class="item-content">
                             <div class="item-media"><i class="icon icon-form-name"></i></div>
                             <div class="item-inner">
-                                <div class="item-title label">开始时间</div>
+                                <div class="item-title label">发票号</div>
                                 <div class="item-input">
-                                    <input type="text" placeholder="YYYY-MM-DD" id="startDate" data-toggle="date" readonly/>
+                                    <input type="text" placeholder="发票号" id="invoiceNo">
                                 </div>
                             </div>
                         </div>
@@ -81,24 +76,14 @@
                         <div class="item-content">
                             <div class="item-media"><i class="icon icon-form-name"></i></div>
                             <div class="item-inner">
-                                <div class="item-title label">结束时间</div>
+                                <div class="item-title label">发票金额</div>
                                 <div class="item-input">
-                                    <input type="text" placeholder="YYYY-MM-DD" id="endDate" data-toggle="date" readonly/>
+                                    <input type="text" placeholder="发票金额" id="amount">
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <div class="item-content">
-                            <div class="item-media"><i class="icon icon-form-name"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title label">文件上传</div>
-                                <div class="item-input">
-                                    <input type="file" id="fileUpload" name="file" />
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+
                     <li>
                         <div class="item-content" style="visibility: hidden">
                             <div class="item-media"><i class="icon icon-form-name"></i></div>
@@ -151,10 +136,8 @@
             uid : 1,
         },
         body : {
-            htype : 1,
-            begin : '',
-            end : '',
-            pic : {}
+            invoiceNo : '',
+            amount : 0
         }
     }
 
@@ -168,23 +151,7 @@
 
 
     $(document).on("pageInit", function(e) {
-        $("#startDate").calendar({
-            value: ['2017-08-01'],
-            onChange : function (p, values, displayValues) {
-                console.log(p, values, displayValues)
 
-                formData.body.begin = displayValues[0]
-            }
-        });
-
-        $("#endDate").calendar({
-            value: ['2017-08-01'],
-            onChange : function (p, values, displayValues) {
-                console.log(p, values, displayValues)
-
-                formData.body.end = displayValues[0]
-            }
-        });
     });
 
     $.init();
@@ -193,12 +160,13 @@
 
     $('#submit').click( function() {
 
-        formData.body.htype = Number($('#htype').val());
+        formData.body.invoiceNo = $('#invoiceNo').val()
+        formData.body.amount = Number($('#amount').val())
 
         formData.header.bcode = $('#bcode').val()
         formData.header.task = $('#task').val()
         formData.header.bsn = $('#bsn').val()
-        formData.header.uid = Number($('#uid').val());
+        formData.header.uid = Number($('#uid').val())
 
         console.log("formData:", formData)
         $.ajax({
@@ -211,68 +179,11 @@
                 console.log('submit: ', data)
                 window.location = '/'
             }
-        });
-    });
-
-
-    $('#fileUpload').on("change", function(event) {
-        console.log("event", event);
-
-        $.ajax({
-            url: '/asset/policy/' + $('#uid').val(),
-            type: 'GET',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (data) {
-                console.log('aliPolicy: ', data)
-
-                var aliOssPolicy = {
-                    dirName: data.data.dirName,
-                    policy: data.data.policy,
-                    callback: data.data.callback,
-                    signature: data.data.signature,
-                    OSSAccessKeyId: data.data.OSSAccessKeyId
-                }
-
-                var selectedFileList = document.getElementById('fileUpload').files
-                console.log('selectedFileList:', selectedFileList);
-
-                if (selectedFileList && selectedFileList[0] && selectedFileList.length > 0) {
-
-                    var newFile = selectedFileList[0]
-                    console.log('newFile:', newFile)
-
-                    var inputForm = new FormData()
-                    inputForm.append('key', aliOssPolicy.dirName + '/' + guid1() + '.' + newFile.name.split('.').pop())
-                    inputForm.append('policy', aliOssPolicy.policy)
-                    inputForm.append('callback', aliOssPolicy.callback)
-                    inputForm.append('signature', aliOssPolicy.signature)
-                    inputForm.append('OSSAccessKeyId', aliOssPolicy.OSSAccessKeyId)
-                    inputForm.append('x:realname', newFile.name)
-                    inputForm.append('file', newFile, newFile.name) //append the key name 'file' with the first file in the element
-
-                    $.ajax({
-                        url: data.data.host,
-                        type: 'POST',
-                        dataType: 'json',
-                        contentType: false,
-                        data: inputForm,
-                        processData:false,
-                        success: function (data) {
-                            console.log('uploaded success: ', data)
-                            formData.body.pic = data.data
-                        },
-                        error: function(error) {
-                            console.log('upload error: ', error)
-                        }
-                    });
-
-                    event.target.value = ''
-                }
-
-            }
         })
-    });
+    })
+
+
+
 
 
 </script>

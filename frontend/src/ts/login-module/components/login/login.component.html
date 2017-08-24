@@ -7,12 +7,14 @@
 
             <app-text-input formControlName="username" [fc]="registerForm.get('username')" [type]="'text'" [label]="'用户名:'" [dirty]="ignoreDirty" [error]="registerFormError.username || (registerForm.get('username').hasError('isExist') ? registerFormValidationMessages.username.isExist : '') "></app-text-input>
             <app-text-input formControlName="mobilePhone" [fc]="registerForm.get('mobilePhone')" [type]="'text'" [label]="'手机号:'" [dirty]="ignoreDirty" [error]="registerFormError.mobilePhone || (registerForm.get('mobilePhone').hasError('isExist') ? registerFormValidationMessages.mobilePhone.isExist : '') "></app-text-input>
-            <app-text-input formControlName="password" [fc]="registerForm.get('password')" [type]="'text'" [label]="'密码:'" [dirty]="ignoreDirty" [error]="registerFormError.password"></app-text-input>
+            <app-text-input formControlName="password" [fc]="registerForm.get('password')" [type]="'password'" [label]="'密码:'" [dirty]="ignoreDirty" [error]="registerFormError.password"></app-text-input>
             <app-text-input formControlName="password2" [fc]="registerForm.get('password2')" [type]="'text'" [label]="'确认密码:'" [dirty]="ignoreDirty" [error]="registerFormError.password2"></app-text-input>
 
             <app-text-input formControlName="captcha" [fc]="registerForm.get('captcha')" [type]="'text'" [label]="'验证码:'" [dirty]="ignoreDirty" [error]="registerFormError.captcha || (registerForm.get('captcha').hasError('wrong') ? registerFormValidationMessages.captcha.wrong : '')">
                 <img [src]="imageSrcCaptcha"  class="img-fluid" (click)="changeCaptchaImage($event)" >
             </app-text-input>
+
+
 
 <!--
             <div class="form-group row" >
