@@ -61,7 +61,7 @@ exports.checkUsernameExist = async (username) => {
 exports.checkMobilePhoneExist = async (mobilePhone) => {
     GDataChecker.userMobile(mobilePhone)
 
-    return await await MUserBaseInfo.findOne({mobilePhone:mobilePhone}).exec()
+    return await MUserBaseInfo.findOne({mobilePhone:mobilePhone}).exec()
 }
 
 

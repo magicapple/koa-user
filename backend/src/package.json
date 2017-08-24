@@ -18,6 +18,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@alicloud/sms-sdk": "^1.0.2",
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "captchapng2": "^1.0.3",

@@ -9,7 +9,8 @@ const mathUtil = require('../../koa2/common-libs/math')
 
 const MCaptcha = require('../../app-user/service/user/model/captcha')
 
-
+const SendTypeImage = 'image'
+const SendTypeSMS = 'sms'
 
 exports.getCaptchaImage = function (captchaType) {
     return async function (ctx, next) {
@@ -19,14 +20,14 @@ exports.getCaptchaImage = function (captchaType) {
 
         const captcha = {
             visitorId : ctx.visitor.visitorId,
+            sendType: SendTypeImage,
             type: captchaType,
             code: rand,
             isUsed : false,
-            isVerified : false,
-            expireDate : moment().add(10, 'minutes')
+            isVerified : false
         }
 
-        const captchaData = await MCaptcha.findOneAndUpdate({visitorId: captcha.visitorId, type : captcha.type }, captcha, { upsert : true} )
+        const captchaData = await MCaptcha.findOneAndUpdate({visitorId: captcha.visitorId, type : captcha.type, sendType: SendTypeImage}, captcha, { upsert : true} )
 
         ctx.type = 'image/png'
         ctx.body = png.getBuffer()
@@ -35,17 +36,17 @@ exports.getCaptchaImage = function (captchaType) {
 }
 
 
-exports.verifyCaptcha = function (captchaType) {
+exports.verifyCaptchaImage = function (captchaType) {
     return async function (ctx, next) {
 
         console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
 
         GDataChecker.userCaptcha(ctx.request.body.captcha)
 
-        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, code: ctx.request.body.captcha } )
+        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, sendType: SendTypeImage, code: ctx.request.body.captcha } )
 
         ctx.body = { captchaWrong : true }
-
+        console.log("captchaData", captchaData)
         if (captchaData) {
 
             if (!captchaData.isExpired()) {
@@ -59,13 +60,13 @@ exports.verifyCaptcha = function (captchaType) {
 
 
 
-exports.verifyMiddleware = function(captchaType) {
+exports.verifyImageMiddleware = function(captchaType) {
 
     return async function (ctx, next) {
 
         console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
 
-        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType,  isUsed: false, isVerified: true} )
+        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, sendType: SendTypeImage, isUsed: false, isVerified: true} )
 
         console.log('captchaData: ', captchaData)
 

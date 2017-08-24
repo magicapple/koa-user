@@ -12,6 +12,7 @@ const moment = require('moment')
 const CaptchaSchema = new GSchema({
 
     visitorId: { type: String, trim: true},
+    sendType: { type: String},
     type: { type: String},
 
     code: { type: String, trim: true },

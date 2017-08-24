@@ -9,6 +9,7 @@ module.exports = {
         signup : 'signup'
     },
 
+
     userMessageType : {
         signup : 'signup',
         signin : 'signin',
