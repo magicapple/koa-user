@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的生活</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+<!--
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+-->
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+
+        <nav class="bar bar-tab">
+            <a class="tab-item active" href="#">
+                <span class="icon icon-home"></span>
+                <span class="tab-label">首页</span>
+            </a>
+            <a class="tab-item" href="#">
+                <span class="icon icon-me"></span>
+                <span class="tab-label">预览</span>
+            </a>
+            <!--<a class="tab-item" href="#">-->
+                <!--<span class="icon icon-star"></span>-->
+                <!--<span class="tab-label">收藏</span>-->
+            <!--</a>-->
+            <!--<a class="tab-item" href="#">-->
+                <!--<span class="icon icon-settings"></span>-->
+                <!--<span class="tab-label">设置</span>-->
+            <!--</a>-->
+        </nav>
+
+        <header class="bar bar-nav">
+            <h1 class="title">表单</h1>
+        </header>
+
+
+        <div class="content">
+            <div class="list-block">
+                <ul>
+                    <!-- Switch (Checkbox) -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-toggle"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">类型</div>
+                                <div class="item-input">
+                                    <select id="type">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">开始时间</div>
+                                <div class="item-input">
+                                    <input type="text" placeholder="YYYY-MM-DD" id="startDate" data-toggle="date" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">结束时间</div>
+                                <div class="item-input">
+                                    <input type="text" placeholder="YYYY-MM-DD" id="endDate" data-toggle="date" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">文件上传</div>
+                                <div class="item-input">
+                                    <input type="file" id="fileUpload" name="file" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content" style="visibility: hidden">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label"></div>
+                                <div class="item-input">
+                                    <input type="hidden" id="bcode" value="xxx">
+                                    <input type="hidden" id="task" value="xxx">
+                                    <input type="hidden" id="bsn" value="xxx">
+                                    <input type="hidden" id="uid" value="xxx">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block">
+                <div class="row">
+                    <!--<div class="col-50"><a href="#" class="button button-big button-fill button-danger">取消</a></div>-->
+                    <div class="col-50"><a href="#" id="submit" class="button button-big button-fill button-success">提交</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+-->
+
+
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+<!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+
+
+<script type="text/javascript">
+
+    var formData = {
+        header : {
+            bcode : '',
+            task : '',
+            bsn : '',
+            uid : ''
+        },
+        body : {
+            type : 1,
+            begin : '',
+            end : '',
+            file : ''
+        }
+    }
+
+
+    //打开自动初始化页面的功能
+    //建议不要打开自动初始化，而是自己调用 $.init 方法完成初始化
+    $.config = {
+        autoInit: false,
+        showPageLoadingIndicator : true
+    }
+
+
+    $(document).on("pageInit", function(e) {
+        $("#startDate").calendar({
+            value: ['2017-08-01'],
+            onChange : function (p, values, displayValues) {
+                console.log(p, values, displayValues)
+
+                formData.body.begin = displayValues[0]
+            }
+        });
+
+        $("#endDate").calendar({
+            value: ['2017-08-01'],
+            onChange : function (p, values, displayValues) {
+                console.log(p, values, displayValues)
+
+                formData.body.end = displayValues[0]
+            }
+        });
+    });
+
+    $.init();
+
+
+
+    $('#submit').click( function() {
+
+        formData.body.type = $('#type').val()
+        formData.header.bcode = $('#bcode').val()
+        formData.header.task = $('#task').val()
+        formData.header.bsn = $('#bsn').val()
+        formData.header.uid = $('#uid').val()
+
+        console.log(formData)
+        $.ajax({
+            url: '/api/form',
+            type: 'POST',
+            contentType : 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(formData),
+            success: function(data) {
+                console.log('submit: ', data)
+                window.location = '/'
+            }
+        });
+    });
+
+
+    $('#fileUpload').on("change", function(event){
+
+        function guid1() {
+            // https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4()
+        }
+
+
+
+        $.ajax({
+            url: '/asset/policy/' + $('#uid').val(),
+            type: 'GET',
+            contentType : 'application/json',
+            dataType: 'json',
+            success: function(data) {
+                console.log('aliPolicy: ', data)
+
+                var aliOssPolicy = {
+                    dirName : data.data.dirName,
+                    policy : data.data.policy,
+                    callback : data.data.callback,
+                    signature : data.data.signature,
+                    OSSAccessKeyId : data.data.OSSAccessKeyId
+                }
+
+
+                var selectedFileList = document.getElementById('fileUpload').files
+
+                if (selectedFileList && selectedFileList[0] && selectedFileList.length > 0) {
+
+                    var newFile = selectedFileList[0]
+                    console.log('file:', newFile)
+
+                    var inputForm = new FormData()
+                    inputForm.append('key', aliOssPolicy.dirName + '/' + this.guid1() + '.' + newFile.name.split('.').pop())
+                    inputForm.append('policy', aliOssPolicy.policy)
+                    inputForm.append('callback', aliOssPolicy.callback)
+                    inputForm.append('signature', aliOssPolicy.signature)
+                    inputForm.append('OSSAccessKeyId', aliOssPolicy.OSSAccessKeyId)
+                    inputForm.append('x:realName', newFile.name)
+                    inputForm.append('file', newFile, newFile.name) //append the key name 'file' with the first file in the element
+
+                    $.ajax({
+                        url: data.data.host,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: inputForm,
+                        contentType : false,
+                        processData : false,
+                        success: function(data) {
+                            console.log('uploadedFile: ', data)
+
+                            formData.body.file = data.data.fileName
+                        }
+                    });
+
+                    event.target.value = ''
+
+                }
+
+                console.log(event);
+                console.log(selectedFileList);
+
+            }
+        });
+
+
+    });
+
+
+
+</script>
+</body>
+</html>
