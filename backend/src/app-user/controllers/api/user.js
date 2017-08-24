@@ -12,7 +12,7 @@ const headerToken = require('../../../koa2/common-libs/authorization-header/auth
 const UserService = require('../../service/user/userService')
 const MUserToken = require('../../service/user/model/userToken')
 
-const SMS = require('../../../koa2/koa2-libs/sms/alicloud/sms')
+
 
 const tokenFieldName = GConfig.authToken.fieldName;
 const TOKEN_EXPIRATION_SEC = 60 * 60 * 24 * GConfig.authToken.expireDay;
@@ -61,31 +61,6 @@ exports.registerMobilePhoneCheck = async (ctx, next) => {
 
 }
 
-
-/**
- * 发送注册短信
- */
-exports.registerMobileSMS = async (ctx, next) => {
-
-
-    GDataChecker.userMobile(ctx.request.body.mobilePhone)
-
-    let newUser = await UserService.checkMobilePhoneExist(ctx.request.body.mobilePhone);
-
-    GDataChecker.userMobilePhoneExist(newUser.mobilePhone)
-
-    if (newUser) {
-        GDataChecker.userMobilePhoneExist(newUser.mobilePhone)
-    }else {
-
-    }
-    const result = await  SMS.sendSmsCode('', '', '')
-
-    console.log('result: ', result)
-
-    ctx.body = result
-
-}
 
 
 

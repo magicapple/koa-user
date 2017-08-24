@@ -58,8 +58,6 @@ function serverLog (error, ctx, isAppOnError){
             debug400(errorText + '===== Server 4XX Bad Request : \n', error, '\n ----- Server Koa2 Context : \n', ctx)
         }
     }
-
-
 }
 
 

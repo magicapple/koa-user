@@ -90,7 +90,7 @@ const url_filter = function (pattern, options){
 
             let newErr = error;
 
-            if (typeof error.type === 'undefined'){
+            if (typeof error.type === 'undefined' ){
 
                 if (error.name === 'UnauthorizedError'){
                     newErr = new GUnauthenticatedAccessError('token.tokenDecodeWrong', 'authorization');

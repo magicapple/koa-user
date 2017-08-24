@@ -16,6 +16,7 @@ const CaptchaSchema = new GSchema({
     type: { type: String},
 
     code: { type: String, trim: true },
+    mobilePhone: { type: String, trim: true },
 
     isUsed: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },

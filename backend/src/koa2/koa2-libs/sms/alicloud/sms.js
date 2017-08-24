@@ -22,11 +22,11 @@ const SMSTemplate = {
 exports.SMSTemplate = SMSTemplate
 
 
-exports.sendSmsCode = function (recipient, message, template ) {
+exports.sendCode = function (recipient, code, template ) {
 
     recipient = recipient || '13564568304'
     message =  {
-        code : message || '测试短信,测试短信,测试短信,测试短信!'
+        code : code || '测试短信,测试短信,测试短信,测试短信!'
     }
 
     template = template || SMSTemplate.signUp
