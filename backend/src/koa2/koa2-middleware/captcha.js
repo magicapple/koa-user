@@ -36,6 +36,7 @@ exports.getCaptchaImage = function (captchaType) {
             type: captchaType,
             code: rand,
             isUsed : false,
+            isUsedTimes : 0,
             isVerified : false,
             expireDate : moment().add(CaptchaExpireMinutes, 'minutes')
         }
@@ -59,7 +60,7 @@ exports.verifyCaptchaImage = function (captchaType) {
         const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, sendType : SendType.image, code: ctx.request.body.captcha } )
 
         ctx.body = { captchaWrong : true }
-        console.log("captchaData", captchaData)
+
         if (captchaData) {
 
             if (!captchaData.isExpired()) {
@@ -73,20 +74,27 @@ exports.verifyCaptchaImage = function (captchaType) {
 
 
 
-exports.verifyImageMiddleware = function(captchaType) {
+exports.verifyImageMiddleware = function(captchaType, reUsedTimes) {
 
     return async function (ctx, next) {
+        reUsedTimes = reUsedTimes || 1
 
         console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
 
-        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, sendType : SendType.image, isUsed: false, isVerified: true} )
+        const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, sendType : SendType.image,  isVerified: true} )
 
         console.log('captchaData: ', captchaData)
 
         if (captchaData) {
-            captchaData.isUsed = true
-            const captchaUpdated = await captchaData.save()
-            return next()
+
+            if (reUsedTimes > captchaData.isUsedTimes ) {
+                captchaData.isUsed = true
+                captchaData.isUsedTimes++
+                const captchaUpdated = await captchaData.save()
+                return next()
+            }else {
+                GDataChecker.userCaptchaTooManyTimes(null)
+            }
 
         }else {
             GDataChecker.userCaptchaUsed(captchaData)
@@ -108,7 +116,7 @@ exports.getSMSCode = function (captchaType) {
         const mobilePhoneNumber = ctx.params.mobilePhone
         GDataChecker.userMobile(mobilePhoneNumber)
 
-        let newUser = await UserService.checkMobilePhoneExist(mobilePhoneNumber);
+        let newUser = await UserService.checkMobilePhoneExist(mobilePhoneNumber)
 
         if (newUser) {
             GDataChecker.userMobilePhoneExist(newUser.mobilePhone)
@@ -140,14 +148,16 @@ exports.getSMSCode = function (captchaType) {
              *
              */
 
-
             const [resultSMS, captchaResult] = await Promise.all([
                 // SMS.sendCode(mobilePhoneNumber, code),
-                MCaptcha.findOneAndUpdate({visitorId: captcha.visitorId, type : captchaType, sendType : SendType.sms}, captcha, { upsert : true} )
+                MCaptcha.findOneAndUpdate({visitorId: captcha.visitorId, type : captchaType, sendType : SendType.sms, mobilePhone : mobilePhoneNumber}, captcha, { upsert : true} )
             ]);
 
-            console.log('SMS send success: ', resultSMS)
-            console.log('captcha save success: ', captchaResult)
+            // console.log('SMS send success: ', resultSMS)
+            // console.log('captcha save success: ', captchaResult)
+
+            console.log('SMS Code: ', await MCaptcha.findOne({visitorId: captcha.visitorId, type : captchaType, sendType : SendType.sms, mobilePhone : mobilePhoneNumber} ))
+
 
             ctx.body = {smsSendSuccess : true}
 
@@ -156,3 +166,51 @@ exports.getSMSCode = function (captchaType) {
     }
 }
 
+
+exports.verifySMSCode = function (captchaType) {
+    return async function (ctx, next) {
+
+        GDataChecker.userSMSCode(ctx.request.body.smsCode)
+        GDataChecker.userMobile(ctx.request.body.mobilePhone)
+
+        const SMSCodeData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, sendType : SendType.sms, code: ctx.request.body.smsCode , mobilePhone : ctx.request.body.mobilePhone} )
+
+        ctx.body = { smsCodeWrong : true }
+
+        console.log('SMSCodeData: ', SMSCodeData)
+
+        if (SMSCodeData) {
+
+            if (!SMSCodeData.isExpired()) {
+                SMSCodeData.isVerified = true
+                const codeUpdated = await SMSCodeData.save()
+                ctx.body = { smsCodeWrong : false }
+            }
+        }
+    }
+}
+
+
+exports.verifySMSCodeMiddleware = function(captchaType) {
+
+    return async function (ctx, next) {
+
+        console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
+
+        const SMSCodeData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type: captchaType, sendType: SendType.sms, isUsed: false, isVerified: true, mobilePhone: ctx.request.body.mobilePhone} )
+
+        console.log('SMSCodeData: ', SMSCodeData)
+
+        if (SMSCodeData) {
+
+            SMSCodeData.isUsed = true
+            SMSCodeData.isUsedTimes++
+            const codeUpdated = await SMSCodeData.save()
+            return next()
+
+        }else {
+            GDataChecker.userSMSCodeUsed(SMSCodeData)
+        }
+
+    }
+}

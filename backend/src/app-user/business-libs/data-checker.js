@@ -46,11 +46,25 @@ let validation = {
         if (!validator.isLength(captcha, 4, 4)) return throw409('user.captchaWrong', field);
     },
 
+    userSMSCode : function (smsCode, field){
+        if (!smsCode) return throw409('user.smsCodeRequired', field);
+        if (!validator.isLength(smsCode, 6, 6)) return throw409('user.smsCodeWrong', field);
+    },
+
     userCaptchaUsed : function (captcha, field){
         if (!captcha) return throw409('user.captchaUsed', field);
         if (!validator.isLength(captcha, 4, 4)) return throw409('user.captchaUsed', field);
     },
 
+    userCaptchaTooManyTimes : function (captcha, field){
+        if (!captcha) return throw409('user.captchaTooManyTimes', field);
+        if (!validator.isLength(captcha, 4, 4)) return throw409('user.captchaTooManyTimes', field);
+    },
+
+    userSMSCodeUsed : function (smsCode, field){
+        if (!smsCode) return throw409('user.smsCodeUsed', field);
+        if (!validator.isLength(smsCode, 6, 6)) return throw409('user.smsCodeUsed', field);
+    },
 
 
     userWeChatJsCode : function (js_code, field){
@@ -99,11 +113,11 @@ let validation = {
 
 
     loginUserNotFound : function (user, field){
-        if (!user) return throw401('user.userNotFound', field);
+        if (!user) return throw409('user.userNotFound', field);
     },
 
     loginUserUnauthorized : function (isPasswordMatch, field){
-        if (!isPasswordMatch) return throw401('user.passwordNotMatch', field);
+        if (!isPasswordMatch) return throw409('user.passwordNotMatch', field);
     },
 
 

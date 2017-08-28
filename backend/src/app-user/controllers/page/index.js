@@ -16,8 +16,3 @@ exports.index = async function pageIndex(ctx, next) {
 }
 
 
-exports.userHome = async function pageIndex(ctx, next) {
-
-    const user = null
-    await ctx.render('web/home', { page : {title : 'User Home !'},  user:user });
-}

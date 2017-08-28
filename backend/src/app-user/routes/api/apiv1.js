@@ -29,10 +29,14 @@ router.post('/upload', upload.single('file'), files);
 
 
 router.post('/user/signup', captcha.verifyImageMiddleware(userConstant.captchaType.signup), userController.registerNewUser);
+router.post('/user/signupmobile', captcha.verifySMSCodeMiddleware(userConstant.captchaType.signup), userController.registerNewUser);
+
 router.post('/user/signup/username', userController.registerUsernameCheck);
 router.post('/user/signup/phone', userController.registerMobilePhoneCheck);
-router.get('/user/signup/sms/:mobilePhone', captcha.getSMSCode(userConstant.captchaType.signup));
+
 router.post('/user/signup/captcha', captcha.verifyCaptchaImage(userConstant.captchaType.signup));
+router.get('/user/signup/sms/:mobilePhone', captcha.verifyImageMiddleware(userConstant.captchaType.signup, 3), captcha.getSMSCode(userConstant.captchaType.signup));
+router.post('/user/signup/smscode', captcha.verifySMSCode(userConstant.captchaType.signup));
 
 
 

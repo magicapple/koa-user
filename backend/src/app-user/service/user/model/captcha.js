@@ -19,6 +19,7 @@ const CaptchaSchema = new GSchema({
     mobilePhone: { type: String, trim: true },
 
     isUsed: { type: Boolean, default: false },
+    isUsedTimes: { type: Number, default: 0 },
     isVerified: { type: Boolean, default: false },
 
     expireDate: { type: Date, required: true, default: moment().add(10, 'minutes') }

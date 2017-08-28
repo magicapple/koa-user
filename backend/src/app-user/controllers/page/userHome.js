@@ -3,11 +3,10 @@
  */
 
 
-async function pageWebHome(ctx, next) {
-    const users = [
-        {name : 'Dead Horse'},
-        {name : 'Jack'},
-        {name : 'Tom'}
-    ];
-    await ctx.render('web/home', { page : {title : 'Homepage !'}, users:users });
+
+exports.userHome = async function pageUserHome(ctx, next) {
+
+    const user = null
+    await ctx.render('web/home', { page : {title : 'User Home !'},  user:user });
 }
+

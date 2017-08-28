@@ -9,6 +9,7 @@ const router = require('koa-router')()
 
 const pageIndex = require('../../controllers/page/index')
 const pageLogin = require('../../controllers/page/login')
+const pageUserHome = require('../../controllers/page/userHome')
 
 const pageAdminHome = require('../../controllers/page/adminHome')
 
@@ -25,7 +26,20 @@ router.get('/signup', pageLogin.register)
 router.get('/login', pageLogin.login)
 
 router.get('/index', pageIndex.index)
-router.get('/userhome', pageIndex.userHome)
+router.get('/home', pageUserHome.userHome)
+
+
+
+
+router.get('/admin', pageAdminHome.adminHome)
+
+
+
+
+
+router.get('/wx', async function pageIndex(ctx, next) {
+    await ctx.render('test/wx');
+})
 
 
 
@@ -34,7 +48,6 @@ router.get('/userhome', pageIndex.userHome)
 
 
 
-router.get('/admin', pageAdminHome.pageHome)
 
 module.exports = router
 

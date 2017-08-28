@@ -7,14 +7,16 @@ const validationName = {
         passwordRequired : {code:1002, message:"Field validation error,  password is required", field:'password'},
         emailRequired : {code:1003, message:"Field validation error, Email is required", field:'email'},
         mobileRequired : {code:1004, message:"Field validation error, mobile number is required", field:'mobilePhone'},
-        captchaRequired :  {code:1009, message:"Field validation error, captcha is required", field:'captcha'},
+        captchaRequired :  {code:1007, message:"Field validation error, captcha is required", field:'captcha'},
+        smsCodeRequired :  {code:1008, message:"Field validation error, sms code is required", field:'smsCode'},
 
 
-        usernameWrong : {code:1005, message:"Field validation error,  username length must be 4-30, start with letter character", field:'username'},
-        passwordWrong : {code:1006, message:"Field validation error,  password length must be 6-30", field:'password'},
-        emailWrong : {code:1007, message:"Field validation error, Email format wrong", field:'email'},
-        mobileWrong : {code:1008, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
-        captchaWrong :  {code:1009, message:"Field validation error, captcha length must be 4-4 or captcha expired", field:'captcha'},
+        usernameWrong : {code:1011, message:"Field validation error,  username length must be 4-30, start with letter character", field:'username'},
+        passwordWrong : {code:1012, message:"Field validation error,  password length must be 6-30", field:'password'},
+        emailWrong : {code:1013, message:"Field validation error, Email format wrong", field:'email'},
+        mobileWrong : {code:1014, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
+        captchaWrong :  {code:1017, message:"Field validation error, captcha length must be 4-4 or captcha expired", field:'captcha'},
+        smsCodeWrong :  {code:1018, message:"Field validation error, sms code length must be 6-6 or captcha expired", field:'smsCode'},
 
 
         usernameExist : {code:1031, message:"Field validation error,  username already exist", field:'username'},
@@ -26,8 +28,9 @@ const validationName = {
         passwordNotMatch :  {code:1042, message:"User Unauthorized, password not match", field:'password'},
 
 
-        captchaUsed :  {code:1051, message:"Field validation error, captcha already used", field:'captcha'},
-
+        captchaUsed :  {code:1051, message:"Field validation error, captcha not found or already used", field:'captcha'},
+        captchaTooManyTimes :  {code:1052, message:"Field validation error, captcha used too many times", field:'captcha'},
+        smsCodeUsed :  {code:1053, message:"Field validation error, sms code not found or already used", field:'smsCode'},
 
 
         weChatJsCodeRequired : {code:1071, message:"Field validation error, wechat js_code is required", field:'code'},

@@ -25,7 +25,7 @@ exports.SMSTemplate = SMSTemplate
 exports.sendCode = function (recipient, code, template ) {
 
     recipient = recipient || '13564568304'
-    message =  {
+    const message =  {
         code : code || '测试短信,测试短信,测试短信,测试短信!'
     }
 
