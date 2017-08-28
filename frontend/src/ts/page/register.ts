@@ -1,7 +1,7 @@
 import { enableProdMode } from '@angular/core'
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 
-import { LoginModule } from '../login-module/login.module'
+import { RegisterModule } from '../login-module/register.module'
 
 if (process.env.NODE_ENV === 'production') {
     enableProdMode()
@@ -9,4 +9,4 @@ if (process.env.NODE_ENV === 'production') {
 
 platformBrowserDynamic(
     [ {provide: 'moduleType', useValue: 'register' } ]
-).bootstrapModule(LoginModule)
+).bootstrapModule(RegisterModule)

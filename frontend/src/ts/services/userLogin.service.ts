@@ -26,7 +26,22 @@ export class UserLoginService {
 
     registerNewUser(user : any): Observable<any> {
 
-        return this.http.post(apiPath.sign, user)
+        return this.http.post(apiPath.signUp, user)
     }
 
+    registerNewUserByMobile(user : any): Observable<any> {
+
+        return this.http.post(apiPath.signUpByMobile, user)
+    }
+
+    registerSendSMS(mobilePhone : any): Observable<any> {
+
+        return this.http.get(apiPath.signUpGetSMSCode + '/' + mobilePhone)
+    }
+
+
+    login(user : any): Observable<any> {
+
+        return this.http.post(apiPath.login, user)
+    }
 }

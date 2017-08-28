@@ -8,7 +8,12 @@ const apiPath = {
     signUpCheckCaptcha : prefix + '/user/signup/captcha',
     signUpCheckUsername : prefix + '/user/signup/username',
     signUpCheckMobilePhone : prefix + '/user/signup/phone',
-    sign : prefix + '/user/signup'
+    signUpGetSMSCode : prefix + '/user/signup/sms',
+    signUpCheckSMSCode : prefix + '/user/signup/smscode',
+    signUp : prefix + '/user/signup',
+    signUpByMobile : prefix + '/user/signupmobile',
+
+    login : prefix + '/user/login'
 }
 
 

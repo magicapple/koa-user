@@ -20,6 +20,7 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
     @Input() hint: string = ''
     @Input() error: string = ''
     @Input() dirty: boolean = false
+    @Input() readOnly: boolean = false
 
     @Input('labelclass') labelClass: string = 'col-2'
     @Input('inputclass') inputClass: string = 'col-6'

@@ -1,7 +1,7 @@
 import { enableProdMode } from '@angular/core'
 import {platformBrowser} from '@angular/platform-browser'
 
-import {LoginModuleNgFactory} from '../../aotCompiled/ts/login-module/login.module.ngfactory'
+import {RegisterModuleNgFactory} from '../../aotCompiled/ts/login-module/register.module.ngfactory'
 
 if (process.env.NODE_ENV === 'production') {
     enableProdMode()
@@ -9,5 +9,5 @@ if (process.env.NODE_ENV === 'production') {
 
 platformBrowser(
     [ {provide: 'moduleType', useValue: 'register' } ]
-).bootstrapModuleFactory(LoginModuleNgFactory)
+).bootstrapModuleFactory(RegisterModuleNgFactory)
 

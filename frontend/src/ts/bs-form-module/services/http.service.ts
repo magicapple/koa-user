@@ -108,8 +108,8 @@ class HttpService {
         }
     }
 
-    successHandler (data: any) {
-        this.notificationService.success( '保存成功!', '提示: 点击后提示消失',
+    successHandler (data: any, message? : string) {
+        this.notificationService.success( message || '保存成功!', '提示: 点击后提示消失',
             {
                 showProgressBar: false,
                 pauseOnHover: true,

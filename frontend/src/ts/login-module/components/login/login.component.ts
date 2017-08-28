@@ -4,12 +4,9 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { HttpService } from '../../../bs-form-module/services/http.service'
 
 
-import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../bs-form-module/validators/validator'
+import { formErrorHandler } from '../../../bs-form-module/validators/validator'
 import {UserLoginService} from '../../../services/userLogin.service'
 
-
-
-import {apiPath} from '../../../services/apiPath'
 
 
 @Component({
@@ -18,28 +15,24 @@ import {apiPath} from '../../../services/apiPath'
 })
 export class LoginComponent implements OnInit {
 
-    user: any = {}
-
-    registerForm: FormGroup
     loginForm: FormGroup
     ignoreDirty: boolean = false
 
-    imageSrcCaptcha : string = apiPath.getSignUpCaptcha
     constructor(
         @Inject('moduleType') public pageType: string,
         private fb: FormBuilder,
         public userService: UserLoginService,
-        private httpService: HttpService,
+        private httpService: HttpService
     ) {
 
     }
 
     ngOnInit(): void {
-        this.createRegisterForm()
+        this.createLoginForm()
     }
 
-    registerFormError : any = {}
-    registerFormValidationMessages: any = {
+    loginFormError : any = {}
+    loginFormValidationMessages: any = {
         'username'  : {
             'required'      : '请填写用户名!',
             'minlength'     : '用户名长度4-30个字符!',
@@ -56,68 +49,40 @@ export class LoginComponent implements OnInit {
             'required'      : '请填写密码!',
             'minlength'     : '密码长度6-30个字符!',
             'maxlength'     : '密码长度6-30个字符!'
-        },
-        'password2'  : {
-            'required'      : '请填写确认密码!',
-            'minlength'     : '确认密码长度6-30个字符!',
-            'maxlength'     : '确认密码长度6-30个字符!',
-            'mismatched'    : '确认密码输入不一致!'
-        },
-        'captcha'  : {
-            'required'      : '请填写验证码!',
-            'minlength'     : '验证码长度4-4个字符!',
-            'maxlength'     : '验证码长度4-4个字符!',
-            'wrong      '   : '验证码错误!'
         }
     }
 
-    registerFormInputChange(formInputData : any, ignoreDirty : boolean = false) {
-        this.registerFormError = formErrorHandler(formInputData, this.registerForm, this.registerFormValidationMessages, ignoreDirty)
+    loginFormInputChange(formInputData : any, ignoreDirty : boolean = false) {
+        this.loginFormError = formErrorHandler(formInputData, this.loginForm, this.loginFormValidationMessages, ignoreDirty)
     }
 
-    createRegisterForm(): void {
-        this.registerForm = this.fb.group({
-            'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)], [checkFieldIsExist(apiPath.signUpCheckUsername)] ],
-            'mobilePhone' : ['', [Validators.required, isMobilePhone() ], [checkFieldIsExist(apiPath.signUpCheckMobilePhone, 'mobilePhone')]],
-            'password'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)] ],
-            'password2'   : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), isMatched('password')] ],
-            'captcha'   : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)], [checkFieldIsExist(apiPath.signUpCheckCaptcha, 'captcha')] ]
+    createLoginForm(): void {
+        this.loginForm = this.fb.group({
+            'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)] ],
+            'password'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)] ]
         } )
-
-        this.registerForm.valueChanges.subscribe(data => {
+        this.loginForm.valueChanges.subscribe(data => {
             this.ignoreDirty = false
-            this.registerFormInputChange(data)
+            this.loginFormInputChange(data)
         })
     }
 
 
-    registerFormSubmit() {
+    loginFormSubmit() {
 
-        console.log('registerFormOnSubmit', this.registerForm.value)
-
-
-        if (this.registerForm.invalid) {
-            this.registerFormInputChange(this.registerForm.value, true)
+        if (this.loginForm.invalid) {
+            this.loginFormInputChange(this.loginForm.value, true)
             this.ignoreDirty = true
-            // return
+            return
         }
 
-        this.userService.registerNewUser(this.registerForm.value).subscribe(
+        this.userService.login(this.loginForm.value).subscribe(
             data => {
-                console.log('注册成功: ', data)
+                console.log('登陆成功: ', data)
                 this.httpService.successHandler(data)
             },
             error => {this.httpService.errorHandler(error) }
         )
-
-    }
-
-
-
-    // 点击图片更换验证码
-    changeCaptchaImage() {
-
-        this.imageSrcCaptcha = apiPath.getSignUpCaptcha + '?' + new Date().getTime().toString()
 
     }
 

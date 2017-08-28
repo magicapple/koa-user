@@ -4,7 +4,7 @@
  */
 
 import {ReflectiveInjector, Type} from '@angular/core'
-import {AbstractControl, AsyncValidatorFn, ValidationErrors} from '@angular/forms'
+import {AbstractControl, AsyncValidatorFn, ValidationErrors, FormControl} from '@angular/forms'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 
 import {Observable} from 'rxjs/Observable'
@@ -52,7 +52,7 @@ function convertTsickleDecoratorIntoMetadata(decoratorInvocations: any[]): any[]
 
 
 
-export function checkFieldIsExist (url: string, postDataKey: string = 'username'): AsyncValidatorFn {
+export function checkFieldIsExist (url: string, postDataKey: string = 'username', mobilePhoneKey?: string ): AsyncValidatorFn {
 
     return (control : AbstractControl) : Observable<ValidationErrors| null> => {
 
@@ -62,10 +62,25 @@ export function checkFieldIsExist (url: string, postDataKey: string = 'username'
         const postData : any = {}
         postData[postDataKey] = control.value
 
+        if (postDataKey === 'smsCode' && mobilePhoneKey) {
+
+            if (!control.parent) {
+                return null
+            }
+
+            const mobilePhoneField : FormControl = control.parent.get(mobilePhoneKey) as FormControl
+
+            if (!mobilePhoneField) {
+                throw new Error('checkFieldIsExistValidator(): mobilePhone field control not found')
+            }
+
+            postData[mobilePhoneKey] = mobilePhoneField.value
+        }
+
         return Observable.timer(1000).switchMap(() => {
             return http.post(url, postData).map( data => {
 
-                if (postDataKey === 'captcha') {
+                if (postDataKey === 'captcha' || postDataKey === 'smsCode') {
                     if (data.data[postDataKey + 'Wrong']) {
                         return {wrong : true}
                     }
