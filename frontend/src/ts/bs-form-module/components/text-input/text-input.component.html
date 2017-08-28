@@ -3,14 +3,14 @@
 
     <div class="{{inputClass}}">
 
-        <div class="tip-password" *ngIf="type ==='password' && showTip">
+        <div class="form-password-security-info" *ngIf="type ==='password' && showTip">
             <div class="arrow"></div>
             <h6>密码安全</h6>
             <ul>
                 <li [ngClass]="{'fail':!showPasswordValidation1, 'success': showPasswordValidation1}">不少于6个字符</li>
-                <li [ngClass]="{'fail':!showPasswordValidation1, 'success': showPasswordValidation2}">包含1个大写字母</li>
-                <li [ngClass]="{'fail':!showPasswordValidation1, 'success': showPasswordValidation3}">包含1个小写字母</li>
-                <li [ngClass]="{'fail':!showPasswordValidation1, 'success': showPasswordValidation4}">包含1个数字</li>
+                <li [ngClass]="{'fail':!showPasswordValidation2, 'success': showPasswordValidation2}">包含1个大写字母</li>
+                <li [ngClass]="{'fail':!showPasswordValidation3, 'success': showPasswordValidation3}">包含1个小写字母</li>
+                <li [ngClass]="{'fail':!showPasswordValidation4, 'success': showPasswordValidation4}">包含1个数字</li>
             </ul>
         </div>
 
