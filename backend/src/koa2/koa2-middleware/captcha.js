@@ -122,7 +122,7 @@ exports.getSMSCode = function (captchaType) {
             GDataChecker.userMobilePhoneExist(newUser.mobilePhone)
         }else {
 
-            let code = mathUtil.getRandomInt(1000, 999999)
+            let code = mathUtil.getRandomInt(100000, 999999)
 
             const captcha = {
                 visitorId : ctx.visitor.visitorId,
