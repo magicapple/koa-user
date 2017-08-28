@@ -12,6 +12,7 @@
     "dev:debug": "node --inspect server.js",
     "dev": "nodemon server.js",
     "dev:legacy": "nodemon --harmony-async-await server.js",
+    "prod": "DEBUG=koa2-user:* NODE_ENV=production node server.js",
     "test": "NODE_ENV=unittest mocha --recursive test/unit",
     "cover": "nyc npm test"
   },
