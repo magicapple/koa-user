@@ -66,6 +66,11 @@ let validation = {
         if (!validator.isLength(smsCode, 6, 6)) return throw409('user.smsCodeUsed', field);
     },
 
+    userSMSCodeFrequently : function (smsCode, field){
+        if (!smsCode) return throw409('user.smsCodeFrequently', field);
+        if (!validator.isLength(smsCode, 6, 6)) return throw409('user.smsCodeFrequently', field);
+    },
+
 
     userWeChatJsCode : function (js_code, field){
         if (!js_code) return throw409('user.weChatJsCodeRequired', field);

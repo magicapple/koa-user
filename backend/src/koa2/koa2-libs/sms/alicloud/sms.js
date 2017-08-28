@@ -19,6 +19,11 @@ const SMSTemplate = {
     signUp : 'SMS_87570015'
 }
 
+const SMSSign = {
+    name1 : '杰酷'
+}
+
+
 exports.SMSTemplate = SMSTemplate
 
 
@@ -33,7 +38,7 @@ exports.sendCode = function (recipient, code, template ) {
 
     return smsClient.sendSMS({
         PhoneNumbers: recipient,
-        SignName: '杰酷',
+        SignName: SMSSign.name1,
         TemplateCode: template,
         TemplateParam: JSON.stringify(message)
     })

@@ -23,6 +23,9 @@ const SendType = {
 
 /**
  * 发送图片验证码
+ *
+ * 参考链接 http://blog.csdn.net/clementad/article/details/48788361
+ *
  */
 exports.getCaptchaImage = function (captchaType) {
     return async function (ctx, next) {
@@ -108,6 +111,8 @@ exports.verifyImageMiddleware = function(captchaType, reUsedTimes) {
 
 /**
  * 发送短信验证码
+ *
+ * 参考链接 https://my.oschina.net/wanglihui/blog/321101
  */
 exports.getSMSCode = function (captchaType) {
 
@@ -123,6 +128,8 @@ exports.getSMSCode = function (captchaType) {
         }else {
 
             let code = mathUtil.getRandomInt(100000, 999999)
+
+            const timeNow = new Date()
 
             const captcha = {
                 visitorId : ctx.visitor.visitorId,
@@ -148,6 +155,21 @@ exports.getSMSCode = function (captchaType) {
              *
              */
 
+            const SMSCodeData = await MCaptcha.findOne({visitorId: captcha.visitorId, type : captchaType, sendType : SendType.sms, mobilePhone : mobilePhoneNumber, expireDate:{$gt: timeNow} } )
+
+            if (SMSCodeData){
+
+                // 查询90s内是否发送过，如果存在，需要等待 90-(已发送时间)s
+
+                const timeUpdatedAt = moment(SMSCodeData.updatedAt).add(90, 'seconds')
+                // console.log('SMSCodeData', moment().toDate(), SMSCodeData.updatedAt, moment().isBefore(timeUpdatedAt));
+
+                if (moment().isBefore(timeUpdatedAt)) {
+                    GDataChecker.userSMSCodeFrequently(null)
+                }
+            }
+
+            // 开发环境 不需要真实发短信, 注释掉了
             const [resultSMS, captchaResult] = await Promise.all([
                 // SMS.sendCode(mobilePhoneNumber, code),
                 MCaptcha.findOneAndUpdate({visitorId: captcha.visitorId, type : captchaType, sendType : SendType.sms, mobilePhone : mobilePhoneNumber}, captcha, { upsert : true} )
@@ -157,7 +179,6 @@ exports.getSMSCode = function (captchaType) {
             // console.log('captcha save success: ', captchaResult)
 
             console.log('SMS Code: ', await MCaptcha.findOne({visitorId: captcha.visitorId, type : captchaType, sendType : SendType.sms, mobilePhone : mobilePhoneNumber} ))
-
 
             ctx.body = {smsSendSuccess : true}
 

@@ -31,6 +31,7 @@ const validationName = {
         captchaUsed :  {code:1051, message:"Field validation error, captcha not found or already used", field:'captcha'},
         captchaTooManyTimes :  {code:1052, message:"Field validation error, captcha used too many times", field:'captcha'},
         smsCodeUsed :  {code:1053, message:"Field validation error, sms code not found or already used", field:'smsCode'},
+        smsCodeFrequently :  {code:1054, message:"Field validation error, 90秒内只能发送一次短信验证码", field:'smsCode'},
 
 
         weChatJsCodeRequired : {code:1071, message:"Field validation error, wechat js_code is required", field:'code'},
