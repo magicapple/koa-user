@@ -14,10 +14,11 @@ const MCaptcha = require('../../app-user/service/user/model/captcha')
 
 
 const CaptchaExpireMinutes = 10
+const SMSSendFrequency = 90
+
 const SendType = {
     image : 'image',
     sms : 'sms'
-
 }
 
 
@@ -56,7 +57,7 @@ exports.getCaptchaImage = function (captchaType) {
 exports.verifyCaptchaImage = function (captchaType) {
     return async function (ctx, next) {
 
-        console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
+        // console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
 
         GDataChecker.userCaptcha(ctx.request.body.captcha)
 
@@ -82,11 +83,11 @@ exports.verifyImageMiddleware = function(captchaType, reUsedTimes) {
     return async function (ctx, next) {
         reUsedTimes = reUsedTimes || 1
 
-        console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
+        // console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
 
         const captchaData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type : captchaType, sendType : SendType.image,  isVerified: true} )
 
-        console.log('captchaData: ', captchaData)
+        // console.log('captchaData: ', captchaData)
 
         if (captchaData) {
 
@@ -112,6 +113,7 @@ exports.verifyImageMiddleware = function(captchaType, reUsedTimes) {
 /**
  * 发送短信验证码
  *
+ * 手机验证短信设计与代码实现
  * 参考链接 https://my.oschina.net/wanglihui/blog/321101
  */
 exports.getSMSCode = function (captchaType) {
@@ -161,7 +163,7 @@ exports.getSMSCode = function (captchaType) {
 
                 // 查询90s内是否发送过，如果存在，需要等待 90-(已发送时间)s
 
-                const timeUpdatedAt = moment(SMSCodeData.updatedAt).add(90, 'seconds')
+                const timeUpdatedAt = moment(SMSCodeData.updatedAt).add(SMSSendFrequency, 'seconds')
                 // console.log('SMSCodeData', moment().toDate(), SMSCodeData.updatedAt, moment().isBefore(timeUpdatedAt));
 
                 if (moment().isBefore(timeUpdatedAt)) {
@@ -198,7 +200,7 @@ exports.verifySMSCode = function (captchaType) {
 
         ctx.body = { smsCodeWrong : true }
 
-        console.log('SMSCodeData: ', SMSCodeData)
+        // console.log('SMSCodeData: ', SMSCodeData)
 
         if (SMSCodeData) {
 
@@ -216,11 +218,11 @@ exports.verifySMSCodeMiddleware = function(captchaType) {
 
     return async function (ctx, next) {
 
-        console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
+        // console.log('ctx.visitor.visitorId: ', ctx.visitor.visitorId)
 
         const SMSCodeData = await MCaptcha.findOne({visitorId: ctx.visitor.visitorId, type: captchaType, sendType: SendType.sms, isUsed: false, isVerified: true, mobilePhone: ctx.request.body.mobilePhone} )
 
-        console.log('SMSCodeData: ', SMSCodeData)
+        // console.log('SMSCodeData: ', SMSCodeData)
 
         if (SMSCodeData) {
 
