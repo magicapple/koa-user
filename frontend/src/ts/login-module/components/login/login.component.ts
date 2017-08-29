@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
         this.userService.login(this.loginForm.value).subscribe(
             data => {
                 console.log('登陆成功: ', data)
+                window.location.href = '/web/home'
                 this.httpService.successHandler(data)
             },
             error => {this.httpService.errorHandler(error) }
