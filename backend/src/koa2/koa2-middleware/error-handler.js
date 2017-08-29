@@ -148,7 +148,11 @@ function productionErrorHandler (app, options){
                 }else if (ctx.status >= 400){
                     if (ctx.status === 404) {
                         await ctx.render('error/404', { error : error });
-                    } else {
+
+                    } else if (ctx.status === 401) {
+                        await ctx.render('error/401', { error : error });
+
+                    }else {
                         await ctx.render('error/400', { error : error });
                     }
                 }
