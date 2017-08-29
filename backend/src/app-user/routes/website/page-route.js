@@ -7,14 +7,19 @@
 
 const router = require('koa-router')()
 
+const userConstant = require("../../service/user/userConstant");
+const captcha = require("../../../koa2/koa2-middleware/captcha");
+
+const auth = require('../../../koa2/koa2-middleware/auth-jwt');
+
+
+
 const pageIndex = require('../../controllers/page/index')
 const pageLogin = require('../../controllers/page/login')
 const pageUserHome = require('../../controllers/page/userHome')
 
 const pageAdminHome = require('../../controllers/page/adminHome')
 
-const userConstant = require("../../service/user/userConstant");
-const captcha = require("../../../koa2/koa2-middleware/captcha");
 
 
 
@@ -26,7 +31,7 @@ router.get('/signup', pageLogin.register)
 router.get('/login', pageLogin.login)
 
 router.get('/index', pageIndex.index)
-router.get('/home', pageUserHome.userHome)
+router.get('/home', auth(), pageUserHome.userHome)
 
 
 

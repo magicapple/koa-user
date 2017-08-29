@@ -3,116 +3,43 @@
     <%- include ./includehead/head %>
 
 
-    <style>
-
-        html,body {
-            margin:0;
-            padding:0;
-            height: 100%;
-        }
-
-        .grid {
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -o-flex;
-            display: -ms-flex;
-            display: flex;
-            flex-direction: row
-
-        }
-        .col {
-            padding: 30px;
-        }
-        .fluid {
-            flex: 1;
-            border: 1px solid blue;
-        }
-        .fixed {
-            width: 400px;
-            border: 1px solid red;
-        }
-
-
-
-        .flex-parent {
-            width: 100%;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -o-flex;
-            display: -ms-flex;
-            display: flex;
-            flex-direction: row
-        }
-
-        .flex-son{
-            border: 1px solid red;
-        }
-
-        .flex-son:nth-child(1){
-            flex: 3 1 200px;
-        }
-        .flex-son:nth-child(2){
-            flex: 2 2 300px;
-        }
-        .flex-son:nth-child(3){
-            flex: 1 3 500px;
-        }
-
-
-    </style>
 </head>
 <body>
 
+<%- include ./layout/header.ejs %>
 
-<div class="flex-parent">
-    <div class="flex-son">111</div>
-    <div class="flex-son">222</div>
-    <div class="flex-son">333</div>
+
+<div class="container-fluid mainbox">
+
+    <div class="row">
+        <h1>用户中心</h1>
+        <p class="lead"><%= user.username %></p>
+
+        <ul class="list-group">
+            <li class="list-group-item"><%= user._id %></li>
+            <li class="list-group-item"><%= user.username %></li>
+            <li class="list-group-item"><%= user.mobilePhone %></li>
+        </ul>
+
+    </div>
+
+    <app-root>加载中...</app-root>
 </div>
 
 
 
-<div class="grid">
-    <div class="col fluid">
-        fluid
-    </div>
-    <div class="col fixed">
-        fixed
-    </div>
-    <div class="col fluid">
-        fluid
-    </div>
-</div>
-
-<div>
-    <label for="files" class="btn">Select Image</label>
-    <input id="files" style="visibility:hidden;" type="file">
-</div>
 
 
 
-<app-root>加载中...</app-root>
 
-<script type="text/javascript" src="<%= staticPath %>/js/manifest.bundle.js"></script>
-<script type="text/javascript" src="<%= staticPath %>/js/polyfills.bundle.js"></script>
-<script type="text/javascript" src="<%= staticPath %>/js/vendor.bundle.js"></script>
+
+
+
+
+<%- include ./includehead/bottomscript.ejs %>
+
 <script type="text/javascript" src="<%= staticPath %>/js/home.bundle.js"></script>
 
-
-<script type="text/javascript">
-
-    var box = document.getElementsByClassName('flex-parent')[0];
-
-    window.onresize = function (){
-        box.children[0].innerHTML = box.children[0].offsetWidth
-        box.children[1].innerHTML = box.children[1].offsetWidth
-        box.children[2].innerHTML = box.children[2].offsetWidth
-
-        console.log('offsetWidth',box.children[0],  box.children[0].offsetWidth, box.children[1].offsetWidth, box.children[2].offsetWidth)
-        console.log('clientWidth', box.children[0].clientWidth, box.children[1].clientWidth, box.children[2].clientWidth)
-        console.log('scrollWidth', box.children[0].scrollWidth, box.children[1].scrollWidth, box.children[2].scrollWidth)
-    }
-
-</script>
 </body>
 </html>
+

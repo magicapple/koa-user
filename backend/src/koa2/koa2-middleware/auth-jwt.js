@@ -17,7 +17,8 @@ function authMiddleware(options) {
         key : 'userToken',  // add token info to ctx.state.userToken
         isRevoked : async (ctx, decodeToken, token) => {
 
-            ctx.state.userInfo = await UserService.userInfo(decodeToken);
+            ctx.state.user = await UserService.userInfo(decodeToken);
+            console.log('ctx.state: ', ctx.state)
             return false;
         }
     })
