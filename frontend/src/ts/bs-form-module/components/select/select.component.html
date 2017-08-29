@@ -1,0 +1,24 @@
+<div class="form-group row" >
+    <label class="{{labelClass}} col-form-label">{{label}}</label>
+    <div class="{{inputClass}}" >
+
+        <!--<select  class="form-control" name="" id="" (change)="selectOnChange($event.target.value)" [class.is-invalid]="error">-->
+            <!--<option value="" *ngIf="!currentSelected" >请选择</option>-->
+            <!--<option *ngFor="let data of dataSource" [value]="data.id" [selected]="data.id === currentSelected ">{{data.name}}</option>-->
+        <!--</select>-->
+
+        <input type="text" class="form-control selectInput" placeholder="请选择" readonly [class.is-invalid]="error" (focus)="showSelectOption()" [value]="currentSelected">
+
+        <ul class="list-group selectOption" [class.optionHide]="!selectOption">
+            <li *ngFor="let data of dataSource; let i=index;" class="list-group-item selectOptions" [class.active]="i === activeIndex" (click)="getTargetVal(data.id,'selectOptions','selectInput')">{{data.name}}</li>
+        </ul>
+
+        <div class="invalid-feedback" *ngIf="error">
+            <span *ngIf="error"> {{error}} </span>
+            <span *ngIf="!error">
+                <span *ngIf="currentFormControl.hasError('required')"> 该项是必填项！</span>
+            </span>
+        </div>
+    </div>
+
+</div>
