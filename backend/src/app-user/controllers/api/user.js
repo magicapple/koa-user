@@ -15,7 +15,7 @@ const MUserToken = require('../../service/user/model/userToken')
 
 
 const tokenFieldName = GConfig.authToken.fieldName;
-const TOKEN_EXPIRATION_SEC = 60 * 60 * 24 * GConfig.authToken.expireDay;
+const TOKEN_EXPIRATION_SEC = 1000 * 60 * 60 * 24 * GConfig.authToken.expireDay;
 
 
 

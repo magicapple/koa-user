@@ -17,7 +17,7 @@ import {UserLoginService} from '../../../services/userLogin.service'
 })
 export class IndexHomeComponent implements OnInit {
 
-    loginForm: FormGroup
+    userInfoForm: FormGroup
     ignoreDirty: boolean = false
 
     constructor(
@@ -28,12 +28,18 @@ export class IndexHomeComponent implements OnInit {
 
     }
 
+    sexDataList : any[] = [
+        { id : 10, name : '男'},
+        { id : 20, name : '女'},
+        { id : 30, name : '女同'}
+    ]
+
     ngOnInit(): void {
         this.createLoginForm()
     }
 
-    loginFormError : any = {}
-    loginFormValidationMessages: any = {
+    userInfoFormError : any = {}
+    userInfoFormValidationMessages: any = {
         'username'  : {
             'required'      : '请填写用户名!',
             'minlength'     : '用户名长度4-30个字符!',
@@ -46,41 +52,38 @@ export class IndexHomeComponent implements OnInit {
             'mobilePhone' : '手机号格式不正确!',
             'isExist'     : '手机号已经存在!'
         },
-        'password'  : {
-            'required'      : '请填写密码!',
-            'minlength'     : '密码长度6-30个字符!',
-            'maxlength'     : '密码长度6-30个字符!'
+        'sex'  : {
+            'required'      : '请填写性别!'
         }
     }
 
-    loginFormInputChange(formInputData : any, ignoreDirty : boolean = false) {
-        this.loginFormError = formErrorHandler(formInputData, this.loginForm, this.loginFormValidationMessages, ignoreDirty)
+    userInfoFormInputChange(formInputData : any, ignoreDirty : boolean = false) {
+        this.userInfoFormError = formErrorHandler(formInputData, this.userInfoForm, this.userInfoFormValidationMessages, ignoreDirty)
     }
 
     createLoginForm(): void {
-        this.loginForm = this.fb.group({
+        this.userInfoForm = this.fb.group({
             'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)] ],
-            'password'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)] ]
+            'sex'    : [20, [Validators.required, Validators.minLength(6), Validators.maxLength(30)] ]
         } )
-        this.loginForm.valueChanges.subscribe(data => {
+        this.userInfoForm.valueChanges.subscribe(data => {
             this.ignoreDirty = false
-            this.loginFormInputChange(data)
+            this.userInfoFormInputChange(data)
         })
     }
 
 
-    loginFormSubmit() {
+    userInfoFormSubmit() {
 
-        if (this.loginForm.invalid) {
-            this.loginFormInputChange(this.loginForm.value, true)
+        if (this.userInfoForm.invalid) {
+            this.userInfoFormInputChange(this.userInfoForm.value, true)
             this.ignoreDirty = true
             return
         }
 
-        this.userService.login(this.loginForm.value).subscribe(
+        this.userService.login(this.userInfoForm.value).subscribe(
             data => {
                 console.log('登陆成功: ', data)
-                window.location.href = '/web/home'
                 this.httpService.successHandler(data)
             },
             error => {this.httpService.errorHandler(error) }
