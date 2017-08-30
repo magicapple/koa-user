@@ -44,7 +44,7 @@ export class SelectDropdownComponent implements OnInit, ControlValueAccessor {
     }
 
     ngOnInit(): void {
-        console.log('ngOnInit', this.el.nativeElement)
+        // console.log('ngOnInit', this.el.nativeElement)
     }
 
     showOptions() {

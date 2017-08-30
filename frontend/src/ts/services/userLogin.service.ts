@@ -44,4 +44,14 @@ export class UserLoginService {
 
         return this.http.post(apiPath.login, user)
     }
+
+    getUserInfo(user? : any): Observable<any> {
+
+        return this.http.get(apiPath.getUserInfo)
+    }
+
+    saveUserInfo(user : any): Observable<any> {
+
+        return this.http.post(apiPath.saveUserInfo, user)
+    }
 }

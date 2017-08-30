@@ -101,7 +101,18 @@ exports.logout = async (ctx, next) => {
  */
 exports.getSessionUserInfo = async (ctx, next) => {
 
-    ctx.body = ctx.state.userInfo
+    ctx.body = ctx.state.user
+}
+
+/**
+ * 修改用户基本信息
+ */
+exports.saveUserBasicInfo = async (ctx, next) => {
+
+    let user = await UserService.saveUserBasicInfo(ctx.state.user._id, ctx.request.body)
+
+    ctx.body = user
+
 }
 
 

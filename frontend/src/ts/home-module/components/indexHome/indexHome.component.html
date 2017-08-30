@@ -2,9 +2,12 @@
 <div class="row justify-content-center mt-4">
     <div class="col-10 col-lg-6">
 
-        <H1> 修改信息 </H1>
+        <H1 class="mb-4"> 修改信息 - {{currentUser?.username}}</H1>
+
         <form [formGroup]="userInfoForm" (ngSubmit)="userInfoFormSubmit()" (keydown.enter)="$event.preventDefault()">
 
+            <bs-text-input formControlName="lastName" [fc]="userInfoForm.get('lastName')" [type]="'text'" [label]="'姓:'" [dirty]="ignoreDirty" [error]="userInfoFormError.lastName"></bs-text-input>
+            <bs-text-input formControlName="firstName" [fc]="userInfoForm.get('firstName')" [type]="'text'" [label]="'名字:'" [dirty]="ignoreDirty" [error]="userInfoFormError.firstName"></bs-text-input>
             <bs-text-input formControlName="nickname" [fc]="userInfoForm.get('nickname')" [type]="'text'" [label]="'昵称:'" [dirty]="ignoreDirty" [error]="userInfoFormError.nickname"></bs-text-input>
 
             <bs-select formControlName ="gender" [fc]="userInfoForm.get('gender')" [label]="'性别:'"  [options]="genderDataList" [error]="userInfoFormError.gender" ></bs-select>

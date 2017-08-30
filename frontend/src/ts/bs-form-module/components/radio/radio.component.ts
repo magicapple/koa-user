@@ -32,7 +32,7 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
     constructor() {}
 
     ngOnInit(): void {
-        console.log('radio')
+        // console.log('radio')
 
     }
 
