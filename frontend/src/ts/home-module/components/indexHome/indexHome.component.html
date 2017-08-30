@@ -8,6 +8,7 @@
             <bs-text-input formControlName="username" [fc]="userInfoForm.get('username')" [type]="'text'" [label]="'用户名:'" [dirty]="ignoreDirty" [error]="userInfoFormError.username"></bs-text-input>
 
             <bs-select formControlName ="sex" [fc]="userInfoForm.get('sex')" [label]="'性别:'"  [options]="sexDataList" [error]="userInfoFormError.sex" ></bs-select>
+            <bs-radio formControlName ="married" [fc]="userInfoForm.get('married')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.married" ></bs-radio>
 
 
             <div class="form-group row">

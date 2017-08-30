@@ -34,6 +34,11 @@ export class IndexHomeComponent implements OnInit {
         { id : 30, name : '女同'}
     ]
 
+    marryDataList : any[] = [
+        { id : 10, name : '已婚'},
+        { id : 20, name : '未婚'}
+    ]
+
     ngOnInit(): void {
         this.createLoginForm()
     }
@@ -54,6 +59,9 @@ export class IndexHomeComponent implements OnInit {
         },
         'sex'  : {
             'required'      : '请填写性别!'
+        },
+        'married'  : {
+            'required'      : '请填写婚姻状况!'
         }
     }
 
@@ -64,8 +72,10 @@ export class IndexHomeComponent implements OnInit {
     createLoginForm(): void {
         this.userInfoForm = this.fb.group({
             'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)] ],
-            'sex'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)] ]
+            'sex'    : ['', [Validators.required] ],
+            'married'    : ['', [Validators.required] ]
         } )
+
         this.userInfoForm.valueChanges.subscribe(data => {
             this.ignoreDirty = false
             this.userInfoFormInputChange(data)

@@ -13,6 +13,13 @@
     transform: rotate(180deg);
 }
 
+.options {
+    position: absolute;
+    top : 38px;
+    width: 98%;
+    padding-right: 0.75rem;
+    z-index: 2;
+}
 .options li:hover{
     background-color: #f1f1f1;
     cursor: pointer;

@@ -21,6 +21,7 @@ export class SelectDropdownComponent implements OnInit, ControlValueAccessor {
 
     @Input('fc') currentFormControl: FormControl = new FormControl()
     @Input() label: string
+
     @Input('options') optionList: any[]
 
     @Input() error: string = ''
@@ -105,12 +106,12 @@ export class SelectDropdownComponent implements OnInit, ControlValueAccessor {
     onTouched () {}
 
     get value() {
-        console.log('getter: ', this.interValueCurrentSelected)
+        // console.log('getter: ', this.interValueCurrentSelected)
         return this.interValueCurrentSelected
     }
 
     set value(val: any) {
-        console.log('Setter: ', val)
+        // console.log('Setter: ', val)
         this.interValueCurrentSelected = val
 
         this.onChange(val.id)
@@ -129,7 +130,7 @@ export class SelectDropdownComponent implements OnInit, ControlValueAccessor {
     }
 
     writeValue(value: any): void {
-        console.log('WriteValue: ', value)
+        // console.log('WriteValue: ', value)
 
         if (Array.isArray(this.optionList)) {
             this.value = this.optionList.find(option => option.id === value) || { id : -1 , name : '请选择'}
