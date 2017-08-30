@@ -2,14 +2,17 @@
     <label class="{{labelClass}} col-form-label">{{label}}</label>
     <div class="{{inputClass}}" #optionsListEl>
 
-        <!--<select  class="form-control" name="" id="" (change)="selectOnChange($event.target.value)" [class.is-invalid]="error">-->
-            <!--<option value="" *ngIf="!currentSelected" >请选择</option>-->
-            <!--<option *ngFor="let data of dataSource" [value]="data.id" [selected]="data.id === currentSelected ">{{data.name}}</option>-->
-        <!--</select>-->
+<!--
+        <select  class="form-control"  (change)="getCurrentOption($event.target.value)" [class.is-invalid]="error">
+            <option value="" *ngIf="!interValueCurrentSelected.name" >请选择</option>
+            <option *ngFor="let data of optionList" [value]="data.id" [selected]="data.id === interValueCurrentSelected.id ">{{data.name}}</option>
+        </select>
+-->
+        <i class="fa fa-angle-down select_input_arrow" aria-hidden="true" [class.arrow_up]="isShowSelectOptionList"></i>
+        <input type="text" class="form-control select_input" readonly [class.is-invalid]="error" (click)="showOptions()" [value]="interValueCurrentSelected.name">
 
-        <input type="text" class="form-control selectInput" placeholder="请选择" readonly [class.is-invalid]="error" (click)="showOptions()" [value]="interValueCurrentSelected.name">
 
-        <ul class="list-group options"  [class.optionHide]="!isShowSelectOptionList">
+        <ul class="list-group options"  [class.d-none]="!isShowSelectOptionList">
             <li *ngFor="let option of optionList; let i = index" class="list-group-item selectOptions" [class.active]="i === currentSelectByKeyboard" (click)="getCurrentOption(option)">{{option.name}}</li>
         </ul>
 

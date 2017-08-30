@@ -1,3 +1,17 @@
+.select_input {
+    padding-right: 20px;
+}
+.select_input_arrow {
+    position: absolute;
+    top : 4px;
+    right: 18px;
+    font-size: 2em;
+    transition: transform 0.2s linear;
+}
+
+.arrow_up {
+    transform: rotate(180deg);
+}
 
 .options li:hover{
     background-color: #f1f1f1;
@@ -6,7 +20,4 @@
 .active{
     background-color: #03b7f1!important;
     border: none;
-}
-.optionHide{
-    display: none;
 }
