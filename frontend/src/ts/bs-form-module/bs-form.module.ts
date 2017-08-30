@@ -10,6 +10,8 @@ import { BSCommonModule } from '../bs-common-module/bs-common.module'
 
 import { SwitchComponent } from './components/switch/switch.component'
 import { TextInputComponent } from './components/text-input/text-input.component'
+import { SelectDropdownComponent } from './components/selectDropdown/selectDropdown.component'
+import { RadioComponent } from './components/radio/radio.component'
 
 
 import {ForbiddenValidatorDirective} from './validators/custom-validator'
@@ -21,6 +23,9 @@ import {HttpService} from './services/http.service'
     declarations : [
         SwitchComponent,
         TextInputComponent,
+        SelectDropdownComponent,
+        RadioComponent,
+
         ForbiddenValidatorDirective
     ],
     imports      : [
@@ -39,7 +44,9 @@ import {HttpService} from './services/http.service'
         HttpClientModule,
 
         TextInputComponent,
-        SwitchComponent
+        SwitchComponent,
+        SelectDropdownComponent,
+        RadioComponent
     ],
     bootstrap    : []
 })

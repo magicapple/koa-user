@@ -2,7 +2,7 @@ import {Component, Input, forwardRef, OnInit, OnChanges, SimpleChange} from '@an
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms'
 
 @Component({
-    selector    : 'app-text-input',
+    selector    : 'bs-text-input',
     templateUrl : './text-input.component.html',
     providers   : [
         {
@@ -21,6 +21,7 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
     @Input() error: string = ''
     @Input() dirty: boolean = false
     @Input() readOnly: boolean = false
+    @Input() passwordTip: boolean = false
 
     @Input('labelclass') labelClass: string = 'col-2'
     @Input('inputclass') inputClass: string = 'col-6'
