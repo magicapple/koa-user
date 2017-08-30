@@ -28,7 +28,7 @@ export class IndexHomeComponent implements OnInit {
 
     }
 
-    sexDataList : any[] = [
+    genderDataList : any[] = [
         { id : 10, name : '男'},
         { id : 20, name : '女'},
         { id : 30, name : '女同'}
@@ -45,7 +45,21 @@ export class IndexHomeComponent implements OnInit {
 
     userInfoFormError : any = {}
     userInfoFormValidationMessages: any = {
-        'username'  : {
+        'firstName'  : {
+            'required'      : '请填写用户名!',
+            'minlength'     : '用户名长度4-30个字符!',
+            'maxlength'     : '用户名长度4-30个字符!',
+            'pattern'       : '用户名必须字母开头!',
+            'isExist'       : '用户名已经存在!'
+        },
+        'lastName'  : {
+            'required'      : '请填写用户名!',
+            'minlength'     : '用户名长度4-30个字符!',
+            'maxlength'     : '用户名长度4-30个字符!',
+            'pattern'       : '用户名必须字母开头!',
+            'isExist'       : '用户名已经存在!'
+        },
+        'nickname'  : {
             'required'      : '请填写用户名!',
             'minlength'     : '用户名长度4-30个字符!',
             'maxlength'     : '用户名长度4-30个字符!',
@@ -57,7 +71,7 @@ export class IndexHomeComponent implements OnInit {
             'mobilePhone' : '手机号格式不正确!',
             'isExist'     : '手机号已经存在!'
         },
-        'sex'  : {
+        'gender'  : {
             'required'      : '请填写性别!'
         },
         'married'  : {
@@ -71,8 +85,10 @@ export class IndexHomeComponent implements OnInit {
 
     createLoginForm(): void {
         this.userInfoForm = this.fb.group({
-            'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)] ],
-            'sex'    : ['', [Validators.required] ],
+            'firstName'    : ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)] ],
+            'lastName'    : ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)] ],
+            'nickname'    : ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)] ],
+            'gender'    : ['', [Validators.required] ],
             'married'    : ['', [Validators.required] ]
         } )
 
