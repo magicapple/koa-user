@@ -143,3 +143,19 @@ exports.userInfo = async (userToken) =>{
     return resultUser
 
 }
+
+exports.saveUserBasicInfo = async (userId, userInfo) =>{
+
+    let resultUser = await MUserBaseInfo.find1({_id : userId})
+
+    if (userInfo.nickname ) { resultUser.nickname = userInfo.nickname}
+    if (userInfo.firstName ) { resultUser.firstName = userInfo.firstName}
+    if (userInfo.lastName ) { resultUser.lastName = userInfo.lastName}
+
+    if (userInfo.firstName && userInfo.lastName ) { resultUser.fullName = userInfo.lastName + userInfo.firstName}
+
+    if (userInfo.gender ) { resultUser.gender = userInfo.gender}
+
+    return await resultUser.save()
+
+}

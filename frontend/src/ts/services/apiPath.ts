@@ -13,7 +13,10 @@ const apiPath = {
     signUp : prefix + '/user/signup',
     signUpByMobile : prefix + '/user/signupmobile',
 
-    login : prefix + '/user/login'
+    login : prefix + '/user/login',
+
+    getUserInfo : prefix + '/users/session',
+    saveUserInfo : prefix + '/users/info'
 }
 
 

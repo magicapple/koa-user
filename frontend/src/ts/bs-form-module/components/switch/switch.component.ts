@@ -2,7 +2,7 @@ import {Component, Input, forwardRef, OnInit, OnChanges, SimpleChange} from '@an
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms'
 
 @Component({
-    selector    : 'app-switch',
+    selector    : 'bs-switch',
     templateUrl : './switch.component.html',
     providers   : [
         {

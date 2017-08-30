@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, forwardRef} from '@angular/core'
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms'
 
 @Component({
-    selector: 'app-radio',
+    selector: 'bs-radio',
     templateUrl: './radio.component.html',
     styleUrls: ['./radio.component.css'],
     providers   : [
@@ -13,38 +13,32 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/for
         }
     ]
 })
-export class RadioComponent implements OnInit, ControlValueAccessor{
+export class RadioComponent implements OnInit, ControlValueAccessor {
     @Input('fc') currentFormControl: FormControl = new FormControl()
-    @Input() label: string;
+    @Input() label: string
 
     @Input() error: string = ''
-    @Input('labelclass') labelClass: string = 'col-2';
-    @Input('inputclass') inputClass: string = 'col-6';
-    @Input('colArrange') colArrange: string = '';
+    @Input('labelclass') labelClass: string = 'col-2'
+    @Input('inputclass') inputClass: string = 'col-6'
+    @Input() stacked: boolean = false
 
+
+    @Input('sourceList') sourceList: any[]
+
+    interValueCurrentRadio : any = { id : -1 , name : '请选择'}
 
     currentRadio : boolean
 
     constructor() {}
 
     ngOnInit(): void {
-        console.log('radio')
+        // console.log('radio')
 
     }
 
-    getVal(index: any, val: any) {
-        console.log(index,val)
-        if(index === '1' && val === 'on') {
-            this.value = true
-
-        }else {
-            this.value = false
-        }
-        console.log(this.currentRadio)
+    chooseRadio(currentRadio: any) {
+        this.value = currentRadio
     }
-
-
-
 
 
 
@@ -52,33 +46,31 @@ export class RadioComponent implements OnInit, ControlValueAccessor{
     onTouched () {}
 
     get value() {
-        console.log('getter: ', this.currentRadio)
-        return this.currentRadio
+        return this.interValueCurrentRadio
     }
 
     set value(val: any) {
-        console.log('Setter: ', val)
-        this.currentRadio = val
+        this.interValueCurrentRadio = val
 
-        this.onChange(val)
+        this.onChange(val.id)
         this.onTouched()
     }
 
 
     registerOnChange(fn: any): void {
-        console.log('RegisterOnChange: ', fn)
+        // console.log('RegisterOnChange: ', fn)
         this.onChange = fn
     }
 
     registerOnTouched(fn: any): void {
-        console.log('RegisterOnTouched: ', fn)
+        // console.log('RegisterOnTouched: ', fn)
         this.onTouched = fn
     }
 
     writeValue(value: any): void {
         // console.log('WriteValue: ', value)
-        if (value) {
-            this.value = value
+        if (Array.isArray(this.sourceList)) {
+            this.value = this.sourceList.find(option => option.id === value) || { id : -1 , name : '是'}
         }
     }
 

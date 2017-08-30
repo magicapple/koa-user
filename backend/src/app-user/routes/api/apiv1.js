@@ -51,6 +51,7 @@ router.post('/user/logout', userController.logout);
 
 
 router.get('/users/session', auth(), userController.getSessionUserInfo);
+router.post('/users/info', auth(), userController.saveUserBasicInfo);
 
 
 

@@ -15,7 +15,7 @@ const MUserToken = require('../../service/user/model/userToken')
 
 
 const tokenFieldName = GConfig.authToken.fieldName;
-const TOKEN_EXPIRATION_SEC = 60 * 60 * 24 * GConfig.authToken.expireDay;
+const TOKEN_EXPIRATION_SEC = 1000 * 60 * 60 * 24 * GConfig.authToken.expireDay;
 
 
 
@@ -101,7 +101,18 @@ exports.logout = async (ctx, next) => {
  */
 exports.getSessionUserInfo = async (ctx, next) => {
 
-    ctx.body = ctx.state.userInfo
+    ctx.body = ctx.state.user
+}
+
+/**
+ * 修改用户基本信息
+ */
+exports.saveUserBasicInfo = async (ctx, next) => {
+
+    let user = await UserService.saveUserBasicInfo(ctx.state.user._id, ctx.request.body)
+
+    ctx.body = user
+
 }
 
 
