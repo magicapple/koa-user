@@ -3,7 +3,7 @@
 }
 .select_input_arrow {
     position: absolute;
-    top : 4px;
+    top : 5px;
     right: 18px;
     font-size: 2em;
     transition: transform 0.2s linear;
@@ -19,5 +19,5 @@
 }
 .active{
     background-color: #03b7f1!important;
-    border: none;
+    border-color: transparent;
 }

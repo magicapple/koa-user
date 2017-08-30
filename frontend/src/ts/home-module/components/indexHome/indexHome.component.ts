@@ -64,7 +64,7 @@ export class IndexHomeComponent implements OnInit {
     createLoginForm(): void {
         this.userInfoForm = this.fb.group({
             'username'    : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30), Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)] ],
-            'sex'    : [20, [Validators.required, Validators.minLength(6), Validators.maxLength(30)] ]
+            'sex'    : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)] ]
         } )
         this.userInfoForm.valueChanges.subscribe(data => {
             this.ignoreDirty = false
