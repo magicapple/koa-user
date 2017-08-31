@@ -48,7 +48,7 @@ export class FormModelService {
 
     createFormData(data : any): Observable<any> {
 
-        return this.http.get(apiPath.getFormDataByFormModelId + '/' + data.modelSchemeId + '/formdata')
+        return this.http.post(apiPath.getFormDataByFormModelId + '/' + data.modelSchemeId + '/formdata', data)
     }
 
 }

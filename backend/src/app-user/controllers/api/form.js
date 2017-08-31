@@ -68,8 +68,8 @@ exports.postNewFormModel = async (ctx, next) => {
     }
 
     const newForm = {
-        "modelSchema": JSON.stringify(mySchema),
-        "uiSchema": JSON.stringify(uiSchema),
+        "modelSchema": JSON.stringify(ctx.request.body.modelSchema),
+        "uiSchema": JSON.stringify(ctx.request.body.uiSchema),
     }
 
     ctx.body = await MFormModel.create(newForm)
@@ -96,7 +96,7 @@ exports.getFormModel = async (ctx, next) => {
  * 获取某个表单模型的表单数据列表
  */
 exports.getFormDataList = async (ctx, next) => {
-
+    console.log('ctx.params.id', ctx.params.id)
     // throw new GValidationError('XXXName', 'xxxField');
 
     ctx.body  = await MFormData.findAll({modelSchemaId: ctx.params.id})

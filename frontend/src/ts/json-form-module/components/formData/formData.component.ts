@@ -10,10 +10,10 @@ import { FormModelService } from '../../../services/formModel.service'
 
 @Component({
     selector    : 'app-root',
-    templateUrl : './formModelList.component.html',
-    styleUrls   : ['./formModelList.component.css']
+    templateUrl : './formData.component.html',
+    styleUrls   : ['./formData.component.css']
 })
-export class FormModelListComponent implements OnInit {
+export class FormDataComponent implements OnInit {
 
     formModelList: any[] = []
 
@@ -39,17 +39,13 @@ export class FormModelListComponent implements OnInit {
         )
     }
 
+    currentTask : any = {}
 
     formModelSchema: any = {
         "properties" : {
             "modelSchema"      : {
                 "type"        : "string",
                 "description" : "Model Schema",
-                "widget" : "textarea"
-            },
-            "uiSchema"   : {
-                "type"        : "string",
-                "description" : "UI Schema",
                 "widget" : "textarea"
             }
         },
@@ -66,32 +62,40 @@ export class FormModelListComponent implements OnInit {
 
 
     getFormModel(task: any) {
-        console.log(task.modelSchema)
-        // this.formModelSchema = JSON.parse(task.modelSchema)
+        this.currentTask = task
+        this.formModelSchema = JSON.parse(task.modelSchema)
     }
 
-    createNewFormModels() {
-        console.log(this.newFormData.modelSchema)
-        if (!this.newFormData.modelSchema) {
+    getFormData (task: any) {
 
-            return this.httpService.errorMessage('', '不符合JSON规范')
-        }
-
-        const tempJson = this.safelyParseJSON(this.newFormData.modelSchema)
-
-        if (!tempJson) {
-            console.log('tempJson', tempJson)
-
-            return this.httpService.errorMessage('', '不符合JSON规范')
-        }
-
-        this.fmService.createFormModel({ modelSchema : tempJson}).subscribe(
+        this.fmService.getFormDataByFormModelId(task._id).subscribe(
             data => {
-                this.httpService.successHandler(data, '创建成功!')
+                this.httpService.successHandler(data, '查看成功!')
+            },
+            error => {this.httpService.errorHandler(error) }
+        )
+
+
+    }
+
+
+    createNewFormData() {
+
+        const newFormData = {
+            modelSchemaId : this.currentTask._id,
+            postData : this.newFormData
+        }
+
+        console.log(newFormData)
+
+        this.fmService.createFormData(newFormData).subscribe(
+            data => {
+                this.httpService.successHandler(data, '提交成功!')
             },
             error => {this.httpService.errorHandler(error) }
         )
     }
+
 
 
     safelyParseJSON (json: any) {

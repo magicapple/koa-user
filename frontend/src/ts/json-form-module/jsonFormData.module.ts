@@ -3,24 +3,32 @@ import {NgModule} from '@angular/core'
 
 import {SchemaFormModule, WidgetRegistry, DefaultWidgetRegistry} from 'angular2-schema-form'
 
-import {FormModelListComponent} from './components/formModel/formModelList.component'
+import { BSFormModule } from '../bs-form-module/bs-form.module'
+import { BSCommonModule } from '../bs-common-module/bs-common.module'
+
+
+
+
+import {FormDataComponent} from './components/formData/formData.component'
 
 import {FormModelService} from '../services/formModel.service'
 
 
 @NgModule({
     declarations : [
-        FormModelListComponent
+        FormDataComponent
     ],
     imports      : [
         BrowserModule,
-        SchemaFormModule
+        SchemaFormModule,
+        BSFormModule,
+        BSCommonModule
     ],
     providers    : [
         FormModelService,
         {provide : WidgetRegistry, useClass : DefaultWidgetRegistry}
     ],
-    bootstrap    : [FormModelListComponent]
+    bootstrap    : [FormDataComponent]
 })
 export class JsonFormDataModule {
 }
