@@ -18,6 +18,7 @@ const pageIndex = require('../../controllers/page/index')
 const pageLogin = require('../../controllers/page/login')
 const pageUserHome = require('../../controllers/page/userHome')
 
+const pageJsonForm = require('../../controllers/page/jsonForm')
 const pageAdminHome = require('../../controllers/page/adminHome')
 
 
@@ -37,6 +38,9 @@ router.get('/home', auth(), pageUserHome.userHome)
 
 
 router.get('/admin', pageAdminHome.adminHome)
+
+router.get('/form/models', pageJsonForm.formModelList)
+router.get('/form/data', pageJsonForm.formData)
 
 
 

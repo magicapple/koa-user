@@ -1,0 +1,56 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+
+
+{{formData | json}
+
+
+
+<div class="row">
+
+    <div class="col-12 mb-3">
+        <h1>表单模型列表</h1>
+    </div>
+
+    <div class="col-12">
+
+
+        <table class="table table-responsive table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Model Schema</th>
+                    <th>UI Schema</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let task of formModelList">
+                    <th scope="row">{{task._id}}</th>
+                    <td>{{task.modelSchema}}</td>
+                    <td>{{task.uiSchema}}</td>
+                    <td>
+                        <button class="btn btn-outline-info" (click)="getFormModel(task)">查看</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+    <div class="col-12">
+
+        <h1>新建表单模型</h1>
+
+        <sf-form [schema]="formModelSchema" [model]="newformModel" (onChange)="showFormData($event.value)" ></sf-form>
+
+        <button class="btn btn-info" (click)="createNewFormModels()"> 保存</button>
+
+    </div>
+
+</div>
+
+<simple-notifications></simple-notifications>

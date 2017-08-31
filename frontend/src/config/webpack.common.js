@@ -39,7 +39,9 @@ module.exports = function (env) {
             "polyfills": ["./ts/polyfills.ts"],
             "login": AOT ? './ts/page/login.aot.ts' : './ts/page/login.ts',
             "register": AOT ? './ts/page/register.aot.ts' : './ts/page/register.ts',
-            "home": AOT ? './ts/page/home.aot.ts' : './ts/page/home.ts'
+            "home": AOT ? './ts/page/home.aot.ts' : './ts/page/home.ts',
+            "formModelList": AOT ? './ts/page/formModelList.aot.ts' : './ts/page/formModelList.ts',
+            "formData": AOT ? './ts/page/formData.aot.ts' : './ts/page/formData.ts',
         },
 
         /**
