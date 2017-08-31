@@ -11,6 +11,7 @@ const auth = require('../../../koa2/koa2-middleware/auth-jwt');
 const router = require('koa-router')();
 const userController = require('../../controllers/api/user');
 const shopController = require('../../controllers/api/shop');
+const formController = require('../../controllers/api/form');
 
 const userConstant = require("../../service/user/userConstant");
 const captcha = require("../../../koa2/koa2-middleware/captcha");
@@ -57,6 +58,18 @@ router.post('/users/info', auth(), userController.saveUserBasicInfo);
 
 router.get('/shops', shopController.getShopList);
 router.post('/shops', shopController.postNewShop);
+
+
+
+
+
+router.get('/form/models', formController.getFormModelList);
+router.post('/form/models', formController.postNewFormModel);
+router.get('/form/models/:id', formController.getFormModel);
+
+router.get('/form/models/:id/formdata', formController.getFormDataList);
+router.post('/form/models/:id/formdata', formController.postNewFormData);
+
 
 
 module.exports = router;
