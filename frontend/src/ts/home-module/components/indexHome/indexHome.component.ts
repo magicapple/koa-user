@@ -49,6 +49,26 @@ export class IndexHomeComponent implements OnInit {
         this.getCurrentUserInfo()
     }
 
+    getCurrentUserInfo () {
+        this.userService.getUserInfo().subscribe(
+            data => {
+                this.currentUser = data.data
+
+                this.userInfoForm.patchValue({
+                    'firstName'    : data.data.firstName,
+                    'lastName'    : data.data.lastName,
+                    'nickname'    : data.data.nickname,
+                    'gender'    : data.data.gender,
+                    'marriage'    : data.data.marriage
+                })
+
+                console.log('当前登陆的用户信息: ', data)
+            },
+            error => {this.httpService.errorHandler(error) }
+        )
+    }
+
+
     userInfoFormError : any = { addressXX : []}
     userInfoFormValidationMessages: any = {
         'firstName'  : {
@@ -136,7 +156,7 @@ export class IndexHomeComponent implements OnInit {
 
 
     userInfoFormSubmit() {
-
+        console.log('当前信息: ', this.userInfoForm.invalid, this.userInfoFormError)
         if (this.userInfoForm.invalid) {
             this.userInfoFormInputChange(this.userInfoForm.value, true)
             this.ignoreDirty = true
@@ -153,24 +173,7 @@ export class IndexHomeComponent implements OnInit {
 
     }
 
-    getCurrentUserInfo () {
-        this.userService.getUserInfo().subscribe(
-            data => {
-                this.currentUser = data.data
 
-                this.userInfoForm.patchValue({
-                    'firstName'    : data.data.firstName,
-                    'lastName'    : data.data.lastName,
-                    'nickname'    : data.data.nickname,
-                    'gender'    : data.data.gender,
-                    'marriage'    : data.data.marriage
-                })
-
-                console.log('当前登陆的用户信息: ', data)
-            },
-            error => {this.httpService.errorHandler(error) }
-        )
-    }
 
 
 }

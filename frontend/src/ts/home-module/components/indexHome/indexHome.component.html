@@ -14,15 +14,17 @@
             <bs-radio formControlName ="marriage" [fc]="userInfoForm.get('marriage')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.marriage" ></bs-radio>
 
 
-            <!--<div formGroupName="address" class="well well-lg">-->
-                <!--<h4>地址</h4>-->
-                <!--<bs-text-input formControlName="street" [fc]="userInfoForm.get('address.street')" [type]="'text'" [label]="'街道:'" [dirty]="ignoreDirty" [error]="userInfoFormError.address?.street"></bs-text-input>-->
-                <!---->
-            <!--</div>-->
+            <div formGroupName="address" class="well well-lg">
+                <h4>地址</h4>
+                <bs-text-input formControlName="street" [fc]="userInfoForm.get('address.street')" [type]="'text'" [label]="'街道:'" [dirty]="ignoreDirty" [error]="userInfoFormError.address?.street"></bs-text-input>
+                <bs-text-input formControlName="city" [fc]="userInfoForm.get('address.city')" [type]="'text'" [label]="'城市:'" [dirty]="ignoreDirty" [error]="userInfoFormError.address?.city"></bs-text-input>
+
+            </div>
 
             <div formArrayName="addressXX" class="well well-lg">
                 <div *ngFor="let addressFormGroup of userInfoForm.get('addressXX').controls; let i=index" [formGroupName]="i" >
                     <bs-text-input formControlName="street" [fc]="addressFormGroup.get('street')" [type]="'text'" [label]="'街道:'" [dirty]="ignoreDirty" [error]="userInfoFormError.addressXX[i] && userInfoFormError.addressXX[i].street"></bs-text-input>
+                    <bs-text-input formControlName="city" [fc]="addressFormGroup.get('city')" [type]="'text'" [label]="'城市:'" [dirty]="ignoreDirty" [error]="userInfoFormError.addressXX[i] && userInfoFormError.addressXX[i].city"></bs-text-input>
                 </div>
             </div>
 
