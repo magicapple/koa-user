@@ -15,7 +15,12 @@ const debug  = require('debug')('koa2-user:Mongodb');
 const DBUrl = mongodbUri.format(GConfig.mongodb);
 
 
-GMongoose.connect(DBUrl, function (err) {
+
+// http://mongoosejs.com/docs/connections.html#use-mongo-client
+GMongoose.connect(DBUrl, {
+    useMongoClient: true,
+    /* other options */
+}, function (err) {
     if (err) {
         GLogger.error('===== Mongodb mongoose Error : ', err);
         debug('===== Mongodb mongoose Error : ', err);

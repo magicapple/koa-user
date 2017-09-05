@@ -90,6 +90,8 @@ const url_filter = function (pattern, options){
 
             let newErr = error;
 
+            // Deal with Some extra error type. Such as 3rd party sms provider libs
+
             if (typeof error.type === 'undefined' ){
 
                 if (error.name === 'UnauthorizedError'){

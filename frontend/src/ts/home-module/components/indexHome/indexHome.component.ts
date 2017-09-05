@@ -151,7 +151,6 @@ export class IndexHomeComponent implements OnInit {
             this.ignoreDirty = false
             this.userInfoFormInputChange(data)
         })
-        console.log(this.userInfoForm)
     }
 
 
