@@ -49,7 +49,7 @@ export class IndexHomeComponent implements OnInit {
         this.getCurrentUserInfo()
     }
 
-    userInfoFormError : any = {}
+    userInfoFormError : any = { addressXX : []}
     userInfoFormValidationMessages: any = {
         'firstName'  : {
             'required'      : '请填写名字!',
@@ -82,6 +82,14 @@ export class IndexHomeComponent implements OnInit {
         },
         'marriage'  : {
             'required'      : '请填写婚姻状况!'
+        },
+        'address'  : {
+            'street' : {'required'      : '请填写街道!'},
+            'city' : { 'required'      : '请填写城市!'}
+        },
+        'addressXX'  : {
+            'street' : {'required'      : '请填写街道!'},
+            'city' : { 'required'      : '请填写城市!'}
         }
     }
 
@@ -102,13 +110,28 @@ export class IndexHomeComponent implements OnInit {
             'lastName'    : [user.lastName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'nickname'    : [user.nickname, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'gender'    : [user.gender, [Validators.required] ],
-            'marriage'    : [user.marriage, [Validators.required] ]
+            'marriage'    : [user.marriage, [Validators.required] ],
+            'address'    : this.fb.group({
+                street: ['', [Validators.required] ],
+                city: ['', [Validators.required] ]
+            }),
+            'addressXX'    : this.fb.array([
+                this.fb.group({
+                    street: ['', [Validators.required] ],
+                    city: ['', [Validators.required] ]
+                }),
+                this.fb.group({
+                    street: ['', [Validators.required] ],
+                    city: ['', [Validators.required] ]
+                })
+            ])
         } )
 
         this.userInfoForm.valueChanges.subscribe(data => {
             this.ignoreDirty = false
             this.userInfoFormInputChange(data)
         })
+        console.log(this.userInfoForm)
     }
 
 

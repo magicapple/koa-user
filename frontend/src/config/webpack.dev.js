@@ -29,7 +29,7 @@ module.exports = function (env) {
 
         devServer : {
             hot: false,
-            inline             : true,
+            inline             : false,
             port               : 4200,
             historyApiFallback : true,
             contentBase        : helpers.root('ts/page'),

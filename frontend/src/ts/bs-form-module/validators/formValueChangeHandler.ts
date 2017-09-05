@@ -3,7 +3,7 @@
  */
 
 
-import {FormGroup} from '@angular/forms'
+import {FormArray, FormGroup} from '@angular/forms'
 
 
 
@@ -23,7 +23,21 @@ export function formErrorHandler (formData: Object, fb: FormGroup, validationErr
 
                 const control = formGroupSource.get(field)
 
-                if (control instanceof FormGroup) {
+                if (control instanceof FormArray) {
+                    // 递归
+
+                    errorMessageOutput[field] = []
+                    if (typeof errorMessageInput[field] === 'undefined') {
+                        errorMessageInput[field] = {}
+                    }
+
+                    for (let i = 0; i < control.controls.length; i ++) {
+                        errorMessageOutput[field].push({})
+                        getValidationErrorMessage(control.controls[i], errorMessageInput[field], errorMessageOutput[field][i], needDirty)
+                    }
+
+
+                }else if (control instanceof FormGroup) {
                     // 递归
 
                     errorMessageOutput[field] = {}
