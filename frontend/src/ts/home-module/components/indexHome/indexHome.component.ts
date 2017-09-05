@@ -91,7 +91,6 @@ export class IndexHomeComponent implements OnInit {
 
     createUserInfoForm(user: any = {}): void {
 
-        console.log('user: ', user)
         if (!user.firstName) {user.firstName = ''}
         if (!user.lastName) {user.lastName = ''}
         if (!user.nickname) {user.nickname = ''}
@@ -105,8 +104,6 @@ export class IndexHomeComponent implements OnInit {
             'gender'    : [user.gender, [Validators.required] ],
             'marriage'    : [user.marriage, [Validators.required] ]
         } )
-
-
 
         this.userInfoForm.valueChanges.subscribe(data => {
             this.ignoreDirty = false
@@ -145,10 +142,6 @@ export class IndexHomeComponent implements OnInit {
                     'gender'    : data.data.gender,
                     'marriage'    : data.data.marriage
                 })
-
-
-
-
 
                 console.log('当前登陆的用户信息: ', data)
             },

@@ -155,6 +155,7 @@ exports.saveUserBasicInfo = async (userId, userInfo) =>{
     if (userInfo.firstName && userInfo.lastName ) { resultUser.fullName = userInfo.lastName + userInfo.firstName}
 
     if (userInfo.gender ) { resultUser.gender = userInfo.gender}
+    if (userInfo.marriage ) { resultUser.marriage = userInfo.marriage}
 
     return await resultUser.save()
 
