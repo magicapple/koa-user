@@ -30,8 +30,8 @@ export class IndexHomeComponent implements OnInit {
     ]
 
     marryDataList : any[] = [
-        { id : 0, name : '未婚'},
-        { id : 1, name : '已婚'}
+        { id : 1, name : '未婚'},
+        { id : 2, name : '已婚'}
     ]
 
     constructor(
