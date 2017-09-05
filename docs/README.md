@@ -66,13 +66,22 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 
 
-#### mongodb 相关库
+### 第三方短信服务库
+1. [@alicloud/sms-sdk] 阿里云发短信的库
 
-1. 安装 [mongoose] mongodb ORM
+
+### mongodb 相关库
+
+1. 安装 [mongoose] mongodb 的Node.js的 ORM 操作数据库的库
 
 
 ## 项目测试所用到的库
+
 1. 安装 [chai] 库用于在测试时,支持BDD断言语法  ``` npm install --save-dev chai ``` 
+
+
+
+
 
 
 
@@ -119,6 +128,10 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 
 
 [mongoose]: http://mongoosejs.com/
+
+[@alicloud/sms-sdk]: https://www.npmjs.com/package/@alicloud/sms-sdk
+
+
 
 
 
