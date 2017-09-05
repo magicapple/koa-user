@@ -6,13 +6,13 @@
 
 module.exports = {
     smsNexmo : {
-        API_KEY : '1',
-        API_SECRET : '2'
+        API_KEY : 'b1241848',
+        API_SECRET : 'a979d1a106e87dca'
     },
 
     smsAliyun: {
-        AccessKeyId : '3',
-        AccessKeySecret : '4'
+        AccessKeyId : 'LTAIvKQtctwg3p5e',
+        AccessKeySecret : 'aBiGHCA87COGtfmELvTPx6vxQyRl8M'
     }
 }
 
