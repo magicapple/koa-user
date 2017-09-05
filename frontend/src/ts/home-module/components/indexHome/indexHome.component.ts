@@ -30,8 +30,8 @@ export class IndexHomeComponent implements OnInit {
     ]
 
     marryDataList : any[] = [
-        { id : 10, name : '已婚'},
-        { id : 20, name : '未婚'}
+        { id : 0, name : '未婚'},
+        { id : 1, name : '已婚'}
     ]
 
     constructor(
@@ -80,7 +80,7 @@ export class IndexHomeComponent implements OnInit {
         'gender'  : {
             'required'      : '请填写性别!'
         },
-        'married'  : {
+        'marriage'  : {
             'required'      : '请填写婚姻状况!'
         }
     }
@@ -96,14 +96,14 @@ export class IndexHomeComponent implements OnInit {
         if (!user.lastName) {user.lastName = ''}
         if (!user.nickname) {user.nickname = ''}
         if (!user.gender) {user.gender = ''}
-        if (!user.married) {user.married = ''}
+        if (!user.marriage) {user.marriage = ''}
 
         this.userInfoForm = this.fb.group({
             'firstName'    : [user.firstName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'lastName'    : [user.lastName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'nickname'    : [user.nickname, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'gender'    : [user.gender, [Validators.required] ],
-            'married'    : [user.married, [Validators.required] ]
+            'marriage'    : [user.marriage, [Validators.required] ]
         } )
 
 
@@ -143,7 +143,7 @@ export class IndexHomeComponent implements OnInit {
                     'lastName'    : data.data.lastName,
                     'nickname'    : data.data.nickname,
                     'gender'    : data.data.gender,
-                    'married'    : data.data.married
+                    'marriage'    : data.data.marriage
                 })
 
 

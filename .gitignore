@@ -9,7 +9,7 @@ frontend/src/aotCompiled
 frontend/dist
 
 backend/src/config/local.js
-backend/src/config/development.js
+
 
 # css sprite
 auto-sprite.png

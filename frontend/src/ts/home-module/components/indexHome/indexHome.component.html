@@ -11,7 +11,7 @@
             <bs-text-input formControlName="nickname" [fc]="userInfoForm.get('nickname')" [type]="'text'" [label]="'昵称:'" [dirty]="ignoreDirty" [error]="userInfoFormError.nickname"></bs-text-input>
 
             <bs-select formControlName ="gender" [fc]="userInfoForm.get('gender')" [label]="'性别:'"  [options]="genderDataList" [error]="userInfoFormError.gender" ></bs-select>
-            <bs-radio formControlName ="married" [fc]="userInfoForm.get('married')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.married" ></bs-radio>
+            <bs-radio formControlName ="marriage" [fc]="userInfoForm.get('marriage')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.marriage" ></bs-radio>
 
 
             <div class="form-group row">

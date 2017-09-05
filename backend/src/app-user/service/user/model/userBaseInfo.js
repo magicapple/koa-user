@@ -29,7 +29,7 @@ const UserBaseInfoSchema = new GSchema({
 
     nickname: {type: String},
     gender: {type: Number, min: 0, max: 10},
-
+    marriage: {type: Number, min: 0, max: 10}, // 0未婚，1已婚，2离婚，3二婚，4二离
     avatar: {type: String},
 
 

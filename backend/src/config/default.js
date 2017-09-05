@@ -21,7 +21,7 @@ module.exports = {
 
     authToken : {
         secret : "koa2-user-secret-x1",
-        expireDay : 30,
+        expireDay : 1,
         fieldName : "X-Access-Token"
     },
 
