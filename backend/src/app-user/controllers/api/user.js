@@ -10,6 +10,7 @@ const weChatMiniApp = require('../../business-libs/wechat/weChatMiniApp');
 
 const headerToken = require('../../../koa2/common-libs/authorization-header/auth-header')
 const UserService = require('../../service/user/userService')
+const UserRoleService = require('../../service/user/userRoleService')
 const MUserToken = require('../../service/user/model/userToken')
 
 
@@ -101,6 +102,7 @@ exports.logout = async (ctx, next) => {
  */
 exports.getSessionUserInfo = async (ctx, next) => {
 
+    // UserRoleService.checkUserPermission(ctx.state.user, UserRoleService.permissions.user.getOwn)
     ctx.body = ctx.state.user
 }
 
@@ -108,6 +110,7 @@ exports.getSessionUserInfo = async (ctx, next) => {
  * 修改用户基本信息
  */
 exports.saveUserBasicInfo = async (ctx, next) => {
+
 
     let user = await UserService.saveUserBasicInfo(ctx.state.user._id, ctx.request.body)
 

@@ -65,6 +65,14 @@ const validationName = {
 
     },
 
+    userPermission : {
+        create : {code:3001, message:"User role not authorized 'create' permission", field:'roles'},
+        update : {code:3002, message:"User role not authorized 'update' permission", field:'roles'},
+        del : {code:3003, message:"User role not authorized 'delete' permission", field:'roles'},
+        getList : {code:3004, message:"User role not authorized 'getList' permission", field:'roles'},
+        getOwn : {code:3005, message:"User role not authorized 'getOwn' permission", field:'roles'},
+    },
+
 
     pay:{
         payPhone:{code:5500,message:'Field validation error, phone format wrong'}

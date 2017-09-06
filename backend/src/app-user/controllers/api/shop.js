@@ -35,3 +35,4 @@ exports.postNewShop = async (ctx, next) => {
 
     ctx.body = ctx.request.body
 }
+

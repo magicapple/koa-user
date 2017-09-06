@@ -1,18 +1,18 @@
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 
 
 
-const saltRounds = 10;
+const saltRounds = 10
 
 /**
  * Mongoose schema
  */
 
 const encryptPassword = function (password) {
-    let salt = bcrypt.genSaltSync(saltRounds);
-    return bcrypt.hashSync(password, salt);
-};
+    let salt = bcrypt.genSaltSync(saltRounds)
+    return bcrypt.hashSync(password, salt)
+}
 
 
 const UserBaseInfoSchema = new GSchema({
@@ -22,6 +22,8 @@ const UserBaseInfoSchema = new GSchema({
     email: { type: String, unique: true, lowercase: true, trim: true, sparse: true },
 
     password: { type: String, required: true, default: '20170101', set : encryptPassword},
+
+    roles : [{ type: GSchema.Types.ObjectId, ref: 'UserRole' }],
 
     firstName: { type: String, trim: true},
     lastName: { type: String, trim: true },
@@ -44,7 +46,7 @@ const UserBaseInfoSchema = new GSchema({
     toObject: { virtuals: false },
     toJSON: { virtuals: false },
     timestamps: true
-});
+})
 
 
 /**
@@ -52,7 +54,7 @@ const UserBaseInfoSchema = new GSchema({
  */
 
 
-// UserBaseInfoSchema.index({username: 1});
+// UserBaseInfoSchema.index({username: 1})
 
 
 
@@ -61,7 +63,7 @@ const UserBaseInfoSchema = new GSchema({
  * Mongoose plugin
  */
 
-// UserSchema.plugin(mongooseTimestamps);
+// UserSchema.plugin(mongooseTimestamps)
 
 
 
@@ -76,24 +78,24 @@ const UserBaseInfoSchema = new GSchema({
 
 //
 // UserSchema.pre('save', function (next) {
-//     var user = this;
+//     var user = this
 //     if (this.isModified('password') || this.isNew) {
 //         bcrypt.genSalt(10, function (err, salt) {
 //             if (err) {
-//                 return next(err);
+//                 return next(err)
 //             }
 //             bcrypt.hash(user.password, salt, function (err, hash) {
 //                 if (err) {
-//                     return next(err);
+//                     return next(err)
 //                 }
-//                 user.password = hash;
-//                 next();
-//             });
-//         });
+//                 user.password = hash
+//                 next()
+//             })
+//         })
 //     } else {
-//         return next();
+//         return next()
 //     }
-// });
+// })
 
 
 
@@ -108,17 +110,17 @@ const UserBaseInfoSchema = new GSchema({
 
 const field = {
     common : "-__v -updatedAt -password"
-};
+}
 
 UserBaseInfoSchema.statics.findAll = function(query){
-    return UserBaseInfo.find(query).select(field.common).exec();
-};
+    return UserBaseInfo.find(query).select(field.common).populate('roles').exec()
+}
 UserBaseInfoSchema.statics.find1 = function(query){
-    return UserBaseInfo.findOne(query).select(field.common).exec();
-};
+    return UserBaseInfo.findOne(query).select(field.common).populate('roles').exec()
+}
 UserBaseInfoSchema.statics.find1ById = function(id){
-    return UserBaseInfo.findById(id).select(field.common).exec();
-};
+    return UserBaseInfo.findById(id).select(field.common).populate('roles').exec()
+}
 
 
 
@@ -136,27 +138,27 @@ UserBaseInfoSchema.statics.find1ById = function(id){
 
 
 UserBaseInfoSchema.methods.comparePasswordSync = function (password) {
-    return bcrypt.compareSync(password, this.password);
-};
+    return bcrypt.compareSync(password, this.password)
+}
 
 
 UserBaseInfoSchema.methods.comparePassword = function (password) {
-    return bcrypt.compare(password, this.password);
-};
+    return bcrypt.compare(password, this.password)
+}
 
 
 UserBaseInfoSchema.methods.comparePasswordCB = function (password, callback) {
 
     bcrypt.compare(password, this.password, function (err, isMatch) {
         if (err) {
-            return callback(err);
+            return callback(err)
         }
-        callback(null, isMatch);
-    });
-};
+        callback(null, isMatch)
+    })
+}
 
 
-UserBaseInfoSchema.methods.encryptPassword = encryptPassword;
+UserBaseInfoSchema.methods.encryptPassword = encryptPassword
 
 
 
@@ -164,5 +166,5 @@ UserBaseInfoSchema.methods.encryptPassword = encryptPassword;
  * Register Model
  */
 
-const UserBaseInfo = GMongoose.model("UserBaseInfo", UserBaseInfoSchema);
-module.exports = UserBaseInfo;
+const UserBaseInfo = GMongoose.model("UserBaseInfo", UserBaseInfoSchema)
+module.exports = UserBaseInfo

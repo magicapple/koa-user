@@ -17,7 +17,7 @@ const UserRoleSchema = new GSchema({
     toObject: { virtuals: false },
     toJSON: { virtuals: false },
     timestamps: true
-});
+})
 
 
 /**
@@ -25,7 +25,7 @@ const UserRoleSchema = new GSchema({
  */
 
 
-// UserRoleSchema.index({username: 1});
+// UserRoleSchema.index({username: 1})
 
 
 
@@ -34,7 +34,7 @@ const UserRoleSchema = new GSchema({
  * Mongoose plugin
  */
 
-// UserSchema.plugin(mongooseTimestamps);
+// UserSchema.plugin(mongooseTimestamps)
 
 
 
@@ -49,24 +49,24 @@ const UserRoleSchema = new GSchema({
 
 //
 // UserRoleSchema.pre('save', function (next) {
-//     var user = this;
+//     var user = this
 //     if (this.isModified('password') || this.isNew) {
 //         bcrypt.genSalt(10, function (err, salt) {
 //             if (err) {
-//                 return next(err);
+//                 return next(err)
 //             }
 //             bcrypt.hash(user.password, salt, function (err, hash) {
 //                 if (err) {
-//                     return next(err);
+//                     return next(err)
 //                 }
-//                 user.password = hash;
-//                 next();
-//             });
-//         });
+//                 user.password = hash
+//                 next()
+//             })
+//         })
 //     } else {
-//         return next();
+//         return next()
 //     }
-// });
+// })
 
 
 
@@ -80,18 +80,18 @@ const UserRoleSchema = new GSchema({
 
 
 const field = {
-    common : "-__v -updatedAt -password"
-};
+    common : "-__v -updatedAt"
+}
 
 UserRoleSchema.statics.findAll = function(query){
-    return UserBaseInfo.find(query).select(field.common).exec();
-};
+    return UserRole.find(query).select(field.common).exec()
+}
 UserRoleSchema.statics.find1 = function(query){
-    return UserBaseInfo.findOne(query).select(field.common).exec();
-};
+    return UserRole.findOne(query).select(field.common).exec()
+}
 UserRoleSchema.statics.find1ById = function(id){
-    return UserBaseInfo.findById(id).select(field.common).exec();
-};
+    return UserRole.findById(id).select(field.common).exec()
+}
 
 
 
@@ -106,11 +106,11 @@ UserRoleSchema.statics.find1ById = function(id){
  */
 
 
-//
-//
-// UserRoleSchema.methods.comparePasswordSync = function (password) {
-//     return bcrypt.compareSync(password, this.password);
-// };
+
+
+UserRoleSchema.methods.checkPermission = function (permission) {
+    return this.permissions.includes(permission)
+}
 
 
 
@@ -118,5 +118,5 @@ UserRoleSchema.statics.find1ById = function(id){
  * Register Model
  */
 
-const UserRole = GMongoose.model("UserRole", UserRoleSchema);
-module.exports = UserRole;
+const UserRole = GMongoose.model("UserRole", UserRoleSchema)
+module.exports = UserRole
