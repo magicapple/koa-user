@@ -31,7 +31,13 @@ const UserBaseInfoSchema = new GSchema({
 
     nickname: {type: String},
     gender: {type: Number, min: 1, max: 10},
+    birthday: {
+        year  : {type : Number, min : 1800, max : 9999},
+        month : {type : Number, min : 1, max : 12},
+        day   : {type : Number, min : 1, max : 31}
+    },
     marriage: {type: Number, min: 1, max: 10}, // 1未婚，2已婚，3离婚，4二婚，5二离
+
     avatar: {type: String},
 
 

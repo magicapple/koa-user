@@ -17,6 +17,7 @@ const router          = require('koa-router')();
 const bodyParser      = require('koa-bodyparser');
 const userAgent       = require('koa-useragent');
 const cors            = require('kcors');
+const helmet          = require('koa-helmet')
 
 const debug           = require('debug')('koa2-user:server');
 
@@ -48,6 +49,7 @@ app.use(errorHandler(app, {env : GConfig.env}));     // 全局错误处理
 
 app.use(log4js.middleware)
 app.use(logger())     // 记录所用方式与时间
+app.use(helmet())
 app.use(XResponseTime())     // 设置Header
 app.use(bodyParser())     // POST请求 body 解析
 app.use(cors())     // 跨域资源共享 CORS

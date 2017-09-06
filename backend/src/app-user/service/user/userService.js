@@ -157,6 +157,12 @@ exports.saveUserBasicInfo = async (userId, userInfo) =>{
     if (userInfo.gender ) { resultUser.gender = userInfo.gender}
     if (userInfo.marriage ) { resultUser.marriage = userInfo.marriage}
 
+    if (userInfo.birthday) {
+        if (userInfo.birthday.year ) { resultUser.birthday.year = userInfo.birthday.year}
+        if (userInfo.birthday.month ) { resultUser.birthday.month = userInfo.birthday.month}
+        if (userInfo.birthday.day ) { resultUser.birthday.day = userInfo.birthday.day}
+    }
+
     return await resultUser.save()
 
 }

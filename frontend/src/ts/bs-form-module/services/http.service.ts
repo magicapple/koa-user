@@ -119,7 +119,7 @@ class HttpService {
         )
     }
 
-    errorMessage (data: any, message? : string) {
+    errorMessage (error: any, message? : string) {
         this.notificationService.error( message || '保存成功!', '提示: 点击后提示消失',
             {
                 showProgressBar: false,

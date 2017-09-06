@@ -8,10 +8,9 @@
                 <h4 class="card-title">帐号设置</h4>
             </div>
             <ul class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">基本信息</a>
-                <a href="#" class="list-group-item list-group-item-action">修改密码</a>
-                <a href="#" class="list-group-item list-group-item-action">收货地址</a>
-
+                <a routerLink="/info/basic" routerLinkActive="list-group-item-secondary" class="list-group-item list-group-item-action ">基本信息</a>
+                <a routerLink="/info/password" routerLinkActive="list-group-item-secondary" class="list-group-item list-group-item-action">修改密码</a>
+                <a routerLink="/info/address" routerLinkActive="list-group-item-secondary" class="list-group-item list-group-item-action">收货地址</a>
             </ul>
 
         </div>
@@ -21,37 +20,8 @@
 
     <div class="col-10 col-lg-6">
 
-        <H2 class="mb-4"> 修改信息 - {{currentUser?.username}}</H2>
+        <router-outlet></router-outlet>
 
-        <form [formGroup]="userInfoForm" (ngSubmit)="userInfoFormSubmit()" (keydown.enter)="$event.preventDefault()">
-
-            <bs-text-input formControlName="lastName" [fc]="userInfoForm.get('lastName')" [type]="'text'" [label]="'姓:'" [dirty]="ignoreDirty" [error]="userInfoFormError.lastName"></bs-text-input>
-            <bs-text-input formControlName="firstName" [fc]="userInfoForm.get('firstName')" [type]="'text'" [label]="'名字:'" [dirty]="ignoreDirty" [error]="userInfoFormError.firstName"></bs-text-input>
-            <bs-text-input formControlName="nickname" [fc]="userInfoForm.get('nickname')" [type]="'text'" [label]="'昵称:'" [dirty]="ignoreDirty" [error]="userInfoFormError.nickname"></bs-text-input>
-
-            <bs-select formControlName ="gender" [fc]="userInfoForm.get('gender')" [label]="'性别:'"  [options]="genderDataList" [error]="userInfoFormError.gender" ></bs-select>
-            <bs-radio formControlName ="marriage" [fc]="userInfoForm.get('marriage')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.marriage" ></bs-radio>
-
-
-            <div formGroupName="address" class="well well-lg">
-                <h4>地址</h4>
-                <bs-text-input formControlName="street" [fc]="userInfoForm.get('address.street')" [type]="'text'" [label]="'街道:'" [dirty]="ignoreDirty" [error]="userInfoFormError.address?.street"></bs-text-input>
-                <bs-text-input formControlName="city" [fc]="userInfoForm.get('address.city')" [type]="'text'" [label]="'城市:'" [dirty]="ignoreDirty" [error]="userInfoFormError.address?.city"></bs-text-input>
-            </div>
-
-            <div formArrayName="addressXX" class="well well-lg">
-                <div *ngFor="let addressFormGroup of userInfoForm.get('addressXX').controls; let i=index" [formGroupName]="i" >
-                    <bs-text-input formControlName="street" [fc]="addressFormGroup.get('street')" [type]="'text'" [label]="'街道:'" [dirty]="ignoreDirty" [error]="userInfoFormError.addressXX[i] && userInfoFormError.addressXX[i].street"></bs-text-input>
-                    <bs-text-input formControlName="city" [fc]="addressFormGroup.get('city')" [type]="'text'" [label]="'城市:'" [dirty]="ignoreDirty" [error]="userInfoFormError.addressXX[i] && userInfoFormError.addressXX[i].city"></bs-text-input>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-10 ml-auto">
-                    <button type="submit" class="btn btn-info" >保存</button>
-                </div>
-            </div>
-        </form>
     </div>
 
 </div>

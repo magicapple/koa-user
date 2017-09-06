@@ -11,11 +11,11 @@ import {UserLoginService} from '../../../services/userLogin.service'
 
 
 @Component({
-  selector: 'app-user-basic',
-  templateUrl: './basicInfo.component.html',
-  styleUrls: ['./basicInfo.component.css']
+  selector: 'app-user-address',
+  templateUrl: './address.component.html',
+  styleUrls: ['./address.component.css']
 })
-export class BasicInfoComponent implements OnInit {
+export class AddressComponent implements OnInit {
 
     userInfoForm: FormGroup
     ignoreDirty: boolean = false
@@ -31,10 +31,7 @@ export class BasicInfoComponent implements OnInit {
 
     marryDataList : any[] = [
         { id : 1, name : '未婚'},
-        { id : 2, name : '已婚'},
-        { id : 3, name : '离婚'},
-        { id : 4, name : '二婚'},
-        { id : 5, name : '二次离婚'}
+        { id : 2, name : '已婚'}
     ]
 
     constructor(
@@ -65,7 +62,7 @@ export class BasicInfoComponent implements OnInit {
                     'marriage'    : data.data.marriage
                 })
 
-                // console.log('当前登陆的用户信息: ', data)
+                console.log('当前登陆的用户信息: ', data)
             },
             error => {this.httpService.errorHandler(error) }
         )
@@ -74,49 +71,45 @@ export class BasicInfoComponent implements OnInit {
 
     userInfoFormError : any = { addressXX : []}
     userInfoFormValidationMessages: any = {
-        'firstName'   : {
-            'required'  : '请填写名字!',
-            'minlength' : '名字长度1-100个字符!',
-            'maxlength' : '名字长度1-100个字符!',
-            'pattern'   : '名字必须字母开头!',
-            'isExist'   : '名字已经存在!'
+        'firstName'  : {
+            'required'      : '请填写名字!',
+            'minlength'     : '名字长度1-100个字符!',
+            'maxlength'     : '名字长度1-100个字符!',
+            'pattern'       : '名字必须字母开头!',
+            'isExist'       : '名字已经存在!'
         },
-        'lastName'    : {
-            'required'  : '请填写姓!',
-            'minlength' : '姓长度1-100个字符!',
-            'maxlength' : '姓长度1-100个字符!',
-            'pattern'   : '姓必须字母开头!',
-            'isExist'   : '姓已经存在!'
+        'lastName'  : {
+            'required'      : '请填写姓!',
+            'minlength'     : '姓长度1-100个字符!',
+            'maxlength'     : '姓长度1-100个字符!',
+            'pattern'       : '姓必须字母开头!',
+            'isExist'       : '姓已经存在!'
         },
-        'nickname'    : {
-            'required'  : '请填写昵称!',
-            'minlength' : '昵称长度4-30个字符!',
-            'maxlength' : '昵称长度4-30个字符!',
-            'pattern'   : '昵称必须字母开头!',
-            'isExist'   : '昵称已经存在!'
+        'nickname'  : {
+            'required'      : '请填写昵称!',
+            'minlength'     : '昵称长度4-30个字符!',
+            'maxlength'     : '昵称长度4-30个字符!',
+            'pattern'       : '昵称必须字母开头!',
+            'isExist'       : '昵称已经存在!'
         },
         'mobilePhone' : {
             'required'    : '请填写手机号!',
             'mobilePhone' : '手机号格式不正确!',
             'isExist'     : '手机号已经存在!'
         },
-        'gender'      : {
-            'required' : '请填写性别!'
+        'gender'  : {
+            'required'      : '请填写性别!'
         },
-        'marriage'    : {
-            'required' : '请填写婚姻状况!'
+        'marriage'  : {
+            'required'      : '请填写婚姻状况!'
         },
-
-        'birthday' : {
-            'year'  : {
-                'required' : '请填写生日年份!'
-            },
-            'month' : {
-                'required' : '请填写生日月份!'
-            },
-            'day'   : {
-                'required' : '请填写生日!'
-            }
+        'address'  : {
+            'street' : {'required'      : '请填写街道!'},
+            'city' : { 'required'      : '请填写城市!'}
+        },
+        'addressXX'  : {
+            'street' : {'required'      : '请填写街道!'},
+            'city' : { 'required'      : '请填写城市!'}
         }
     }
 
@@ -138,12 +131,20 @@ export class BasicInfoComponent implements OnInit {
             'nickname'    : [user.nickname, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'gender'    : [user.gender, [Validators.required] ],
             'marriage'    : [user.marriage, [Validators.required] ],
-            'birthday'    : this.fb.group({
-                year: ['', [Validators.required] ],
-                month: ['', [Validators.required] ],
-                day: ['', [Validators.required] ]
-            })
-
+            'address'    : this.fb.group({
+                street: ['', [Validators.required] ],
+                city: ['', [Validators.required] ]
+            }),
+            'addressXX'    : this.fb.array([
+                this.fb.group({
+                    street: ['', [Validators.required] ],
+                    city: ['', [Validators.required] ]
+                }),
+                this.fb.group({
+                    street: ['', [Validators.required] ],
+                    city: ['', [Validators.required] ]
+                })
+            ])
         } )
 
         this.userInfoForm.valueChanges.subscribe(data => {
@@ -154,8 +155,7 @@ export class BasicInfoComponent implements OnInit {
 
 
     userInfoFormSubmit() {
-        // console.log('当前表单状态: ', this.userInfoForm.invalid, this.userInfoFormError)
-
+        console.log('当前信息: ', this.userInfoForm.invalid, this.userInfoFormError)
         if (this.userInfoForm.invalid) {
             this.userInfoFormInputChange(this.userInfoForm.value, true)
             this.ignoreDirty = true

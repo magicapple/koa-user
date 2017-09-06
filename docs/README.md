@@ -1,7 +1,7 @@
 # 该项目为学习 Nodejs 框架 Koa2 的教程
 
 
-## 项目从零起步的配置
+## 从零起步的配置
 
 1. 使用 [Node.js] V7.8 以上版本运行, Mac电脑建议通过 ``` nvm install node ```安装 [Node.js].  需要先安装nvm,运行脚本 ``` curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash``` . 或参考[3m安装法]
 2. 在 项目根目录配置 .npmrc 文件, 加速 npm 安装源.
@@ -50,7 +50,8 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 13. 安装 [koa-useragent] koa2 查看 请求Header中的UserAgent 模块 ``` npm install --save koa-useragent ``` 
 14. 安装 [koa-jwt]  koa2 针对每个路由的需要验证jwt token 的中间件
 15. 安装 [koa-multer]  koa2 上传文件组件
-16. 安装 [koa-session]  koa2 session中间件 Simple session middleware for Koa 
+16. 安装 [koa-session]  koa2 session中间件, Simple session middleware for Koa 
+17. 安装 [koa-helmet]  koa2 提高安全性中间件, Helmet helps you secure your apps by setting various HTTP headers. 
 
 
 20. 安装 [validator] 验证数据校验库
@@ -125,7 +126,7 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 [koa-jwt]: https://github.com/koajs/jwt
 [koa-multer]: https://github.com/koa-modules/multer
 [koa-session]: https://github.com/koajs/session
-
+[koa-helmet]: https://github.com/venables/koa-helmet
 
 [mongoose]: http://mongoosejs.com/
 
