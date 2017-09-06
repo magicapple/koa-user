@@ -61,7 +61,8 @@ const validationName = {
         tokenNotFound : {code:2003, message:"User Unauthorized, token not found", field:'X-Access-Token'},
         userNotFound : {code:2005, message:"User Unauthorized, user not found", field:'X-Access-Token'},
         tokenDecodeWrong : {code:2007, message:"User Unauthorized, token wrong", field:'X-Access-Token'},
-        tokenExpired : {code:2008, message:"User Unauthorized, token expired", field:'X-Access-Token'}
+        tokenExpired : {code:2008, message:"User Unauthorized, token expired", field:'X-Access-Token'},
+        tokenInvalidSignature : {code:2009, message:"User Unauthorized, token invalid signature", field:'X-Access-Token'}
 
     },
 

@@ -95,12 +95,13 @@ const url_filter = function (pattern, options){
             if (typeof error.type === 'undefined' ){
 
                 if (error.name === 'UnauthorizedError'){
-                    newErr = new GUnauthenticatedAccessError('token.tokenDecodeWrong', 'authorization');
+                    newErr = new GUnauthenticatedAccessError('token.tokenDecodeWrong', 'X-Access-Token');
 
                     /**
                      * Base on Module koa-jwt Error
                      * https://github.com/koajs/jwt
                      */
+                    console.log('error.message:', error.message)
                     if (error.message && error.message !== 'Authentication Error'){
                         newErr.message = error.message;
                     }
@@ -110,7 +111,11 @@ const url_filter = function (pattern, options){
                      * https://github.com/auth0/node-jsonwebtoken
                      */
                     if (error.message === 'jwt expired') {
-                        newErr = new GUnauthenticatedAccessError('token.tokenExpired', 'authorization');
+                        newErr = new GUnauthenticatedAccessError('token.tokenExpired', 'X-Access-Token');
+                    }
+
+                    if (error.message === 'invalid signature') {
+                        newErr = new GUnauthenticatedAccessError('token.tokenInvalidSignature', 'X-Access-Token');
                     }
 
                 }else {

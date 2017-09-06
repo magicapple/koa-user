@@ -72,6 +72,14 @@ let validation = {
     },
 
 
+    // SMScodeNotFound : function (code, next){
+    //     if (!code) return throw409(code.user.SMSCodeNotFound.code, code.user.SMSCodeNotFound.message, code.user.SMSCodeNotFound.field)
+    // },
+    // SMScodeExpired : function (isExpired, next){
+    //     if (isExpired) return throw409(code.user.SMSCodeExpired.code, code.user.SMSCodeExpired.message, code.user.SMSCodeExpired.field)
+    // },
+
+
     userWeChatJsCode : function (js_code, field){
         if (!js_code) return throw409('user.weChatJsCodeRequired', field)
         if (!validator.isLength(js_code, 32, 50))  return throw409('user.weChatJsCodeWrong', field)
@@ -142,8 +150,8 @@ let validation = {
         if (token) return throw401('token.tokenDecodeWrong', field)
     },
 
-    tokenExpired : function (tokenIsExpired, next){
-        if (tokenIsExpired) return throw401('token.tokenDecodeWrong', field)
+    tokenExpired : function (tokenIsExpired, field){
+        if (tokenIsExpired) return throw401('token.tokenExpired', field)
     },
 
 
@@ -158,12 +166,7 @@ let validation = {
     },
 
 
-    // SMScodeNotFound : function (code, next){
-    //     if (!code) return throw409(code.user.SMSCodeNotFound.code, code.user.SMSCodeNotFound.message, code.user.SMSCodeNotFound.field)
-    // },
-    // SMScodeExpired : function (isExpired, next){
-    //     if (isExpired) return throw409(code.user.SMSCodeExpired.code, code.user.SMSCodeExpired.message, code.user.SMSCodeExpired.field)
-    // },
+
 
 
 }

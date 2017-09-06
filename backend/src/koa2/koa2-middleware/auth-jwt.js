@@ -3,9 +3,9 @@
  */
 
 
-const koaJwt             = require('koa-jwt');
+const koaJwt             = require('koa-jwt')
 
-const UserService        = require('../../app-user/service/user/userService');
+const UserService        = require('../../app-user/service/user/userService')
 
 
 function authMiddleware(options) {
@@ -17,13 +17,13 @@ function authMiddleware(options) {
         key : 'userToken',  // add token info to ctx.state.userToken
         isRevoked : async (ctx, decodeToken, token) => {
 
-            ctx.state.user = await UserService.userInfo(decodeToken);
+            ctx.state.user = await UserService.userInfo(decodeToken)
             console.log('ctx.state: ', ctx.state)
-            return false;
+            return false
         }
     })
 }
 
 
-module.exports = authMiddleware;
+module.exports = authMiddleware
 
