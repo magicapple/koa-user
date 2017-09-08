@@ -77,7 +77,7 @@ export function checkFieldIsExist (url: string, postDataKey: string = 'username'
             postData[mobilePhoneKey] = mobilePhoneField.value
         }
 
-        return Observable.timer(1000).switchMap(() => {
+        return Observable.timer(500).switchMap(() => {
             return http.post(url, postData).map( data => {
 
                 if (postDataKey === 'captcha' || postDataKey === 'smsCode') {
@@ -91,7 +91,6 @@ export function checkFieldIsExist (url: string, postDataKey: string = 'username'
                     }
                     return null
                 }
-
 
             })
         })
