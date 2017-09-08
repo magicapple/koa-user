@@ -1,5 +1,5 @@
 <div class="form-group row" >
-    <label class="{{labelClass}} col-form-label">{{label}}</label>
+    <label class="{{labelClass}} col-form-label">{{label}} <pre>Model: {{ model | json }}</pre></label>
     <div class="{{inputClass}}" #datepicker>
 
         <div class="input-group">
@@ -7,7 +7,7 @@
             <span class="input-group-addon" (click)="showDatePicker()"><i class="fa fa-calendar"></i></span>
         </div>
 
-        <ngb-datepicker *ngIf="isShowDatePicker" (navigate)="getDate($event.next)"> </ngb-datepicker>
+        <ngb-datepicker *ngIf="isShowDatePicker" [(ngModel)]="interValueDate" (ngModelChange)="getDate($event)"> </ngb-datepicker>
 
 
         <div class="invalid-feedback" *ngIf="error">

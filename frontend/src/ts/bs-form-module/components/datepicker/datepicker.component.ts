@@ -32,7 +32,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     interValueDate : any = { year : 2017 , month : 12}
 
     isShowDatePicker: boolean = false
-    currentSelectByKeyboard: number =  -1
 
     constructor(
         private el: ElementRef
@@ -49,7 +48,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     getDate(event : any) {
-        this.value = event
+        // this.value = event
         console.log(event)
     }
 

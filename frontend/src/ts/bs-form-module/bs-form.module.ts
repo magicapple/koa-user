@@ -1,7 +1,7 @@
 import { NgModule} from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
-import { ReactiveFormsModule} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 
 
 import { BSCommonModule } from '../bs-common-module/bs-common.module'
@@ -35,6 +35,7 @@ import {HttpService} from './services/http.service'
     imports      : [
         CommonModule,
         HttpClientModule,
+        FormsModule,
         ReactiveFormsModule,
 
         BSCommonModule,

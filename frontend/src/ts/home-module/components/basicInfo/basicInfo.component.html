@@ -48,7 +48,7 @@
 
             </div>
 
-            <bs-datepicker formControlName="birthdayDate" [fc]="userInfoForm.get('birthdayDate')" [label]="'生日2:'"></bs-datepicker>
+            <bs-datepicker formControlName="birthdayDate" [label]="'生日2:'"></bs-datepicker>
 
             <div formGroupName="birthday">
                 <bs-text-input formControlName="year" [fc]="userInfoForm.get('birthday.year')" [type]="'text'" [label]="'年:'" [dirty]="ignoreDirty" [error]="userInfoFormError.birthday?.year"></bs-text-input>
