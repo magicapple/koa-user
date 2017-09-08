@@ -92,7 +92,7 @@ export class TextInputComponent implements ControlValueAccessor, OnInit, OnChang
     writeValue(value: any): void {
         // console.log('WriteValue: ', value)
         if (value) {
-            this.value = value
+            this.interValue = value
         }
     }
 

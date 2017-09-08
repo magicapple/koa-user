@@ -7,7 +7,6 @@ const path             = require('path');
 const webpackMerge     = require('webpack-merge');
 const webpack          = require('webpack');
 const OptimizeJsPlugin = require('optimize-js-plugin');
-const {AotPlugin}      = require('@ngtools/webpack');
 
 
 const commonConfig = require('./webpack.common.js');
@@ -17,7 +16,6 @@ const helpers = require('./helpers');
 module.exports = function (env) {
 
     return webpackMerge(commonConfig(env), {
-
 
         /**
          * Developer tool to enhance debugging
@@ -45,12 +43,10 @@ module.exports = function (env) {
              */
             new OptimizeJsPlugin({
               sourceMap: false
-            }),
+            })
 
         ]
 
-
     })
-
 
 };

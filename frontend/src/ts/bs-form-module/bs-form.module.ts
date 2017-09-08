@@ -5,6 +5,7 @@ import { ReactiveFormsModule} from '@angular/forms'
 
 
 import { BSCommonModule } from '../bs-common-module/bs-common.module'
+import { NgbDatepickerModule } from './components/ngb-datepicker/datepicker.module';
 
 
 
@@ -12,6 +13,8 @@ import { SwitchComponent } from './components/switch/switch.component'
 import { TextInputComponent } from './components/text-input/text-input.component'
 import { SelectDropdownComponent } from './components/selectDropdown/selectDropdown.component'
 import { RadioComponent } from './components/radio/radio.component'
+import { DatePickerComponent } from './components/datepicker/datepicker.component'
+
 
 
 import {ForbiddenValidatorDirective} from './validators/custom-validator'
@@ -25,6 +28,7 @@ import {HttpService} from './services/http.service'
         TextInputComponent,
         SelectDropdownComponent,
         RadioComponent,
+        DatePickerComponent,
 
         ForbiddenValidatorDirective
     ],
@@ -33,7 +37,8 @@ import {HttpService} from './services/http.service'
         HttpClientModule,
         ReactiveFormsModule,
 
-        BSCommonModule
+        BSCommonModule,
+        NgbDatepickerModule.forRoot()
     ],
     providers    : [
         HttpService
@@ -43,10 +48,13 @@ import {HttpService} from './services/http.service'
         ReactiveFormsModule,
         HttpClientModule,
 
+        NgbDatepickerModule,
+
         TextInputComponent,
         SwitchComponent,
         SelectDropdownComponent,
-        RadioComponent
+        RadioComponent,
+        DatePickerComponent
     ],
     bootstrap    : []
 })

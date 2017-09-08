@@ -9,7 +9,6 @@ const webpack          = require('webpack');
 const OptimizeJsPlugin = require('optimize-js-plugin');
 
 
-
 const commonConfig = require('./webpack.common.js');
 const helpers = require('./helpers');
 
@@ -25,7 +24,6 @@ module.exports = function (env) {
          * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
          */
         devtool: 'source-map',
-
 
 
         plugins: [
@@ -47,12 +45,8 @@ module.exports = function (env) {
               sourceMap: false
             })
 
-
-
         ]
 
-
     })
-
 
 };

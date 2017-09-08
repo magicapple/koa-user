@@ -276,7 +276,7 @@
         "use-isnan": true,
         "use-named-parameter": true,
         "valid-typeof": true,
-        "variable-name": true,
+        "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
         "whitespace": [
             true,
             "check-branch",

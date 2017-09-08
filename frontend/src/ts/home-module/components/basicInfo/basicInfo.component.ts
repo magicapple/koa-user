@@ -142,7 +142,8 @@ export class BasicInfoComponent implements OnInit {
                 year: ['', [Validators.required] ],
                 month: ['', [Validators.required] ],
                 day: ['', [Validators.required] ]
-            })
+            }),
+            'birthdayDate'    : [null]
 
         } )
 

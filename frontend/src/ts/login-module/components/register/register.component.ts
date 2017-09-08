@@ -171,7 +171,7 @@ export class RegisterComponent implements OnInit {
 
 
                 this.sendSMSFirstTime = false
-                this.sendSMSTimer = 60
+                this.sendSMSTimer = 90
 
                 const intervalTimer : any  = setInterval( () => {
                     this.sendSMSTimer = this.sendSMSTimer - 1
