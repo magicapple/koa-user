@@ -57,14 +57,29 @@ export class BasicInfoComponent implements OnInit {
             data => {
                 this.currentUser = data.data
 
-                this.userInfoForm.patchValue({
-                    'firstName'    : data.data.firstName,
-                    'lastName'    : data.data.lastName,
-                    'nickname'    : data.data.nickname,
-                    'gender'    : data.data.gender,
-                    'marriage'    : data.data.marriage,
-                    'birthday'    : data.data.birthday
-                })
+                if (data.data.firstName) {
+                    this.userInfoForm.patchValue({ 'firstName'    : data.data.firstName})
+                }
+
+                if (data.data.lastName) {
+                    this.userInfoForm.patchValue({ 'lastName'    : data.data.lastName})
+                }
+
+                if (data.data.nickname) {
+                    this.userInfoForm.patchValue({ 'nickname'    : data.data.nickname})
+                }
+
+                if (data.data.gender) {
+                    this.userInfoForm.patchValue({ 'gender'    : data.data.gender})
+                }
+
+                if (data.data.marriage) {
+                    this.userInfoForm.patchValue({ 'marriage'    : data.data.marriage})
+                }
+
+                if (data.data.birthday) {
+                    this.userInfoForm.patchValue({ 'birthday'    : data.data.birthday})
+                }
 
                 // console.log('当前登陆的用户信息: ', data)
             },
@@ -73,7 +88,7 @@ export class BasicInfoComponent implements OnInit {
     }
 
 
-    userInfoFormError : any = { addressXX : []}
+    userInfoFormError : any = {}
     userInfoFormValidationMessages: any = {
         'firstName'   : {
             'required'  : '请填写名字!',
@@ -157,15 +172,18 @@ export class BasicInfoComponent implements OnInit {
             this.ignoreDirty = false
             this.userInfoFormInputChange(data)
         })
+
     }
 
 
     userInfoFormSubmit() {
-        // console.log('当前表单状态: ', this.userInfoForm.invalid, this.userInfoFormError)
 
         if (this.userInfoForm.invalid) {
             this.userInfoFormInputChange(this.userInfoForm.value, true)
             this.ignoreDirty = true
+
+            console.log('当前表单状态: ', this.userInfoForm.invalid, this.userInfoFormError, this.userInfoForm)
+
             return
         }
 

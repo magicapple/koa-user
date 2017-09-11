@@ -1,6 +1,6 @@
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script type="text/javascript" src="<%= staticPath %>/js/jquery3/jquery.slim.min.js"></script>
+<script type="text/javascript" src="<%= staticPath %>/js/jquery3/jquery.min.js"></script>
 <script type="text/javascript" src="<%= staticPath %>/js/popper.js/dist/umd/popper.min.js"></script>
 <script type="text/javascript" src="<%= staticPath %>/js/bootstrap4/bootstrap.min.js"></script>
 
@@ -8,3 +8,43 @@
 <script type="text/javascript" src="<%= staticPath %>/js/polyfills.bundle.js"></script>
 <script type="text/javascript" src="<%= staticPath %>/js/vendor.bundle.js"></script>
 
+
+
+
+<script type="text/javascript">
+
+
+    $( document ).ready(function() {
+
+        $( "#logout" ).click(function(event) {
+
+            event.preventDefault();
+
+            $.ajax({
+                url : '/api/user/logout',
+
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+
+                dataType : "json",
+            })
+            .done(function(result) {
+                console.log('Logout success', result)
+            })
+            .fail(function(xhr, status, errorThrown) {
+                console.error('Logout error', errorThrown)
+            })
+            .always(function(xhr, status) {
+//                alert( "complete" );
+            });
+
+        });
+
+
+    });
+
+
+
+
+
+</script>

@@ -139,6 +139,9 @@ function productionErrorHandler (app, options){
                     error.stack = ''
                 }
 
+                console.log('ctx.status', ctx.status)
+
+
             }else {
 
                 if (ctx.status >= 500){

@@ -18,8 +18,10 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
     @Input() label: string
 
     @Input() error: string = ''
+
     @Input('labelclass') labelClass: string = 'col-2'
     @Input('inputclass') inputClass: string = 'col-6'
+
     @Input() stacked: boolean = false
 
 
@@ -27,12 +29,13 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
 
     interValueCurrentRadio : any = { id : -1 , name : '请选择'}
 
-    currentRadio : boolean
 
-    constructor() {}
+    constructor() {
+        // console.log('constructor')
+    }
 
     ngOnInit(): void {
-        // console.log('radio')
+        // console.log('ngOnInit')
 
     }
 
@@ -42,8 +45,8 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
 
 
 
-    onChange (value : any) {}
-    onTouched () {}
+    onChange (value : any) { return }
+    onTouched () { return }
 
     get value() {
         return this.interValueCurrentRadio

@@ -19,6 +19,8 @@ function authMiddleware(options) {
 
             ctx.state.user = await UserService.userInfo(decodeToken)
 
+            GDataChecker.tokenUserNotFound(ctx.state.user)
+
             console.log('ctx.state: ', ctx.state)
 
             return false
