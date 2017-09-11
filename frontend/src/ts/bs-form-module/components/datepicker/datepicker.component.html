@@ -1,5 +1,5 @@
 <div class="form-group row" >
-    <label class="{{labelClass}} col-form-label">{{label}} </label>
+    <label class="{{labelClass}} col-form-label" *ngIf="showLabel">{{label}} </label>
     <div class="{{inputClass}}" #datepicker>
 
         <div class="input-group">

@@ -24,6 +24,8 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
 
     @Input() error: string = ''
 
+    @Input() showLabel: boolean = true
+
     @Input('labelclass') labelClass: string = 'col-2'
     @Input('inputclass') inputClass: string = 'col-3'
 
@@ -52,7 +54,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     getDate(event : any) {
-        
+
         this.value = event
         this.inputDisplayValue = event.year + '-' + event.month + '-' + event.day
     }
