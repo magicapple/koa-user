@@ -33,6 +33,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/web/home">账户设置</a>
                     <a class="dropdown-item" href="/web/home">修改密码</a>
+                    <a class="dropdown-item" href="/web/admin" <%- ngShow(user.isAdmin) %> >后台管理</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/api/logout">退出</a>
                 </div>

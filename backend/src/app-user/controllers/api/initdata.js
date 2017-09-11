@@ -11,6 +11,7 @@ exports.createUserRoles = async (ctx, next) => {
 
     const roleList = [
         {
+            "_id" : ObjectId("59ae7885cba8a4766ee00eeb"),
             name : 'normal',
             displayName : '普通用户',
             permissions : [
@@ -18,6 +19,7 @@ exports.createUserRoles = async (ctx, next) => {
             ]
         },
         {
+            "_id" : ObjectId("59ae7885cba8a4766ee00eec"),
             name : 'admin',
             displayName : '管理员',
             permissions : [

@@ -3,10 +3,10 @@
  */
 
 
-const koaJwt             = require('koa-jwt')
+const koaJwt = require('koa-jwt')
 
-const UserService        = require('../../app-user/service/user/userService')
-
+const UserService     = require('../../app-user/service/user/userService')
+const UserRoleService = require('../../app-user/service/user/userRoleService')
 
 function authMiddleware(options) {
 
@@ -18,7 +18,9 @@ function authMiddleware(options) {
         isRevoked : async (ctx, decodeToken, token) => {
 
             ctx.state.user = await UserService.userInfo(decodeToken)
+
             console.log('ctx.state: ', ctx.state)
+
             return false
         }
     })

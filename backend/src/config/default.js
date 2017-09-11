@@ -25,6 +25,11 @@ module.exports = {
         fieldName : "X-Access-Token"
     },
 
+    role : {
+        normal : '59ae7885cba8a4766ee00eeb',
+        admin : '59ae7885cba8a4766ee00eec',
+    },
+
     // 应用目录配置
     pathLogs : path.join(__dirname, "../../../logs/"),
 

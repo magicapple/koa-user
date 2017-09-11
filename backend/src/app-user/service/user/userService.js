@@ -11,7 +11,6 @@ const MUserToken = require('./model/userToken')
 const MVisitor = require('./model/visitor')
 
 
-
 exports.signUp = async (user) => {
 
     GDataChecker.username(user.username)
@@ -19,8 +18,10 @@ exports.signUp = async (user) => {
 
     let newUser = {
         username  : user.username,
-        password : user.password
+        password : user.password,
+        roles : [GMongoose.Types.ObjectId(GConfig.role.normal)]
     }
+
 
     if (user.email){
         GDataChecker.userEmail(user.email)
