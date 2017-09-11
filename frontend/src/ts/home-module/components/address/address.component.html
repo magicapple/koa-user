@@ -1,16 +1,8 @@
 
 
-        <H2 class="mb-4"> 修改信息 - {{currentUser?.username}}</H2>
+        <H2 class="mb-4"> 收货地址 </H2>
 
         <form [formGroup]="userInfoForm" (ngSubmit)="userInfoFormSubmit()" (keydown.enter)="$event.preventDefault()">
-
-            <bs-text-input formControlName="lastName" [fc]="userInfoForm.get('lastName')" [type]="'text'" [label]="'姓:'" [dirty]="ignoreDirty" [error]="userInfoFormError.lastName"></bs-text-input>
-            <bs-text-input formControlName="firstName" [fc]="userInfoForm.get('firstName')" [type]="'text'" [label]="'名字:'" [dirty]="ignoreDirty" [error]="userInfoFormError.firstName"></bs-text-input>
-            <bs-text-input formControlName="nickname" [fc]="userInfoForm.get('nickname')" [type]="'text'" [label]="'昵称:'" [dirty]="ignoreDirty" [error]="userInfoFormError.nickname"></bs-text-input>
-
-            <bs-select formControlName ="gender" [fc]="userInfoForm.get('gender')" [label]="'性别:'"  [options]="genderDataList" [error]="userInfoFormError.gender" ></bs-select>
-            <bs-radio formControlName ="marriage" [fc]="userInfoForm.get('marriage')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.marriage" ></bs-radio>
-
 
             <div formGroupName="address" class="well well-lg">
                 <h4>地址</h4>
