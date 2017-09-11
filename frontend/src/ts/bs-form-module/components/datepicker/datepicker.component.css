@@ -1,3 +1,5 @@
-.custom-select  {
-    background : none;
+.ngb-date-picker  {
+    position: absolute;
+    z-index: 10;
+    background-color: white;
 }

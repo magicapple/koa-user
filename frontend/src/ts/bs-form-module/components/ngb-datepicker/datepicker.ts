@@ -56,7 +56,7 @@ export interface NgbDatepickerNavigateEvent {
   selector: 'ngb-datepicker',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'class': 'd-inline-block rounded',
+    'class': 'ngb-date-picker d-inline-block rounded',
     'tabindex': '0',
     '[attr.tabindex]': 'model.disabled ? undefined : "0"',
     '(blur)': 'showFocus(false)',
