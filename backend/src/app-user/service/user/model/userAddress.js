@@ -9,7 +9,7 @@
 
 const UserAddressSchema = new GSchema({
 
-    user : [{ type: GSchema.Types.ObjectId, ref: 'UserBaseInfo' }],
+    user : { type: GSchema.Types.ObjectId, ref: 'UserBaseInfo' },
 
     addressCodeName: { type: String },
     
@@ -17,7 +17,7 @@ const UserAddressSchema = new GSchema({
     city: { type: String, trim: true, required: true },
     district: { type: String, trim: true, required: true },
 
-    detailAddress: { type: String },
+    detailAddress: { type: String, required: true },
     postalCode: { type: String, trim: true },
 
 

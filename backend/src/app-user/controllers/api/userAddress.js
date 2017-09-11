@@ -22,6 +22,6 @@ exports.getUserAddressListById = async (ctx, next) => {
  */
 exports.addNewAddress = async (ctx, next) => {
 
-    let address = await UserAddressService.addNewAddress(ctx.state.user._id, ctx.body);
+    let address = await UserAddressService.addNewAddress(ctx.state.user._id, ctx.request.body);
     ctx.body = address
 }

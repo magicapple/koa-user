@@ -22,7 +22,7 @@ exports.addNewAddress = async (userId, address) => {
         user  : userId,
 
         province : address.province,
-        city : address.province,
+        city : address.city,
         district : address.district,
 
         detailAddress : address.detailAddress,
