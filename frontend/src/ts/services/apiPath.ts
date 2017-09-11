@@ -16,7 +16,9 @@ const apiPath = {
     login : prefix + '/user/login',
 
     getUserInfo : prefix + '/users/session',
-    saveUserInfo : prefix + '/users/info'
+    saveUserInfo : prefix + '/users/info',
+
+    getUserAddressList : prefix + '/users/address'
 }
 
 

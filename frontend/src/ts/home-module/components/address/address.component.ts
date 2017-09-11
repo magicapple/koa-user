@@ -5,7 +5,7 @@ import { HttpService } from '../../../bs-form-module/services/http.service'
 
 
 import { formErrorHandler } from '../../../bs-form-module/validators/validator'
-import {UserLoginService} from '../../../services/userLogin.service'
+import { UserLoginService } from '../../../services/userLogin.service'
 
 
 
@@ -20,7 +20,7 @@ export class AddressComponent implements OnInit {
     userAddressForm: FormGroup
     ignoreDirty: boolean = false
 
-    currentUser : any
+    addressList : any[] = []
 
     constructor(
         private fb: FormBuilder,
@@ -38,19 +38,11 @@ export class AddressComponent implements OnInit {
     }
 
     getCurrentUserInfo () {
-        this.userService.getUserInfo().subscribe(
+        this.userService.getUserAddressList().subscribe(
             data => {
-                this.currentUser = data.data
+                this.addressList = data.data
 
-                this.userAddressForm.patchValue({
-                    'firstName'    : data.data.firstName,
-                    'lastName'    : data.data.lastName,
-                    'nickname'    : data.data.nickname,
-                    'gender'    : data.data.gender,
-                    'marriage'    : data.data.marriage
-                })
-
-                console.log('当前登陆的用户信息: ', data)
+                console.log('当前用户的收货地址: ', data)
             },
             error => {this.httpService.errorHandler(error) }
         )

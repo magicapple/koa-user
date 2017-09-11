@@ -5,7 +5,6 @@
         <form [formGroup]="userAddressForm" (ngSubmit)="userAddressFormSubmit()" (keydown.enter)="$event.preventDefault()">
 
             <div formGroupName="address" class="well well-lg">
-                <h4>地址</h4>
                 <bs-text-input formControlName="street" [fc]="userAddressForm.get('address.street')" [type]="'text'" [label]="'街道:'" [dirty]="ignoreDirty" [error]="userAddressFormError.address?.street"></bs-text-input>
                 <bs-text-input formControlName="city" [fc]="userAddressForm.get('address.city')" [type]="'text'" [label]="'城市:'" [dirty]="ignoreDirty" [error]="userAddressFormError.address?.city"></bs-text-input>
             </div>
@@ -25,3 +24,26 @@
         </form>
 
 
+
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>收货人</th>
+                    <th>所在地区</th>
+                    <th>详细地址</th>
+                    <th>邮编</th>
+                    <th>手机/电话</th>
+                    <th>电子邮箱</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+            </tbody>
+        </table>

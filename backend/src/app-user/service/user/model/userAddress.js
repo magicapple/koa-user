@@ -18,6 +18,7 @@ const UserAddressSchema = new GSchema({
     district: { type: String, trim: true, required: true },
 
     detailAddress: { type: String },
+    postalCode: { type: String, trim: true },
 
 
     contactPerson: { type: String, trim: true, required: true },

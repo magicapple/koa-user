@@ -45,8 +45,8 @@ export class IndexHomeComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.createUserInfoForm()
-        this.getCurrentUserInfo()
+        // this.createUserInfoForm()
+        // this.getCurrentUserInfo()
     }
 
     getCurrentUserInfo () {
