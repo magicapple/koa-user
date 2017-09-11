@@ -22,7 +22,6 @@
             <div class="form-group row">
                 <label class="col-2 col-form-label">邮箱:</label>
                 <div class="col-6">
-
                     <input type="text" readonly class="form-control-plaintext form-input-readonly" value="{{currentUser?.email || '暂无'}}">
                 </div>
             </div>
@@ -33,28 +32,22 @@
             <bs-text-input formControlName="nickname" [fc]="userInfoForm.get('nickname')" [type]="'text'" [label]="'昵称:'" [dirty]="ignoreDirty" [error]="userInfoFormError.nickname"></bs-text-input>
 
             <bs-select formControlName ="gender" [fc]="userInfoForm.get('gender')" [label]="'性别:'"  [options]="genderDataList" [error]="userInfoFormError.gender" ></bs-select>
+
+
+            <bs-datepicker formControlName="birthday" [fc]="userInfoForm.get('birthday')" [label]="'生日:'" [error]="userInfoFormError.birthday"></bs-datepicker>
             <bs-radio formControlName ="marriage" [fc]="userInfoForm.get('marriage')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.marriage" ></bs-radio>
 
 
-            <div class="form-group row">
-                <label class="col-2 col-form-label">生日:</label>
 
-                <div class="col-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" ngbDatepicker #birthdayPicker="ngbDatepicker" (click)="birthdayPicker.toggle();">
-                        <span class="input-group-addon" (click)="birthdayPicker.toggle();"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
 
-            </div>
-
-            <bs-datepicker formControlName="birthdayDate" [label]="'生日2:'"></bs-datepicker>
+<!--
 
             <div formGroupName="birthday">
                 <bs-text-input formControlName="year" [fc]="userInfoForm.get('birthday.year')" [type]="'text'" [label]="'年:'" [dirty]="ignoreDirty" [error]="userInfoFormError.birthday?.year"></bs-text-input>
                 <bs-text-input formControlName="month" [fc]="userInfoForm.get('birthday.month')" [type]="'text'" [label]="'月:'" [dirty]="ignoreDirty" [error]="userInfoFormError.birthday?.month"></bs-text-input>
                 <bs-text-input formControlName="day" [fc]="userInfoForm.get('birthday.day')" [type]="'text'" [label]="'日:'" [dirty]="ignoreDirty" [error]="userInfoFormError.birthday?.day"></bs-text-input>
             </div>
+-->
 
 
 

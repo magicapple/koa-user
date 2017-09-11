@@ -34,6 +34,8 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
 
     isShowDatePicker: boolean = false
 
+    errorFormatInfo: string = ''
+
     constructor(
         private el: ElementRef
     ) {
@@ -50,12 +52,35 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
     }
 
     getDate(event : any) {
-        // this.value = event
-        console.log(event)
+        
         this.value = event
         this.inputDisplayValue = event.year + '-' + event.month + '-' + event.day
     }
 
+    onKeyChange(textValue : string) {
+
+        // const isDateString = new RegExp('^[1-4][0-9]{3}-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][0-9]|3[0-1])$')
+
+        /**
+         * @isDateString {RegExp}
+         *
+         * 考虑闰年的情况
+         * http://blog.sina.com.cn/s/blog_672f8c780100ni4j.html
+         */
+        const isDateString = new RegExp('^(?:(?!0000)[0-9]{4}-(?:(?:0?[1-9]|1[0-2])-(?:0?[1-9]|1[0-9]|2[0-8])|(?:0?[13-9]|1[0-2])-(?:29|30)|(?:0?[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$')
+
+        if (isDateString.test(textValue)) {
+            this.errorFormatInfo = ''
+
+            const tempArrayDate : string[] = textValue.split('-')
+            const tempDate = new Date( Number(tempArrayDate[0]), Number(tempArrayDate[1]) - 1, Number(tempArrayDate[2]) )
+
+            this.value = {year: tempDate.getFullYear(), month: tempDate.getMonth() + 1, day: tempDate.getDate()}
+            // this.inputDisplayValue = this.interValueDate.year + '-' + this.interValueDate.month + '-' + this.interValueDate.day
+        }else {
+            this.errorFormatInfo = '日期格式不正确!'
+        }
+    }
 
     //点击选择框以外区域,隐藏datepicker
     onClickHideSelect(event: any) {
@@ -117,7 +142,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
 
                         now = new Date( Number(tempArray[0]), Number(tempArray[1]) - 1, Number(tempArray[2]) )
 
-                        this.interValueDate = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()}
+                        this.value = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()}
                         this.inputDisplayValue = this.interValueDate.year + '-' + this.interValueDate.month + '-' + this.interValueDate.day
                     }
                 }
@@ -131,21 +156,25 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
 
                         now = new Date( Number(tempArray[0]), Number(tempArray[1]) - 1, 1 )
 
-                        this.interValueDate = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()}
+                        this.value = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()}
                         this.inputDisplayValue = this.interValueDate.year + '-' + this.interValueDate.month
                     }
                 }
+            }
 
+            if (typeof value === 'object' && value.year && value.month && value.day ) {
+
+                isValid = true
+                this.value = value
+                this.inputDisplayValue = this.interValueDate.year + '-' + this.interValueDate.month + '-' + this.interValueDate.day
             }
 
         }
 
         if (!isValid) {
-            this.interValueDate = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()}
+            this.value = null
             this.inputDisplayValue = ''
         }
-
-
 
     }
 

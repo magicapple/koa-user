@@ -62,7 +62,8 @@ export class BasicInfoComponent implements OnInit {
                     'lastName'    : data.data.lastName,
                     'nickname'    : data.data.nickname,
                     'gender'    : data.data.gender,
-                    'marriage'    : data.data.marriage
+                    'marriage'    : data.data.marriage,
+                    'birthday'    : data.data.birthday
                 })
 
                 // console.log('当前登陆的用户信息: ', data)
@@ -107,16 +108,19 @@ export class BasicInfoComponent implements OnInit {
             'required' : '请填写婚姻状况!'
         },
 
-        'birthday' : {
-            'year'  : {
-                'required' : '请填写生日年份!'
-            },
-            'month' : {
-                'required' : '请填写生日月份!'
-            },
-            'day'   : {
-                'required' : '请填写生日!'
-            }
+        // 'birthday' : {
+        //     'year'  : {
+        //         'required' : '请填写生日年份!'
+        //     },
+        //     'month' : {
+        //         'required' : '请填写生日月份!'
+        //     },
+        //     'day'   : {
+        //         'required' : '请填写生日!'
+        //     }
+        // },
+        'birthday'    : {
+            'required' : '请填写生日!'
         }
     }
 
@@ -132,18 +136,20 @@ export class BasicInfoComponent implements OnInit {
         if (!user.gender) {user.gender = ''}
         if (!user.marriage) {user.marriage = ''}
 
+        if (!user.birthday) {user.birthday = ''}
+
         this.userInfoForm = this.fb.group({
             'firstName'    : [user.firstName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'lastName'    : [user.lastName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'nickname'    : [user.nickname, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'gender'    : [user.gender, [Validators.required] ],
             'marriage'    : [user.marriage, [Validators.required] ],
-            'birthday'    : this.fb.group({
-                year: ['', [Validators.required] ],
-                month: ['', [Validators.required] ],
-                day: ['', [Validators.required] ]
-            }),
-            'birthdayDate'    : ['2017']
+            // 'birthday'    : this.fb.group({
+            //     year: ['', [Validators.required] ],
+            //     month: ['', [Validators.required] ],
+            //     day: ['', [Validators.required] ]
+            // }),
+            'birthday'    : [user.birthday, [Validators.required]]
 
         } )
 
