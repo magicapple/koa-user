@@ -3,7 +3,7 @@
     <div class="{{inputClass}}" #datepicker>
 
         <div class="input-group">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" (click)="showDatePicker()">
             <span class="input-group-addon" (click)="showDatePicker()"><i class="fa fa-calendar"></i></span>
         </div>
 
