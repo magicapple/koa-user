@@ -40,8 +40,8 @@
                 <bs-text-input formControlName="day" [fc]="userInfoForm.get('birthday.day')" [type]="'text'" [label]="'日:'" [dirty]="ignoreDirty" [error]="userInfoFormError.birthday?.day"></bs-text-input>
             </div>
 
-
-
+            <bs-address formControlName ="address" [fc]="userInfoForm.get('address')" [label]="'住址:'" [options]="addressDataList" [error]="userInfoFormError.address"></bs-address>
+            <p>{{userInfoForm.get('address').value | json}}</p>
 
             <div class="form-group row">
                 <div class="col-10 ml-auto">

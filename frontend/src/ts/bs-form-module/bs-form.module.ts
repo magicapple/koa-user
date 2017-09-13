@@ -12,8 +12,7 @@ import { SwitchComponent } from './components/switch/switch.component'
 import { TextInputComponent } from './components/text-input/text-input.component'
 import { SelectDropdownComponent } from './components/selectDropdown/selectDropdown.component'
 import { RadioComponent } from './components/radio/radio.component'
-
-
+import { SelectAddressComponent } from './components/address/address.component'
 import {ForbiddenValidatorDirective} from './validators/custom-validator'
 
 
@@ -25,7 +24,7 @@ import {HttpService} from './services/http.service'
         TextInputComponent,
         SelectDropdownComponent,
         RadioComponent,
-
+        SelectAddressComponent,
         ForbiddenValidatorDirective
     ],
     imports      : [
@@ -46,7 +45,8 @@ import {HttpService} from './services/http.service'
         TextInputComponent,
         SwitchComponent,
         SelectDropdownComponent,
-        RadioComponent
+        RadioComponent,
+        SelectAddressComponent
     ],
     bootstrap    : []
 })
