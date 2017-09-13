@@ -13,18 +13,24 @@
     transform: rotate(180deg);
 }
 
-.options {
+.options_box {
     position: absolute;
     top : 38px;
     width: 98%;
     padding-right: 0.75rem;
-    z-index: 2;
+    z-index: 99;
 }
-.options li:hover{
+
+.options_box .list-group-item {
+    border-radius: 0;
+    padding: 6px 1.25rem;
+
+}
+.options_box li:hover{
     background-color: #f1f1f1;
     cursor: pointer;
 }
-.active{
+.options_box .active{
     background-color: #03b7f1!important;
     border-color: transparent;
 }

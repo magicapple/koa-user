@@ -58,13 +58,29 @@ export class BasicInfoComponent implements OnInit {
             data => {
                 this.currentUser = data.data
 
-                this.userInfoForm.patchValue({
-                    'firstName'    : data.data.firstName,
-                    'lastName'    : data.data.lastName,
-                    'nickname'    : data.data.nickname,
-                    'gender'    : data.data.gender,
-                    'marriage'    : data.data.marriage
-                })
+                if (data.data.firstName) {
+                    this.userInfoForm.patchValue({ 'firstName'    : data.data.firstName})
+                }
+
+                if (data.data.lastName) {
+                    this.userInfoForm.patchValue({ 'lastName'    : data.data.lastName})
+                }
+
+                if (data.data.nickname) {
+                    this.userInfoForm.patchValue({ 'nickname'    : data.data.nickname})
+                }
+
+                if (data.data.gender) {
+                    this.userInfoForm.patchValue({ 'gender'    : data.data.gender})
+                }
+
+                if (data.data.marriage) {
+                    this.userInfoForm.patchValue({ 'marriage'    : data.data.marriage})
+                }
+
+                if (data.data.birthday) {
+                    this.userInfoForm.patchValue({ 'birthday'    : data.data.birthday})
+                }
 
                 // console.log('当前登陆的用户信息: ', data)
             },
@@ -73,7 +89,7 @@ export class BasicInfoComponent implements OnInit {
     }
 
 
-    userInfoFormError : any = { addressXX : []}
+    userInfoFormError : any = {}
     userInfoFormValidationMessages: any = {
         'firstName'   : {
             'required'  : '请填写名字!',
@@ -108,16 +124,19 @@ export class BasicInfoComponent implements OnInit {
             'required' : '请填写婚姻状况!'
         },
 
-        'birthday' : {
-            'year'  : {
-                'required' : '请填写生日年份!'
-            },
-            'month' : {
-                'required' : '请填写生日月份!'
-            },
-            'day'   : {
-                'required' : '请填写生日!'
-            }
+        // 'birthday' : {
+        //     'year'  : {
+        //         'required' : '请填写生日年份!'
+        //     },
+        //     'month' : {
+        //         'required' : '请填写生日月份!'
+        //     },
+        //     'day'   : {
+        //         'required' : '请填写生日!'
+        //     }
+        // },
+        'birthday'    : {
+            'required' : '请填写生日!'
         },
         'address'      : {
             'required' : '请选择住址!'
@@ -137,6 +156,8 @@ export class BasicInfoComponent implements OnInit {
         if (!user.address) {user.address = ''}
         if (!user.marriage) {user.marriage = ''}
 
+        if (!user.birthday) {user.birthday = ''}
+
         this.userInfoForm = this.fb.group({
             'firstName'    : [user.firstName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'lastName'    : [user.lastName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
@@ -149,11 +170,12 @@ export class BasicInfoComponent implements OnInit {
 
             }, [Validators.required] ],
             'marriage'    : [user.marriage, [Validators.required] ],
-            'birthday'    : this.fb.group({
-                year: ['', [Validators.required] ],
-                month: ['', [Validators.required] ],
-                day: ['', [Validators.required] ]
-            })
+            // 'birthday'    : this.fb.group({
+            //     year: ['', [Validators.required] ],
+            //     month: ['', [Validators.required] ],
+            //     day: ['', [Validators.required] ]
+            // }),
+            'birthday'    : [user.birthday, [Validators.required]]
 
         } )
 
@@ -161,15 +183,18 @@ export class BasicInfoComponent implements OnInit {
             this.ignoreDirty = false
             this.userInfoFormInputChange(data)
         })
+
     }
 
 
     userInfoFormSubmit() {
-        // console.log('当前表单状态: ', this.userInfoForm.invalid, this.userInfoFormError)
 
         if (this.userInfoForm.invalid) {
             this.userInfoFormInputChange(this.userInfoForm.value, true)
             this.ignoreDirty = true
+
+            console.log('当前表单状态: ', this.userInfoForm.invalid, this.userInfoFormError, this.userInfoForm)
+
             return
         }
 

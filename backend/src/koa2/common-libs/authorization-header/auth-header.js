@@ -14,7 +14,7 @@
  */
 module.exports = function resolveAuthorizationHeader(ctx, opts) {
     if (!ctx.header || !ctx.header.authorization) {
-        return false;
+        return false
     }
 
     const parts = ctx.header.authorization.split(' ');

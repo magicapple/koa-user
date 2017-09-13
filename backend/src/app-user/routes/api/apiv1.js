@@ -11,6 +11,8 @@ const auth = require('../../../koa2/koa2-middleware/auth-jwt')
 const router = require('koa-router')()
 const initController = require('../../controllers/api/initdata')
 const userController = require('../../controllers/api/user')
+const userAddressController = require('../../controllers/api/userAddress')
+
 const shopController = require('../../controllers/api/shop')
 const formController = require('../../controllers/api/form')
 
@@ -60,6 +62,10 @@ router.post('/user/logout', userController.logout)
 
 router.get('/users/session', auth(), userController.getSessionUserInfo)
 router.post('/users/info', auth(), userController.saveUserBasicInfo)
+
+
+router.get('/users/address', auth(), userAddressController.getUserAddressListById)
+router.post('/users/address', auth(), userAddressController.addNewAddress)
 
 
 

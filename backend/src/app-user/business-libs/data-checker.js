@@ -142,9 +142,10 @@ let validation = {
     // tokenNotFound : function (token, next){
     //     if (!token) return throw401(code.token.tokenNotFound.code, code.token.tokenNotFound.message, code.token.tokenNotFound.field, next)
     // },
-    // tokenUserNotFound : function (user, next){
-    //     if (!user) return throw401(code.token.userNotFound.code, code.token.userNotFound.message, code.token.userNotFound.field, next)
-    // },
+
+    tokenUserNotFound : function (user, field){
+        if (!user) return throw401('token.userNotFound', field)
+    },
 
     tokenDecodeWrong : function (token, field){
         if (token) return throw401('token.tokenDecodeWrong', field)

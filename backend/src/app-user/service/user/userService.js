@@ -11,7 +11,6 @@ const MUserToken = require('./model/userToken')
 const MVisitor = require('./model/visitor')
 
 
-
 exports.signUp = async (user) => {
 
     GDataChecker.username(user.username)
@@ -19,8 +18,10 @@ exports.signUp = async (user) => {
 
     let newUser = {
         username  : user.username,
-        password : user.password
+        password : user.password,
+        roles : [GMongoose.Types.ObjectId(GConfig.role.normal)]
     }
+
 
     if (user.email){
         GDataChecker.userEmail(user.email)
@@ -56,12 +57,12 @@ exports.signUp = async (user) => {
 exports.checkUsernameExist = async (username) => {
     GDataChecker.username(username)
 
-    return await MUserBaseInfo.findOne({username : username}).exec()
+    return MUserBaseInfo.findOne({username : username}).exec()
 }
 exports.checkMobilePhoneExist = async (mobilePhone) => {
     GDataChecker.userMobile(mobilePhone)
 
-    return await MUserBaseInfo.findOne({mobilePhone:mobilePhone}).exec()
+    return MUserBaseInfo.findOne({mobilePhone:mobilePhone}).exec()
 }
 
 
@@ -102,8 +103,7 @@ exports.logout = async (userToken) =>{
 
     GDataChecker.token(userToken)
 
-    let resultToken = await MUserToken.removeToken(userToken)
-    return resultToken
+    return MUserToken.removeToken(userToken)
 
 }
 
@@ -138,9 +138,7 @@ exports.signUpWeChat = async (user) => {
 
 exports.userInfo = async (userToken) =>{
 
-    let resultUser = await MUserBaseInfo.find1({_id:userToken._id})
-
-    return resultUser
+    return MUserBaseInfo.find1({_id:userToken._id})
 
 }
 
@@ -163,6 +161,6 @@ exports.saveUserBasicInfo = async (userId, userInfo) =>{
         if (userInfo.birthday.day ) { resultUser.birthday.day = userInfo.birthday.day}
     }
 
-    return await resultUser.save()
+    return resultUser.save()
 
 }

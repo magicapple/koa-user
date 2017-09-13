@@ -32,16 +32,25 @@
             <bs-text-input formControlName="nickname" [fc]="userInfoForm.get('nickname')" [type]="'text'" [label]="'昵称:'" [dirty]="ignoreDirty" [error]="userInfoFormError.nickname"></bs-text-input>
 
             <bs-select formControlName ="gender" [fc]="userInfoForm.get('gender')" [label]="'性别:'"  [options]="genderDataList" [error]="userInfoFormError.gender" ></bs-select>
+
+
+            <bs-datepicker formControlName="birthday" [fc]="userInfoForm.get('birthday')" [label]="'生日:'" [error]="userInfoFormError.birthday"></bs-datepicker>
             <bs-radio formControlName ="marriage" [fc]="userInfoForm.get('marriage')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.marriage" ></bs-radio>
+
+
+
+            <bs-address formControlName ="address" [fc]="userInfoForm.get('address')" [label]="'住址:'" [options]="addressDataList" [error]="userInfoFormError.address"></bs-address>
+
+<!--
 
             <div formGroupName="birthday">
                 <bs-text-input formControlName="year" [fc]="userInfoForm.get('birthday.year')" [type]="'text'" [label]="'年:'" [dirty]="ignoreDirty" [error]="userInfoFormError.birthday?.year"></bs-text-input>
                 <bs-text-input formControlName="month" [fc]="userInfoForm.get('birthday.month')" [type]="'text'" [label]="'月:'" [dirty]="ignoreDirty" [error]="userInfoFormError.birthday?.month"></bs-text-input>
                 <bs-text-input formControlName="day" [fc]="userInfoForm.get('birthday.day')" [type]="'text'" [label]="'日:'" [dirty]="ignoreDirty" [error]="userInfoFormError.birthday?.day"></bs-text-input>
             </div>
+-->
 
-            <bs-address formControlName ="address" [fc]="userInfoForm.get('address')" [label]="'住址:'" [options]="addressDataList" [error]="userInfoFormError.address"></bs-address>
-            <p>{{userInfoForm.get('address').value | json}}</p>
+
 
             <div class="form-group row">
                 <div class="col-10 ml-auto">

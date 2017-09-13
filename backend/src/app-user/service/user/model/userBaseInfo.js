@@ -2,8 +2,10 @@
 const bcrypt = require('bcrypt')
 
 
+const roleAdmin = GConfig.role.admin
 
-const saltRounds = 10
+
+const saltRounds = 12
 
 /**
  * Mongoose schema
@@ -49,8 +51,8 @@ const UserBaseInfoSchema = new GSchema({
 
 
 }, {
-    toObject: { virtuals: false },
-    toJSON: { virtuals: false },
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
     timestamps: true
 })
 
@@ -102,6 +104,20 @@ const UserBaseInfoSchema = new GSchema({
 //         return next()
 //     }
 // })
+
+
+
+
+UserBaseInfoSchema.virtual('isAdmin').get(function () {
+    let isPassed = false
+    this.roles.forEach( (role )=> {
+        if (role._id.equals( GMongoose.Types.ObjectId(roleAdmin)) ) {
+            isPassed = true
+        }
+    })
+
+    return isPassed
+})
 
 
 
@@ -165,6 +181,9 @@ UserBaseInfoSchema.methods.comparePasswordCB = function (password, callback) {
 
 
 UserBaseInfoSchema.methods.encryptPassword = encryptPassword
+
+
+
 
 
 

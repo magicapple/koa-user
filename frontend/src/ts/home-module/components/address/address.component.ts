@@ -5,7 +5,7 @@ import { HttpService } from '../../../bs-form-module/services/http.service'
 
 
 import { formErrorHandler } from '../../../bs-form-module/validators/validator'
-import {UserLoginService} from '../../../services/userLogin.service'
+import { UserLoginService } from '../../../services/userLogin.service'
 
 
 
@@ -17,22 +17,10 @@ import {UserLoginService} from '../../../services/userLogin.service'
 })
 export class AddressComponent implements OnInit {
 
-    userInfoForm: FormGroup
+    userAddressForm: FormGroup
     ignoreDirty: boolean = false
 
-    currentUser : any
-
-    genderDataList : any[] = [
-        { id : 1, name : '男'},
-        { id : 2, name : '女'},
-        { id : 3, name : '男变性女'},
-        { id : 4, name : '女变性男'}
-    ]
-
-    marryDataList : any[] = [
-        { id : 1, name : '未婚'},
-        { id : 2, name : '已婚'}
-    ]
+    addressList : any[] = []
 
     constructor(
         private fb: FormBuilder,
@@ -45,47 +33,39 @@ export class AddressComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.createUserInfoForm()
+        this.createuserAddressForm()
         this.getCurrentUserInfo()
     }
 
     getCurrentUserInfo () {
-        this.userService.getUserInfo().subscribe(
+        this.userService.getUserAddressList().subscribe(
             data => {
-                this.currentUser = data.data
+                this.addressList = data.data
 
-                this.userInfoForm.patchValue({
-                    'firstName'    : data.data.firstName,
-                    'lastName'    : data.data.lastName,
-                    'nickname'    : data.data.nickname,
-                    'gender'    : data.data.gender,
-                    'marriage'    : data.data.marriage
-                })
-
-                console.log('当前登陆的用户信息: ', data)
+                console.log('当前用户的收货地址: ', data)
             },
             error => {this.httpService.errorHandler(error) }
         )
     }
 
 
-    userInfoFormError : any = { addressXX : []}
-    userInfoFormValidationMessages: any = {
-        'firstName'  : {
+    userAddressFormError : any = { addressXX : []}
+    userAddressFormValidationMessages: any = {
+        'province'  : {
             'required'      : '请填写名字!',
             'minlength'     : '名字长度1-100个字符!',
             'maxlength'     : '名字长度1-100个字符!',
             'pattern'       : '名字必须字母开头!',
             'isExist'       : '名字已经存在!'
         },
-        'lastName'  : {
+        'city'  : {
             'required'      : '请填写姓!',
             'minlength'     : '姓长度1-100个字符!',
             'maxlength'     : '姓长度1-100个字符!',
             'pattern'       : '姓必须字母开头!',
             'isExist'       : '姓已经存在!'
         },
-        'nickname'  : {
+        'district'  : {
             'required'      : '请填写昵称!',
             'minlength'     : '昵称长度4-30个字符!',
             'maxlength'     : '昵称长度4-30个字符!',
@@ -96,28 +76,14 @@ export class AddressComponent implements OnInit {
             'required'    : '请填写手机号!',
             'mobilePhone' : '手机号格式不正确!',
             'isExist'     : '手机号已经存在!'
-        },
-        'gender'  : {
-            'required'      : '请填写性别!'
-        },
-        'marriage'  : {
-            'required'      : '请填写婚姻状况!'
-        },
-        'address'  : {
-            'street' : {'required'      : '请填写街道!'},
-            'city' : { 'required'      : '请填写城市!'}
-        },
-        'addressXX'  : {
-            'street' : {'required'      : '请填写街道!'},
-            'city' : { 'required'      : '请填写城市!'}
         }
     }
 
-    userInfoFormInputChange(formInputData : any, ignoreDirty : boolean = false) {
-        this.userInfoFormError = formErrorHandler(formInputData, this.userInfoForm, this.userInfoFormValidationMessages, ignoreDirty)
+    userAddressFormInputChange(formInputData : any, ignoreDirty : boolean = false) {
+        this.userAddressFormError = formErrorHandler(formInputData, this.userAddressForm, this.userAddressFormValidationMessages, ignoreDirty)
     }
 
-    createUserInfoForm(user: any = {}): void {
+    createuserAddressForm(user: any = {}): void {
 
         if (!user.firstName) {user.firstName = ''}
         if (!user.lastName) {user.lastName = ''}
@@ -125,7 +91,7 @@ export class AddressComponent implements OnInit {
         if (!user.gender) {user.gender = ''}
         if (!user.marriage) {user.marriage = ''}
 
-        this.userInfoForm = this.fb.group({
+        this.userAddressForm = this.fb.group({
             'firstName'    : [user.firstName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'lastName'    : [user.lastName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'nickname'    : [user.nickname, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
@@ -147,22 +113,22 @@ export class AddressComponent implements OnInit {
             ])
         } )
 
-        this.userInfoForm.valueChanges.subscribe(data => {
+        this.userAddressForm.valueChanges.subscribe(data => {
             this.ignoreDirty = false
-            this.userInfoFormInputChange(data)
+            this.userAddressFormInputChange(data)
         })
     }
 
 
-    userInfoFormSubmit() {
-        console.log('当前信息: ', this.userInfoForm.invalid, this.userInfoFormError)
-        if (this.userInfoForm.invalid) {
-            this.userInfoFormInputChange(this.userInfoForm.value, true)
+    userAddressFormSubmit() {
+        console.log('当前信息: ', this.userAddressForm.invalid, this.userAddressFormError)
+        if (this.userAddressForm.invalid) {
+            this.userAddressFormInputChange(this.userAddressForm.value, true)
             this.ignoreDirty = true
             return
         }
 
-        this.userService.saveUserInfo(this.userInfoForm.value).subscribe(
+        this.userService.saveUserInfo(this.userAddressForm.value).subscribe(
             data => {
                 console.log('保存用户信息成功: ', data)
                 this.httpService.successHandler(data)

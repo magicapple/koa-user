@@ -21,8 +21,13 @@ module.exports = {
 
     authToken : {
         secret : "koa2-user-secret-x1",
-        expireDay : 1,
+        expireDay : 7,
         fieldName : "X-Access-Token"
+    },
+
+    role : {
+        normal : '59ae7885cba8a4766ee00eeb',
+        admin : '59ae7885cba8a4766ee00eec',
     },
 
     // 应用目录配置
