@@ -39,8 +39,108 @@
 
 
 <body>
+<div class="wrapper">
+    <header class="header">
+        <span class="logo">logo</span>
+        <i class="fa fa-navicon tabChange" id="tabChange"></i>
+        <div class="headRight">
+            <span>登录</span>
+            <span>注册</span>
+            <span>******,您好</span>
+        </div>
+    </header>
+    <div class="aside">
+        <aside class="sideBar" id="nav" role="tabList">
+            <div class="card pt-4">
+                <div role="tab" id="headingOne" class="active">
+                    <h6 class="mb-0 ml-4">
+                        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <em class="fa fa-magic mr-2"></em>
+                            <span>Dashboard</span>
+                        </a>
+                    </h6>
+                </div>
+                <div id="collapseOne" class="subNav collapse show" role="tabPanel" aria-labelledby="headingOne" data-parent="#nav">
+                    <ul>
+                        <li>
+                            <a href="#">Dashboard v1</a>
+                        </li>
+                        <li>
+                            <a href="#">Dashboard v2</a>
+                        </li>
+                        <li>
+                            <a href="#">Dashboard v3</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-sss
+            <div class="card">
+                <div role="tab" id="headingOne">
+                    <h6 class="mb-0 ml-4">
+                        <a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <em class="fa fa-key mr-2"></em>
+                            <span>Widgets</span>
+                        </a>
+                    </h6>
+                </div>
+                <div id="collapseTwo" class="subNav collapse" role="tabPanel" aria-labelledby="headingTwo" data-parent="#nav">
+                    <ul>
+                        <li>
+                            <a href="#">Widgets v1</a>
+                        </li>
+                        <li>
+                            <a href="#">Widgets v2</a>
+                        </li>
+                        <li>
+                            <a href="#">Widgets v3</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <aside class="sideBarIco">
+            <ul>
+                <li class="nav-header active">
+                    <em class="fa fa-magic"></em>
+                    <ul class="subNav">
+                        <li><h6>Dashboard</h6></li>
+                        <li><a href="">Dashboard v1</a></li>
+                        <li><a href="">Dashboard v2</a></li>
+                        <li><a href="">Dashboard v3</a></li>
+                    </ul>
+                </li>
+                <li class="nav-header">
+                    <em class="fa fa-key"></em>
+                    <ul class="subNav">
+                        <li><h6>Widgets</h6></li>
+                        <li><a href="">Widgets v1</a></li>
+                        <li><a href="">Widgets v2</a></li>
+                        <li><a href="">Widgets v3</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -55,9 +155,6 @@ sss
 <script type="text/javascript" src="<%= staticPath %>/js/manifest.bundle.js"></script>
 <script type="text/javascript" src="<%= staticPath %>/js/polyfills.bundle.js"></script>
 <script type="text/javascript" src="<%= staticPath %>/js/vendor.bundle.js"></script>
-
-
-
 
 <script type="text/javascript">
 
@@ -88,12 +185,21 @@ sss
 
         });
 
+        $("#tabChange").click(function () {
+            if($(".sideBarIco").css('display') === 'none') {
+                $(".sideBarIco").css('display','block');
+                $(".aside").animate({width:'65px'});
+                $(".sideBar").css('display','none');
+            }else {
+                $(".sideBarIco").css('display','none');
+                $(".aside").animate({width:'220px'});
+                $(".sideBar").css('display','block');
+            }
+
+        })
+
 
     });
-
-
-
-
 
 </script>
 <!--<script type="text/javascript" src="<%= staticPath %>/js/home.bundle.js"></script>-->
