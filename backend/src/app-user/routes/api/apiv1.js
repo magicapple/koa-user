@@ -66,6 +66,7 @@ router.post('/users/info', auth(), userController.saveUserBasicInfo)
 
 router.get('/users/address', auth(), userAddressController.getUserAddressListById)
 router.post('/users/address', auth(), userAddressController.addNewAddress)
+router.put('/users/address/:addressId', auth(), userAddressController.updateNewAddress)
 
 
 

@@ -12,10 +12,16 @@ const UserAddressSchema = new GSchema({
     user : { type: GSchema.Types.ObjectId, ref: 'UserBaseInfo' },
 
     addressCodeName: { type: String },
-    
-    province: { type: String, trim: true, required: true },  // 由于微信登录等第三方登录，所以注册时可以不填写
+
+    province: { type: String, trim: true, required: true },
+    provinceId: { type: String, trim: true, required: true },
+
     city: { type: String, trim: true, required: true },
+    cityId: { type: String, trim: true, required: true },
+
     district: { type: String, trim: true, required: true },
+    districtId: { type: String, trim: true, required: true },
+
 
     detailAddress: { type: String, required: true },
     postalCode: { type: String, trim: true },

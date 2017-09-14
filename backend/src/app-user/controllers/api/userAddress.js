@@ -25,3 +25,13 @@ exports.addNewAddress = async (ctx, next) => {
     let address = await UserAddressService.addNewAddress(ctx.state.user._id, ctx.request.body);
     ctx.body = address
 }
+
+
+/**
+ * 修改用户收货地址
+ */
+exports.updateNewAddress = async (ctx, next) => {
+
+    let address = await UserAddressService.updateAddress(ctx.state.user._id, ctx.params.addressId, ctx.request.body);
+    ctx.body = address
+}

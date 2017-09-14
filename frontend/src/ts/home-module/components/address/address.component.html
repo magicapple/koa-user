@@ -1,7 +1,7 @@
 
 
         <H2 class="mb-4"> 收货地址
-            <button type="button" class="btn btn-outline-info btn-sm float-right" (click)="showForm()">新建</button>
+            <button type="button" class="btn btn-outline-info btn-sm float-right" (click)="showForm(true)">新建</button>
         </H2>
 
 
@@ -52,7 +52,7 @@
                     <td> {{address.postalCode}}</td>
                     <td> {{address.contactPersonMobilePhone}} / {{address.contactPersonFixedPhone}}</td>
                     <td> {{address.contactPersonEmail}}</td>
-                    <td> <button class="btn btn-info btn-sm" (click)="modifyUserAddress(address)"> 修改 </button></td>
+                    <td> <button class="btn btn-info btn-sm" (click)="showForm(false, address)"> 修改 </button></td>
                 </tr>
             </tbody>
         </table>

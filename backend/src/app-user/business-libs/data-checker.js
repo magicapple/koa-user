@@ -23,6 +23,13 @@ function throw401 (codeName, field){
 
 
 let validation = {
+    userId : function (userId, field){
+        if (!validator.isMongoId(userId.toString() ))  return throw409('user.userIdWrong', field)
+    },
+    userAddressId : function (id, field){
+        if (!validator.isMongoId(id.toString() ))  return throw409('user.addressIdWrong', field)
+    },
+
     username : function (username, field){
         if (!username) return throw409('user.usernameRequired', field)
         if (!validator.isLength(username, 4, 30))  return throw409('user.usernameWrong', field)
@@ -122,6 +129,41 @@ let validation = {
     userWeChatOpenIDExist : function (user, field){
         if (user) return throw409('user.weChatOpenIDExist', field)
     },
+
+
+
+    userAddress : function (address, field){
+
+        if (!address) return throw409('user.addressRequired', field)
+        if (!validator.isLength(address.provinceId.toString(), 1, 10))  return throw409('user.addressProvinceId', field)
+        if (!validator.isLength(address.province, 2, 100))  return throw409('user.addressProvince', field)
+
+        if (!validator.isLength(address.cityId.toString(), 1, 10))  return throw409('user.addressCityId', field)
+        if (!validator.isLength(address.city, 2, 100))  return throw409('user.addressCity', field)
+
+        if (!validator.isLength(address.districtId.toString(), 1, 10))  return throw409('user.addressDistrictId', field)
+        if (!validator.isLength(address.district, 2, 100))  return throw409('user.addressDistrict', field)
+
+
+        if (!validator.isLength(address.detailAddress, 2, 1000))  return throw409('user.addressDistrict', field)
+        if (!validator.isLength(address.contactPerson, 2, 100))  return throw409('user.addressContactPerson', field)
+        if (!validator.isMobilePhone(address.contactPersonMobilePhone,'zh-CN'))  return throw409('user.addressContactPersonMobilePhone', field)
+
+    },
+
+    userAddressCodeName : function (addressCodeName, field){
+        if (!validator.isLength(addressCodeName, 2, 500))  return throw409('user.addressCodeName', field)
+    },
+    userAddressPostalCode : function (postalCode, field){
+        if (!validator.isLength(postalCode, 2, 60))  return throw409('user.addressPostalCode', field)
+    },
+    userAddressContactPersonFixedPhone : function (contactPersonFixedPhone, field){
+        if (!validator.isLength(contactPersonFixedPhone, 2, 40))  return throw409('user.addressContactPersonFixedPhone', field)
+    },
+    userAddressContactPersonEmail : function (contactPersonEmail, field){
+        if (!validator.isEmail(contactPersonEmail))  return throw409('user.addressContactPersonEmail', field)
+    },
+
 
 
 

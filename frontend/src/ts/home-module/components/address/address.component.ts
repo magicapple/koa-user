@@ -20,8 +20,10 @@ export class AddressComponent implements OnInit {
     ignoreDirty: boolean = false
 
     isShowForm: boolean = false
+    isAddNew: boolean = true
 
     addressList : any[] = []
+    currentAddressId : string = ''
 
     constructor(
         private fb: FormBuilder,
@@ -99,9 +101,9 @@ export class AddressComponent implements OnInit {
 
         if (!address.contactPerson) {address.contactPerson = ''}
         if (!address.addressObj) {address.addressObj = {
-            provinceId: 110000,
-            cityId: 110100,
-            districtId: 110104
+            province: '',
+            city: '',
+            district: ''
         }}
 
         if (!address.detailAddress) {address.detailAddress = ''}
@@ -117,7 +119,7 @@ export class AddressComponent implements OnInit {
             'detailAddress'    : [address.detailAddress, [Validators.required, Validators.minLength(4), Validators.maxLength(500)] ],
             'contactPersonMobilePhone'    : [address.contactPersonMobilePhone, [Validators.required, isMobilePhone()] ],
             'contactPersonFixedPhone'    : [address.contactPersonFixedPhone ],
-            'contactPersonEmail'    : [address.contactPersonEmail, [Validators.email] ],
+            'contactPersonEmail'    : [address.contactPersonEmail, [] ],
             'postalCode'    : [address.postalCode ],
             'addressCodeName'    : [address.addressCodeName ]
         } )
@@ -142,45 +144,82 @@ export class AddressComponent implements OnInit {
 
         const postData = this.userAddressForm.value
 
-        postData.province = this.userAddressForm.value.addressObj.provinceId
-        postData.city = this.userAddressForm.value.addressObj.cityId
-        postData.district = this.userAddressForm.value.addressObj.districtId
+        postData.province = this.userAddressForm.value.addressObj.province
+        postData.provinceId = this.userAddressForm.value.addressObj.provinceId
+
+        postData.city = this.userAddressForm.value.addressObj.city
+        postData.cityId = this.userAddressForm.value.addressObj.cityId
+
+        postData.district = this.userAddressForm.value.addressObj.district
+        postData.districtId = this.userAddressForm.value.addressObj.districtId
 
 
+        if (this.isAddNew) {
+            this.userService.createUserAddress(postData).subscribe(
+                data => {
+                    console.log('保存用户地址成功: ', data)
+                    this.httpService.successHandler(data)
 
-        this.userService.createUserAddress(postData).subscribe(
-            data => {
-                console.log('保存用户地址成功: ', data)
-                this.httpService.successHandler(data)
+                    this.getUserAddress()
+                    this.showForm()
 
-                this.getUserAddress()
-                this.showForm()
+                },
+                error => {this.httpService.errorHandler(error) }
+            )
+        } else {
+            this.userService.updateUserAddress(this.currentAddressId, postData).subscribe(
+                data => {
+                    console.log('修改用户地址成功: ', data)
+                    this.httpService.successHandler(data)
 
-            },
-            error => {this.httpService.errorHandler(error) }
-        )
+                    this.getUserAddress()
+                    this.showForm()
+
+                },
+                error => {this.httpService.errorHandler(error) }
+            )
+        }
+
     }
 
 
-    showForm() {
+    showForm(isAddNew : boolean = true, address?: any ) {
+
+        if (isAddNew) {
+            this.isAddNew = true
+
+            this.userAddressForm.patchValue({
+                'contactPerson'    : '',
+                'addressObj'    : {
+                    province: '',
+                    city: '',
+                    district: ''
+                },
+                'detailAddress'    : '',
+                'contactPersonMobilePhone'    : '',
+                'contactPersonFixedPhone'    : '',
+                'contactPersonEmail'    : '',
+                'postalCode'    : '',
+                'addressCodeName'    : ''
+            })
+
+        } else {
+            this.isAddNew = false
+            this.currentAddressId = address._id
+            const tempAddress = address
+
+            tempAddress.addressObj = {
+                provinceId : address.provinceId,
+                cityId : address.cityId,
+                districtId : address.districtId
+            }
+            this.userAddressForm.patchValue(tempAddress)
+        }
+
+
         this.isShowForm = !this.isShowForm
     }
 
-
-    modifyUserAddress(address : any) {
-
-        const tempAddress = address
-
-        tempAddress.addressObj = {
-            provinceId : address.province,
-            cityId : address.city,
-            districtId : address.district
-
-        }
-        console.log(tempAddress)
-        this.userAddressForm.patchValue(tempAddress)
-        this.showForm()
-    }
 
 
 }

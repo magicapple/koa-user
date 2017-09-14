@@ -11,12 +11,15 @@ const validationName = {
         smsCodeRequired :  {code:1008, message:"Field validation error, sms code is required", field:'smsCode'},
 
 
+        userIdWrong : {code:1010, message:"Field validation error,  user id length must be 24", field:'_id'},
+
         usernameWrong : {code:1011, message:"Field validation error,  username length must be 4-30, start with letter character", field:'username'},
         passwordWrong : {code:1012, message:"Field validation error,  password length must be 6-30", field:'password'},
         emailWrong : {code:1013, message:"Field validation error, Email format wrong", field:'email'},
         mobileWrong : {code:1014, message:"Field validation error, mobile number format wrong", field:'mobilePhone'},
         captchaWrong :  {code:1017, message:"Field validation error, captcha length must be 4-4 or captcha expired", field:'captcha'},
         smsCodeWrong :  {code:1018, message:"Field validation error, sms code length must be 6-6 or captcha expired", field:'smsCode'},
+
 
 
         usernameExist : {code:1031, message:"Field validation error,  username already exist", field:'username'},
@@ -51,6 +54,32 @@ const validationName = {
         weChatOpenIDWrong : {code:1085, message:"Field validation error, wechat OpenID length must be 28", field:'idWeChatOpenID'},
         weChatUnionIDWrong : {code:1086, message:"Field validation error, wechat UnionID length must be 29", field:'idWeChatUnionID'},
 
+
+
+
+
+        addressIdWrong : {code:1111, message:"Field validation error,  user address id length must be 24", field:'_id'},
+        addressRequired : {code:1112, message:"Field validation error,  user address is required, must be a object", field:'provinceId'},
+
+        addressProvinceId : {code:1113, message:"Field validation error,  user address province Id is required and length must be 1-10", field:'provinceId'},
+        addressProvince : {code:1114, message:"Field validation error,  user address province name is required and length must be 2-100", field:'province'},
+
+        addressCityId : {code:1115, message:"Field validation error,  user address city Id is required and length must be 1-10", field:'cityId'},
+        addressCity : {code:1116, message:"Field validation error,  user address city name is required and length must be 2-100", field:'city'},
+
+        addressDistrictId : {code:1117, message:"Field validation error,  user address district Id is required and length must be 1-10", field:'districtId'},
+        addressDistrict : {code:1118, message:"Field validation error,  user address district name is required and length must be 2-100", field:'district'},
+
+
+        addressDetailAddress : {code:1121, message:"Field validation error,  user detailAddress is required and length must be 2-1000", field:'detailAddress'},
+        addressContactPerson : {code:1122, message:"Field validation error,  user address contact person is required and length must be 2-100", field:'contactPerson'},
+        addressContactPersonMobilePhone : {code:1123, message:"Field validation error,  user address contact person mobile phone format wrong", field:'contactPersonMobilePhone'},
+
+
+        addressCodeName : {code:1126, message:"Field validation error, user address code name length must be 2-500", field:'addressCodeName'},
+        addressPostalCode : {code:1127, message:"Field validation error, user address postal code length must be 2-60", field:'postalCode'},
+        addressContactPersonFixedPhone : {code:1128, message:"Field validation error, user address contact person fixed phone length must be 2-40", field:'contactPersonFixedPhone'},
+        addressContactPersonEmail : {code:1129, message:"Field validation error,  user address contact person email format wrong", field:'contactPersonEmail'},
 
     },
 

@@ -64,4 +64,9 @@ export class UserLoginService {
 
         return this.http.post(apiPath.saveUserAddressList, address)
     }
+
+    updateUserAddress(addressId : string, address : any): Observable<any> {
+
+        return this.http.put(apiPath.saveUserAddressList + '/' + addressId, address)
+    }
 }

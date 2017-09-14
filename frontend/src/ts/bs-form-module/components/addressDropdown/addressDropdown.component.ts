@@ -185,7 +185,7 @@ export class AddressDropdownComponent implements OnInit, ControlValueAccessor {
     }
 
     writeValue(value: any): void {
-        console.log('WriteValue: ', value, this.dataSource)
+        // console.log('WriteValue: ', value, this.dataSource)
 
 
         if (!this.dataSource) {
@@ -197,9 +197,9 @@ export class AddressDropdownComponent implements OnInit, ControlValueAccessor {
 
             if (value && value.provinceId && value.cityId && value.districtId) {
                 //通过 省市区 ID查找
-                this.currentProvince = this.dataSource.find(province => province.id === value.provinceId) || {id : -1, name: '请选择省', cities : []}
-                this.currentCity = this.currentProvince.cities.find(city => city.id === value.cityId) || {id : -1, name: '市', counties : [] }
-                this.currentDistrict = this.currentCity.counties.find(district => district.id === value.districtId) || {id : -1, name: '区'}
+                this.currentProvince = this.dataSource.find(province => province.id === Number(value.provinceId)) || {id : -1, name: '请选择省', cities : []}
+                this.currentCity = this.currentProvince.cities.find(city => city.id === Number(value.cityId)) || {id : -1, name: '市', counties : [] }
+                this.currentDistrict = this.currentCity.counties.find(district => district.id === Number(value.districtId)) || {id : -1, name: '区'}
 
                 this.value = {
                     province: this.currentProvince.name,
