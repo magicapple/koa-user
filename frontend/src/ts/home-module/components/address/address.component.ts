@@ -34,7 +34,7 @@ export class AddressComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.createuserAddressForm()
+        this.createUserAddressForm()
         this.getUserAddress()
     }
 
@@ -95,7 +95,7 @@ export class AddressComponent implements OnInit {
         this.userAddressFormError = formErrorHandler(formInputData, this.userAddressForm, this.userAddressFormValidationMessages, ignoreDirty)
     }
 
-    createuserAddressForm(address: any = {}): void {
+    createUserAddressForm(address: any = {}): void {
 
         if (!address.contactPerson) {address.contactPerson = ''}
         if (!address.addressObj) {address.addressObj = {
@@ -103,6 +103,13 @@ export class AddressComponent implements OnInit {
             cityId: 110100,
             districtId: 110104
         }}
+
+        if (!address.detailAddress) {address.detailAddress = ''}
+        if (!address.contactPersonMobilePhone) {address.contactPersonMobilePhone = ''}
+        if (!address.contactPersonFixedPhone) {address.contactPersonFixedPhone = ''}
+        if (!address.contactPersonEmail) {address.contactPersonEmail = ''}
+        if (!address.postalCode) {address.postalCode = ''}
+        if (!address.addressCodeName) {address.addressCodeName = ''}
 
         this.userAddressForm = this.fb.group({
             'contactPerson'    : [address.contactPerson, [Validators.required] ],
@@ -123,21 +130,35 @@ export class AddressComponent implements OnInit {
 
 
     userAddressFormSubmit() {
-        console.log('当前信息: ', this.userAddressForm.invalid, this.userAddressFormError)
+        console.log('当前信息: ', this.userAddressForm, this.userAddressFormError)
+
         if (this.userAddressForm.invalid) {
             this.userAddressFormInputChange(this.userAddressForm.value, true)
             this.ignoreDirty = true
+
+            console.log('当前信息: ', this.userAddressForm, this.userAddressFormError)
             return
         }
 
-        this.userService.saveUserInfo(this.userAddressForm.value).subscribe(
+        const postData = this.userAddressForm.value
+
+        postData.province = this.userAddressForm.value.addressObj.province
+        postData.city = this.userAddressForm.value.addressObj.city
+        postData.district = this.userAddressForm.value.addressObj.district
+
+
+
+        this.userService.createUserAddress(postData).subscribe(
             data => {
-                console.log('保存用户信息成功: ', data)
+                console.log('保存用户地址成功: ', data)
                 this.httpService.successHandler(data)
+
+                this.getUserAddress()
+                this.showForm()
+
             },
             error => {this.httpService.errorHandler(error) }
         )
-
     }
 
 
@@ -145,22 +166,6 @@ export class AddressComponent implements OnInit {
         this.isShowForm = !this.isShowForm
     }
 
-
-    collection: any = [{id: 1}, {id: 2}, {id: 3}]
-
-    getItems() {
-        this.collection = this.getItemsFromServer()
-    }
-
-    getItemsFromServer() {
-        return [{id: 1}, {id: 2}, {id: 3}, {id: 4}]
-    }
-
-
-
-    trackByFn(index: any, item: any) {
-        return item ? item._id : undefined
-    }
 
 
 }

@@ -59,4 +59,9 @@ export class UserLoginService {
 
         return this.http.get(apiPath.getUserAddressList)
     }
+
+    createUserAddress(address : any): Observable<any> {
+
+        return this.http.post(apiPath.saveUserAddressList, address)
+    }
 }

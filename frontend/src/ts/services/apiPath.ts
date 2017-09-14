@@ -18,7 +18,8 @@ const apiPath = {
     getUserInfo : prefix + '/users/session',
     saveUserInfo : prefix + '/users/info',
 
-    getUserAddressList : prefix + '/users/address'
+    getUserAddressList : prefix + '/users/address',
+    saveUserAddressList : prefix + '/users/address'
 }
 
 
