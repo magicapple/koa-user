@@ -20,6 +20,8 @@ export class AddressComponent implements OnInit {
     userAddressForm: FormGroup
     ignoreDirty: boolean = false
 
+    isShowForm: boolean = false
+
     addressList : any[] = []
 
     constructor(
@@ -34,10 +36,10 @@ export class AddressComponent implements OnInit {
 
     ngOnInit(): void {
         this.createuserAddressForm()
-        this.getCurrentUserInfo()
+        this.getUserAddress()
     }
 
-    getCurrentUserInfo () {
+    getUserAddress () {
         this.userService.getUserAddressList().subscribe(
             data => {
                 this.addressList = data.data
