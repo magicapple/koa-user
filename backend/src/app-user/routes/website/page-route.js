@@ -43,6 +43,8 @@ router.get('/admin', pageAdminHome.adminHome)
 router.get('/form/models', pageJsonForm.formModelList)
 router.get('/form/data', pageJsonForm.formData)
 
+router.get('/test', pageIndex.test)
+
 
 
 

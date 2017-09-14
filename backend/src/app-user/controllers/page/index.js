@@ -16,3 +16,10 @@ exports.index = async function pageIndex(ctx, next) {
 }
 
 
+
+exports.test = async function pageIndex(ctx, next) {
+
+    await ctx.render('test/test', { page : {title : 'Homepage !'} });
+}
+
+
