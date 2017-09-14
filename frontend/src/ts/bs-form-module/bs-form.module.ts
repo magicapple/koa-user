@@ -14,24 +14,31 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { SelectDropdownComponent } from './components/selectDropdown/selectDropdown.component'
 import { RadioComponent } from './components/radio/radio.component'
 import { DatePickerComponent } from './components/datepicker/datepicker.component'
+import { AddressDropdownComponent } from './components/addressDropdown/addressDropdown.component'
 
 
-
-import { SelectAddressComponent } from './components/address/address.component'
 import {ForbiddenValidatorDirective} from './validators/custom-validator'
+
+
+
+import {FilterArrayPipe} from './pipes/filterArray/filterArray.pipe'
 
 
 import {HttpService} from './services/http.service'
 
 @NgModule({
     declarations : [
+        FilterArrayPipe,
+
+
         SwitchComponent,
         TextInputComponent,
         SelectDropdownComponent,
         RadioComponent,
         DatePickerComponent,
+        AddressDropdownComponent,
 
-        SelectAddressComponent,
+
         ForbiddenValidatorDirective
     ],
     imports      : [
@@ -59,7 +66,7 @@ import {HttpService} from './services/http.service'
         RadioComponent,
         DatePickerComponent,
         RadioComponent,
-        SelectAddressComponent
+        AddressDropdownComponent
     ],
     bootstrap    : []
 })

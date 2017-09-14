@@ -7,7 +7,6 @@ import { HttpService } from '../../../bs-form-module/services/http.service'
 import { formErrorHandler } from '../../../bs-form-module/validators/validator'
 import {UserLoginService} from '../../../services/userLogin.service'
 
-import { provinceList } from '../../../bs-form-module/components/address/province'
 
 
 @Component({
@@ -36,7 +35,6 @@ export class BasicInfoComponent implements OnInit {
         { id : 4, name : '二婚'},
         { id : 5, name : '二次离婚'}
     ]
-    addressDataList: any = provinceList
 
     constructor(
         private fb: FormBuilder,
@@ -163,12 +161,7 @@ export class BasicInfoComponent implements OnInit {
             'lastName'    : [user.lastName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'nickname'    : [user.nickname, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'gender'    : [user.gender, [Validators.required] ],
-            'address'    : [{
-                provinceId: 110000,
-                cityId: 110100,
-                districtId: 110104
 
-            }, [Validators.required] ],
             'marriage'    : [user.marriage, [Validators.required] ],
             // 'birthday'    : this.fb.group({
             //     year: ['', [Validators.required] ],

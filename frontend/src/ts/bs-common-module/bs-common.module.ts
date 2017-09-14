@@ -15,12 +15,14 @@ import { SimpleNotificationComponent } from '../bs-common-module/components/simp
 import {MaxPipe} from './pipes/max/max.pipe'
 
 
+
 import {ModalService} from './services/modal.service'
 import {NotificationService} from './services/notification.service'
 
 @NgModule({
     declarations : [
         MaxPipe,
+
 
 
         BSModalComponent,

@@ -33,13 +33,9 @@
 
             <bs-select formControlName ="gender" [fc]="userInfoForm.get('gender')" [label]="'性别:'"  [options]="genderDataList" [error]="userInfoFormError.gender" ></bs-select>
 
-
             <bs-datepicker formControlName="birthday" [fc]="userInfoForm.get('birthday')" [label]="'生日:'" [error]="userInfoFormError.birthday"></bs-datepicker>
             <bs-radio formControlName ="marriage" [fc]="userInfoForm.get('marriage')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.marriage" ></bs-radio>
 
-
-
-            <bs-address formControlName ="address" [fc]="userInfoForm.get('address')" [label]="'住址:'" [options]="addressDataList" [error]="userInfoFormError.address"></bs-address>
 
 <!--
 

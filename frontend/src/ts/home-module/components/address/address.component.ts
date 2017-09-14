@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
 import { HttpService } from '../../../bs-form-module/services/http.service'
 
-
-import { formErrorHandler } from '../../../bs-form-module/validators/validator'
+import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../bs-form-module/validators/validator'
 import { UserLoginService } from '../../../services/userLogin.service'
 
 
@@ -51,33 +50,44 @@ export class AddressComponent implements OnInit {
     }
 
 
-    userAddressFormError : any = { addressXX : []}
+    userAddressFormError : any = {}
     userAddressFormValidationMessages: any = {
-        'province'  : {
-            'required'      : '请填写名字!',
+        'contactPerson'  : {
+            'required'      : '请填写收货人!',
             'minlength'     : '名字长度1-100个字符!',
             'maxlength'     : '名字长度1-100个字符!',
             'pattern'       : '名字必须字母开头!',
             'isExist'       : '名字已经存在!'
         },
-        'city'  : {
-            'required'      : '请填写姓!',
-            'minlength'     : '姓长度1-100个字符!',
-            'maxlength'     : '姓长度1-100个字符!',
-            'pattern'       : '姓必须字母开头!',
-            'isExist'       : '姓已经存在!'
+        'addressObj'  : {
+            'required'      : '请填写地区!'
         },
-        'district'  : {
-            'required'      : '请填写昵称!',
-            'minlength'     : '昵称长度4-30个字符!',
-            'maxlength'     : '昵称长度4-30个字符!',
+        'detailAddress'  : {
+            'required'      : '请填写详细地址!',
+            'minlength'     : '详细地址长度4-500个字符!',
+            'maxlength'     : '详细地址长度4-500个字符!',
             'pattern'       : '昵称必须字母开头!',
             'isExist'       : '昵称已经存在!'
         },
-        'mobilePhone' : {
+        'contactPersonMobilePhone' : {
             'required'    : '请填写手机号!',
             'mobilePhone' : '手机号格式不正确!',
             'isExist'     : '手机号已经存在!'
+        },
+        'contactPersonFixedPhone' : {
+            'required'    : '请填写固定电话!',
+            'mobilePhone' : '固定电话格式不正确!',
+            'isExist'     : '固定电话已经存在!'
+        },
+        'contactPersonEmail' : {
+            'required'    : '请填写邮箱!',
+            'email' : '邮箱格式不正确!'
+        },
+        'postalCode' : {
+            'required'    : '请填写邮编!'
+        },
+        'addressCodeName' : {
+            'required'    : '请填写地址别名!'
         }
     }
 
@@ -85,34 +95,24 @@ export class AddressComponent implements OnInit {
         this.userAddressFormError = formErrorHandler(formInputData, this.userAddressForm, this.userAddressFormValidationMessages, ignoreDirty)
     }
 
-    createuserAddressForm(user: any = {}): void {
+    createuserAddressForm(address: any = {}): void {
 
-        if (!user.firstName) {user.firstName = ''}
-        if (!user.lastName) {user.lastName = ''}
-        if (!user.nickname) {user.nickname = ''}
-        if (!user.gender) {user.gender = ''}
-        if (!user.marriage) {user.marriage = ''}
+        if (!address.contactPerson) {address.contactPerson = ''}
+        if (!address.addressObj) {address.addressObj = {
+            provinceId: 110000,
+            cityId: 110100,
+            districtId: 110104
+        }}
 
         this.userAddressForm = this.fb.group({
-            'firstName'    : [user.firstName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
-            'lastName'    : [user.lastName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
-            'nickname'    : [user.nickname, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
-            'gender'    : [user.gender, [Validators.required] ],
-            'marriage'    : [user.marriage, [Validators.required] ],
-            'address'    : this.fb.group({
-                street: ['', [Validators.required] ],
-                city: ['', [Validators.required] ]
-            }),
-            'addressXX'    : this.fb.array([
-                this.fb.group({
-                    street: ['', [Validators.required] ],
-                    city: ['', [Validators.required] ]
-                }),
-                this.fb.group({
-                    street: ['', [Validators.required] ],
-                    city: ['', [Validators.required] ]
-                })
-            ])
+            'contactPerson'    : [address.contactPerson, [Validators.required] ],
+            'addressObj'    : [address.addressObj, [Validators.required] ],
+            'detailAddress'    : [address.detailAddress, [Validators.required, Validators.minLength(4), Validators.maxLength(500)] ],
+            'contactPersonMobilePhone'    : [address.contactPersonMobilePhone, [Validators.required, isMobilePhone()] ],
+            'contactPersonFixedPhone'    : [address.contactPersonFixedPhone ],
+            'contactPersonEmail'    : [address.contactPersonEmail, [Validators.email] ],
+            'postalCode'    : [address.postalCode ],
+            'addressCodeName'    : [address.addressCodeName ]
         } )
 
         this.userAddressForm.valueChanges.subscribe(data => {
@@ -141,6 +141,26 @@ export class AddressComponent implements OnInit {
     }
 
 
+    showForm() {
+        this.isShowForm = !this.isShowForm
+    }
+
+
+    collection: any = [{id: 1}, {id: 2}, {id: 3}]
+
+    getItems() {
+        this.collection = this.getItemsFromServer()
+    }
+
+    getItemsFromServer() {
+        return [{id: 1}, {id: 2}, {id: 3}, {id: 4}]
+    }
+
+
+
+    trackByFn(index: any, item: any) {
+        return item ? item._id : undefined
+    }
 
 
 }
