@@ -1,16 +1,104 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>管理后台 - 首页</title>
-    <base href="/">
+<!DOCTYPE html >
+<html lang="zh-cmn-Hans">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> <!-- 优先使用 IE 最新版本和 Chrome -->
+    <meta name="renderer" content="webkit"> <!--360浏览器就会在读取到这个标签后，立即切换对应的内核。并将这个行为应用于这个二级域名下所有网址。-->
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Custom meta tags -->
+    <meta name="keywords" content="杰酷网">
+    <meta name="description" content="杰酷 就是cool jscool javascript cool">
+    <meta name="author" content="JinWYP">
+
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!--<link type="image/x-icon" rel="shortcut icon" href="<%= staticPath %>/images/favicon.ico" />-->
+
+
+    <!-- Bootstrap CSS -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" crossorigin="anonymous">-->
+
+    <!-- Web site css -->
+    <!--<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="<%= staticPath %>/css/stylesheets/font-awesome/font-awesome.css">
+    <link rel="stylesheet" href="<%= staticPath %>/css/stylesheets/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="<%= staticPath %>/css/stylesheets/page/global.css">
+    <link rel="stylesheet" href="<%= staticPath %>/css/stylesheets/page/admin.css">
+
+
+    <title><%= page.title %> | 杰酷 JS Cool </title>
+
 </head>
+
+
 <body>
 
-<h1>admin home  </h1>
+sss
+
+
+
+
+
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script type="text/javascript" src="<%= staticPath %>/js/jquery3/jquery.min.js"></script>
+<script type="text/javascript" src="<%= staticPath %>/js/popper.js/dist/umd/popper.min.js"></script>
+<script type="text/javascript" src="<%= staticPath %>/js/bootstrap4/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="<%= staticPath %>/js/manifest.bundle.js"></script>
+<script type="text/javascript" src="<%= staticPath %>/js/polyfills.bundle.js"></script>
+<script type="text/javascript" src="<%= staticPath %>/js/vendor.bundle.js"></script>
+
+
+
+
+<script type="text/javascript">
+
+
+    $( document ).ready(function() {
+
+        $( "#logout" ).click(function(event) {
+
+            event.preventDefault();
+
+            $.ajax({
+                url : '/api/user/logout',
+
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+
+                dataType : "json",
+            })
+                .done(function(result) {
+                    console.log('Logout success', result)
+                })
+                .fail(function(xhr, status, errorThrown) {
+                    console.error('Logout error', errorThrown)
+                })
+                .always(function(xhr, status) {
+//                alert( "complete" );
+                });
+
+        });
+
+
+    });
+
+
+
+
+
+</script>
+<!--<script type="text/javascript" src="<%= staticPath %>/js/home.bundle.js"></script>-->
 
 </body>
+
 </html>
+
