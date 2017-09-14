@@ -52,7 +52,7 @@
                     <td> {{address.postalCode}}</td>
                     <td> {{address.contactPersonMobilePhone}} / {{address.contactPersonFixedPhone}}</td>
                     <td> {{address.contactPersonEmail}}</td>
-                    <td> <button class="btn btn-info btn-sm"> 修改 </button></td>
+                    <td> <button class="btn btn-info btn-sm" (click)="modifyUserAddress(address)"> 修改 </button></td>
                 </tr>
             </tbody>
         </table>

@@ -142,9 +142,9 @@ export class AddressComponent implements OnInit {
 
         const postData = this.userAddressForm.value
 
-        postData.province = this.userAddressForm.value.addressObj.province
-        postData.city = this.userAddressForm.value.addressObj.city
-        postData.district = this.userAddressForm.value.addressObj.district
+        postData.province = this.userAddressForm.value.addressObj.provinceId
+        postData.city = this.userAddressForm.value.addressObj.cityId
+        postData.district = this.userAddressForm.value.addressObj.districtId
 
 
 
@@ -166,6 +166,21 @@ export class AddressComponent implements OnInit {
         this.isShowForm = !this.isShowForm
     }
 
+
+    modifyUserAddress(address : any) {
+
+        const tempAddress = address
+
+        tempAddress.addressObj = {
+            provinceId : address.province,
+            cityId : address.city,
+            districtId : address.district
+
+        }
+        console.log(tempAddress)
+        this.userAddressForm.patchValue(tempAddress)
+        this.showForm()
+    }
 
 
 }

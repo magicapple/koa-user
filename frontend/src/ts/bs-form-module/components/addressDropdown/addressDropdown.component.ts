@@ -35,12 +35,15 @@ export class AddressDropdownComponent implements OnInit, ControlValueAccessor {
     @ViewChild('optionsListEl') optionsListEl: ElementRef
 
     currentProvince: any = {
+        id : -1,
         name: '请选择省'
     }
     currentCity: any = {
+        id : -1,
         name: '市'
     }
     currentDistrict: any = {
+        id : -1,
         name: '区'
     }
 
@@ -182,7 +185,7 @@ export class AddressDropdownComponent implements OnInit, ControlValueAccessor {
     }
 
     writeValue(value: any): void {
-        // console.log('WriteValue: ', value, this.dataSource)
+        console.log('WriteValue: ', value, this.dataSource)
 
 
         if (!this.dataSource) {
@@ -192,10 +195,10 @@ export class AddressDropdownComponent implements OnInit, ControlValueAccessor {
 
         if (Array.isArray(this.dataSource) && this.dataSource.length > 0) {
 
-            if (value && value.provinceId) {
+            if (value && value.provinceId && value.cityId && value.districtId) {
                 //通过 省市区 ID查找
-                this.currentProvince = this.dataSource.find(province => province.id === value.provinceId) || {id : -1, name: '请选择省'}
-                this.currentCity = this.currentProvince.cities.find(city => city.id === value.cityId) || {id : -1, name: '市'}
+                this.currentProvince = this.dataSource.find(province => province.id === value.provinceId) || {id : -1, name: '请选择省', cities : []}
+                this.currentCity = this.currentProvince.cities.find(city => city.id === value.cityId) || {id : -1, name: '市', counties : [] }
                 this.currentDistrict = this.currentCity.counties.find(district => district.id === value.districtId) || {id : -1, name: '区'}
 
                 this.value = {
@@ -207,10 +210,10 @@ export class AddressDropdownComponent implements OnInit, ControlValueAccessor {
                     districtId: value.districtId
                 }
 
-            }else {
+            }else if (value && value.province && value.city && value.district) {
                 //通过省市名称字符串 查找
-                this.currentProvince = this.dataSource.find(province => province.name === value.province) || {id : -1, name: '请选择省'}
-                this.currentCity = this.currentProvince.cities.find(city => city.name === value.city) || {id : -1, name: '市'}
+                this.currentProvince = this.dataSource.find(province => province.name === value.province) || {id : -1, name: '请选择省', cities : []}
+                this.currentCity = this.currentProvince.cities.find(city => city.name === value.city) || {id : -1, name: '市', counties : []}
                 this.currentDistrict = this.currentCity.counties.find(district => district.name === value.district) || {id : -1, name: '区'}
 
                 this.value = {
@@ -222,7 +225,6 @@ export class AddressDropdownComponent implements OnInit, ControlValueAccessor {
                     districtId: this.currentDistrict.id
                 }
             }
-
 
         }
     }
