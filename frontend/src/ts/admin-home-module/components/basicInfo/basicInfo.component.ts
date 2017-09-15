@@ -38,7 +38,7 @@ export class BasicInfoComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        public userService: UserInfoService,
+        private userService: UserInfoService,
         private httpService: HttpService
     ) {
 
@@ -54,31 +54,7 @@ export class BasicInfoComponent implements OnInit {
     getCurrentUserInfo () {
         this.userService.getUserInfo().subscribe(
             data => {
-                this.currentUser = data.data
-
-                if (data.data.firstName) {
-                    this.userInfoForm.patchValue({ 'firstName'    : data.data.firstName})
-                }
-
-                if (data.data.lastName) {
-                    this.userInfoForm.patchValue({ 'lastName'    : data.data.lastName})
-                }
-
-                if (data.data.nickname) {
-                    this.userInfoForm.patchValue({ 'nickname'    : data.data.nickname})
-                }
-
-                if (data.data.gender) {
-                    this.userInfoForm.patchValue({ 'gender'    : data.data.gender})
-                }
-
-                if (data.data.marriage) {
-                    this.userInfoForm.patchValue({ 'marriage'    : data.data.marriage})
-                }
-
-                if (data.data.birthday) {
-                    this.userInfoForm.patchValue({ 'birthday'    : data.data.birthday})
-                }
+                this.currentUser = data
 
                 // console.log('当前登陆的用户信息: ', data)
             },

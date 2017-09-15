@@ -21,7 +21,7 @@ export class IndexHomeComponent implements OnInit {
 
     constructor(
         private httpService: HttpService,
-        public userService: UserInfoService
+        private userService: UserInfoService
     ) {
 
     }

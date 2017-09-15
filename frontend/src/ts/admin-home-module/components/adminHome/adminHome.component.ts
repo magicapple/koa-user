@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { HttpService } from '../../../bs-form-module/services/http.service'
 
 
-import { formErrorHandler } from '../../../bs-form-module/validators/validator'
+import {UserInfoService} from '../../../services/userInfo.service'
+
 
 
 
@@ -16,17 +17,16 @@ import { formErrorHandler } from '../../../bs-form-module/validators/validator'
 })
 export class AdminHomeComponent implements OnInit {
 
+    currentUser : any
+
     isLeftMenuCollapsed : boolean = false
     currentMenu : string = ''
 
 
-    menuList : any[] = [
-        {}
-    ]
-
 
     constructor(
-        // private httpService: HttpService
+        private httpService: HttpService,
+        private userService: UserInfoService
     ) {
         // this.getCurrentUserInfo()
     }
@@ -34,7 +34,7 @@ export class AdminHomeComponent implements OnInit {
 
 
     ngOnInit(): void {
-        // this.getCurrentUserInfo()
+        this.getCurrentUserInfo()
     }
 
 
@@ -44,6 +44,20 @@ export class AdminHomeComponent implements OnInit {
 
     clickMenu (menu : string) {
         this.currentMenu = menu
+    }
+
+
+    getCurrentUserInfo () {
+        this.userService.getUserInfoHttp().subscribe(
+            data => {
+                this.currentUser = data.data
+
+                this.userService.sendUserInfoMessage(data.data)
+
+                // console.log('当前登陆的用户信息: ', data)
+            },
+            error => {this.httpService.errorHandler(error) }
+        )
     }
 
 

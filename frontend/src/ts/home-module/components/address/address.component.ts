@@ -29,7 +29,7 @@ export class AddressComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        public userService: UserInfoService,
+        private userService: UserInfoService,
         private httpService: HttpService
     ) {
 
