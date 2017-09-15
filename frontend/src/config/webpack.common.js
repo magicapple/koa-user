@@ -14,7 +14,7 @@ const helpers = require('./helpers')
 
 
 const vendorLibraryFromChunks = [
-    "register", "login", "home"
+    "register", "login", "home", "adminHome"
 ]
 
 const distPath = {
@@ -42,6 +42,7 @@ module.exports = function (env) {
             "home": AOT ? './ts/page/home.aot.ts' : './ts/page/home.ts',
             "formModelList": AOT ? './ts/page/formModelList.aot.ts' : './ts/page/formModelList.ts',
             "formData": AOT ? './ts/page/formData.aot.ts' : './ts/page/formData.ts',
+            "adminHome": AOT ? './ts/page/adminHome.aot.ts' : './ts/page/adminHome.ts',
         },
 
         /**

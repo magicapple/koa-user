@@ -10,7 +10,7 @@ import {UserInfoService} from '../../../services/userInfo.service'
 
 
 @Component({
-  selector: 'app-user-basic',
+  selector: 'app-admin-basic',
   templateUrl: './basicInfo.component.html',
   styleUrls: ['./basicInfo.component.css']
 })

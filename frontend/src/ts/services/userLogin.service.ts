@@ -45,28 +45,4 @@ export class UserLoginService {
         return this.http.post(apiPath.login, user)
     }
 
-    getUserInfo(): Observable<any> {
-
-        return this.http.get(apiPath.getUserInfo)
-    }
-
-    saveUserInfo(user : any): Observable<any> {
-
-        return this.http.post(apiPath.saveUserInfo, user)
-    }
-
-    getUserAddressList(): Observable<any> {
-
-        return this.http.get(apiPath.getUserAddressList)
-    }
-
-    createUserAddress(address : any): Observable<any> {
-
-        return this.http.post(apiPath.saveUserAddressList, address)
-    }
-
-    updateUserAddress(addressId : string, address : any): Observable<any> {
-
-        return this.http.put(apiPath.saveUserAddressList + '/' + addressId, address)
-    }
 }

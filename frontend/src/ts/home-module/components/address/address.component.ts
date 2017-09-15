@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { HttpService } from '../../../bs-form-module/services/http.service'
 
 import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../bs-form-module/validators/validator'
-import { UserLoginService } from '../../../services/userLogin.service'
+import { UserInfoService } from '../../../services/userInfo.service'
 
 
 
@@ -27,7 +27,7 @@ export class AddressComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        public userService: UserLoginService,
+        public userService: UserInfoService,
         private httpService: HttpService
     ) {
 

@@ -6,9 +6,8 @@ import { BSFormModule } from '../bs-form-module/bs-form.module'
 import { BSCommonModule } from '../bs-common-module/bs-common.module'
 
 
-import { IndexHomeComponent } from './components/indexHome/indexHome.component'
+import { AdminHomeComponent } from './components/adminHome/adminHome.component'
 import { BasicInfoComponent } from './components/basicInfo/basicInfo.component'
-import { AddressComponent } from './components/address/address.component'
 
 import { UserInfoService } from '../services/userInfo.service'
 
@@ -16,17 +15,14 @@ import { UserInfoService } from '../services/userInfo.service'
 const userHomeRoutes: Routes = [
     {path : '', redirectTo : '/info/basic', pathMatch : 'full'},
     {path : 'info/basic', component : BasicInfoComponent},
-    {path : 'info/password', component : BasicInfoComponent},
-    {path : 'info/address', component : AddressComponent},
     {path : '**', redirectTo : '/info/basic', pathMatch : 'full'},
 ]
 
 
 @NgModule({
     declarations : [
-        IndexHomeComponent,
-        BasicInfoComponent,
-        AddressComponent
+        AdminHomeComponent,
+        BasicInfoComponent
     ],
     imports      : [
         BrowserModule,
@@ -42,6 +38,6 @@ const userHomeRoutes: Routes = [
     providers    : [
         UserInfoService
     ],
-    bootstrap    : [IndexHomeComponent]
+    bootstrap    : [AdminHomeComponent]
 })
-export class UserHomeModule { }
+export class AdminHomeModule { }
