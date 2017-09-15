@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core'
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 
+
 import { HttpService } from '../../../bs-form-module/services/http.service'
-
-
 import { formErrorHandler } from '../../../bs-form-module/validators/validator'
+
+
 import {UserInfoService} from '../../../services/userInfo.service'
 
 
@@ -52,7 +53,7 @@ export class BasicInfoComponent implements OnInit {
     }
 
     getCurrentUserInfo () {
-        this.userService.getUserInfo().subscribe(
+        this.userService.getUserInfoHttp().subscribe(
             data => {
                 this.currentUser = data.data
 

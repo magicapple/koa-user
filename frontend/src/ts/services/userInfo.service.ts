@@ -4,9 +4,11 @@
  */
 
 import {Injectable} from '@angular/core'
-import {HttpClient} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http'
 
-import {Observable} from 'rxjs/Observable'
+import { Observable } from 'rxjs/Observable'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+
 
 import {apiPath} from './apiPath'
 
@@ -20,8 +22,25 @@ export class UserInfoService {
     }
 
 
+    private behaviorSubject : any = new BehaviorSubject(null)
+
+
+    sendUserInfoMessage(user: any): Observable<any> {
+        return this.behaviorSubject.next(user)
+    }
+
 
     getUserInfo(): Observable<any> {
+        return this.behaviorSubject.asObservable()
+    }
+
+    clearUserInfo() {
+        this.behaviorSubject.next(null)
+    }
+
+
+
+    getUserInfoHttp(): Observable<any> {
 
         return this.http.get(apiPath.getUserInfo)
     }

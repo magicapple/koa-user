@@ -16,6 +16,8 @@ import { UserInfoService } from '../../../services/userInfo.service'
 })
 export class AddressComponent implements OnInit {
 
+    currentUser : any
+
     userAddressForm: FormGroup
     ignoreDirty: boolean = false
 
@@ -37,15 +39,29 @@ export class AddressComponent implements OnInit {
 
     ngOnInit(): void {
         this.createUserAddressForm()
+        this.getCurrentUserInfo()
         this.getUserAddress()
     }
+
+    getCurrentUserInfo () {
+        this.userService.getUserInfo().subscribe(
+            data => {
+                if (data) {
+                    this.currentUser = data
+                }
+                // console.log('当前登陆的用户信息: ', data)
+            },
+            error => {this.httpService.errorHandler(error) }
+        )
+    }
+
 
     getUserAddress () {
         this.userService.getUserAddressList().subscribe(
             data => {
                 this.addressList = data.data
 
-                console.log('当前用户的收货地址: ', data)
+                // console.log('当前用户的收货地址: ', data)
             },
             error => {this.httpService.errorHandler(error) }
         )
