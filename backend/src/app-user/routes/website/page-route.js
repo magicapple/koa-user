@@ -38,7 +38,8 @@ router.get('/home/*', auth(), pageUserHome.userHome)
 
 
 
-router.get('/admin', pageAdminHome.adminHome)
+router.get('/admin', auth(), pageAdminHome.adminHome)
+router.get('/admin/*', auth(), pageAdminHome.adminHome)
 
 router.get('/form/models', pageJsonForm.formModelList)
 router.get('/form/data', pageJsonForm.formData)
