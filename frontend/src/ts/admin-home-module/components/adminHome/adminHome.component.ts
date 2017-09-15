@@ -16,7 +16,7 @@ import { formErrorHandler } from '../../../bs-form-module/validators/validator'
 })
 export class AdminHomeComponent implements OnInit {
 
-
+    isLeftMenuCollapsed : boolean = false
 
     constructor(
         // private httpService: HttpService
@@ -31,6 +31,9 @@ export class AdminHomeComponent implements OnInit {
     }
 
 
+    toggleLeftMenu () {
+        this.isLeftMenuCollapsed = !this.isLeftMenuCollapsed
+    }
 
 
 }
