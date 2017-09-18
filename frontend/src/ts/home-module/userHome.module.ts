@@ -8,6 +8,7 @@ import { BSCommonModule } from '../bs-common-module/bs-common.module'
 
 import { IndexHomeComponent } from './components/indexHome/indexHome.component'
 import { BasicInfoComponent } from './components/basicInfo/basicInfo.component'
+import { ModifyPasswordComponent } from './components/modifyPassword/modifyPassword.component'
 import { AddressComponent } from './components/address/address.component'
 
 import { UserInfoService } from '../services/userInfo.service'
@@ -16,7 +17,7 @@ import { UserInfoService } from '../services/userInfo.service'
 const userHomeRoutes: Routes = [
     {path : '', redirectTo : '/info/basic', pathMatch : 'full'},
     {path : 'info/basic', component : BasicInfoComponent},
-    {path : 'info/password', component : BasicInfoComponent},
+    {path : 'info/password', component : ModifyPasswordComponent},
     {path : 'info/address', component : AddressComponent},
     {path : '**', redirectTo : '/info/basic', pathMatch : 'full'},
 ]
@@ -26,6 +27,7 @@ const userHomeRoutes: Routes = [
     declarations : [
         IndexHomeComponent,
         BasicInfoComponent,
+        ModifyPasswordComponent,
         AddressComponent
     ],
     imports      : [
