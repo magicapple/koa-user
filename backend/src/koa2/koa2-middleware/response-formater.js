@@ -14,9 +14,9 @@ const response_formatter = function(ctx){
                 meta : {
                     total : 0,
                     count : ctx.body.length,
-                    numPerPage : 0,
+                    pageSize : 0,
                     offset : 0,
-                    page : 0
+                    pageNo : 0
                 },
                 data : ctx.body
             }
@@ -25,9 +25,9 @@ const response_formatter = function(ctx){
                 ctx.body.meta = {
                     total : ctx.meta.total,
                     count : ctx.body.length,
-                    numPerPage : ctx.meta.numPerPage,
+                    pageSize : ctx.meta.pageSize,
                     offset : ctx.meta.offset,
-                    page : ctx.meta.page
+                    pageNo : ctx.meta.pageNo
                 }
             }
         }else {

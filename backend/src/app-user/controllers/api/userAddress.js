@@ -12,8 +12,16 @@ const UserAddressService = require('../../service/user/userAddressService')
  */
 exports.getUserAddressListById = async (ctx, next) => {
 
-    let addressList = await UserAddressService.addressList(ctx.state.user._id);
+    let addressList = await UserAddressService.addressList(ctx.state.user._id, ctx.request.query);
+    let addressListCount = await UserAddressService.addressListCount(ctx.state.user._id);
+
     ctx.body = addressList
+    ctx.meta = {
+        total : addressListCount,
+        pageSize : Number(ctx.request.query.pageSize),
+        offset : ctx.request.query.pageSize * ctx.request.query.pageNo,
+        pageNo : Number(ctx.request.query.pageNo)
+    }
 }
 
 

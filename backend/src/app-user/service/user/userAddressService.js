@@ -7,11 +7,16 @@ const MUserBaseInfo = require('./model/userBaseInfo')
 const MUserAddress = require('./model/userAddress')
 
 
+exports.addressListCount = async (userId) => {
+    GDataChecker.userId(userId)
 
-exports.addressList = async (userId) => {
-    // GDataChecker.userMobile(userId)
+    return MUserAddress.count({user : userId})
+}
 
-    return MUserAddress.findAll({user : userId})
+exports.addressList = async (userId, pagination) => {
+    GDataChecker.userId(userId)
+
+    return MUserAddress.findAll({user : userId}, {pageSize : pagination.pageSize, pageNo: pagination.pageNo})
 }
 
 

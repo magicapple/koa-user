@@ -107,8 +107,8 @@ const field = {
     common : "-__v -updatedAt"
 }
 
-UserAddressSchema.statics.findAll = function(query){
-    return UserAddress.find(query).select(field.common).exec()
+UserAddressSchema.statics.findAll = function(query, pagination){
+    return UserAddress.find(query).select(field.common).limit(Number(pagination.pageSize) || 100).skip(Number(pagination.pageSize || 100) * (pagination.pageNo || 0)).exec()
 }
 UserAddressSchema.statics.find1 = function(query){
     return UserAddress.findOne(query).select(field.common).exec()

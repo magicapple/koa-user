@@ -27,6 +27,11 @@ export class AddressComponent implements OnInit {
     addressList : any[] = []
     currentAddressId : string = ''
 
+    pagination: any = {
+        pageSize : 2,
+        pageNo : 1
+    }
+
     constructor(
         private fb: FormBuilder,
         private userService: UserInfoService,
@@ -57,7 +62,14 @@ export class AddressComponent implements OnInit {
 
 
     getUserAddress () {
-        this.userService.getUserAddressList().subscribe(
+
+        const query : any = {
+            pageSize: this.pagination.pageSize,
+            pageNo: this.pagination.pageNo
+        }
+
+
+        this.userService.getUserAddressList(query).subscribe(
             data => {
                 this.addressList = data.data
 

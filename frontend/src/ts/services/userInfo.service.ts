@@ -4,7 +4,7 @@
  */
 
 import {Injectable} from '@angular/core'
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpParams} from '@angular/common/http'
 
 import { Observable } from 'rxjs/Observable'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
@@ -55,9 +55,12 @@ export class UserInfoService {
         return this.http.post(apiPath.modifyUserPassword, user)
     }
 
-    getUserAddressList(): Observable<any> {
+    getUserAddressList(query: any): Observable<any> {
+        const params = new HttpParams()
+            .set('pageSize', query.pageSize)
+            .set('pageNo', query.pageNo)
 
-        return this.http.get(apiPath.getUserAddressList)
+        return this.http.get(apiPath.getUserAddressList, {params: params})
     }
 
     createUserAddress(address : any): Observable<any> {

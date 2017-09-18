@@ -139,6 +139,21 @@ let validation = {
     userAddress : function (address, field){
 
         if (!address) return throw409('user.addressRequired', field)
+        if (!address.provinceId) return throw409('user.addressProvinceId', field)
+        if (!address.province) return throw409('user.addressProvince', field)
+
+        if (!address.cityId) return throw409('user.addressCityId', field)
+        if (!address.city) return throw409('user.addressCity', field)
+
+        if (!address.districtId) return throw409('user.addressDistrictId', field)
+        if (!address.district) return throw409('user.addressDistrict', field)
+
+        if (!address.detailAddress) return throw409('user.addressDistrict', field)
+        if (!address.contactPerson) return throw409('user.addressContactPerson', field)
+        if (!address.contactPersonMobilePhone) return throw409('user.addressContactPersonMobilePhone', field)
+
+
+
         if (!validator.isLength(address.provinceId.toString(), 1, 10))  return throw409('user.addressProvinceId', field)
         if (!validator.isLength(address.province, 2, 100))  return throw409('user.addressProvince', field)
 
