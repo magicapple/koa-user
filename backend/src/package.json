@@ -14,6 +14,7 @@
     "dev:legacy": "nodemon --harmony-async-await server.js",
     "prod": "DEBUG=koa2-user:* NODE_ENV=production node server.js",
     "test": "NODE_ENV=unittest mocha --recursive test/unit",
+    "apitest": "NODE_ENV=apitest mocha --recursive test/api",
     "cover": "nyc npm test"
   },
   "author": "",
@@ -54,9 +55,10 @@
     "validator": "^7.0.0"
   },
   "devDependencies": {
-    "chai": "^4.0.2",
-    "mocha": "^3.4.2",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3",
     "nodemon": "^1.11.0",
-    "nyc": "^11.0.2"
+    "nyc": "^11.2.1",
+    "supertest": "^3.0.0"
   }
 }
