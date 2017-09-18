@@ -50,6 +50,11 @@ export class UserInfoService {
         return this.http.post(apiPath.saveUserInfo, user)
     }
 
+    modifyPassword(user : any): Observable<any> {
+
+        return this.http.post(apiPath.modifyUserPassword, user)
+    }
+
     getUserAddressList(): Observable<any> {
 
         return this.http.get(apiPath.getUserAddressList)

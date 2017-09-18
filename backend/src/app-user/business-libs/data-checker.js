@@ -39,6 +39,10 @@ let validation = {
         if (!password) return throw409('user.passwordRequired', field)
         if (!validator.isLength(password, 6, 30)) return throw409('user.passwordWrong', field)
     },
+    userPasswordNew : function (password, field){
+        if (!password) return throw409('user.passwordNewRequired', field)
+        if (!validator.isLength(password, 6, 30)) return throw409('user.passwordNewWrong', field)
+    },
     userEmail : function (email, field){
         if (!email) return throw409('user.emailRequired', field)
         if (!validator.isEmail(email)) return throw409('user.emailWrong', field)
@@ -165,7 +169,9 @@ let validation = {
     },
 
 
-
+    userNotFound : function (user, field){
+        if (!user) return throw409('user.userNotFound', field)
+    },
 
     loginUserNotFound : function (user, field){
         if (!user) return throw409('user.userNotFound', field)
@@ -196,6 +202,11 @@ let validation = {
     tokenExpired : function (tokenIsExpired, field){
         if (tokenIsExpired) return throw401('token.tokenExpired', field)
     },
+
+
+
+
+
 
 
     userRolePermission : function (permission, field){

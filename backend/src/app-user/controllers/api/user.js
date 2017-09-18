@@ -118,6 +118,16 @@ exports.saveUserBasicInfo = async (ctx, next) => {
 
 }
 
+/**
+ * 修改密码
+ */
+exports.modifyUserPassword = async (ctx, next) => {
+
+    let user = await UserService.modifyPassword(ctx.state.user._id, ctx.request.body)
+
+    ctx.body = user
+
+}
 
 
 

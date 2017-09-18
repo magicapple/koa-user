@@ -8,6 +8,7 @@ import { BSCommonModule } from '../bs-common-module/bs-common.module'
 
 import { AdminHomeComponent } from './components/adminHome/adminHome.component'
 import { BasicInfoComponent } from './components/basicInfo/basicInfo.component'
+import { ModifyPasswordComponent } from './components/modifyPassword/modifyPassword.component'
 
 import { UserInfoService } from '../services/userInfo.service'
 
@@ -15,6 +16,7 @@ import { UserInfoService } from '../services/userInfo.service'
 const userHomeRoutes: Routes = [
     {path : '', redirectTo : '/info/basic', pathMatch : 'full'},
     {path : 'info/basic', component : BasicInfoComponent},
+    {path : 'info/password', component : ModifyPasswordComponent},
     {path : '**', redirectTo : '/info/basic', pathMatch : 'full'},
 ]
 
@@ -22,7 +24,8 @@ const userHomeRoutes: Routes = [
 @NgModule({
     declarations : [
         AdminHomeComponent,
-        BasicInfoComponent
+        BasicInfoComponent,
+        ModifyPasswordComponent
     ],
     imports      : [
         BrowserModule,

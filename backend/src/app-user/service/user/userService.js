@@ -145,6 +145,7 @@ exports.userInfo = async (userToken) =>{
 exports.saveUserBasicInfo = async (userId, userInfo) =>{
 
     let resultUser = await MUserBaseInfo.find1({_id : userId})
+    GDataChecker.userNotFound(resultUser)
 
     if (userInfo.nickname ) { resultUser.nickname = userInfo.nickname}
     if (userInfo.firstName ) { resultUser.firstName = userInfo.firstName}
@@ -164,3 +165,23 @@ exports.saveUserBasicInfo = async (userId, userInfo) =>{
     return resultUser.save()
 
 }
+
+
+exports.modifyPassword = async (userId, user) =>{
+
+    let resultUser = await MUserBaseInfo.findOne({_id : userId})
+    GDataChecker.userNotFound(resultUser)
+
+    GDataChecker.userPassword(user.oldPassword)
+    GDataChecker.userPasswordNew(user.newPassword)
+
+    let isPasswordMatch = await resultUser.comparePassword(user.oldPassword)
+    GDataChecker.loginUserUnauthorized(isPasswordMatch)
+
+    resultUser.password = user.newPassword
+    let resultUser2 =  await resultUser.save()
+
+    return MUserBaseInfo.find1({_id : resultUser2._id})
+
+}
+

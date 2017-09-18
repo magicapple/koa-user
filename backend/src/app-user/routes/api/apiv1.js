@@ -61,7 +61,8 @@ router.post('/user/logout', userController.logout)
 
 
 router.get('/users/session', auth(), userController.getSessionUserInfo)
-router.post('/users/info', auth(), userController.saveUserBasicInfo)
+router.post('/users/session/info', auth(), userController.saveUserBasicInfo)
+router.post('/users/session/password', auth(), userController.modifyUserPassword)
 
 
 router.get('/users/address', auth(), userAddressController.getUserAddressListById)
@@ -83,6 +84,11 @@ router.get('/form/models/:id', formController.getFormModel)
 
 router.get('/form/models/:id/formdata', formController.getFormDataList)
 router.post('/form/models/:id/formdata', formController.postNewFormData)
+
+
+
+
+
 
 
 

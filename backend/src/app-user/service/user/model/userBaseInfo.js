@@ -12,6 +12,7 @@ const saltRounds = 12
  */
 
 const encryptPassword = function (password) {
+
     let salt = bcrypt.genSaltSync(saltRounds)
     return bcrypt.hashSync(password, salt)
 }
