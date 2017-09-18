@@ -5,25 +5,32 @@ const MUserRole = require('../../service/user/model/userRole')
  */
 
 
-
+'getList', 'getOwn', 'create', 'update', 'updatePassword', 'delete'
 
 exports.createUserRoles = async (ctx, next) => {
 
     const roleList = [
         {
-            "_id" : ObjectId("59ae7885cba8a4766ee00eeb"),
+            "_id" : GMongoose.Types.ObjectId("59ae7885cba8a4766ee00eeb"),
             name : 'normal',
             displayName : '普通用户',
             permissions : [
-                'user.create'
+                'user.getOwn',
+                'user.update',
+                'user.updatePassword'
             ]
         },
         {
-            "_id" : ObjectId("59ae7885cba8a4766ee00eec"),
+            "_id" : GMongoose.Types.ObjectId("59ae7885cba8a4766ee00eec"),
             name : 'admin',
             displayName : '管理员',
             permissions : [
-                'user.create'
+                'user.getList',
+                'user.getOwn',
+                'user.create',
+                'user.update',
+                'user.updatePassword',
+                'user.delete'
             ]
         }
     ]

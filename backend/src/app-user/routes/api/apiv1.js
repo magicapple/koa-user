@@ -7,6 +7,9 @@ const upload = multer({ dest: GConfig.pathFileUpload })
 
 
 const auth = require('../../../koa2/koa2-middleware/auth-jwt')
+const authRole = require('../../../koa2/koa2-middleware/auth-role')
+const UserRoleService = require('../../service/user/userRoleService')
+
 
 const router = require('koa-router')()
 const initController = require('../../controllers/api/initdata')
@@ -62,7 +65,7 @@ router.post('/user/logout', userController.logout)
 
 router.get('/users/session', auth(), userController.getSessionUserInfo)
 router.post('/users/session/info', auth(), userController.saveUserBasicInfo)
-router.post('/users/session/password', auth(), userController.modifyUserPassword)
+router.post('/users/session/password', auth(), authRole(UserRoleService.permissions.user.updatePassword), userController.modifyUserPassword)
 
 
 router.get('/users/address', auth(), userAddressController.getUserAddressListById)

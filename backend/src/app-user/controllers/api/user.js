@@ -102,7 +102,7 @@ exports.logout = async (ctx, next) => {
  */
 exports.getSessionUserInfo = async (ctx, next) => {
 
-    // UserRoleService.checkUserPermission(ctx.state.user, UserRoleService.permissions.user.getOwn)
+
     ctx.body = ctx.state.user
 }
 

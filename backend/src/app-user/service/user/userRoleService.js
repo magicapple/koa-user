@@ -17,7 +17,7 @@ const resourceList = [
 ]
 
 const actionList = [
-    'create', 'update', 'getList', 'getOwn', 'delete'
+    'getList', 'getOwn', 'create', 'update', 'updatePassword', 'delete'
 ]
 
 const getPermissions = function (){
@@ -30,7 +30,7 @@ const getPermissions = function (){
             result[resource][action] = resource + '.' + action
         })
     })
-    console.log("permissions: ", result)
+    // console.log("permissions: ", result)
     return result
 
 }
