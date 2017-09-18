@@ -10,6 +10,9 @@ import { AdminHomeComponent } from './components/adminHome/adminHome.component'
 import { BasicInfoComponent } from './components/basicInfo/basicInfo.component'
 import { ModifyPasswordComponent } from './components/modifyPassword/modifyPassword.component'
 
+
+import { UserManagementComponent } from './components/userManagement/userManagement.component'
+
 import { UserInfoService } from '../services/userInfo.service'
 
 
@@ -17,6 +20,8 @@ const userHomeRoutes: Routes = [
     {path : '', redirectTo : '/info/basic', pathMatch : 'full'},
     {path : 'info/basic', component : BasicInfoComponent},
     {path : 'info/password', component : ModifyPasswordComponent},
+
+    {path : 'users', component : UserManagementComponent},
     {path : '**', redirectTo : '/info/basic', pathMatch : 'full'},
 ]
 
@@ -25,7 +30,9 @@ const userHomeRoutes: Routes = [
     declarations : [
         AdminHomeComponent,
         BasicInfoComponent,
-        ModifyPasswordComponent
+        ModifyPasswordComponent,
+
+        UserManagementComponent
     ],
     imports      : [
         BrowserModule,

@@ -85,8 +85,9 @@
 
             <div id="collapse3" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
                 <ul class="list-group">
-                    <li routerLinkActive="active" > <a (click)="clickMenu('31')">用户管理</a> </li>
-                    <li routerLinkActive="active"> <a (click)="clickMenu('32')">用户地址管理</a> </li>
+                    <li routerLinkActive="active" > <a routerLink="/users" (click)="clickMenu('31')">用户管理</a> </li>
+                    <li routerLinkActive="active"> <a (click)="clickMenu('32')">事业部门管理</a> </li>
+                    <li routerLinkActive="active"> <a (click)="clickMenu('33')">业务团队管理</a> </li>
                 </ul>
             </div>
         </div>
@@ -97,8 +98,8 @@
 
 
     <div class="right-content-box">
-        <div class="row justify-content-center mt-4">
-            <div class="col-10 col-lg-8">
+        <div class="row justify-content-center mt-4 ml-4 mr-4">
+            <div class="col-12">
 
                 <router-outlet></router-outlet>
 
