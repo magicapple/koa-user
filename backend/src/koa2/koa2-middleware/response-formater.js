@@ -24,6 +24,7 @@ const response_formatter = function(ctx){
             if (ctx.meta && ctx.meta.total) {
                 ctx.body.meta = {
                     total : ctx.meta.total,
+                    totalPages : Math.ceil(ctx.meta.total / ctx.meta.pageSize),
                     count : ctx.body.length,
                     pageSize : ctx.meta.pageSize,
                     offset : ctx.meta.offset,

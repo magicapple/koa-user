@@ -29,7 +29,8 @@ export class AddressComponent implements OnInit {
 
     pagination: any = {
         pageSize : 2,
-        pageNo : 1
+        pageNo : 1,
+        total : 1
     }
 
     constructor(
@@ -61,7 +62,7 @@ export class AddressComponent implements OnInit {
     }
 
 
-    getUserAddress () {
+    getUserAddress (currentPageNo?: any) {
 
         const query : any = {
             pageSize: this.pagination.pageSize,
@@ -72,6 +73,9 @@ export class AddressComponent implements OnInit {
         this.userService.getUserAddressList(query).subscribe(
             data => {
                 this.addressList = data.data
+
+                this.pagination.total = data.meta.total
+                this.pagination.pageNo = data.meta.pageNo
 
                 // console.log('当前用户的收货地址: ', data)
             },
