@@ -45,7 +45,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let address of addressList;trackBy: trackByFn">
+                <tr *ngFor="let address of addressList">
                     <td> {{address.contactPerson}}</td>
                     <td> {{address.province}} {{address.city}} {{address.district}}</td>
                     <td> {{address.detailAddress}}</td>

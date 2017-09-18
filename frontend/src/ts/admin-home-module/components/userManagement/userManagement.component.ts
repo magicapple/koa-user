@@ -24,7 +24,7 @@ export class UserManagementComponent implements OnInit {
     isShowForm: boolean = false
     isAddNew: boolean = true
 
-    addressList : any[] = []
+    userList : any[] = []
     currentAddressId : string = ''
 
     constructor(
@@ -40,7 +40,11 @@ export class UserManagementComponent implements OnInit {
     ngOnInit(): void {
         this.createUserAddressForm()
         this.getCurrentUserInfo()
-        this.getUserAddress()
+        this.getUserList()
+    }
+
+    trackByFn(index: any, item: any) {
+        return item ? item.id : undefined
     }
 
     getCurrentUserInfo () {
@@ -56,10 +60,10 @@ export class UserManagementComponent implements OnInit {
     }
 
 
-    getUserAddress () {
-        this.userService.getUserAddressList().subscribe(
+    getUserList () {
+        this.userService.getUserList().subscribe(
             data => {
-                this.addressList = data.data
+                this.userList = data.data
 
                 // console.log('当前用户的收货地址: ', data)
             },
@@ -176,7 +180,7 @@ export class UserManagementComponent implements OnInit {
                     console.log('保存用户地址成功: ', data)
                     this.httpService.successHandler(data)
 
-                    this.getUserAddress()
+                    this.getUserList()
                     this.showForm()
 
                 },
@@ -188,7 +192,7 @@ export class UserManagementComponent implements OnInit {
                     console.log('修改用户地址成功: ', data)
                     this.httpService.successHandler(data)
 
-                    this.getUserAddress()
+                    this.getUserList()
                     this.showForm()
 
                 },

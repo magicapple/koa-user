@@ -69,4 +69,13 @@ export class UserInfoService {
 
         return this.http.put(apiPath.saveUserAddressList + '/' + addressId, address)
     }
+
+
+
+    getUserList(): Observable<any> {
+
+        return this.http.get(apiPath.getUserList)
+    }
+
+
 }

@@ -20,7 +20,11 @@ const apiPath = {
     modifyUserPassword : prefix + '/users/session/password',
 
     getUserAddressList : prefix + '/users/address',
-    saveUserAddressList : prefix + '/users/address'
+    saveUserAddressList : prefix + '/users/address',
+
+
+
+    getUserList : prefix + '/test/users'
 }
 
 

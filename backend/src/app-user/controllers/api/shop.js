@@ -36,3 +36,51 @@ exports.postNewShop = async (ctx, next) => {
     ctx.body = ctx.request.body
 }
 
+
+
+
+
+exports.getUsers = async (ctx, next) => {
+
+    // throw new GValidationError('XXXName', 'xxxField');
+
+    ctx.body = [
+        {
+            id : 1,
+            deptId : 1,
+            phone : '13022117050',
+            password : '12345678',
+            passwordSalt : 'salt',
+            createDate : '2017-01-01',
+            createBy : 'hary',
+            isAdmin : 1,
+            isActive : 1
+        },
+
+        {
+            id : 2,
+            deptId : 1,
+            phone : '13022117051',
+            password : '12345678',
+            passwordSalt : 'salt',
+            createDate : '2017-01-01',
+            createBy : 'hary',
+            isAdmin : 1,
+            isActive : 1
+        },
+
+        {
+            id : 3,
+            deptId : 1,
+            phone : '13022117052',
+            password : '12345678',
+            passwordSalt : 'salt',
+            createDate : '2017-01-01',
+            createBy : 'hary',
+            isAdmin : 1,
+            isActive : 1
+        }
+    ]
+}
+
+

@@ -74,8 +74,8 @@ router.put('/users/address/:addressId', auth(), userAddressController.updateNewA
 
 
 
-router.get('/shops', shopController.getShopList)
-router.post('/shops', shopController.postNewShop)
+router.get('/test/users', shopController.getUsers)
+router.post('/test/shops', shopController.postNewShop)
 
 
 
