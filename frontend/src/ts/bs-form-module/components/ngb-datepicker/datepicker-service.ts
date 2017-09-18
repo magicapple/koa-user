@@ -131,7 +131,7 @@ export class NgbDatepickerService {
 
   private _updateState(patch: Partial<DatepickerViewModel>): DatepickerViewModel {
     // patching fields
-    const state = Object.assign({}, this._state, patch)
+    const state = (<any>Object).assign({}, this._state, patch)
 
     let startDate = state.firstDate
 

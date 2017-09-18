@@ -5,9 +5,9 @@ function normalizeText(txt: string): string {
   return txt.trim().replace(/\s+/g, ' ');
 }
 
-export function getWindowLinks(element: DebugElement): DebugElement[] {
-  return Array.from(element.queryAll(By.css('button.dropdown-item')));
-}
+// export function getWindowLinks(element: DebugElement): DebugElement[] {
+//   return Array.from(element.queryAll(By.css('button.dropdown-item')));
+// }
 
 export function expectResults(nativeEl: HTMLElement, resultsDef: string[]): void {
   const pages = nativeEl.querySelectorAll('button.dropdown-item');

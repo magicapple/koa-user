@@ -40,8 +40,8 @@ module.exports = function (env) {
             "login": AOT ? './ts/page/login.aot.ts' : './ts/page/login.ts',
             "register": AOT ? './ts/page/register.aot.ts' : './ts/page/register.ts',
             "home": AOT ? './ts/page/home.aot.ts' : './ts/page/home.ts',
-            "formModelList": AOT ? './ts/page/formModelList.aot.ts' : './ts/page/formModelList.ts',
-            "formData": AOT ? './ts/page/formData.aot.ts' : './ts/page/formData.ts',
+            // "formModelList": AOT ? './ts/page/formModelList.aot.ts' : './ts/page/formModelList.ts',
+            // "formData": AOT ? './ts/page/formData.aot.ts' : './ts/page/formData.ts',
             "adminHome": AOT ? './ts/page/adminHome.aot.ts' : './ts/page/adminHome.ts',
         },
 

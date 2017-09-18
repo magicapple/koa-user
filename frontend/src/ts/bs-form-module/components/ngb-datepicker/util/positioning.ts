@@ -239,12 +239,25 @@ export function positionElements(
   let placementVals: Array<Placement> = Array.isArray(placement) ? placement : [placement as Placement]
 
   // replace auto placement with other placements
-  let hasAuto = placementVals.findIndex(val => val === 'auto')
+    let hasAuto = -1
+    placementVals.forEach ( (val, indexItem ) => {
+        if (val === 'auto' && hasAuto === -1) {
+            hasAuto = indexItem
+        }
+    })
+
+
   if (hasAuto >= 0) {
     ['top', 'right', 'bottom', 'left'].forEach(function(obj) {
-      if (placementVals.find(val => val.search('^' + obj + '|^' + obj + '-') !== -1) == null) {
+
+        const tempPlacementVals = placementVals.filter(val => val.search('^' + obj + '|^' + obj + '-') !== -1)
+        let tempPlacement = null
+        if (tempPlacementVals.length > 0) { tempPlacement = tempPlacementVals[0]}
+
+      if (tempPlacement == null) {
         placementVals.splice(hasAuto++, 1, obj as Placement)
       }
+
     })
   }
 
@@ -257,7 +270,12 @@ export function positionElements(
   for (let { item, index } of toItemIndexes(placementVals)) {
     // check if passed placement is present in the available placement or otherwise apply the last placement in the
     // passed placement list
-    if ((availablePlacements.find(val => val === item) != null) || (placementVals.length === index + 1)) {
+
+      const tempAvailablePlacements = placementVals.filter(val => val === item)
+      let tempPlacement = null
+      if (tempAvailablePlacements.length > 0) { tempPlacement = tempAvailablePlacements[0]}
+
+    if ((tempPlacement != null) || (placementVals.length === index + 1)) {
       appliedPlacement = <Placement>item
       const pos = positionService.positionElements(hostElement, targetElement, item, appendToBody)
       topVal = pos.top

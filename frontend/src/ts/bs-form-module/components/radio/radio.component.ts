@@ -73,9 +73,21 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
     writeValue(valueFromFatherComponent: any): void {
         // console.log('WriteValue: ', valueFromFatherComponent, this.sourceList)
         if (Array.isArray(this.sourceList)) {
-            this.value = this.sourceList.find(option => option.id === valueFromFatherComponent) || { id : -1 , name : '是'}
+
+            let tempValue = { id : -1 , name : '是'}
+
+            this.sourceList.forEach( option => {
+                if (option.id === valueFromFatherComponent) {
+                    tempValue = option
+                }
+            })
+            
+
+            this.value = tempValue
             // console.log('value: ', this.value)
         }
+
+
     }
 
 }

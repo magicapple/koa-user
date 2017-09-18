@@ -65,17 +65,42 @@ export class NgbDatepickerNavigationSelect implements OnChanges {
     this.months = this.calendar.getMonths()
 
     if (this.date && this.date.year === this.minDate.year) {
-      const index = this.months.findIndex(month => month === this.minDate.month)
+        let index = -1
+
+       this.months.forEach( (month, monthIndex) => {
+           if (month === this.minDate.month && index === -1) {
+               index = monthIndex
+           }
+       })
+
+
+
       this.months = this.months.slice(index)
     }
 
     if (this.date && this.date.year === this.maxDate.year) {
-      const index = this.months.findIndex(month => month === this.maxDate.month)
-      this.months = this.months.slice(0, index + 1)
+
+        let index2 = -1
+      this.months.forEach( (month, monthIndex) => {
+          if (month === this.maxDate.month && index2 === -1) {
+              index2 = monthIndex
+          }
+      })
+
+
+      this.months = this.months.slice(0, index2 + 1)
     }
   }
 
   private _generateYears() {
-    this.years = Array.from({length: this.maxDate.year - this.minDate.year + 1}, (e, i) => this.minDate.year + i)
+      this.years = []
+
+      for (let i = 0; i < this.maxDate.year - this.minDate.year + 1; i++) {
+          this.years.push (this.minDate.year + i)
+      }
+
+    // this.years = Array.from( {
+    //     length: this.maxDate.year - this.minDate.year + 1
+    // },  (e, i) => this.minDate.year + i)
   }
 }

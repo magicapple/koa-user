@@ -197,9 +197,24 @@ export class AddressDropdownComponent implements OnInit, ControlValueAccessor {
 
             if (value && value.provinceId && value.cityId && value.districtId) {
                 //通过 省市区 ID查找
-                this.currentProvince = this.dataSource.find(province => province.id === Number(value.provinceId)) || {id : -1, name: '请选择省', cities : []}
-                this.currentCity = this.currentProvince.cities.find(city => city.id === Number(value.cityId)) || {id : -1, name: '市', counties : [] }
-                this.currentDistrict = this.currentCity.counties.find(district => district.id === Number(value.districtId)) || {id : -1, name: '区'}
+                let tempProvince = {id : -1, name: '请选择省', cities : []}
+                let tempCity = {id : -1, name: '市', counties : [] }
+                let tempDistrict = {id : -1, name: '区'}
+
+                this.dataSource.forEach( province => {
+                    if (province.id === Number(value.provinceId)) { tempProvince = province }
+                })
+                this.currentProvince = tempProvince
+
+                this.currentProvince.cities.forEach(city => {
+                    if (city.id === Number(value.cityId)) { tempCity = city}
+                })
+                this.currentCity = tempCity
+
+                this.currentCity.counties.forEach(district => {
+                    if ( district.id === Number(value.districtId) ) { tempDistrict = district }
+                })
+                this.currentDistrict = tempDistrict
 
                 this.value = {
                     province: this.currentProvince.name,
@@ -212,9 +227,25 @@ export class AddressDropdownComponent implements OnInit, ControlValueAccessor {
 
             }else if (value && value.province && value.city && value.district) {
                 //通过省市名称字符串 查找
-                this.currentProvince = this.dataSource.find(province => province.name === value.province) || {id : -1, name: '请选择省', cities : []}
-                this.currentCity = this.currentProvince.cities.find(city => city.name === value.city) || {id : -1, name: '市', counties : []}
-                this.currentDistrict = this.currentCity.counties.find(district => district.name === value.district) || {id : -1, name: '区'}
+
+                let tempProvince = {id : -1, name: '请选择省', cities : []}
+                let tempCity = {id : -1, name: '市', counties : [] }
+                let tempDistrict = {id : -1, name: '区'}
+
+                this.dataSource.forEach( province => {
+                    if (province.name === Number(value.province)) { tempProvince = province }
+                })
+                this.currentProvince = tempProvince
+
+                this.currentProvince.cities.forEach(city => {
+                    if (city.name === Number(value.city)) { tempCity = city}
+                })
+                this.currentCity = tempCity
+
+                this.currentCity.counties.forEach(district => {
+                    if ( district.name === Number(value.district) ) { tempDistrict = district }
+                })
+                this.currentDistrict = tempDistrict
 
                 this.value = {
                     province: this.currentProvince.name,

@@ -133,7 +133,16 @@ export class SelectDropdownComponent implements OnInit, ControlValueAccessor {
         // console.log('WriteValue: ', value)
 
         if (Array.isArray(this.optionList)) {
-            this.value = this.optionList.find(option => option.id === value) || { id : -1 , name : '请选择'}
+
+            let tempValue = { id : -1 , name : '请选择'}
+
+            this.optionList.forEach( option => {
+                if (option.id === value) {
+                    tempValue = option
+                }
+            })
+
+            this.value = tempValue
             this.currentSelectByKeyboard = this.optionList.indexOf(this.value)
         }
     }
