@@ -8,6 +8,19 @@ const koaJwt = require('koa-jwt')
 const UserService     = require('../../app-user/service/user/userService')
 const UserRoleService = require('../../app-user/service/user/userRoleService')
 
+
+/**
+ *
+ * https://github.com/koajs/jwt
+ *
+ * The resolution order for the token is the following. The first non-empty token resolved will be the one that is verified.
+ *
+ *
+ * 1. opts.getToken function
+ * 2. check the cookies (if opts.cookie is set)
+ * 3. check the Authorization header for a bearer token
+ *
+ */
 function authMiddleware(options) {
 
     return koaJwt({

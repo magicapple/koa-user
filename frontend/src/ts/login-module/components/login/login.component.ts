@@ -5,7 +5,9 @@ import { HttpService } from '../../../bs-form-module/services/http.service'
 
 
 import { formErrorHandler } from '../../../bs-form-module/validators/validator'
-import {UserLoginService} from '../../../services/userLogin.service'
+
+import { saveAccessToken } from '../../../services/localStorage'
+import { UserLoginService } from '../../../services/userLogin.service'
 
 
 
@@ -79,6 +81,9 @@ export class LoginComponent implements OnInit {
         this.userService.login(this.loginForm.value).subscribe(
             data => {
                 console.log('登陆成功: ', data)
+
+                saveAccessToken(data.data.accessToken)
+
                 window.location.href = '/web/home'
                 this.httpService.successHandler(data)
             },

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule, Routes } from '@angular/router'
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BSFormModule } from '../bs-form-module/bs-form.module'
 import { BSCommonModule } from '../bs-common-module/bs-common.module'
@@ -12,6 +13,9 @@ import { ModifyPasswordComponent } from './components/modifyPassword/modifyPassw
 import { AddressComponent } from './components/address/address.component'
 
 import { UserInfoService } from '../services/userInfo.service'
+import { AuthInterceptor } from '../services/headerHttpInterceptor'
+
+
 
 
 const userHomeRoutes: Routes = [
@@ -42,7 +46,9 @@ const userHomeRoutes: Routes = [
 
     ],
     providers    : [
-        UserInfoService
+        UserInfoService,
+
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
     ],
     bootstrap    : [IndexHomeComponent]
 })
