@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule, Routes } from '@angular/router'
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { BSFormModule } from '../bs-form-module/bs-form.module'
 import { BSCommonModule } from '../bs-common-module/bs-common.module'
@@ -23,7 +23,7 @@ const userHomeRoutes: Routes = [
     {path : 'info/basic', component : BasicInfoComponent},
     {path : 'info/password', component : ModifyPasswordComponent},
     {path : 'info/address', component : AddressComponent},
-    {path : '**', redirectTo : '/info/basic', pathMatch : 'full'},
+    {path : '**', redirectTo : '/info/basic', pathMatch : 'full'}
 ]
 
 
