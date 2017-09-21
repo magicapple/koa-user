@@ -50,7 +50,7 @@ export class AddressComponent implements OnInit {
     }
 
     getCurrentUserInfo () {
-        this.userService.getUserInfo().subscribe(
+        this.userService.sessionUserInfo().subscribe(
             data => {
                 if (data) {
                     this.currentUser = data

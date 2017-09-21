@@ -16,9 +16,9 @@ const initController = require('../../controllers/api/initdata')
 const userController = require('../../controllers/api/user')
 const userAddressController = require('../../controllers/api/userAddress')
 
-const shopController = require('../../controllers/api/shop')
-const formController = require('../../controllers/api/form')
 
+const formController = require('../../controllers/api/form')
+const testController = require('../../controllers/api/test')
 
 const userConstant = require("../../service/user/userConstant")
 const captcha = require("../../../koa2/koa2-middleware/captcha")
@@ -74,8 +74,17 @@ router.put('/users/address/:addressId', auth(), userAddressController.updateNewA
 
 
 
-router.get('/test/users', shopController.getUsers)
-router.post('/test/shops', shopController.postNewShop)
+router.get('/test/users', testController.getUsers)
+router.post('/test/users', testController.getUsers)
+router.put('/test/users／:userId', testController.getUsers)
+
+router.get('/test/teams', testController.getTeams)
+router.get('/test/departments', testController.getDepartments)
+
+
+
+
+router.post('/test/shops', testController.postNewShop)
 
 
 

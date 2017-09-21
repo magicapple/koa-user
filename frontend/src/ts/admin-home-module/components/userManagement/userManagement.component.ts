@@ -5,6 +5,7 @@ import { HttpService } from '../../../bs-form-module/services/http.service'
 
 import { formErrorHandler, isMobilePhone, isMatched, checkFieldIsExist } from '../../../bs-form-module/validators/validator'
 import { UserInfoService } from '../../../services/userInfo.service'
+import { HSUserService } from '../../../services/hsUser.service'
 
 
 
@@ -16,21 +17,31 @@ import { UserInfoService } from '../../../services/userInfo.service'
 })
 export class UserManagementComponent implements OnInit {
 
-    currentUser : any
+    sessionUser : any
+    currentUserId : any
 
-    userAddressForm: FormGroup
+    userForm: FormGroup
     ignoreDirty: boolean = false
 
     isShowForm: boolean = false
     isAddNew: boolean = true
 
     userList : any[] = []
-    currentAddressId : string = ''
+    departmentList : any[] = []
+
+    dataIsAdmin : any [] = [
+        { id : 2 , name : '是'},
+        { id : 1 , name : '否'}
+    ]
+
+
 
     constructor(
+        private httpService: HttpService,
         private fb: FormBuilder,
         private userService: UserInfoService,
-        private httpService: HttpService
+        private hsUserService: HSUserService
+
     ) {
 
     }
@@ -38,8 +49,9 @@ export class UserManagementComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.createUserAddressForm()
-        this.getCurrentUserInfo()
+        this.getDepartmentList()
+        this.getSessionUserInfo()
+        this.createUserForm()
         this.getUserList()
     }
 
@@ -47,11 +59,11 @@ export class UserManagementComponent implements OnInit {
         return item ? item.id : undefined
     }
 
-    getCurrentUserInfo () {
-        this.userService.getUserInfo().subscribe(
+    getSessionUserInfo () {
+        this.userService.sessionUserInfo().subscribe(
             data => {
                 if (data) {
-                    this.currentUser = data
+                    this.sessionUser = data
                 }
                 // console.log('当前登陆的用户信息: ', data)
             },
@@ -59,123 +71,83 @@ export class UserManagementComponent implements OnInit {
         )
     }
 
-
     getUserList () {
-        this.userService.getUserList().subscribe(
+        this.hsUserService.getUserList().subscribe(
             data => {
                 this.userList = data.data
 
-                // console.log('当前用户的收货地址: ', data)
+            },
+            error => {this.httpService.errorHandler(error) }
+        )
+    }
+
+    getDepartmentList () {
+        this.hsUserService.getDepartmentList().subscribe(
+            data => {
+                this.departmentList = data.data
+
             },
             error => {this.httpService.errorHandler(error) }
         )
     }
 
 
-    userAddressFormError : any = {}
-    userAddressFormValidationMessages: any = {
-        'contactPerson'  : {
-            'required'      : '请填写收货人!',
-            'minlength'     : '名字长度1-100个字符!',
-            'maxlength'     : '名字长度1-100个字符!',
-            'pattern'       : '名字必须字母开头!',
-            'isExist'       : '名字已经存在!'
-        },
-        'addressObj'  : {
-            'required'      : '请填写地区!'
-        },
-        'detailAddress'  : {
-            'required'      : '请填写详细地址!',
-            'minlength'     : '详细地址长度4-500个字符!',
-            'maxlength'     : '详细地址长度4-500个字符!',
-            'pattern'       : '昵称必须字母开头!',
-            'isExist'       : '昵称已经存在!'
-        },
-        'contactPersonMobilePhone' : {
-            'required'    : '请填写手机号!',
+    userFormError : any = {}
+    userFormValidationMessages: any = {
+        'phone'  : {
+            'required'      : '请填写手机号!',
             'mobilePhone' : '手机号格式不正确!',
             'isExist'     : '手机号已经存在!'
         },
-        'contactPersonFixedPhone' : {
-            'required'    : '请填写固定电话!',
-            'mobilePhone' : '固定电话格式不正确!',
-            'isExist'     : '固定电话已经存在!'
+        'password'  : {
+            'required'      : '请填写密码!'
         },
-        'contactPersonEmail' : {
-            'required'    : '请填写邮箱!',
-            'email' : '邮箱格式不正确!'
+        'deptId'  : {
+            'required'      : '请填写事业部门!'
         },
-        'postalCode' : {
-            'required'    : '请填写邮编!'
+        'isAdmin' : {
+            'required'    : '必填项!'
         },
-        'addressCodeName' : {
-            'required'    : '请填写地址别名!'
+        'isActive' : {
+            'required'    : '必填项!'
         }
     }
 
-    userAddressFormInputChange(formInputData : any, ignoreDirty : boolean = false) {
-        this.userAddressFormError = formErrorHandler(formInputData, this.userAddressForm, this.userAddressFormValidationMessages, ignoreDirty)
+    userFormInputChange(formInputData : any, ignoreDirty : boolean = false) {
+        this.userFormError = formErrorHandler(formInputData, this.userForm, this.userFormValidationMessages, ignoreDirty)
     }
 
-    createUserAddressForm(address: any = {}): void {
+    createUserForm(user: any = {}): void {
 
-        if (!address.contactPerson) {address.contactPerson = ''}
-        if (!address.addressObj) {address.addressObj = {
-            province: '',
-            city: '',
-            district: ''
-        }}
-
-        if (!address.detailAddress) {address.detailAddress = ''}
-        if (!address.contactPersonMobilePhone) {address.contactPersonMobilePhone = ''}
-        if (!address.contactPersonFixedPhone) {address.contactPersonFixedPhone = ''}
-        if (!address.contactPersonEmail) {address.contactPersonEmail = ''}
-        if (!address.postalCode) {address.postalCode = ''}
-        if (!address.addressCodeName) {address.addressCodeName = ''}
-
-        this.userAddressForm = this.fb.group({
-            'contactPerson'    : [address.contactPerson, [Validators.required] ],
-            'addressObj'    : [address.addressObj, [Validators.required] ],
-            'detailAddress'    : [address.detailAddress, [Validators.required, Validators.minLength(4), Validators.maxLength(500)] ],
-            'contactPersonMobilePhone'    : [address.contactPersonMobilePhone, [Validators.required, isMobilePhone()] ],
-            'contactPersonFixedPhone'    : [address.contactPersonFixedPhone ],
-            'contactPersonEmail'    : [address.contactPersonEmail, [] ],
-            'postalCode'    : [address.postalCode ],
-            'addressCodeName'    : [address.addressCodeName ]
+        this.userForm = this.fb.group({
+            'phone'    : ['', [Validators.required, isMobilePhone()] ],
+            'password'    : ['', [Validators.required] ],
+            'deptId'    : ['', [Validators.required ] ],
+            'isAdmin'    : [1, [Validators.required] ],
+            'isActive'    : [1, [Validators.required ]]
         } )
 
-        this.userAddressForm.valueChanges.subscribe(data => {
+        this.userForm.valueChanges.subscribe(data => {
             this.ignoreDirty = false
-            this.userAddressFormInputChange(data)
+            this.userFormInputChange(data)
         })
     }
 
 
-    userAddressFormSubmit() {
-        console.log('当前信息: ', this.userAddressForm, this.userAddressFormError)
+    userFormSubmit() {
 
-        if (this.userAddressForm.invalid) {
-            this.userAddressFormInputChange(this.userAddressForm.value, true)
+        if (this.userForm.invalid) {
+            this.userFormInputChange(this.userForm.value, true)
             this.ignoreDirty = true
 
-            console.log('当前信息: ', this.userAddressForm, this.userAddressFormError)
+            console.log('当前信息: ', this.userForm, this.userFormError)
             return
         }
 
-        const postData = this.userAddressForm.value
-
-        postData.province = this.userAddressForm.value.addressObj.province
-        postData.provinceId = this.userAddressForm.value.addressObj.provinceId
-
-        postData.city = this.userAddressForm.value.addressObj.city
-        postData.cityId = this.userAddressForm.value.addressObj.cityId
-
-        postData.district = this.userAddressForm.value.addressObj.district
-        postData.districtId = this.userAddressForm.value.addressObj.districtId
-
+        const postData = this.userForm.value
 
         if (this.isAddNew) {
-            this.userService.createUserAddress(postData).subscribe(
+            this.hsUserService.createNewUser(postData).subscribe(
                 data => {
                     console.log('保存用户地址成功: ', data)
                     this.httpService.successHandler(data)
@@ -187,7 +159,7 @@ export class UserManagementComponent implements OnInit {
                 error => {this.httpService.errorHandler(error) }
             )
         } else {
-            this.userService.updateUserAddress(this.currentAddressId, postData).subscribe(
+            this.hsUserService.modifyUser(this.currentUserId, postData).subscribe(
                 data => {
                     console.log('修改用户地址成功: ', data)
                     this.httpService.successHandler(data)
@@ -203,37 +175,24 @@ export class UserManagementComponent implements OnInit {
     }
 
 
-    showForm(isAddNew : boolean = true, address?: any ) {
+    showForm(isAddNew : boolean = true, user?: any ) {
 
         if (isAddNew) {
             this.isAddNew = true
 
-            this.userAddressForm.patchValue({
-                'contactPerson'    : '',
-                'addressObj'    : {
-                    province: '',
-                    city: '',
-                    district: ''
-                },
-                'detailAddress'    : '',
-                'contactPersonMobilePhone'    : '',
-                'contactPersonFixedPhone'    : '',
-                'contactPersonEmail'    : '',
-                'postalCode'    : '',
-                'addressCodeName'    : ''
+            this.userForm.patchValue({
+                'phone'    : '',
+                'password'    : '',
+                'deptId'    : '',
+                'isAdmin'    : 1,
+                'isActive'    : 1
             })
 
         } else {
             this.isAddNew = false
-            this.currentAddressId = address._id
-            const tempAddress = address
+            this.currentUserId = user.id
 
-            tempAddress.addressObj = {
-                provinceId : address.provinceId,
-                cityId : address.cityId,
-                districtId : address.districtId
-            }
-            this.userAddressForm.patchValue(tempAddress)
+            this.userForm.patchValue(user)
         }
 
 

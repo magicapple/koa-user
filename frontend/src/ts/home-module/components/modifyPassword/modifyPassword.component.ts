@@ -37,7 +37,7 @@ export class ModifyPasswordComponent implements OnInit {
     }
 
     getCurrentUserInfo () {
-        this.userService.getUserInfo().subscribe(
+        this.userService.sessionUserInfo().subscribe(
             data => {
                 this.currentUser = data
 
