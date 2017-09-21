@@ -1,13 +1,16 @@
 
+const MUserBaseInfo = require('../../service/user/model/userBaseInfo')
+const UserService = require('../../service/user/userService')
 const MUserRole = require('../../service/user/model/userRole')
+
+
 /**
  * 初始化数据
  */
 
 
-'getList', 'getOwn', 'create', 'update', 'updatePassword', 'delete'
 
-exports.createUserRoles = async (ctx, next) => {
+async function createUserRoles (ctx, next) {
 
     const roleList = [
         {
@@ -38,10 +41,52 @@ exports.createUserRoles = async (ctx, next) => {
     const currentRoles = await MUserRole.findAll({})
 
     if (currentRoles && currentRoles.length > 0) {
-        ctx.body = currentRoles
+        return currentRoles
     }else {
-        ctx.body = await MUserRole.create(roleList)
+        return await MUserRole.create(roleList)
     }
 
+}
+
+exports.createUserRoles = createUserRoles
+
+
+
+async function createAdmin (ctx, next) {
+
+    const currentAdmin = await MUserBaseInfo.find1({username : 'admin'})
+
+    if (currentAdmin) {
+        return  currentAdmin
+    }else {
+        return await UserService.signUp({
+            username : 'admin',
+            mobilePhone : '13564511111',
+            email : 'admin@gmail.com',
+            password : '123456',
+            roles : [
+                GMongoose.Types.ObjectId(GConfig.role.normal),
+                GMongoose.Types.ObjectId(GConfig.role.admin)
+            ]
+        })
+    }
+
+}
+
+exports.createAdmin = createAdmin
+
+
+
+exports.run = async function (ctx, next) {
+
+    const [roles, userAdmin] = await Promise.all([
+        createUserRoles (),
+        createAdmin()
+    ]);
+
+    ctx.body = {
+        roles,
+        userAdmin
+    }
 }
 

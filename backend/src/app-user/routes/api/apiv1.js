@@ -38,7 +38,7 @@ router.post('/upload', upload.single('file'), files)
 
 
 
-router.post('/init/userrole', initController.createUserRoles)
+router.post('/init', initController.run)
 
 
 router.post('/user/signup', captcha.verifyImageMiddleware(userConstant.captchaType.signup), userController.registerNewUser)

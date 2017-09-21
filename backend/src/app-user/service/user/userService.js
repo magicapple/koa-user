@@ -49,6 +49,13 @@ exports.signUp = async (user) => {
         GDataChecker.userMobilePhoneExist(mobileIsExist)
     }
 
+
+
+    if (user.roles && Array.isArray(user.roles) && user.roles.length > 1) {
+        newUser.roles = user.roles
+    }
+
+
     let createdUser = await MUserBaseInfo.create(newUser)
     return MUserBaseInfo.find1ById(createdUser._id)
 

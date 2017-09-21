@@ -112,7 +112,7 @@ const UserBaseInfoSchema = new GSchema({
 UserBaseInfoSchema.virtual('isAdmin').get(function () {
     let isPassed = false
     this.roles.forEach( (role )=> {
-        if (role._id.equals( GMongoose.Types.ObjectId(roleAdmin)) ) {
+        if (role && role._id && role._id.equals( GMongoose.Types.ObjectId(roleAdmin)) ) {
             isPassed = true
         }
     })
