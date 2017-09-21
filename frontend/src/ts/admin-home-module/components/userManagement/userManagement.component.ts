@@ -82,12 +82,15 @@ export class UserManagementComponent implements OnInit {
             pageSize: this.pagination.pageSize,
             pageNo: this.pagination.pageNo
         }
-        
+
 
         this.hsUserService.getUserList(query).subscribe(
             data => {
                 this.userList = data.data
 
+                // this.pagination.total = data.meta.total
+                // this.pagination.pageNo = data.meta.pageNo
+                
             },
             error => {this.httpService.errorHandler(error) }
         )
