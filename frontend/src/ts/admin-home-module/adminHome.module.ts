@@ -28,6 +28,7 @@ const userHomeRoutes: Routes = [
     {path : 'users', component : UserManagementComponent},
     {path : 'departments', component : UserManagementComponent},
     {path : 'teams', component : UserManagementComponent},
+    {path : 'companies', component : UserManagementComponent},
     {path : '**', redirectTo : '/info/basic', pathMatch : 'full'},
 ]
 
