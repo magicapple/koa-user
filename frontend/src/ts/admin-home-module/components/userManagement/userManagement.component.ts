@@ -34,6 +34,11 @@ export class UserManagementComponent implements OnInit {
         { id : 1 , name : '否'}
     ]
 
+    pagination: any = {
+        pageSize : 20,
+        pageNo : 1,
+        total : 1
+    }
 
 
     constructor(
@@ -72,7 +77,14 @@ export class UserManagementComponent implements OnInit {
     }
 
     getUserList () {
-        this.hsUserService.getUserList().subscribe(
+
+        const query : any = {
+            pageSize: this.pagination.pageSize,
+            pageNo: this.pagination.pageNo
+        }
+        
+
+        this.hsUserService.getUserList(query).subscribe(
             data => {
                 this.userList = data.data
 
