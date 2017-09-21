@@ -2,7 +2,7 @@
 
         <h3>
             用户管理
-            <button type="button" class="btn btn-outline-info btn-sm float-right" (click)="showForm(true)">添加新用户</button>
+            <button type="button" class="btn btn-outline-info btn-sm float-right" *ngIf="!isShowForm" (click)="showForm(true)">添加新用户</button>
         </h3>
 
 
