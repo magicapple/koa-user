@@ -12,7 +12,7 @@
  * @param {Object}        opts The middleware's options
  * @return {String|null}  The resolved token or null if not found
  */
-module.exports = function resolveAuthorizationHeader(ctx, opts) {
+module.exports = function resolveAuthorizationHeader(ctx, options) {
     if (!ctx.header || !ctx.header.authorization) {
         return false
     }

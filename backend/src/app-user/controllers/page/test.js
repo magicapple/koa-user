@@ -4,7 +4,7 @@
 
 
 
-exports.index = async function pageIndex(ctx, next) {
+exports.test1 = async function pageIndex(ctx, next) {
     const users = [
         {name : 'Dead Horse'},
         {name : 'Jack'},
@@ -17,9 +17,15 @@ exports.index = async function pageIndex(ctx, next) {
 
 
 
-exports.test = async function pageIndex(ctx, next) {
+exports.test2 = async function pageIndex(ctx, next) {
 
     await ctx.render('test/test', { page : {title : 'Homepage !'} });
+}
+
+
+exports.wx = async function pageIndex(ctx, next) {
+
+    await ctx.render('test/wx');
 }
 
 

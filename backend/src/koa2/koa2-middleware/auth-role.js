@@ -21,7 +21,6 @@ function authRoleMiddleware(permission, options) {
 
     return async function (ctx, next) {
 
-        // UserRoleService.checkUserPermission(ctx.state.user, UserRoleService.permissions.user.getOwn)
         UserRoleService.checkUserPermission(ctx.state.user, permission)
 
         return next()

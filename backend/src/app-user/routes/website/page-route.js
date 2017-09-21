@@ -14,12 +14,20 @@ const auth = require('../../../koa2/koa2-middleware/auth-jwt');
 
 
 
-const pageIndex = require('../../controllers/page/index')
+const pageTest = require('../../controllers/page/test')
+
 const pageLogin = require('../../controllers/page/login')
 const pageUserHome = require('../../controllers/page/userHome')
+const pageAdminHome = require('../../controllers/page/adminHome')
+
 
 const pageJsonForm = require('../../controllers/page/jsonForm')
-const pageAdminHome = require('../../controllers/page/adminHome')
+
+
+router.get('/test1', pageTest.test1)
+router.get('/test2', pageTest.test2)
+router.get('/wx', pageTest.wx)
+
 
 
 
@@ -31,7 +39,7 @@ router.get('/signup/captcha', captcha.getCaptchaImage(userConstant.captchaType.s
 router.get('/signup', pageLogin.register)
 router.get('/login', pageLogin.login)
 
-router.get('/index', pageIndex.index)
+
 router.get('/home', auth(), pageUserHome.userHome)
 router.get('/home/*', auth(), pageUserHome.userHome)
 
@@ -44,15 +52,10 @@ router.get('/admin/*', auth(), pageAdminHome.adminHome)
 router.get('/form/models', pageJsonForm.formModelList)
 router.get('/form/data', pageJsonForm.formData)
 
-router.get('/test', pageIndex.test)
 
 
 
 
-
-router.get('/wx', async function pageIndex(ctx, next) {
-    await ctx.render('test/wx');
-})
 
 
 
