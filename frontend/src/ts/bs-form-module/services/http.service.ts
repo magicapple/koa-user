@@ -85,7 +85,7 @@ class HttpService {
                     console.log('Http 500 请求发生错误!! ', error.error)
 
                 }else {
-                    console.log('Http 请求发生错误!! ', error.error)
+                    console.log('Http 请求发生错误!! ', error.error || error.message)
                 }
 
 /*
@@ -96,7 +96,14 @@ class HttpService {
 */
 
 
-                this.notificationService.error( '请求出现错误!',  error.error.error.message,
+                let messageError = ''
+                if (error && error.error && error.error.error) {
+                    messageError = error.error.error.message
+                }else {
+                    messageError = error.message
+                }
+
+                this.notificationService.error( '请求出现错误!',  messageError,
                     {
                         showProgressBar: false,
                         pauseOnHover: true,
