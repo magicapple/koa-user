@@ -76,13 +76,13 @@ class HttpService {
                 window.location.href = '/web/login'
             } else {
                 if (error && error.status === 400) {
-                    console.log('Http 400 请求发生错误!! ', error.error)
+                    console.log('Http 400 请求发生错误!! ', error.error || error.message)
 
                 }else if (error && error.status === 404) {
-                    console.log('Http 404 请求发生错误!! ', error.error)
+                    console.log('Http 404 请求发生错误!! ', error.error || error.message)
 
                 }else if (error && error.status === 500) {
-                    console.log('Http 500 请求发生错误!! ', error.error)
+                    console.log('Http 500 请求发生错误!! ', error.error || error.message)
 
                 }else {
                     console.log('Http 请求发生错误!! ', error.error || error.message)
@@ -94,7 +94,6 @@ class HttpService {
                     message : error.error.error.message
                 })
 */
-
 
                 let messageError = ''
                 if (error && error.error && error.error.error && error.error.error.name) {
