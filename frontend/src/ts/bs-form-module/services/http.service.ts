@@ -97,8 +97,12 @@ class HttpService {
 
 
                 let messageError = ''
-                if (error && error.error && error.error.error) {
+                if (error && error.error && error.error.error && error.error.error.name) {
                     messageError = error.error.error.message
+
+                }else if (error && error.error && error.error.error) {
+                    messageError = error.error.message
+
                 }else {
                     messageError = error.message
                 }
