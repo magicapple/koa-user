@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { SwitchComponent } from './switch.component';
+import { UiSwitchComponent } from './ui-switch.component'
 
 describe('SwitchComponent', () => {
-  let component: SwitchComponent;
-  let fixture: ComponentFixture<SwitchComponent>;
+  let component: UiSwitchComponent
+  let fixture: ComponentFixture<UiSwitchComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SwitchComponent ]
+      declarations: [ UiSwitchComponent ]
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SwitchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(UiSwitchComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
