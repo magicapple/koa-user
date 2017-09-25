@@ -77,14 +77,14 @@ ejs(app, {
 
 app.use(ejsHelper());
 
-app.use(responseFormatter('/api', {isInclude:true}));
+app.use(responseFormatter('/apx', {isInclude:true}));
 
 
 
 
 // Start Router 路由
 
-router.use('/api', apiRoutes.routes(), apiRoutes.allowedMethods());
+router.use('/apx', apiRoutes.routes(), apiRoutes.allowedMethods());
 router.use('/web', webRoutes.routes(), webRoutes.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());

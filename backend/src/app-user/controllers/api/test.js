@@ -182,3 +182,18 @@ exports.getPartyList = async (ctx, next) => {
     ]
 }
 
+
+
+exports.getOrderList = async (ctx, next) => {
+    ctx.body = [
+        { id : 1, deptId : 1, teamId: 2, creatorId: 1, ownerId: 1, mainAccounting: 1, line : '业务线-xxx', cargoType : 'COAL', upstreamId : '11', upstreamSettleMode : 'ONE_PAPER_SETTLE' , downstreamId : '10', downstreamSettleMode : 'ONE_PAPER_SETTLE', STATUS: 'UNCOMPLETED'},
+        { id : 2, deptId : 1, teamId: 2, creatorId: 1, ownerId: 1, mainAccounting: 1, line : '业务线-xxx', cargoType : 'COAL', upstreamId : '11', upstreamSettleMode : 'ONE_PAPER_SETTLE' , downstreamId : '10', downstreamSettleMode : 'ONE_PAPER_SETTLE', STATUS: 'UNCOMPLETED'},
+        { id : 3, deptId : 1, teamId: 2, creatorId: 1, ownerId: 1, mainAccounting: 1, line : '业务线-xxx', cargoType : 'COAL', upstreamId : '11', upstreamSettleMode : 'ONE_PAPER_SETTLE' , downstreamId : '10', downstreamSettleMode : 'ONE_PAPER_SETTLE', STATUS: 'UNCOMPLETED'},
+        { id : 4, deptId : 1, teamId: 2, creatorId: 1, ownerId: 1, mainAccounting: 1, line : '业务线-xxx', cargoType : 'COAL', upstreamId : '11', upstreamSettleMode : 'ONE_PAPER_SETTLE' , downstreamId : '10', downstreamSettleMode : 'ONE_PAPER_SETTLE', STATUS: 'UNCOMPLETED'},
+        { id : 5, deptId : 1, teamId: 2, creatorId: 1, ownerId: 1, mainAccounting: 1, line : '业务线-xxx', cargoType : 'COAL', upstreamId : '11', upstreamSettleMode : 'ONE_PAPER_SETTLE' , downstreamId : '10', downstreamSettleMode : 'ONE_PAPER_SETTLE', STATUS: 'UNCOMPLETED'},
+        { id : 6, deptId : 1, teamId: 2, creatorId: 1, ownerId: 1, mainAccounting: 1, line : '业务线-xxx', cargoType : 'COAL', upstreamId : '11', upstreamSettleMode : 'ONE_PAPER_SETTLE' , downstreamId : '10', downstreamSettleMode : 'ONE_PAPER_SETTLE', STATUS: 'UNCOMPLETED'},
+        { id : 7, deptId : 1, teamId: 2, creatorId: 1, ownerId: 1, mainAccounting: 1, line : '业务线-xxx', cargoType : 'COAL', upstreamId : '11', upstreamSettleMode : 'ONE_PAPER_SETTLE' , downstreamId : '10', downstreamSettleMode : 'ONE_PAPER_SETTLE', STATUS: 'UNCOMPLETED'}
+
+
+    ]
+}

@@ -76,10 +76,14 @@ router.put('/users/address/:addressId', auth(), userAddressController.updateNewA
 
 router.get('/test/users', testController.getUsers)
 router.post('/test/users', testController.getUsers)
-router.put('/test/users／:userId', testController.getUsers)
+router.put('/test/users/:userId', testController.getUsers)
 
 router.get('/test/teams', testController.getTeams)
 router.get('/test/departments', testController.getDepartments)
+
+router.get('/test/yings', testController.getOrderList)
+router.post('/test/yings', testController.getOrderList)
+router.put('/test/yings/:id', testController.getOrderList)
 
 
 
