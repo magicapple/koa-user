@@ -37,6 +37,13 @@ export class BasicInfoComponent implements OnInit {
         { id : 5, name : '二次离婚'}
     ]
 
+    interestDataList : any[] = [
+        { id : 1, name : '游泳'},
+        { id : 2, name : '拳击'},
+        { id : 3, name : '跆拳道'},
+        { id : 4, name : '排球'}
+    ]
+
     constructor(
         private fb: FormBuilder,
         private userService: UserInfoService,
@@ -81,6 +88,11 @@ export class BasicInfoComponent implements OnInit {
                     this.userInfoForm.patchValue({ 'birthday'    : data.data.birthday})
                 }
 
+                if (data.data.interest) {
+                    this.userInfoForm.patchValue({ 'interest'    : data.data.interest})
+                }
+
+
                 // console.log('当前登陆的用户信息: ', data)
             },
             error => {this.httpService.errorHandler(error) }
@@ -117,6 +129,9 @@ export class BasicInfoComponent implements OnInit {
             'isExist'     : '手机号已经存在!'
         },
         'gender'      : {
+            'required' : '请填写性别!'
+        },
+        'interest'      : {
             'required' : '请填写性别!'
         },
         'marriage'    : {
@@ -156,12 +171,14 @@ export class BasicInfoComponent implements OnInit {
         if (!user.marriage) {user.marriage = ''}
 
         if (!user.birthday) {user.birthday = ''}
+        if (!user.interest) {user.interest = ''}
 
         this.userInfoForm = this.fb.group({
             'firstName'    : [user.firstName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'lastName'    : [user.lastName, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'nickname'    : [user.nickname, [Validators.required, Validators.minLength(1), Validators.maxLength(1000)] ],
             'gender'    : [user.gender, [Validators.required] ],
+            'interest'    : [user.interest, [Validators.required] ],
 
             'marriage'    : [user.marriage, [Validators.required] ],
             // 'birthday'    : this.fb.group({

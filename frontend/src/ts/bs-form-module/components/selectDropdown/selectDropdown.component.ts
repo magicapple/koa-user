@@ -26,6 +26,8 @@ export class SelectDropdownComponent implements OnInit, OnChanges, ControlValueA
 
     @Input() error: string = ''
 
+    @Input('readonly') readonly: boolean
+
     @Input('labelclass') labelClass: string = 'col-2'
     @Input('inputclass') inputClass: string = 'col-6'
 
@@ -74,8 +76,34 @@ export class SelectDropdownComponent implements OnInit, OnChanges, ControlValueA
     showOptions() {
         this.isShowSelectOptionList = !this.isShowSelectOptionList
     }
+    filterOptionsList: any = []
+    filterOptions(e: any) {
+        // console.log(e)
+        // console.log('list11', this.optionList)
+        this.filterOptionsList = []
+        if (e.trim() !== '') {
+            for (let i = 0; i < this.optionList.length; i ++) {
+                if(this.optionList[i].name.indexOf(e) !== -1) {
+                    this.filterOptionsList.push(this.optionList[i])
+                    this.isShowSelectOptionList = true
+                }
 
+            }
+            console.log('list', this.filterOptionsList)
+        }
+    }
+    getFilterOption(e: any) {
+        if (e.trim() !== '') {
+            for (let i = 0; i < this.optionList.length; i ++) {
+                if (this.optionList[i].name === e) {
+                    this.currentSelectByKeyboard = this.optionList[i]
+                    this.value = this.optionList[i]
+                }
+            }
+            console.log(this.currentSelectByKeyboard)
+        }
 
+    }
 
     getCurrentOption(currentOption: any) {
         this.value = currentOption
@@ -158,7 +186,7 @@ export class SelectDropdownComponent implements OnInit, OnChanges, ControlValueA
 
         if (Array.isArray(this.optionList)) {
 
-            let tempValue = { id : -1 , name : '请选择'}
+            let tempValue = { id : -1 , name : ''}
 
             this.optionList.forEach( option => {
                 if (option.id === value) {

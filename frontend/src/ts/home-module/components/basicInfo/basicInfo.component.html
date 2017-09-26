@@ -31,11 +31,14 @@
             <bs-text-input formControlName="firstName" [fc]="userInfoForm.get('firstName')" [type]="'text'" [label]="'名字:'" [dirty]="ignoreDirty" [error]="userInfoFormError.firstName"></bs-text-input>
             <bs-text-input formControlName="nickname" [fc]="userInfoForm.get('nickname')" [type]="'text'" [label]="'昵称:'" [dirty]="ignoreDirty" [error]="userInfoFormError.nickname"></bs-text-input>
 
-            <bs-select formControlName ="gender" [fc]="userInfoForm.get('gender')" [label]="'性别:'"  [options]="genderDataList" [error]="userInfoFormError.gender" ></bs-select>
+            <bs-select formControlName ="gender" [fc]="userInfoForm.get('gender')" [label]="'性别:'" [readonly]="false"  [options]="genderDataList" [error]="userInfoFormError.gender" ></bs-select>
 
             <bs-datepicker formControlName="birthday" [fc]="userInfoForm.get('birthday')" [label]="'生日:'" [error]="userInfoFormError.birthday"></bs-datepicker>
             <bs-radio formControlName ="marriage" [fc]="userInfoForm.get('marriage')" [label]="'婚姻状况:'" [sourceList]="marryDataList" [error]="userInfoFormError.marriage" ></bs-radio>
 
+            <bs-checkbox formControlName ="interest" [fc]="userInfoForm.get('interest')" [label]="'兴趣:'"  [options]="interestDataList" [error]="userInfoFormError.interest" ></bs-checkbox>
+
+            {{userInfoForm.get('interest').value | json}}
 
 <!--
 
