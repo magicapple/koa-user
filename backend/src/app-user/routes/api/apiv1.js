@@ -83,6 +83,8 @@ router.get('/test/departments', testController.getDepartments)
 
 router.get('/test/yings', testController.getOrderList)
 router.post('/test/yings', testController.getOrderList)
+router.get('/test/yings/:id', testController.getOrderList)
+router.get('/test/yings/:id/units', testController.getOrderUnits)
 router.put('/test/yings/:id', testController.getOrderList)
 
 
