@@ -197,3 +197,21 @@ exports.getOrderList = async (ctx, next) => {
 
     ]
 }
+
+
+exports.getOrderById = async (ctx, next) => {
+    ctx.body = { id : 1, deptId : 1, teamId: 2, creatorId: 1, ownerId: 1, mainAccounting: 1,
+        line : '业务线-xxx', cargoType : 'COAL', upstreamId : '11', upstreamSettleMode : 'ONE_PAPER_SETTLE' , downstreamId : '10',
+        downstreamSettleMode : 'ONE_PAPER_SETTLE', STATUS: 'UNCOMPLETED'}
+
+}
+
+exports.getOrderUnits = async (ctx, next) => {
+    ctx.body = [
+        { id : 1, orderId : 1, hsMonth: '201701', maxPrepayRate: 20.3, unInvoicedRate: 10.22, contractBaseInterest: 11.11, expectHKDays : 10, tradeAddPrice : 50.21, weightedPrice : 100.1},
+        { id : 2, orderId : 1, hsMonth: '201701', maxPrepayRate: 20.3, unInvoicedRate: 10.22, contractBaseInterest: 11.11, expectHKDays : 10, tradeAddPrice : 50.21, weightedPrice : 100.1},
+        { id : 3, orderId : 1, hsMonth: '201701', maxPrepayRate: 20.3, unInvoicedRate: 10.22, contractBaseInterest: 11.11, expectHKDays : 10, tradeAddPrice : 50.21, weightedPrice : 100.1},
+
+    ]
+}
+
