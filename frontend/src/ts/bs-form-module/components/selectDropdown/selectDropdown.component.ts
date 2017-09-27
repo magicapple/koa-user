@@ -78,8 +78,7 @@ export class SelectDropdownComponent implements OnInit, OnChanges, ControlValueA
     }
     filterOptionsList: any = []
     filterOptions(e: any) {
-        // console.log(e)
-        // console.log('list11', this.optionList)
+
         this.filterOptionsList = []
         if (e.trim() !== '') {
             for (let i = 0; i < this.optionList.length; i ++) {
@@ -89,7 +88,6 @@ export class SelectDropdownComponent implements OnInit, OnChanges, ControlValueA
                 }
 
             }
-            console.log('list', this.filterOptionsList)
         }
     }
     getFilterOption(e: any) {
@@ -124,8 +122,14 @@ export class SelectDropdownComponent implements OnInit, OnChanges, ControlValueA
     onKeyboardSelectOption(event: any) {
 
         if ( this.isShowSelectOptionList) {
+            let optionsLength: any
+            if(this.readonly) {
+                 optionsLength = this.optionList.length
+            }else{
+                 optionsLength = this.filterOptionsList.length
+            }
 
-            const optionsLength = this.optionList.length
+
             if ( event.keyCode === 40) {
                 //下
 
@@ -146,8 +150,12 @@ export class SelectDropdownComponent implements OnInit, OnChanges, ControlValueA
 
             }else if (event.keyCode === 13) {
                 //enter
+                if(this.readonly) {
+                    this.getCurrentOption(this.optionList[this.currentSelectByKeyboard])
+                }else{
+                    this.getCurrentOption(this.filterOptionsList[this.currentSelectByKeyboard])
+                }
 
-                this.getCurrentOption(this.optionList[this.currentSelectByKeyboard])
             }
 
         }

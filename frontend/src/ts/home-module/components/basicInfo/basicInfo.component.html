@@ -38,7 +38,8 @@
 
             <bs-checkbox formControlName ="interest" [fc]="userInfoForm.get('interest')" [label]="'兴趣:'"  [options]="interestDataList" [error]="userInfoFormError.interest" ></bs-checkbox>
 
-            <!--{{userInfoForm.get('interest').value | json}}-->
+            {{userInfoForm.get('gender').value}}
+            {{userInfoForm.get('interest').value | json}}
 
 <!--
 
